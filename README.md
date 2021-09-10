@@ -9,7 +9,7 @@ We use the following naming conventions:
 - DRAFT - For work in progress code
 - DELETE - Removal off code (no additions)
 
-Commit messages need to follow one of these four tags before additional message i. e:
+Commit messages need to follow one of these four tags before additional message.
 Commit messages also need to be written in present time.
 
 `FEAT: add new component`
