@@ -1,4 +1,4 @@
-# Group 21 Repo - <Project name here>
+# Group 21 Repo - "insert name here"
 
 ## Naming conventions
 
