@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="304.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WishListController">
+<AnchorPane prefHeight="400.0" prefWidth="304.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WishListController">
    <children>
       <Button mnemonicParsing="false" onAction="#goToMainScreen" text="&lt;-" />
+      <AnchorPane layoutY="149.0" prefHeight="251.0" prefWidth="304.0">
+         <children>
+            <ListView id="currentList" fx:id="currentList" prefHeight="251.0" prefWidth="304.0" />
+         </children>
+      </AnchorPane>
+      <TextField id="newItem" fx:id="newItem" layoutX="14.0" layoutY="72.0" />
+      <Button id="addNewItem" fx:id="addNewItem" layoutX="213.0" layoutY="72.0" mnemonicParsing="false" text="Add" />
+      <Label layoutX="16.0" layoutY="132.0" prefHeight="17.0" prefWidth="149.0" text="Your wishlist:" />
+      <Label id="nameLabel" fx:id="nameLabel" layoutX="48.0" layoutY="13.0" prefHeight="25.0" prefWidth="86.0" text="Name of list" />
    </children>
 </AnchorPane>
