@@ -50,9 +50,6 @@ public class WishListController {
     public void goToDisplayList(){
         application.controllerDisplay.show();
         this.setSelected(list.getSelectionModel().getSelectedItem());
-        System.out.println("Den lange: " + application.controllerDisplay.getSelected());
-        System.out.println("This: " + this.selected);
-        System.out.println(this);
         //Okei så den finner ut hva man trykker på, men den klarer ikke å sende det videre
         List<String> testListe = new ArrayList<>();
         testListe.add("1 + " + this.selected);
@@ -75,20 +72,6 @@ public class WishListController {
 
     public String getSelected(){
         return this.selected;
-    }
-
-    public void setNewList(ListView<String> listToUpdate){
-        System.out.println("Dette er selected: " + selected);
-        List<String> testListe = new ArrayList<>();
-        testListe.add("1 + " + this.selected);
-        testListe.add("1 + " + this.selected);
-        testListe.add("1 + " + this.selected);
-        ObservableList<String> items = FXCollections.observableArrayList();
-
-        for(String i : testListe) {
-            items.add(i);
-        }
-        listToUpdate.setItems(items);
     }
 
 }
