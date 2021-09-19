@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.application.Application;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
@@ -14,6 +15,7 @@ import java.util.List;
 public class WishListController {
     @FXML ListView<String> list;
     @FXML ListView<String> chosenList;
+    @FXML TextField addItemField;
     private WishListApp application;
     private Scene scene;
     public String selected;
@@ -46,24 +48,21 @@ public class WishListController {
         application.controllerMain.show();
     }
 
-    //Skyldes feilen at det er flere controllere? For denne kjøres ikke på samme controller som funksjonen over
     public void goToDisplayList(){
         application.controllerDisplay.show();
+        ObservableList<String> items = FXCollections.observableArrayList();
         this.setSelected(list.getSelectionModel().getSelectedItem());
-        //Okei så den finner ut hva man trykker på, men den klarer ikke å sende det videre
         List<String> testListe = new ArrayList<>();
         testListe.add("1 + " + this.selected);
         testListe.add("2 + " + this.selected);
         testListe.add("3 + " + this.selected);
-        ObservableList<String> items = FXCollections.observableArrayList();
 
         for(String i : testListe) {
             items.add(i);
         }
+        System.out.println("Items før man legger til: " + items);
+        System.out.println(this);
         application.controllerDisplay.chosenList.setItems(items);
-        //setNewList(displayChosenList);
-        //displayChosenList.setItems(items);
-        //application.controllerDisplay.setNewList(displayChosenList);
     }
 
     public void setSelected(String s){
@@ -74,13 +73,14 @@ public class WishListController {
         return this.selected;
     }
 
+    //Får det ikke til å fungere, men logikken blir uansett annerledes med databaser
+    public void addNewItem(){
+        /*
+        System.out.println(this);
+        application.controllerDisplay.items.add(addItemField.getText());
+        System.out.println("Items etter man legger til: " + this.items);
+        chosenList.setItems(application.controllerDisplay.items); */
+    }
+
 }
 
-/*public class WishListController {
-    //Endre navn på knappen til addListButton
-    @FXML private Button addList;
-
-    /*private void onAddList(){
-
-    }
-} */

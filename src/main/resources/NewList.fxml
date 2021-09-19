@@ -17,6 +17,5 @@
       <TextField id="newItem" fx:id="newItem" layoutX="14.0" layoutY="72.0" />
       <Button id="addNewItem" fx:id="addNewItem" layoutX="213.0" layoutY="72.0" mnemonicParsing="false" text="Add" />
       <Label layoutX="16.0" layoutY="132.0" prefHeight="17.0" prefWidth="149.0" text="Your wishlist:" />
-      <Label id="nameLabel" fx:id="nameLabel" layoutX="48.0" layoutY="13.0" prefHeight="25.0" prefWidth="86.0" text="Name of list" />
    </children>
 </AnchorPane>
