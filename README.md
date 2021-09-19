@@ -1,4 +1,4 @@
-# Group 21 Repo - "insert name here"
+# Group 21 Repo - WishList
 
 ## Naming conventions
 
@@ -8,6 +8,7 @@ We use the following naming conventions:
 - CHANGE - Updating/modifying existing code
 - DRAFT - For work in progress code
 - DELETE - Removal off code (no additions)
+- NO-ISSUE - Misc changes, devops and or updates to dependencies
 
 Commit messages need to follow one of these four tags before additional message.
 Commit messages also need to be written in present time.
