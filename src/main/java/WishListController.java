@@ -60,9 +60,27 @@ public class WishListController {
         for(String i : testListe) {
             items.add(i);
         }
-        System.out.println("Items før man legger til: " + items);
-        System.out.println(this);
+
         application.controllerDisplay.chosenList.setItems(items);
+    }
+
+    public void logIn(){
+        // Temp variable, will not be used
+        boolean temp = false;
+        if(temp){
+            //Show error
+        } else {
+            // Needs backend logic to show this user's data
+            application.controllerMain.show();
+        }
+    }
+
+    public void goToLogIn(){
+        application.controllerLogIn.show();
+    }
+
+    public void newUser(){
+        application.controllerNewUser.show();
     }
 
     public void setSelected(String s){
