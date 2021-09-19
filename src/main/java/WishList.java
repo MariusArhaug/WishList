@@ -39,18 +39,27 @@ public class WishList {
     return this.hideInfoFromOwner;
   }
 
-  /** When a wishList is shared the owner can choose to hide information about who is covering each wish from himself/herself **/
+  /**
+   * When a wishList is shared the owner can choose to hide information about who is covering each wish from himself/herself
+   * @param hideInfoFromOwner Boolean to hide information from owner or not
+   */
   public void setHideInfoFromOwner(boolean hideInfoFromOwner) {
     this.hideInfoFromOwner = hideInfoFromOwner;
   }
 
-  /** A new wish can be added to a wishList **/
+  /**
+   * A new wish can be added to a wishList
+   * @param wishContent Wish content to add
+   */
   public void addWish(String wishContent) {
     Wish wish = new Wish(wishContent, this);
     wishes.add(wish);
   }
 
-  /** A wish can be removed from a wishList **/
+  /**
+   * A wish can be removed from a wishList
+   * @param wish Wish to remove
+   */
   public void removeWish(Wish wish) {
     wishes.remove(wish);
     wish = null;

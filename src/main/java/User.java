@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -100,23 +99,37 @@ public class User {
     return this.contacts;
   }
 
-  /** Add new group of people into this user's list of previously used groups, so it can be reused **/
+  /**
+   * Add new group of people into this user's list of previously used groups, so it can be reused
+   * @param newGroup Group to add
+   */
   private void addGroup(List<User> newGroup) {
     this.wishListGroups.add(newGroup);
   }
-  /** Choose specific users to add to a group **/
+  /**
+   * Choose specific users to add to a group
+   * @param chosenContactsArray Contacts to add
+   */
   public void makeGroup(User... chosenContactsArray) {
     List<User> chosenContactsList = new ArrayList<>();
     Collections.addAll(chosenContactsList, chosenContactsArray);
     addGroup(chosenContactsList);
   }
 
-  /** Add a wishList a user has been invited to into the list of invited wishlists **/
+  /**
+   * Add a wishList a user has been invited to into the list of invited wishlists
+   * @param wishList Wishlist to add
+   */
   private void addInvitedToWishList(WishList wishList) {
     this.invitedWishLists.add(wishList);
   }
 
-  /** share a wishlist with a group **/
+  /**
+   * Share a wishlist with a group
+   * @param wishList Wishlist to share
+   * @param group Group to share with
+   * @param hideInfoFromOwner Boolean to hide information from owner or not
+   */
   public void shareWishList(WishList wishList, List<User> group, boolean hideInfoFromOwner) {
     if (this.ownWishLists.contains(wishList)) {
       wishList.setHideInfoFromOwner(hideInfoFromOwner);
@@ -128,14 +141,22 @@ public class User {
     }
   }
 
-  /** Changes if the user that owns the wishlist can se hidden information or not **/
+  /**
+   * Changes if the user that owns the wishlist can se hidden information or not
+   * @param wishList Wishlist to edit
+   * @param hideInfoFromOwner Boolean to hide information from owner or not
+   */
   public void changeVisibility(WishList wishList, boolean hideInfoFromOwner) {
     if (wishList.getHideInfoFromOwner() != hideInfoFromOwner) {
       wishList.setHideInfoFromOwner(hideInfoFromOwner);
     }
   }
 
-  /** Adds a wish to an owned wishlist **/
+  /**
+   * Adds a wish to an owned wishlist
+   * @param wishList Wishlist to add a wish to
+   * @param wish Wish to add
+   */
   public void addWish(WishList wishList, String wish) {
     if (this.ownWishLists.contains(wishList)) {
       wishList.addWish(wish);
@@ -144,7 +165,10 @@ public class User {
     }
   }
 
-  /** Removes a wish from an owned wishlist **/
+  /**
+   * Removes a wish from an owned wishlist
+   * @param wish Wish to remove
+   */
   public void removeWish(Wish wish) {
     if (this.ownWishLists.contains(wish.getBelongTo())) {
       wish.getBelongTo().removeWish(wish);
@@ -153,20 +177,29 @@ public class User {
     }
   }
 
-  /** Add a contact to a users contact list **/
+  /**
+   * Add a contact to a users contact list
+   * @param newContact Contact to add
+   */
   public void addContact(User newContact) {
     this.contacts.add(newContact);
     newContact.getContacts().add(this);
   }
 
-  /** Remove a contact from a users contact list **/
+  /**
+   * Remove a contact from a users contact list
+   * @param notContact Contact to remove
+   */
   public void removeContact(User notContact) {
     this.contacts.remove(notContact);
     notContact.getContacts().remove(this);
 
   }
 
-  /** If the list is not your own the user can cover a wish on that list **/
+  /**
+   * If the list is not your own the user can cover a wish on that list
+   * @param wish Wish to cover
+   */
   public void coverAWish(Wish wish) {
     if (this.invitedWishLists.contains(wish.getBelongTo())) {
       wish.coverAWish(this);
@@ -175,13 +208,20 @@ public class User {
     }
   }
 
-  /** A user can make a new wishList **/
+  /**
+   * A user can make a new wishList
+   * @param name Name of wishlist
+   * @param wishes Wishes to add
+   */
   public void makeWishList(String name, Wish... wishes) {
     WishList wishList = new WishList(this, name, wishes);
     ownWishLists.add(wishList);
   }
 
-  /** A user can delete a wishList that they own **/
+  /**
+   * A user can delete a wishList that they own
+   * @param wishList Wishlist to delete
+   */
   public void removeWishList(WishList wishList) {
     if (this.ownWishLists.contains(wishList)) {
       ownWishLists.remove(wishList);
