@@ -33,7 +33,10 @@ public class Wish {
     return this.belongTo;
   }
 
-  /** A user covers a wish on a wishlist they have been invited to **/
+  /**
+   * A user covers a wish on a wishlist they have been invited to
+   * @param coveredBy User that covers a wish
+   */
   public void coverAWish(User coveredBy) {
     this.covered = true;
     this.coveredBy = coveredBy;
