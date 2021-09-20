@@ -2,11 +2,8 @@
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.application.Application;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
 
 import java.util.ArrayList;
@@ -18,6 +15,7 @@ public class WishListController {
     @FXML TextField addItemField;
     private WishListApp application;
     private Scene scene;
+    // Unnecessary when db is implemented?
     public String selected;
 
     public void configure(final WishListApp application, final Scene scene) {
@@ -29,11 +27,15 @@ public class WishListController {
         application.show(scene);
     }
 
-    public void goToAddList() {
-        application.controller2.show();
+    public void addNewList(){
+        // Insert code for adding new empty list to db
+        // Go to main screen again to update page
+        goToMainScreen();
     }
 
     public void goToMainScreen() {
+
+        // Use to add something to the ListView to show how app works
         List<String> testListe = new ArrayList<>();
         testListe.add("Jul");
         testListe.add("Bursdag");
@@ -50,7 +52,11 @@ public class WishListController {
 
     public void goToDisplayList(){
         application.controllerDisplay.show();
+
+        // Use to add something to the ListView to show how app works
         ObservableList<String> items = FXCollections.observableArrayList();
+
+        // Store which item in ListView is chosen
         this.setSelected(list.getSelectionModel().getSelectedItem());
         List<String> testListe = new ArrayList<>();
         testListe.add("1 + " + this.selected);
@@ -65,13 +71,25 @@ public class WishListController {
     }
 
     public void logIn(){
-        // Temp variable, will not be used
+        // Temp variable. Will be replaced with conditions such as "if field is empty"
         boolean temp = false;
         if(temp){
             //Show error
         } else {
             // Needs backend logic to show this user's data
-            application.controllerMain.show();
+            goToMainScreen();
+        }
+    }
+
+    public void signUp(){
+        //Temp variable. Will be replaced with conditions such as "if field is empty"
+        boolean temp = false;
+        if(temp){
+            //Show error
+        } else {
+            //Implement logic to add new user to db
+            // Needs backend logic to show this user's data
+            goToMainScreen();
         }
     }
 
@@ -79,25 +97,17 @@ public class WishListController {
         application.controllerLogIn.show();
     }
 
-    public void newUser(){
+    public void goToNewUser(){
         application.controllerNewUser.show();
     }
 
+    // Unnecessary when backend is implemented?
     public void setSelected(String s){
         this.selected = s;
     }
 
-    public String getSelected(){
-        return this.selected;
-    }
-
-    //Får det ikke til å fungere, men logikken blir uansett annerledes med databaser
     public void addNewItem(){
-        /*
-        System.out.println(this);
-        application.controllerDisplay.items.add(addItemField.getText());
-        System.out.println("Items etter man legger til: " + this.items);
-        chosenList.setItems(application.controllerDisplay.items); */
+        //Needs backend to add item to chosen list
     }
 
 }
