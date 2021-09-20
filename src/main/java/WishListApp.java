@@ -8,7 +8,7 @@ import java.io.IOException;
 public class WishListApp extends Application {
 
     public WishListController controllerMain;
-    public WishListController controller2;
+    //public WishListController controller2;
     public WishListController controllerDisplay;
     public WishListController controllerLogIn;
     public WishListController controllerNewUser;
@@ -20,26 +20,23 @@ public class WishListApp extends Application {
 
     @Override
     public void start(final Stage primaryStage) throws IOException {
-        /** Define starting stage **/
+        // Define starting stage
         this.primaryStage = primaryStage;
 
         // Load fxml files
         controllerLogIn = load("LogIn.fxml");
         controllerNewUser = load("NewUser.fxml");
         controllerMain = load("WishList.fxml");
-        // Will be removed
-        controller2 = load("NewList.fxml");
         controllerDisplay = load("DisplayList.fxml");
 
-        // Show chosen fxml file when app starts
         primaryStage.setTitle("WishList");
         controllerMain.goToLogIn();
         primaryStage.show();
     }
 
     //Define function that opens app
-    public WishListController load(final String name) throws IOException {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource(name));
+    public WishListController load(final String fileName) throws IOException {
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource(fileName));
         loader.load();
         final WishListController controller = loader.getController();
         controller.configure(this, new Scene(loader.getRoot()));

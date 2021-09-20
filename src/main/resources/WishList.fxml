@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="addList" prefHeight="441.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WishListController">
    <children>
-      <Button layoutX="185.0" layoutY="65.0" mnemonicParsing="false" onAction="#goToAddList" prefHeight="25.0" prefWidth="121.0" text="Make new wishlist" />
+      <Button layoutX="185.0" layoutY="65.0" mnemonicParsing="false" onAction="#addNewList" prefHeight="25.0" prefWidth="121.0" text="Make new wishlist" />
       <AnchorPane layoutY="107.0" prefHeight="334.0" prefWidth="320.0">
          <children>
             <ListView id="list" fx:id="list" layoutY="40.0" onMouseClicked="#goToDisplayList" prefHeight="294.0" prefWidth="320.0" />
