@@ -1,0 +1,13 @@
+image: maven:3.8.2-jdk-16
+
+stages:
+    - build
+    - test
+
+build:
+    stage: build
+    script: mvn clean && mvn install -DskipTests && mvn compile
+
+test:
+    stage: test
+    script: mvn test
