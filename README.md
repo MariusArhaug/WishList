@@ -21,3 +21,7 @@ Everytime a member of the group creates a merge request, it needs to reviewed an
 After the MR has been verfiied and accepted, the creator of the MR needs to merge it into the master branch.
 
 Remember to squash commits when merging, since commit messages after dosen't make much sense in the master branch.
+
+## Link to README explaining the app
+
+[README.md](src/README.md)

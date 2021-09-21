@@ -3,7 +3,7 @@ public class Wish {
   private final String wish;
   private boolean covered = false;
   private User coveredBy = null;
-  private WishList belongTo;
+  private final WishList belongTo;
 
   public Wish(String wish, WishList belongTo) {
     if (wish.length() != 0 && wish.length() < 25) {
