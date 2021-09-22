@@ -6,8 +6,8 @@ stages:
 
 build:
     stage: build
-    script: mvn install -B -DskipTests && mvn clean && mvn compile
+    script: cd wishList && mvn install -B -DskipTests && mvn clean && mvn compile
 
 test:
     stage: test
-    script: mvn test
+    script: cd wishList && mvn test
