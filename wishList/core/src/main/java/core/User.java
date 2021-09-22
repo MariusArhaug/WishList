@@ -1,8 +1,8 @@
+package core;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class User {
 
@@ -19,52 +19,17 @@ public class User {
   private final List<WishList> invitedWishLists = new ArrayList<>();
 
 
-  public User(String firstName, String lastName, String email, String password) {
-    if (firstName.length() != 0 && firstName.length() < 20) {
-      this.firstName = firstName;
-    } else {
+  public User(String firstName, String lastName, String email, String password) throws IllegalArgumentException {
+    if (firstName.length() == 0 || firstName.length() > 20) {
       throw new IllegalArgumentException("A user must have a first name and it can not surpass 20 characters!");
     }
-    if (lastName.length() != 0 && lastName.length() < 20) {
-      this.lastName = lastName;
-    } else {
+    if (lastName.length() == 0 || lastName.length() > 20) {
       throw new IllegalArgumentException("A user must have a last name and it can not surpass 20 characters!");
     }
-    if (email.length() != 0) {
-      Pattern emailPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-      Matcher emailMatcher   = emailPattern.matcher(email);
-      boolean validEmail = emailMatcher.find();
-      if (validEmail) {
-        this.email = email;
-      } else {
-        throw new IllegalArgumentException("This is not a valid email!");
-      }
-    } else {
-      throw new IllegalArgumentException("A user must have an email!");
-    }
-
-    if (password != null && password.length() >= 8) {
-      Pattern specialCharacter = Pattern.compile("[$&+,:;=?@#|'<>.^*()%!-]");
-      Pattern number = Pattern.compile("[0-9]");
-      Pattern upperCase = Pattern.compile("[A-Z]");
-      Matcher scMatcher = specialCharacter.matcher(password);
-      Matcher numberMatcher = number.matcher(password);
-      Matcher upperMatcher = upperCase.matcher(password);
-      boolean containsSC = scMatcher.find();
-      boolean containsNumber = numberMatcher.find();
-      boolean containsUpper = upperMatcher.find();
-      if (!containsSC) {
-        throw new IllegalArgumentException("Password must contain at least one special character!");
-      } else if (!containsNumber) {
-        throw new IllegalArgumentException("Password must contain at least one number!");
-      } else if (!containsUpper) {
-        throw new IllegalArgumentException("Password must contain at least one uppercase letter!");
-      } else {
-        this.password = password;
-      }
-    } else {
-      throw new IllegalArgumentException("A user must have a password and it must be at least 8 characters long!");
-    }
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.password = password;
   }
 
   public String getFirstName() {
@@ -153,9 +118,19 @@ public class User {
   }
 
   /**
+   * Checks to see if user's email and passwords match with inputs
+   * @param email email string
+   * @param password password string
+   * @return boolean
+   */
+  public boolean checkCredentials(String email, String password) {
+    return this.email.equals(email) && this.password.equals(password);
+  }
+
+  /**
    * Adds a wish to an owned wishlist
    * @param wishList Wishlist to add a wish to
-   * @param wish Wish to add
+   * @param wish core.Wish to add
    */
   public void addWish(WishList wishList, String wish) {
     if (this.ownWishLists.contains(wishList)) {
@@ -167,7 +142,7 @@ public class User {
 
   /**
    * Removes a wish from an owned wishlist
-   * @param wish Wish to remove
+   * @param wish core.Wish to remove
    */
   public void removeWish(Wish wish) {
     if (this.ownWishLists.contains(wish.getBelongTo())) {
@@ -198,7 +173,7 @@ public class User {
 
   /**
    * If the list is not your own the user can cover a wish on that list
-   * @param wish Wish to cover
+   * @param wish core.Wish to cover
    */
   public void coverAWish(Wish wish) {
     if (this.invitedWishLists.contains(wish.getBelongTo())) {

@@ -1,3 +1,5 @@
+package core;
+
 public class Wish {
 
   private final String wish;
@@ -35,7 +37,7 @@ public class Wish {
 
   /**
    * A user covers a wish on a wishlist they have been invited to
-   * @param coveredBy User that covers a wish
+   * @param coveredBy core.User that covers a wish
    */
   public void coverAWish(User coveredBy) {
     this.covered = true;

@@ -1,3 +1,5 @@
+package core;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -49,7 +51,7 @@ public class WishList {
 
   /**
    * A new wish can be added to a wishList
-   * @param wishContent Wish content to add
+   * @param wishContent core.Wish content to add
    */
   public void addWish(String wishContent) {
     Wish wish = new Wish(wishContent, this);
@@ -58,7 +60,7 @@ public class WishList {
 
   /**
    * A wish can be removed from a wishList
-   * @param wish Wish to remove
+   * @param wish core.Wish to remove
    */
   public void removeWish(Wish wish) {
     wishes.remove(wish);

@@ -1,15 +1,27 @@
-
+import core.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.Scene;
+import json.JsonLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class WishListController {
+    @FXML private TextField firstNameSignUp;
+    @FXML private TextField lastNameSignUp;
+    @FXML private TextField emailSignUp;
+    @FXML private TextField passwordSignUp;
+
+    @FXML private Label outputSignup;
+
+    private User currentUser;
+    private final JsonLoader jsonLoader = new JsonLoader();
+
     @FXML ListView<String> list;
     @FXML ListView<String> chosenList;
     @FXML TextField addItemField;
@@ -28,6 +40,21 @@ public class WishListController {
 
     public void goToAddList() {
         application.controller2.show();
+    }
+
+    @FXML
+    public void signUpUser() {
+        String firstname = firstNameSignUp.getText();
+        String lastname = lastNameSignUp.getText();
+        String emailSignup = emailSignUp.getText();
+        String password = passwordSignUp.getText();
+
+        try {
+            currentUser = jsonLoader.addUser(firstname, lastname, emailSignup, password);
+            goToMainScreen();
+        } catch (Exception e) {
+            //outputSignup.setText(e.toString());
+        }
     }
 
     public void goToMainScreen() {

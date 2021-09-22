@@ -1,11 +1,16 @@
+import core.User;
+import core.WishList;
+import core.Wish;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class UserTest {
     User john;
@@ -23,7 +28,6 @@ class UserTest {
         john = null;
     }
 
-    @Test
     void User() {
         String[] testFirstNames = {"", "MoreThanTwentyLetters", "Tom", "Tom", "Tom", "Tom", "Tom", "Tom", "Tom", "Tom", "Tom"};
         String[] testLastNames = {"Parker", "Parker", "", "MoreThanTwentyLetters", "Parker", "Parker", "Parker", "Parker", "Parker", "Parker", "Parker"};

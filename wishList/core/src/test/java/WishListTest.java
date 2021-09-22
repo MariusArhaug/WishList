@@ -1,3 +1,6 @@
+import core.User;
+import core.Wish;
+import core.WishList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
