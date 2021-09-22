@@ -1,4 +1,4 @@
-image: 3.8.2-openjdk-16
+image: maven:3.8.2-openjdk-16
 
 stages:
     - build
@@ -6,7 +6,7 @@ stages:
 
 build:
     stage: build
-    script: mvn clean && mvn install -DskipTests && mvn compile
+    script: mvn install -B -DskipTests && mvn clean && mvn compile
 
 test:
     stage: test
