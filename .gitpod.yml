@@ -3,10 +3,15 @@ image:
 
 tasks:
   - sdk use java 16.0.1.hs-adpt
-    prebuild: cd wishList; mvn clean install && mvn compile
+    prebuild: cd wishList; mvn compile
     command: cd wishList
 
 
 ports:
   # used by virtual desktop and vnc, supports JavaFX
   - port: 6080
+  
+vscode:
+  extensions:
+    - jebbs.plantuml@2.13.12:q7DiD6H5NTesaWYIXmeMMQ==
+    - vsls-contrib.codetour@0.0.37:n/LcXr1DIqz+xFGficwDHA==
