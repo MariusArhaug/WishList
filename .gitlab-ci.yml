@@ -14,4 +14,4 @@ build:
 
 test:
     stage: test
-    script: cd wishList && mvn test
+    script: mvn test
