@@ -1,0 +1,17 @@
+image: maven:3.8.2-openjdk-16
+
+cache:
+  paths:
+    - .m2/repository
+
+stages:
+    - build
+    - test
+
+build:
+    stage: build
+    script: cd wishList && mvn install -B -DskipTests && mvn clean compile
+
+test:
+    stage: test
+    script: mvn test

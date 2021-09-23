@@ -1,4 +1,4 @@
-# Group 21 Repo - WishList
+# Group 21 Repo - core.WishList
 
 ## Naming conventions
 
