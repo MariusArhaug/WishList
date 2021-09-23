@@ -50,5 +50,17 @@ public class WishListApp extends Application {
     public static void main(final String[] args) {
         launch(args);
     }
+    /*@Override
+    public void start(Stage stage) throws Exception {
+        System.out.println(getClass().getResource("WishList.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("WishList.fxml"));
+        stage.setScene(new Scene(parent));
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(WishListApp.class, args);
+    }*/
+
 }
 

@@ -1,3 +1,6 @@
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import core.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -6,21 +9,30 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import json.JsonLoader;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class WishListController {
+    public AnchorPane addList;
+    public TextField addNewList;
     @FXML private TextField firstNameSignUp;
     @FXML private TextField lastNameSignUp;
     @FXML private TextField emailSignUp;
     @FXML private TextField passwordSignUp;
+    
 
     @FXML private Label outputSignup;
 
     private User currentUser;
-    private final JsonLoader jsonLoader = new JsonLoader();
+    //private JsonLoader jsonLoader = new JsonLoader();
+    private ObjectMapper mapper = new ObjectMapper();
 
     @FXML ListView<String> list;
     @FXML ListView<String> chosenList;
@@ -33,7 +45,9 @@ public class WishListController {
         this.application = application;
         this.scene = scene;
     }
-
+    public WishListController() {
+        //this.jsonLoader = new JsonLoader();
+    }
     public void show() {
         application.show(scene);
     }
@@ -48,12 +62,43 @@ public class WishListController {
         String lastname = lastNameSignUp.getText();
         String emailSignup = emailSignUp.getText();
         String password = passwordSignUp.getText();
-
         try {
-            currentUser = jsonLoader.addUser(firstname, lastname, emailSignup, password);
+            //currentUser = jsonLoader.addUser(firstname, lastname, emailSignup, password);
+            currentUser = addUser(firstname, lastname, emailSignup, password);
+
             goToMainScreen();
         } catch (Exception e) {
-            //outputSignup.setText(e.toString());
+            //outputSignup.setText(e.toString());;
+            e.printStackTrace();
+        }
+    }
+
+    private List<User> loadJsonList(File file) throws IOException {
+        return mapper.readValue(file, new TypeReference<List<User>>(){});
+    }
+
+    public User addUser(String firstname, String lastname, String email, String password) throws IllegalArgumentException, Exception {
+        try {
+            List<User> users = loadJsonList(new File(Paths.get("").toAbsolutePath() + "/src/main/resources/users.json"));
+            System.out.println(users);
+
+
+
+            for (User user : users) {
+                if (user.getEmail().equals(email)) {
+                    throw new IllegalArgumentException(
+                        "An user with this email already exists, please try another one"
+                    );
+                }
+            }
+            User newUser = new User(firstname, lastname, email, password);
+
+            users.add(newUser);
+            //System.out.println(Paths.get("").toAbsolutePath() + "/src/main/resources/users.json");
+            mapper.writeValue(new File(Paths.get("").toAbsolutePath() + "/src/main/resources/users.json"), users);
+            return newUser;
+        } catch (Exception e) {
+            throw new Exception(e);
         }
     }
 
@@ -64,9 +109,7 @@ public class WishListController {
         testListe.add("Konfirmasjon");
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(String i : testListe) {
-            items.add(i);
-        }
+        items.addAll(testListe);
         application.controllerMain.list.setItems(items);
 
         application.controllerMain.show();

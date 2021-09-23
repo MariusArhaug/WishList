@@ -2,49 +2,30 @@ package core;
 
 public class Wish {
 
-  private final String wish;
-  private boolean covered = false;
-  private User coveredBy = null;
+  private final String name;
   private WishList belongTo;
 
-  public Wish(String wish, WishList belongTo) {
-    if (wish.length() != 0 && wish.length() < 25) {
-      this.wish = wish;
-    } else {
+  public Wish(String name) {
+    if (name.length() == 0 || name.length() > 25) {
+
       throw new IllegalArgumentException("The wish can not be empty or surpass 25 character!");
     }
-    if (belongTo != null) {
-      this.belongTo = belongTo;
-    } else {
-      throw new IllegalArgumentException("A wish must belong to an existing wish list!");
-    }
+    this.name = name;
   }
 
-  public String getWish() {
-    return this.wish;
+  public Wish setBelongTo(WishList list) {
+    this.belongTo = list;
+    return this;
   }
-  public boolean getCovered() {
-    return this.covered;
-  }
-
-  public User getCoveredBy() {
-    return this.coveredBy;
+  public String getName() {
+    return this.name;
   }
 
   public WishList getBelongTo() {
     return this.belongTo;
   }
 
-  /**
-   * A user covers a wish on a wishlist they have been invited to
-   * @param coveredBy core.User that covers a wish
-   */
-  public void coverAWish(User coveredBy) {
-    this.covered = true;
-    this.coveredBy = coveredBy;
-  }
-
   public String toString() {
-    return "" + this.wish + "," + this.belongTo + "," + this.covered + "," + this.coveredBy + "";
+    return "" + this.name + "," + this.belongTo + ",";
   }
 }
