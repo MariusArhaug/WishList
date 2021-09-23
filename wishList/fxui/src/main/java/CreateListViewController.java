@@ -11,6 +11,11 @@ public class CreateListViewController extends AbstractController {
   @FXML private TextField newItem;
   @FXML private Button addNewItem;
 
+  @Override @FXML
+  public void initialize() {
+
+  }
+
   public void changeToMainView(ActionEvent event) throws IOException {
     this.changeScene("MainView.fxml", event);
   }
@@ -22,6 +27,16 @@ public class CreateListViewController extends AbstractController {
 
   @Override
   public void changeToLoginView(ActionEvent event) throws IOException {
+
+  }
+
+  @Override
+  public void changeToCreateListView(ActionEvent event) throws IOException {
+
+  }
+
+  @Override
+  public void changeToShowListView(ActionEvent event) throws IOException {
 
   }
 

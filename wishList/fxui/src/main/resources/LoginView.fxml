@@ -8,9 +8,9 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="291.0"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginViewController">
-   <TextField id="nameInput" fx:id="loginNameInput" layoutX="71.0" layoutY="136.0"/>
+   <TextField id="emailInput" fx:id="loginEmailInput" layoutX="71.0" layoutY="136.0"/>
    <TextField id="passwordInput" fx:id="loginPasswordInput" layoutX="71.0" layoutY="200.0"/>
-   <Label layoutX="70.0" layoutY="119.0" text="Username:"/>
+   <Label layoutX="70.0" layoutY="119.0" text="Email:"/>
    <Label layoutX="71.0" layoutY="183.0" text="Password:"/>
    <Button id="logInButton"  onAction="#changeToMainView" layoutX="121.0" layoutY="244.0"
            mnemonicParsing="false" text="Log in"/>

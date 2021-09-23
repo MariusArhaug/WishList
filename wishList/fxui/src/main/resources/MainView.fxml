@@ -8,10 +8,10 @@
 
 <AnchorPane fx:id="addList" prefHeight="441.0" prefWidth="320.0" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="LoginViewController">
-   <Button layoutX="185.0" layoutY="65.0" mnemonicParsing="false" onAction="#goToAddList" prefHeight="25.0"
+   <Button layoutX="185.0" layoutY="65.0" mnemonicParsing="false" onAction="#changeToCreateListView" prefHeight="25.0"
            prefWidth="121.0" text="Make new wishlist"/>
    <AnchorPane layoutY="107.0" prefHeight="334.0" prefWidth="320.0">
-      <ListView id="list" fx:id="list" layoutY="40.0" onMouseClicked="#goToDisplayList" prefHeight="294.0"
+      <ListView id="list" fx:id="list" layoutY="40.0" onMouseClicked="#changeToShowListView" prefHeight="294.0"
                 prefWidth="320.0"/>
       <Label layoutX="29.0" layoutY="23.0" text="Your wishlists:"/>
    </AnchorPane>
