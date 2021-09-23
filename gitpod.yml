@@ -1,0 +1,12 @@
+image:
+  file: .gitpod.dockerfile
+
+tasks:
+  - sdk use java 16.0.1.hs-adpt
+    prebuild: cd wishList; mvn clean install && mvn compile
+    command: cd wishList
+
+
+ports:
+  # used by virtual desktop and vnc, supports JavaFX
+  - port: 6080

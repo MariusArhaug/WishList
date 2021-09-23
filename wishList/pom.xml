@@ -2,26 +2,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.4</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>WishList</artifactId>
+
+	<groupId>it1901.WishList</groupId>
+	<artifactId>parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>WishList</name>
-	<description>WishList project in Spring Boot</description>
+
 	<properties>
 		<java.version>16</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	<dependencyManagement>
 	<dependencies>
 		<!-- junit -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
 			<version>5.7.2</version>
+			<scope>test</scope>
 		</dependency>
 		<!-- mockito -->
 		<dependency>
@@ -30,38 +29,51 @@
 			<version>2.0.2-beta</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- javafx -->
+
+
+		<!-- Jackson for JSON manipulation -->
 		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-controls</artifactId>
-			<version>15</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.9.6</version>
 		</dependency>
+
 		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-fxml</artifactId>
-			<version>15</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.9.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.6</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
+			<version>2.5.4</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<version>2.5.4</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
+	</dependencyManagement>
 
 	<build>
+		<pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
+					<encoding>UTF-8</encoding>
 					<release>16</release>
 				</configuration>
 			</plugin>
@@ -71,19 +83,12 @@
 				<version>3.0.0-M5</version>
 
 			</plugin>
-
-			<plugin>
-				<groupId>org.openjfx</groupId>
-				<artifactId>javafx-maven-plugin</artifactId>
-				<version>0.0.6</version>
-				<!-- Default configuration for running -->
-				<!-- Usage: mvn javafx:run -->
-				<configuration>
-					<mainClass>WishListApp</mainClass>
-				</configuration>
-			</plugin>
 		</plugins>
+		</pluginManagement>
 	</build>
-
+<modules>
+	<module>core</module>
+	<module>fxui</module>
+</modules>
 
 </project>
