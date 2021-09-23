@@ -15,7 +15,6 @@ public class JsonLoader extends JsonHandler {
 
   public User addUser(String firstname, String lastname, String email, String password) throws IllegalArgumentException, Exception {
     try  {
-
       List<User> users = this.loadJsonList(COMPLETE_PATH);
       User newUser = new User(firstname, lastname, email, password);
 

@@ -88,8 +88,8 @@ public class WishListController {
         application.controllerDisplay.chosenList.setItems(items);
     }
 
-    public void logIn(){
-        // Temp variable, will not be used
+    public void logIn() {
+        
         boolean temp = false;
         if(temp){
             //Show error

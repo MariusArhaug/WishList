@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -14,13 +15,9 @@ public class WishListApp extends Application {
     public WishListController controllerNewUser;
     private Stage primaryStage;
 
-    public static void main(final String[] args) {
-        launch(args);
-    }
 
     @Override
     public void start(final Stage primaryStage) throws IOException {
-        /** Define starting stage **/
         this.primaryStage = primaryStage;
 
         // Load fxml files
@@ -48,6 +45,10 @@ public class WishListApp extends Application {
 
     public void show(final Scene scene) {
         primaryStage.setScene(scene);
+    }
+
+    public static void main(final String[] args) {
+        launch(args);
     }
 }
 
