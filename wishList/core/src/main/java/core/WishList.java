@@ -1,3 +1,5 @@
+package core;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -5,22 +7,28 @@ import java.util.List;
 public class WishList {
 
   private final String name;
-  private List<Wish> wishes = new ArrayList<>();
-  private final User owner;
+  private final List<Wish> wishes = new ArrayList<>();
+  private User owner;
   private boolean hideInfoFromOwner;
 
+  public WishList(String name) {
+    this.name = name;
+  }
+
   public WishList(User owner, String name, Wish... wishes) {
-    if (name.length() != 0 && name.length()< 25) {
-      this.name = name;
-    } else {
+    if (name.length() == 0 || name.length() > 25) {
       throw new IllegalArgumentException("The name can not be empty or surpass 25 character!");
     }
-    if (owner != null) {
-      this.owner = owner;
-    } else {
+    if (owner == null) {
       throw new IllegalArgumentException("A wish list must be owned by an existing user!");
     }
+    this.owner = owner;
+    this.name = name;
     Collections.addAll(this.wishes, wishes);
+  }
+
+  public void setOwner(User owner) {
+    this.owner = owner;
   }
 
   public List<Wish> getWishes() {
@@ -47,22 +55,17 @@ public class WishList {
     this.hideInfoFromOwner = hideInfoFromOwner;
   }
 
-  /**
-   * A new wish can be added to a wishList
-   * @param wishContent Wish content to add
-   */
-  public void addWish(String wishContent) {
-    Wish wish = new Wish(wishContent, this);
-    wishes.add(wish);
+ public void addWish(Wish wish) {
+    this.wishes.add(wish);
+    wish.setBelongTo(this);
   }
 
   /**
    * A wish can be removed from a wishList
-   * @param wish Wish to remove
+   * @param wish core.Wish to remove
    */
   public void removeWish(Wish wish) {
     wishes.remove(wish);
-    wish = null;
   }
 
   public String toString() {

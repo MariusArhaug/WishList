@@ -1,15 +1,38 @@
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.Scene;
+import javafx.event.ActionEvent;
+import java.io.IOException;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class WishListController {
+public class LoginViewController extends AbstractController {
+    @FXML private TextField loginNameInput;
+    @FXML private TextField loginPasswordInput;
+
+
+    @FXML
+    public void changeToRegisterView(ActionEvent event) throws IOException {
+       this.changeScene("RegisterView.fxml", event);
+    }
+
+    @Override
+    public void changeToLoginView(ActionEvent event) throws IOException {
+
+    }
+
+
+    @FXML
+    public void changeToMainView(ActionEvent event) throws IOException {
+        this.changeScene("MainView.fxml", event);
+    }
+
+
+    /*
+    @FXML private Label outputSignup;
+
+    //private User currentUser = new User("1111", "1111", "", "");
+    //private final WishList test = new WishList("test");
+
     @FXML ListView<String> list;
     @FXML ListView<String> chosenList;
     @FXML TextField addItemField;
@@ -26,9 +49,7 @@ public class WishListController {
         application.show(scene);
     }
 
-    public void goToAddList() {
-        application.controller2.show();
-    }
+
 
     public void goToMainScreen() {
         List<String> testListe = new ArrayList<>();
@@ -37,9 +58,7 @@ public class WishListController {
         testListe.add("Konfirmasjon");
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(String i : testListe) {
-            items.add(i);
-        }
+        items.addAll(testListe);
         application.controllerMain.list.setItems(items);
 
         application.controllerMain.show();
@@ -61,8 +80,8 @@ public class WishListController {
         application.controllerDisplay.chosenList.setItems(items);
     }
 
-    public void logIn(){
-        // Temp variable, will not be used
+    public void logIn() {
+        
         boolean temp = false;
         if(temp){
             //Show error
@@ -95,7 +114,7 @@ public class WishListController {
         application.controllerDisplay.items.add(addItemField.getText());
         System.out.println("Items etter man legger til: " + this.items);
         chosenList.setItems(application.controllerDisplay.items); */
-    }
+    //}
 
 }
 
