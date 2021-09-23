@@ -1,7 +1,6 @@
 package core;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -115,6 +114,7 @@ public class User {
 
   public void addWishList(WishList list) {
     wishLists.add(list);
+    list.setOwner(this);
   }
 
   public void addWish(WishList wishList, Wish wish) {

@@ -1,23 +1,31 @@
-# Group 21 Repo - core.WishList
 
-## Naming conventions
+# Group gr2121 repository
 
-We use the following naming conventions:
+GitPod Link: [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.idi.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121)
 
-- FEAT - For developing new feature
-- CHANGE - Updating/modifying existing code
-- DRAFT - For work in progress code
-- DELETE - Removal off code (no additions)
-- NO-ISSUE - Misc changes, devops and or updates to dependencies
+## Modules
 
-Commit messages need to follow one of these four tags before additional message.
-Commit messages also need to be written in present time.
+The project is bulilt with `maven` and to be structured using a modular style. Where you can the parent pom.xml file at the root of this repo. 
 
-`FEAT: add new component`
+Following sub-modules are:
 
-## Code reviews
+- <a href="./core">**core**</a>: Here lies the main *core* logic for the application.
+- <a href="./fxui">**fxui**</a>: Here lies javafx-code for GUI aswell as controllers for different *views*
 
-Everytime a member of the group creates a merge request, it needs to reviewed and verified by atleast one other person before merging it.
-After the MR has been verfiied and accepted, the creator of the MR needs to merge it into the master branch.
+Our repo supports the following
 
-Remember to squash commits when merging, since commit messages after dosen't make much sense in the master branch.
+- Testing (maven-sunfire-plugin)
+- JavaFX running (javafx-maven-plugin)
+
+
+## Get started 
+
+In order to run this project or in a new environment do the following:
+
+- `mvn clean install`
+- `mvn compile`
+- `mvn -pl fxui javafx:run` : To run JavaFX. 
+
+Tests can be run with 
+
+- `mvn test`

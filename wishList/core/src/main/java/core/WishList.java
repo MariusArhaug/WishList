@@ -8,8 +8,12 @@ public class WishList {
 
   private final String name;
   private final List<Wish> wishes = new ArrayList<>();
-  private final User owner;
+  private User owner;
   private boolean hideInfoFromOwner;
+
+  public WishList(String name) {
+    this.name = name;
+  }
 
   public WishList(User owner, String name, Wish... wishes) {
     if (name.length() == 0 || name.length() > 25) {
@@ -21,6 +25,10 @@ public class WishList {
     this.owner = owner;
     this.name = name;
     Collections.addAll(this.wishes, wishes);
+  }
+
+  public void setOwner(User owner) {
+    this.owner = owner;
   }
 
   public List<Wish> getWishes() {

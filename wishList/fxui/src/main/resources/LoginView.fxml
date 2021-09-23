@@ -7,13 +7,13 @@
 
 
 <AnchorPane prefHeight="400.0" prefWidth="291.0"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="WishListController">
-   <TextField id="nameInput" fx:id="nameInput" layoutX="71.0" layoutY="136.0"/>
-   <TextField id="passwordInput" fx:id="passwordInput" layoutX="71.0" layoutY="200.0"/>
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginViewController">
+   <TextField id="nameInput" fx:id="loginNameInput" layoutX="71.0" layoutY="136.0"/>
+   <TextField id="passwordInput" fx:id="loginPasswordInput" layoutX="71.0" layoutY="200.0"/>
    <Label layoutX="70.0" layoutY="119.0" text="Username:"/>
    <Label layoutX="71.0" layoutY="183.0" text="Password:"/>
-   <Button id="logInButton" fx:id="logInButton" onAction="#logIn" layoutX="121.0" layoutY="244.0"
+   <Button id="logInButton"  onAction="#changeToMainView" layoutX="121.0" layoutY="244.0"
            mnemonicParsing="false" text="Log in"/>
-   <Button id="newUserButton" fx:id="newUserButton" onAction="#newUser" layoutX="194.0" layoutY="28.0"
+   <Button id="newUserButton" onAction="#changeToRegisterView" layoutX="194.0" layoutY="28.0"
            mnemonicParsing="false" text="New user"/>
 </AnchorPane>
