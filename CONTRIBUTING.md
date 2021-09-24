@@ -18,6 +18,6 @@ Commit messages also need to be written in present time.
 ## Code reviews
 
 Everytime a member of the group creates a merge request, it needs to reviewed and verified by atleast one other person before merging it.
-After the MR has been verfiied and accepted, the creator of the MR needs to merge it into the master branch.
+After the MR has been verified and accepted, the creator of the MR needs to merge it into the master branch.
 
-Remember to squash commits when merging, since commit messages after dosen't make much sense in the master branch.
+Remember to squash commits when merging, since commit messages after doesn't make much sense in the master branch.
