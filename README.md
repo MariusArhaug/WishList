@@ -1,4 +1,3 @@
-
 # Group gr2121 repository
 
 GitPod Link: [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.idi.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121)
@@ -9,8 +8,8 @@ The project is built with `maven` and to be structured using a modular style. Wh
 
 Following sub-modules are:
 
-- <a href="./core">**core**</a>: Here lies the main *core* logic for the application.
-- <a href="./fxui">**fxui**</a>: Here lies javafx-code for GUI as well as controllers for different *views*
+[**core**](wishList/core): Here lies the main _core_ logic for the application.
+[**fxui**](wishList/fxui): Here lies javafx-code for GUI as well as controllers for different _views_
 
 Our repo supports the following
 
@@ -18,6 +17,7 @@ Our repo supports the following
 - JavaFX running (javafx-maven-plugin)
 
 ## README
+
 Explaining groups usage of git:
 
 [CONTRIBUTING.md](CONTRIBUTING.md)
@@ -43,15 +43,21 @@ Tests can be run with
 - `mvn -pl core test`
 
 ## Directory of the coding project
+
 All the code can be found inside the wishList folder
+
 ### Test
+
 wishList/core/src/test/java
+
 - [UserTest.java](./wishList/core/src/test/java/UserTest.java)
 - [WishListTest.java](./wishList/core/src/test/java/WishListTest.java)
 - [WishTest.java](./wishList/core/src/test/java/WishTest.java)
 
 ### Java class logic
+
 wishList/core/src/main/java/core
+
 - [User.java](./wishList/core/src/main/java/core/User.java)
 - [WishList.java](./wishList/core/src/main/java/core/WishList.java)
 - [Wish.java](./wishList/core/src/main/java/core/Wish.java)
@@ -59,7 +65,9 @@ wishList/core/src/main/java/core
 ### Controller-App-View
 
 #### App and controller and interface
+
 wishList/fxui/src/main/java
+
 - [AbstractController.java](./wishList/fxui/src/main/java/AbstractController.java)
 - [CreateListViewController.java](./wishList/fxui/src/main/java/CreateListViewController.java)
 - [LoginViewController.java](./wishList/fxui/src/main/java/LoginViewController.java)
@@ -70,7 +78,9 @@ wishList/fxui/src/main/java
 - [WishListApp.java](./wishList/fxui/src/main/java/WishListApp.java)
 
 #### FXML
+
 wishList/fxui/src/main/resources
+
 - [CreateListView.fxml](./wishList/fxui/src/main/resources/CreateListView.fxml)
 - [LoginView.fxml](./wishList/fxui/src/main/resources/LoginView.fxml)
 - [MainView.fxml](./wishList/fxui/src/main/resources/MainView.fxml)
@@ -78,7 +88,9 @@ wishList/fxui/src/main/resources
 - [ShowListView.fxml](./wishList/fxui/src/main/resources/ShowListView.fxml)
 
 ### JSON
+
 wishList/core/src/main/java/json
+
 - [JsonHandler.java](./wishList/core/src/main/java/json/JsonHandler.java)
 - [JsonModule.java](./wishList/core/src/main/java/json/JsonModule.java)
 - [UserDeserializer.java](./wishList/core/src/main/java/json/UserDeserializer.java)
