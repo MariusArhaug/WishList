@@ -39,6 +39,8 @@ We originally thought we had time to complete both issues, but after many hours 
 
 Knowing now that our modules structure is finally working, the following Sprints can be done in a way more efficient way and hopefully with more reviewers for merge requests.
 
+We've completed User Story 1, with complete support for UI and Storage of users, and we've only implemented the core functionality of use case Story-2.
+
 # Functionality
 
 - When the app opens, the user has to log in.

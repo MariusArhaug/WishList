@@ -39,25 +39,27 @@ We originally thought we had time to complete both issues, but after many hours 
 
 Knowing now that our modules structure is finally working, the following Sprints can be done in a way more efficient way and hopefully with more reviewers for merge requests.
 
+We've completed User Story 1, with complete support for UI and Storage of users, and we've only implemented the core functionality of use case Story-2.
+
 # Functionality
 
 - When the app opens, the user has to log in.
 
-  ![Log in page](../../../docs/release1/resoursces/login.png)
+  ![Log in page](resoursces/login.png)
 
 - If the user does not have an account, an account can be created.
 
-  ![New user button](../../../docs/release1/resoursces/newUserButton.png)
-  ![Sign up page](../../../docs/release1/resoursces/signup.png)
+  ![New user button](resoursces/newUserButton.png)
+  ![Sign up page](resoursces/signup.png)
 
 - A user can make wish lists. When creating a new list, the user needs to choose a name for the wish list.
-- ![Make new wishlist](../../../docs/release1/resoursces/createWishlist.png)
+- ![Make new wishlist](resoursces/createWishlist.png)
 - A user can see the wish lists that they own displayed on the main page.
-- ![Wish lists](../../../docs/release1/resoursces/wishLists.png)
+- ![Wish lists](resoursces/wishLists.png)
 - A user can see the wishes on their wish lists. When clicking on one of the displayed wish lists, the wishes in this specific list will be displayed.
 
-  ![A specific wish list](../../../docs/release1/resoursces/specificWIshlist.png)
-  ![Wishes](../../../docs/release1/resoursces/wishes.png)
+  ![A specific wish list](resoursces/specificWIshlist.png)
+  ![Wishes](resoursces/wishes.png)
 
 - A user can add wishes on their wish list. When clicking on one of the displayed wish lists, the user will have the option of adding items to the list.
-- ![Add new wish](../../../docs/release1/resoursces/newWish.png)
+- ![Add new wish](resoursces/newWish.png)
