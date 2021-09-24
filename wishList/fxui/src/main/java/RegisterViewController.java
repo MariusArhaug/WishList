@@ -12,17 +12,11 @@ public class RegisterViewController extends AbstractController {
   @FXML private TextField emailSignUp;
   @FXML private TextField passwordSignUp;
 
-  private User currentUser;
   private JsonHandler jsonHandler;
 
   @FXML
   public void initialize() {
-    try {
-      this.jsonHandler = new JsonHandler();
-      System.out.println("PENIS");
-    } catch (Exception e) {
-      System.out.println(e);
-    }
+    this.jsonHandler = new JsonHandler();
   }
 
 
@@ -32,14 +26,19 @@ public class RegisterViewController extends AbstractController {
     this.changeScene("LoginView.fxml", event);
   }
 
+  @Override
+  public void changeToShowListView(ActionEvent event) throws IOException {
+    this.changeScene("ShowList.fxml", event);
+  }
+
 
   public void changeToMainView(ActionEvent event) throws IOException {
     this.changeScene("MainView.fxml", event);
   }
 
   @Override
-  public void changeToRegisterView(ActionEvent event) {
-
+  public void changeToRegisterView(ActionEvent event) throws IOException{
+    this.changeScene("RegisterView.fxml", event);
   }
 
   /**
@@ -53,12 +52,13 @@ public class RegisterViewController extends AbstractController {
     String password = passwordSignUp.getText();
 
     try {
-      currentUser = jsonHandler.addUser(firstName, lastName, email, password);
+      this.updateUser(
+          jsonHandler.addUser(firstName, lastName, email, password)
+      );
 
 
       changeToMainView(event);
     } catch (Exception e) {
-      //outputSignup.setText(e.toString());;
       e.printStackTrace();
     }
 

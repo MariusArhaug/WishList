@@ -68,7 +68,7 @@ public class JsonHandler {
       User newUser = new User(firstname, lastname, email, password);
 
       users.add(newUser);
-      //System.out.println(Paths.get("").toAbsolutePath() + "/src/main/resources/users.json");
+
       mapper.writeValue(new File(Paths.get("").toAbsolutePath() + "/src/main/resources/users.json"), users);
       return newUser;
     } catch (Exception e) {
@@ -77,21 +77,21 @@ public class JsonHandler {
   }
 
 
-  public Optional<User> loadUser(String email, String password) {
+  public Optional<User> loadUser(String email, String password) throws Exception {
 
     try {
       List<User> users = loadJsonUserList();
 
       for (User user : users) {
         if (user.checkCredentials(email, password)) {
+          System.out.println(user);
           return Optional.of(user);
         }
       }
       return Optional.empty();
 
     } catch (IOException e) {
-      e.printStackTrace();
-      return Optional.empty();
+      throw new Exception(e);
     }
   }
 }

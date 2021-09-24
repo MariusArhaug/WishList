@@ -1,13 +1,24 @@
 
+import core.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
+import json.JsonHandler;
+
+
 import java.io.IOException;
+import java.util.Optional;
 
 
 public class LoginViewController extends AbstractController {
-    @FXML private TextField loginNameInput;
+    @FXML private TextField loginEmailInput;
     @FXML private TextField loginPasswordInput;
+
+    private JsonHandler jsonHandler;
+
+    public void initialize() {
+        this.jsonHandler = new JsonHandler();
+    }
 
 
     @FXML
@@ -17,13 +28,36 @@ public class LoginViewController extends AbstractController {
 
     @Override
     public void changeToLoginView(ActionEvent event) throws IOException {
-
+        this.changeScene("LogInView.fxml", event);
     }
 
 
     @FXML
     public void changeToMainView(ActionEvent event) throws IOException {
-        this.changeScene("MainView.fxml", event);
+        String email = loginEmailInput.getText();
+        String password = loginPasswordInput.getText();
+
+        try {
+            jsonHandler.loadUser(email, password)
+                .ifPresent(
+                    this::updateUser
+                );
+            this.changeScene("MainView.fxml", event);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void changeToCreateListView(ActionEvent event) throws IOException {
+        this.changeScene("CreateListView.fxml", event);
+
+    }
+
+    @Override
+    public void changeToShowListView(ActionEvent event) throws IOException {
+        this.changeScene("ShowListView.fxml", event);
     }
 
 
