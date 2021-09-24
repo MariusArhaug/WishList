@@ -8,8 +8,9 @@ The project is built with `maven` and to be structured using a modular style. Wh
 
 Following sub-modules are:
 
-[**core**](wishList/core): Here lies the main _core_ logic for the application.
-[**fxui**](wishList/fxui): Here lies javafx-code for GUI as well as controllers for different _views_
+- [**core**](wishList/core): Here lies the main _core_ logic for the application.
+
+- [**fxui**](wishList/fxui): Here lies javafx-code for GUI as well as controllers for different _views_
 
 Our repo supports the following
 
@@ -30,7 +31,8 @@ Description of main folder:
 
 [README.md](wishList/core/README.md)
 
-Release1:
+Release 1:
+
 [README.md](docs/release1/README.md)
 
 ## Get started
