@@ -30,6 +30,9 @@ Description of main folder:
 
 [README.md](wishList/core/README.md)
 
+Release1:
+[README.md](docs/release1/README.md)
+
 ## Get started
 
 In order to run this project or in a new environment do the following:
