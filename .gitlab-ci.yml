@@ -10,7 +10,14 @@ stages:
 
 build:
     stage: build
-    script: cd wishList && mvn install -B -DskipTests && mvn clean compile
+    script: 
+        - cd wishList && mvn install -B -DskipTests
+        - mvn clean compile
+        - mvn verify
+        - cat core/target/site/jacoco/index.html
+    artifacts:
+        paths:
+            - core/target/site/jacoco/index.html
 
 test:
     stage: test
