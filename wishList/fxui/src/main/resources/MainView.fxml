@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="addList" prefHeight="441.0" prefWidth="320.0" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="LoginViewController">
@@ -15,6 +16,16 @@
                 prefWidth="320.0"/>
       <Label layoutX="29.0" layoutY="23.0" text="Your wishlists:"/>
    </AnchorPane>
-   <TextField id="addNewList" fx:id="addNewList" layoutX="29.0" layoutY="65.0"/>
-   <Label layoutX="29.0" layoutY="48.0" prefHeight="17.0" prefWidth="121.0" text="Name of wishlist:"/>
+   <TextField id="addNewList" fx:id="addNewList" layoutX="27.0" layoutY="94.0" />
+   <Label layoutX="27.0" layoutY="77.0" prefHeight="17.0" prefWidth="121.0" text="Name of wishlist:" />
+   <Label layoutX="27.0" layoutY="26.0" text="Welcome,">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
+   <Label id="mainNameOfUser" fx:id="mainNameOfUser" layoutX="125.0" layoutY="26.0">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
 </AnchorPane>

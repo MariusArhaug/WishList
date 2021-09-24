@@ -1,37 +1,32 @@
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 
 import java.io.IOException;
 
-public class MainViewController extends AbstractController {
+public class MainViewController extends AbstractController{
 
-  @Override @FXML
-  public void initialize() {
-    System.out.println("User passed! " + this.user);
-  }
 
-  @Override
-  public void changeToMainView(ActionEvent event) throws IOException {
+    @Override
+    public void initialize() {
 
-  }
+    }
 
-  @Override
-  public void changeToRegisterView(ActionEvent event) throws IOException {
+    @Override
+    public void changeToMainView(ActionEvent event) throws IOException {
+        this.changeScene("MainView.fxml", event);
+    }
 
-  }
+    @Override
+    public void changeToRegisterView(ActionEvent event) throws IOException {
+        this.changeScene("RegisterView.fxml", event);
+    }
 
-  @Override
-  public void changeToLoginView(ActionEvent event) throws IOException {
+    @Override
+    public void changeToLoginView(ActionEvent event) throws IOException {
+        this.changeScene("LogInView.fxml", event);
+    }
 
-  }
-
-  @Override
-  public void changeToCreateListView(ActionEvent event) throws IOException {
-
-  }
-
-  @Override
-  public void changeToShowListView(ActionEvent event) throws IOException {
-
-  }
+    @Override
+    public void changeToShowListView(ActionEvent event) throws IOException {
+        this.changeScene("ShowListView.fxml", event);
+    }
 }
