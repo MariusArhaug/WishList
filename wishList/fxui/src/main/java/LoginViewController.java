@@ -38,11 +38,11 @@ public class LoginViewController extends AbstractController {
         String password = loginPasswordInput.getText();
 
         try {
-            jsonHandler.loadUser(email, password)
-                .ifPresent(
-                    this::updateUser
-                );
-            this.changeScene("MainView.fxml", event);
+            Optional<User> user = jsonHandler.loadUser(email, password);
+            if (user.isPresent()) {
+                this.changeScene("MainView.fxml", event);
+                this.updateUser(user.get());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
