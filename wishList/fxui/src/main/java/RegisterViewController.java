@@ -19,7 +19,6 @@ public class RegisterViewController extends AbstractController {
   public void initialize() {
     try {
       this.jsonHandler = new JsonHandler();
-      System.out.println("PENIS");
     } catch (Exception e) {
       System.out.println(e);
     }
@@ -32,14 +31,19 @@ public class RegisterViewController extends AbstractController {
     this.changeScene("LoginView.fxml", event);
   }
 
+  @Override
+  public void changeToShowListView(ActionEvent event) throws IOException {
+    this.changeScene("ShowList.fxml", event);
+  }
+
 
   public void changeToMainView(ActionEvent event) throws IOException {
     this.changeScene("MainView.fxml", event);
   }
 
   @Override
-  public void changeToRegisterView(ActionEvent event) {
-
+  public void changeToRegisterView(ActionEvent event) throws IOException{
+    this.changeScene("RegisterView.fxml", event);
   }
 
   /**
