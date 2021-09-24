@@ -105,7 +105,6 @@ class UserTest {
         john.removeWish("Christmas", "Book");
         wishList.removeWish(wish);
         assertEquals(wishList.toString(), john.getWishLists().get(0).toString());
-
     }
 
 

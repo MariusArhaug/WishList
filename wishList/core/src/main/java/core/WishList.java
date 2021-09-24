@@ -15,7 +15,7 @@ public class WishList {
     this.name = name;
   }
 
-  public WishList(User owner, String name, Wish... wishes) {
+  public WishList(User owner, String name) {
     if (name.length() == 0 || name.length() > 25) {
       throw new IllegalArgumentException("The name can not be empty or surpass 25 character!");
     }
@@ -24,7 +24,6 @@ public class WishList {
     }
     this.owner = owner;
     this.name = name;
-    Collections.addAll(this.wishes, wishes);
   }
 
   public void setOwner(User owner) {
@@ -55,7 +54,11 @@ public class WishList {
     this.hideInfoFromOwner = hideInfoFromOwner;
   }
 
- public void addWish(Wish wish) {
+  /**
+   * Add wish to wish list
+   * @param wish wish to add
+   */
+  public void addWish(Wish wish) {
     this.wishes.add(wish);
     wish.setBelongTo(this);
   }
