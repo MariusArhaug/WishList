@@ -7,14 +7,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="addList" prefHeight="441.0" prefWidth="320.0" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="LoginViewController">
-   <Button layoutX="185.0" layoutY="65.0" mnemonicParsing="false" onAction="#changeToCreateListView" prefHeight="25.0"
-           prefWidth="121.0" text="Make new wishlist"/>
+<AnchorPane fx:id="addList" prefHeight="441.0" prefWidth="320.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="MainViewController">
+   <Button layoutX="185.0" layoutY="94.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Make new wishlist" />
    <AnchorPane layoutY="107.0" prefHeight="334.0" prefWidth="320.0">
-      <ListView id="list" fx:id="list" layoutY="40.0" onMouseClicked="#changeToShowListView" prefHeight="294.0"
-                prefWidth="320.0"/>
-      <Label layoutX="29.0" layoutY="23.0" text="Your wishlists:"/>
+      <ListView id="list" fx:id="list" layoutY="40.0" onMouseClicked="#changeToShowListView" prefHeight="244.0" prefWidth="320.0" />
+      <Label layoutX="29.0" layoutY="23.0" text="Your wishlists:" />
+      <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="295.0" onAction="#closeApp" mnemonicParsing="false" text="Sign out" />
    </AnchorPane>
    <TextField id="addNewList" fx:id="addNewList" layoutX="27.0" layoutY="94.0" />
    <Label layoutX="27.0" layoutY="77.0" prefHeight="17.0" prefWidth="121.0" text="Name of wishlist:" />

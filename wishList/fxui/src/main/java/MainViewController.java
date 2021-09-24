@@ -1,8 +1,13 @@
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class MainViewController extends AbstractController{
+    @FXML
+    Button signOut;
 
 
     @Override
@@ -28,5 +33,10 @@ public class MainViewController extends AbstractController{
     @Override
     public void changeToShowListView(ActionEvent event) throws IOException {
         this.changeScene("ShowListView.fxml", event);
+    }
+
+    public void closeApp(){
+        Stage stage = (Stage) signOut.getScene().getWindow();
+        stage.close();
     }
 }
