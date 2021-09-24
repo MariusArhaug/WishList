@@ -73,12 +73,20 @@ public class User {
     return this.email.equals(email) && this.password.equals(password);
   }
 
+  /**
+   * Make a new wish list
+   * @param name name string
+   */
   public void makeWishList(String name) {
     if (!wishListsExist(name)) {
       this.wishLists.add(new WishList(this, name));
     }
   }
 
+  /**
+   * Removes existing wish list
+   * @param name name string
+   */
   public void removeWishList(String name) {
     if (wishListsExist(name)) {
       this.wishLists.remove(
@@ -89,6 +97,11 @@ public class User {
     }
   }
 
+  /**
+   * Owner of wish list can remove it
+   * @param list Wish list to remove
+   * @throws IllegalCallerException
+   */
   public void removeWishList(WishList list) throws IllegalCallerException{
     if (list.getOwner() != this) {
       throw new IllegalCallerException("You can only remove your own list!");
@@ -99,6 +112,11 @@ public class User {
     }
   }
 
+  /**
+   * Remove wish from wish list
+   * @param wishListName wish list to remove wish from
+   * @param wishName wish to remove
+   */
   public void removeWish(String wishListName, String wishName) {
     if (wishListsExist(wishListName)) {
       this.wishLists
@@ -108,15 +126,29 @@ public class User {
     }
   }
 
+  /**
+   * Checks if wish list exists
+   * @param name wish list to check for
+   * @return boolean
+   */
   private boolean wishListsExist(String name) {
     return this.wishLists.stream().anyMatch(e -> e.getName().equals(name));
   }
 
+  /**
+   * Add new wish list
+   * @param list wish list to add
+   */
   public void addWishList(WishList list) {
     wishLists.add(list);
     list.setOwner(this);
   }
 
+  /**
+   * Add wish to wish list
+   * @param wishList wish list to add wish to
+   * @param wish wish to add
+   */
   public void addWish(WishList wishList, Wish wish) {
     wishLists.stream().filter(wl -> wl.equals(wishList)).forEach(wl -> wl.addWish(wish));
   }
