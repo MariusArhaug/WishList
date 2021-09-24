@@ -1,4 +1,4 @@
-_# Core
+# Core
 
 # Main/Core
 In the folder **wishList.core** lies the main core logic. With the three classes:
