@@ -27,7 +27,6 @@ public abstract class AbstractController implements ViewChanger {
     Parent newParent = loader.load();
 
     AbstractController newController = loader.getController();
-    System.out.println(this.getUser());
     newController.updateUser(this.getUser());
 
 
