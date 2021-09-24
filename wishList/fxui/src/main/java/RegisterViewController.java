@@ -27,13 +27,8 @@ public class RegisterViewController extends AbstractController {
   }
 
   @Override
-  public void changeToCreateListView(ActionEvent event) throws IOException {
-
-  }
-
-  @Override
   public void changeToShowListView(ActionEvent event) throws IOException {
-
+    this.changeScene("ShowList.fxml", event);
   }
 
 
@@ -42,8 +37,8 @@ public class RegisterViewController extends AbstractController {
   }
 
   @Override
-  public void changeToRegisterView(ActionEvent event) {
-
+  public void changeToRegisterView(ActionEvent event) throws IOException{
+    this.changeScene("RegisterView.fxml", event);
   }
 
   /**

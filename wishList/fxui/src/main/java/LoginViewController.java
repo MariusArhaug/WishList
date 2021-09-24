@@ -28,7 +28,7 @@ public class LoginViewController extends AbstractController {
 
     @Override
     public void changeToLoginView(ActionEvent event) throws IOException {
-
+        this.changeScene("LogInView.fxml", event);
     }
 
 
