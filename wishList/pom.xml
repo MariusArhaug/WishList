@@ -84,6 +84,7 @@
 
 			</plugin>
 
+
 			<!-- Configure jacoco code coverage -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
@@ -101,7 +102,7 @@
 						<id>jacoco-report</id>
 						<phase>verify</phase>
 						<goals>
-							<goal>report-aggregate</goal>
+							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>
