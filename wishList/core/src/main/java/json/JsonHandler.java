@@ -60,7 +60,7 @@ public class JsonHandler {
 
       for (User user : users) {
         if (user.getEmail().equals(email)) {
-          throw new IllegalArgumentException(
+          System.out.println(
               "An user with this email already exists, please try another one"
           );
         }
@@ -84,7 +84,6 @@ public class JsonHandler {
 
       for (User user : users) {
         if (user.checkCredentials(email, password)) {
-          System.out.println(user);
           return Optional.of(user);
         }
       }
