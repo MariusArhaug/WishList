@@ -32,15 +32,6 @@ public class ShowListViewController extends AbstractController {
     this.changeScene("ShowListView.fxml", event);
   }
 
-  @Override
-  public void changeToCreateListView(ActionEvent event) throws IOException {
-
-  }
-
-  @Override
-  public void changeToShowListView(ActionEvent event) throws IOException {
-
-  }
 
   public void addNewItem(ActionEvent event) {
 

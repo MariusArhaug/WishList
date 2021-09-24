@@ -31,11 +31,6 @@ public class LoginViewController extends AbstractController {
         this.changeScene("LogInView.fxml", event);
     }
 
-    @Override
-    public void changeToShowListView(ActionEvent event) throws IOException {
-        this.changeScene("ShowListView.fxml", event);
-    }
-
 
     @FXML
     public void changeToMainView(ActionEvent event) throws IOException {

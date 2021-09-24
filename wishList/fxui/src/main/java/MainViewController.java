@@ -1,11 +1,14 @@
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 
 import java.io.IOException;
 
 public class MainViewController extends AbstractController{
 
+
+    @Override
+    public void initialize() {
+
+    }
 
     @Override
     public void changeToMainView(ActionEvent event) throws IOException {
