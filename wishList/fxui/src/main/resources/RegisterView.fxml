@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="400.0" maxWidth="300.0" minHeight="400.0" minWidth="300.0" prefHeight="400.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="RegisterViewController">
+<AnchorPane prefHeight="400.0" prefWidth="277.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="RegisterViewController">
    <TextField id="firstNameSignUp" fx:id="firstNameSignUp" layoutX="69.0" layoutY="80.0" />
    <TextField id="lastNameSignUp" fx:id="lastNameSignUp" layoutX="69.0" layoutY="140.0" />
    <TextField id="emailSignUp" fx:id="emailSignUp" layoutX="69.0" layoutY="200.0" />
