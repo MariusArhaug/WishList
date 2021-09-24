@@ -1,6 +1,7 @@
 
 import core.User;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import json.JsonHandler;
@@ -13,6 +14,7 @@ import java.util.Optional;
 public class LoginViewController extends AbstractController {
     @FXML private TextField loginEmailInput;
     @FXML private TextField loginPasswordInput;
+    @FXML private Label errorMessage;
 
     private JsonHandler jsonHandler;
 
@@ -42,6 +44,9 @@ public class LoginViewController extends AbstractController {
             if (user.isPresent()) {
                 this.changeScene("MainView.fxml", event);
                 this.updateUser(user.get());
+            }
+            else {
+                errorMessage.setText("E-mail or password is incorrect");
             }
         } catch (Exception e) {
             e.printStackTrace();
