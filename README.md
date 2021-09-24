@@ -2,6 +2,12 @@
 
 GitPod Link: [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121)
 
+Test coverage: 
+[![coverage report](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121/badges/master/coverage.svg)](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121/-/commits/master)
+
+Pipeline status: 
+[![pipeline status](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121/badges/master/pipeline.svg)](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121/-/commits/master)
+
 ## Modules
 
 The project is built with `maven` and to be structured using a modular style. Where you can the parent pom.xml file at the root of this repo.
