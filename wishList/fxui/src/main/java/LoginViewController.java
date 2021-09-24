@@ -21,18 +21,32 @@ public class LoginViewController extends AbstractController {
         this.jsonHandler = new JsonHandler();
     }
 
-
+    /**
+     * Change scene to RegisterView.fxml
+     * @param event gets state
+     * @throws IOException if file is not found
+     */
     @FXML
     public void changeToRegisterView(ActionEvent event) throws IOException {
        this.changeScene("RegisterView.fxml", event);
     }
 
+    /**
+     * Change scene to LoginView.fxml
+     * @param event gets state
+     * @throws IOException if file is not found
+     */
     @Override
     public void changeToLoginView(ActionEvent event) throws IOException {
         this.changeScene("LogInView.fxml", event);
     }
 
-
+    /**
+     * Change scene to MainView.fxml
+     * Will only change scene if e-mail and password match
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void changeToMainView(ActionEvent event) throws IOException {
         String email = loginEmailInput.getText();
@@ -54,11 +68,11 @@ public class LoginViewController extends AbstractController {
 
     }
 
-    public void changeToCreateListView(ActionEvent event) throws IOException {
-        this.changeScene("CreateListView.fxml", event);
-
-    }
-
+    /**
+     * Change scene to ShowListView.fxml
+     * @param event gets state
+     * @throws IOException if file is not found
+     */
     @Override
     public void changeToShowListView(ActionEvent event) throws IOException {
         this.changeScene("ShowListView.fxml", event);

@@ -19,23 +19,41 @@ public class RegisterViewController extends AbstractController {
     this.jsonHandler = new JsonHandler();
   }
 
-
-
+  /**
+   * Change scene to LoginView.fxml
+   * @param event gets state
+   * @throws IOException if file is not found
+   */
   @FXML
   public void changeToLoginView(ActionEvent event) throws IOException {
     this.changeScene("LoginView.fxml", event);
   }
 
+  /**
+   * Change scene to ShowListView.fxml
+   * @param event gets state
+   * @throws IOException if file is not found
+   */
   @Override
   public void changeToShowListView(ActionEvent event) throws IOException {
-    this.changeScene("ShowList.fxml", event);
+    this.changeScene("ShowListView.fxml", event);
   }
 
 
+  /**
+   * Change scene to MainView.fxml
+   * @param event gets state
+   * @throws IOException if file is not found
+   */
   public void changeToMainView(ActionEvent event) throws IOException {
     this.changeScene("MainView.fxml", event);
   }
 
+  /**
+   * Change scene to RegisterView.fxml
+   * @param event gets state
+   * @throws IOException if file is not found
+   */
   @Override
   public void changeToRegisterView(ActionEvent event) throws IOException{
     this.changeScene("RegisterView.fxml", event);
@@ -43,6 +61,7 @@ public class RegisterViewController extends AbstractController {
 
   /**
    * Sign up user
+   * @param event gets state
    */
   @FXML
   public void registerUser(ActionEvent event) {
