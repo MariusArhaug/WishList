@@ -37,10 +37,14 @@ class UserDeserializerTest {
     void tearDown() {
         user = null;
         json = null;
+        mapper = null;
+        factory = null;
+        parser = null;
+        userDeserializer = null;
     }
 
     @Test
-    void deserializerTest() throws IOException {
+    void userDeserializerTest() throws IOException {
         assertEquals((userDeserializer.deserialize(parser, deserializationContext)).toString(), user.toString());
     }
 }
