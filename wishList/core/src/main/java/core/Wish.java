@@ -5,6 +5,10 @@ public class Wish {
   private final String name;
   private WishList belongTo;
 
+  public Wish() {
+    this("Name");
+  }
+
   public Wish(String name) {
     if (name.length() == 0 || name.length() > 25) {
 

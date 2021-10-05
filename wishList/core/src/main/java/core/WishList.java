@@ -11,6 +11,10 @@ public class WishList {
   private User owner;
   private boolean hideInfoFromOwner;
 
+  public WishList() {
+    this("Name");
+  }
+
   public WishList(String name) {
     this.name = name;
   }
@@ -73,5 +77,15 @@ public class WishList {
 
   public String toString() {
     return "" + this.name + "," + this.owner + "," + this.hideInfoFromOwner + "";
+  }
+
+  public Wish getWish(String name) {
+    List<Wish> wishes = this.getWishes();
+    for (Wish w : wishes) {
+      if (w.getName().equals(name)) {
+        return w;
+      }
+    }
+    return null;
   }
 }

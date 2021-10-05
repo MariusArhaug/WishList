@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
@@ -32,6 +31,7 @@ class UserSerializerTest {
     JsonGenerator jsonGenerator;
     SerializerProvider serializerProvider;
     String path;
+    File file;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -39,8 +39,9 @@ class UserSerializerTest {
         json = "{\"firstName\":\"first\",\"lastName\":\"last\",\"email\":\"user@gmail.com\",\"password\":\"123Password!\",\"wishLists\":[]}";
         mapper = new ObjectMapper();
         factory = mapper.getFactory();
-        path = Paths.get("").toAbsolutePath().getParent() + "/fxui/src/main/resources/usersTest.json";
-        jsonGenerator = factory.createGenerator(new File(path), JsonEncoding.UTF8);
+        path = Paths.get("").toAbsolutePath().getParent() + "\\fxui\\src\\main\\resources\\usersTest.json";
+        file = new File(path);
+        jsonGenerator = factory.createGenerator(file, JsonEncoding.UTF8);
         userSerializer = new UserSerializer();
         serializerProvider = mapper.getSerializerProvider();
     }
@@ -59,20 +60,20 @@ class UserSerializerTest {
 
     @Test
     void userSerializerTest() throws Exception {
+        System.out.println("!!!!!");
+        System.out.println(path);
         List<User> users = new ArrayList<>();
         users.add(user);
-        mapper.writeValue(new File(path), users);
-        //mapper.writeValue(new File(path), users);
+        mapper.writeValue(file, users);
 
-        //userSerializer.serialize(user, jsonGenerator, serializerProvider);
+        User[] usersFromFile = mapper.readValue(file, new TypeReference<User[]>(){});
 
-        List<User> usersFromFile = mapper.readValue(new File(path), new TypeReference<List<User>>(){});
-        System.out.println(usersFromFile.get(0).getFirstName());
-        assertEquals(usersFromFile.get(0).getFirstName(), "first");
-        assertEquals(usersFromFile.get(0).getLastName(), "last");
-        assertEquals(usersFromFile.get(0).getEmail(), "user@gmail.com");
-        assertEquals(usersFromFile.get(0).getPassword(), "123Password!");
+        System.out.println(usersFromFile[0].getFirstName());
+        assertEquals(usersFromFile[0].getFirstName(), "first");
+        assertEquals(usersFromFile[0].getLastName(), "last");
+        assertEquals(usersFromFile[0].getEmail(), "user@gmail.com");
+        assertEquals(usersFromFile[0].getPassword(), "123Password!");
         List<WishList> wishLists = new ArrayList<>();
-        assertEquals(usersFromFile.get(0).getWishLists(), wishLists);
+        assertEquals(usersFromFile[0].getWishLists(), wishLists);
     }
 }

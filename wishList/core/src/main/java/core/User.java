@@ -1,5 +1,7 @@
 package core;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,8 +17,11 @@ public class User {
   private final String lastName;
   private final String email;
   private final String password;
-
   private final List<WishList> wishLists = new ArrayList<>();
+
+  public User() {
+      this("User", "User", "User@gmail.com", "123!User");
+  }
 
   public User(String firstName, String lastName, String email, String password) throws IllegalArgumentException {
     if (firstName.length() == 0 || firstName.length() > 20) {
@@ -155,5 +160,15 @@ public class User {
 
   public String toString() {
     return "" + this.firstName + "," + this.lastName + "," + this.email + "," + this.password + "";
+  }
+
+  public WishList getWishList(String name) {
+    List<WishList> wishLists = this.getWishLists();
+    for (WishList w: wishLists) {
+      if (w.getName().equals(name)) {
+        return w;
+      }
+    }
+    return null;
   }
 }
