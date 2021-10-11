@@ -21,7 +21,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class WishListSerializerTest {
     WishListSerializer wishListSerializer;
@@ -71,5 +71,7 @@ class WishListSerializerTest {
         assertEquals(wishListsFromFile[0].getName(), "Birthday");
         List<Wish> wishes = new ArrayList<>();
         assertEquals(wishListsFromFile[0].getWishes(), wishes);
+        assertNull(wishListsFromFile[0].getOwner());
+        assertFalse(wishListsFromFile[0].getHideInfoFromOwner());
     }
 }

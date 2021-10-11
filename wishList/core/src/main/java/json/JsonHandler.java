@@ -30,9 +30,9 @@ public class JsonHandler {
    * @return file object
    */
 
-  private File toFile(String object) {
-    if (object.equals("wishLists") || object.equals("wishes") || object.equals("users")) {
-      return new File(this.path + "" + object + ".json");
+  private File toFile(String fileNamw) {
+    if (fileNamw.equals("wishLists") || fileNamw.equals("wishes") || fileNamw.equals("users")) {
+      return new File(this.path + "" + fileNamw + ".json");
     }
     return null;
   }
@@ -64,13 +64,10 @@ public class JsonHandler {
    * @throws Exception if not found file
    */
 
-  //Trenger vi heller array her? og lager den ikke brukeren selv om passord og eller mail er brukt??
   public User addUser(String firstname, String lastname, String email, String password) throws IllegalArgumentException, Exception {
     try {
       List<User> users = loadJsonUserList();
       System.out.println(users);
-
-
 
       for (User user : users) {
         if (user.getEmail().equals(email)) {

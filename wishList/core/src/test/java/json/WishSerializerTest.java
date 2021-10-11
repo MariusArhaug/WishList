@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class WishSerializerTest {
     WishSerializer wishSerializer;
@@ -68,5 +69,7 @@ class WishSerializerTest {
         Wish[] wishesFromFile = mapper.readValue(file, new TypeReference<Wish[]>(){});
 
         assertEquals(wishesFromFile[0].getName(), "Toy");
+        assertNull(wishesFromFile[0].getBelongTo());
+
     }
 }

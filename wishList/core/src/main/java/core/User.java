@@ -163,12 +163,9 @@ public class User {
   }
 
   public WishList getWishList(String name) {
-    List<WishList> wishLists = this.getWishLists();
-    for (WishList w: wishLists) {
-      if (w.getName().equals(name)) {
-        return w;
-      }
-    }
-    return null;
+    return this.getWishLists().stream()
+            .filter(wishList -> name.equals(wishList.getName()))
+            .findAny()
+            .orElse(null);
   }
 }
