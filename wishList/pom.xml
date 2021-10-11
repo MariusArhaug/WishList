@@ -111,9 +111,9 @@
 		</plugins>
 		</pluginManagement>
 	</build>
-<modules>
-	<module>core</module>
-	<module>fxui</module>
-</modules>
+	<modules>
+		<module>core</module>
+		<module>fxui</module>
+	</modules>
 
 </project>
