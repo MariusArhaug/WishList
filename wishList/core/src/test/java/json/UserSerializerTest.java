@@ -60,15 +60,12 @@ class UserSerializerTest {
 
     @Test
     void userSerializerTest() throws Exception {
-        System.out.println("!!!!!");
-        System.out.println(path);
         List<User> users = new ArrayList<>();
         users.add(user);
         mapper.writeValue(file, users);
 
         User[] usersFromFile = mapper.readValue(file, new TypeReference<User[]>(){});
 
-        System.out.println(usersFromFile[0].getFirstName());
         assertEquals(usersFromFile[0].getFirstName(), "first");
         assertEquals(usersFromFile[0].getLastName(), "last");
         assertEquals(usersFromFile[0].getEmail(), "user@gmail.com");
