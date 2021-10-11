@@ -20,6 +20,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserSerializerTest {
@@ -30,8 +31,8 @@ class UserSerializerTest {
     JsonFactory factory;
     JsonGenerator jsonGenerator;
     SerializerProvider serializerProvider;
-    String path;
-    File file;
+    File usersTestFile = new File(JsonHandlerTest.testFolder + "users.json");
+
 
     @BeforeEach
     void setUp() throws IOException {
@@ -39,9 +40,8 @@ class UserSerializerTest {
         json = "{\"firstName\":\"first\",\"lastName\":\"last\",\"email\":\"user@gmail.com\",\"password\":\"123Password!\",\"wishLists\":[]}";
         mapper = new ObjectMapper();
         factory = mapper.getFactory();
-        path = Paths.get("").toAbsolutePath().getParent() + "\\fxui\\src\\main\\resources\\usersTest.json";
-        file = new File(path);
-        jsonGenerator = factory.createGenerator(file, JsonEncoding.UTF8);
+
+        jsonGenerator = factory.createGenerator(usersTestFile, JsonEncoding.UTF8);
         userSerializer = new UserSerializer();
         serializerProvider = mapper.getSerializerProvider();
     }
@@ -52,7 +52,6 @@ class UserSerializerTest {
         json = null;
         mapper = null;
         factory = null;
-        path = null;
         jsonGenerator = null;
         userSerializer = null;
         serializerProvider = null;
@@ -60,15 +59,12 @@ class UserSerializerTest {
 
     @Test
     void userSerializerTest() throws Exception {
-        System.out.println("!!!!!");
-        System.out.println(path);
         List<User> users = new ArrayList<>();
         users.add(user);
-        mapper.writeValue(file, users);
+        mapper.writeValue(usersTestFile, users);
 
-        User[] usersFromFile = mapper.readValue(file, new TypeReference<User[]>(){});
+        User[] usersFromFile = mapper.readValue(usersTestFile, new TypeReference<User[]>(){});
 
-        System.out.println(usersFromFile[0].getFirstName());
         assertEquals(usersFromFile[0].getFirstName(), "first");
         assertEquals(usersFromFile[0].getLastName(), "last");
         assertEquals(usersFromFile[0].getEmail(), "user@gmail.com");

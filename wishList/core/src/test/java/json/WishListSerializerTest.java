@@ -31,8 +31,7 @@ class WishListSerializerTest {
     JsonFactory factory;
     JsonGenerator jsonGenerator;
     SerializerProvider serializerProvider;
-    String path;
-    File file;
+    File wishListsFile = new File(JsonHandlerTest.testFolder + "wishLists.json");
 
     @BeforeEach
     void setUp() throws IOException {
@@ -40,9 +39,7 @@ class WishListSerializerTest {
         json = "{\"name\":\"Birthday\"}";
         mapper = new ObjectMapper();
         factory = mapper.getFactory();
-        path = Paths.get("").toAbsolutePath().getParent() + "\\fxui\\src\\main\\resources\\wishListsTest.json";
-        file = new File(path);
-        jsonGenerator = factory.createGenerator(file, JsonEncoding.UTF8);
+        jsonGenerator = factory.createGenerator(wishListsFile, JsonEncoding.UTF8);
         wishListSerializer = new WishListSerializer();
         serializerProvider = mapper.getSerializerProvider();
     }
@@ -53,7 +50,6 @@ class WishListSerializerTest {
         json = null;
         mapper = null;
         factory = null;
-        path = null;
         jsonGenerator = null;
         wishListSerializer = null;
         serializerProvider = null;
@@ -64,9 +60,9 @@ class WishListSerializerTest {
 
         List<WishList> wishLists = new ArrayList<>();
         wishLists.add(wishList);
-        mapper.writeValue(file, wishLists);
+        mapper.writeValue(wishListsFile, wishLists);
 
-        WishList[] wishListsFromFile = mapper.readValue(file, new TypeReference<WishList[]>(){});
+        WishList[] wishListsFromFile = mapper.readValue(wishListsFile, new TypeReference<WishList[]>(){});
 
         assertEquals(wishListsFromFile[0].getName(), "Birthday");
         List<Wish> wishes = new ArrayList<>();

@@ -31,8 +31,7 @@ class WishSerializerTest {
     JsonFactory factory;
     JsonGenerator jsonGenerator;
     SerializerProvider serializerProvider;
-    String path;
-    File file;
+    File wishTestFile = new File(JsonHandlerTest.testFolder + "wishes.json");
 
     @BeforeEach
     void setUp() throws IOException {
@@ -40,9 +39,7 @@ class WishSerializerTest {
         json = "{\"name\":\"Toy\"}";
         mapper = new ObjectMapper();
         factory = mapper.getFactory();
-        path = Paths.get("").toAbsolutePath().getParent() + "\\fxui\\src\\main\\resources\\wishTest.json";
-        file = new File(path);
-        jsonGenerator = factory.createGenerator(file, JsonEncoding.UTF8);
+        jsonGenerator = factory.createGenerator(wishTestFile, JsonEncoding.UTF8);
         wishSerializer = new WishSerializer();
         serializerProvider = mapper.getSerializerProvider();
     }
@@ -53,7 +50,6 @@ class WishSerializerTest {
         json = null;
         mapper = null;
         factory = null;
-        path = null;
         jsonGenerator = null;
         wishSerializer = null;
         serializerProvider = null;
@@ -64,9 +60,9 @@ class WishSerializerTest {
 
         List<Wish> wishes = new ArrayList<>();
         wishes.add(wish);
-        mapper.writeValue(file, wishes);
+        mapper.writeValue(wishTestFile, wishes);
 
-        Wish[] wishesFromFile = mapper.readValue(file, new TypeReference<Wish[]>(){});
+        Wish[] wishesFromFile = mapper.readValue(wishTestFile, new TypeReference<Wish[]>(){});
 
         assertEquals(wishesFromFile[0].getName(), "Toy");
         assertNull(wishesFromFile[0].getBelongTo());

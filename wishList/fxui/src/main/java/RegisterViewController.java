@@ -16,7 +16,7 @@ public class RegisterViewController extends AbstractController {
 
   @FXML
   public void initialize() {
-    this.jsonHandler = new JsonHandler();
+    this.jsonHandler = new JsonHandler("");
   }
 
   /**

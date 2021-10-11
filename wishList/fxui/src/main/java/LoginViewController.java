@@ -1,10 +1,9 @@
 import core.User;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.event.ActionEvent;
 import json.JsonHandler;
-
 
 import java.io.IOException;
 import java.util.Optional;
@@ -18,7 +17,7 @@ public class LoginViewController extends AbstractController {
     private JsonHandler jsonHandler;
 
     public void initialize() {
-        this.jsonHandler = new JsonHandler();
+        this.jsonHandler = new JsonHandler("");
     }
 
     /**

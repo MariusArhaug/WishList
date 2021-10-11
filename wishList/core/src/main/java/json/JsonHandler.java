@@ -8,6 +8,7 @@ import core.WishList;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,22 +20,28 @@ public class JsonHandler {
   private final ObjectMapper mapper;
   private final String path;
 
-  public JsonHandler() {
+  public JsonHandler(String path) {
     this.mapper = new ObjectMapper();
     this.mapper.registerModule(new JsonModule());
-    this.path = Paths.get("").toAbsolutePath() + "/src/main/resources/";
+    this.path = path;
+  }
+    public String getPath() {
+    return this.path;
   }
 
   /**
    * Convert string to file name + path
    * @return file object
    */
-
-  private File toFile(String fileNamw) {
-    if (fileNamw.equals("wishLists") || fileNamw.equals("wishes") || fileNamw.equals("users")) {
-      return new File(this.path + "" + fileNamw + ".json");
+  private File toFile(String fileName) throws NoSuchFileException {
+    if (!fileName.equals("wishLists.json")
+        && !fileName.equals("wishes.json")
+        && !fileName.equals("users.json")
+    ) {
+      throw new NoSuchFileException("Expected filename of type wishLists, wishes or users, got: " + fileName);
     }
-    return null;
+
+    return new File(this.path + fileName);
   }
 
   /**
@@ -42,15 +49,14 @@ public class JsonHandler {
    * @return List of users
    * @throws IOException if not able to find file
    */
-
   private List<User> loadJsonUserList() throws IOException {
-    return mapper.readValue(toFile("users"), new TypeReference<List<User>>(){});
+    return mapper.readValue(toFile("users.json"), new TypeReference<List<User>>(){});
   }
   private WishList[] loadJsonWishListList() throws IOException {
-    return mapper.readValue(toFile("wishLists"), new TypeReference<WishList[]>(){});
+    return mapper.readValue(toFile("wishLists.json"), new TypeReference<WishList[]>(){});
   }
   private Wish[] loadJsonWishList() throws IOException {
-    return mapper.readValue(toFile("wishes"), new TypeReference<Wish[]>(){});
+    return mapper.readValue(toFile("wishes.json"), new TypeReference<Wish[]>(){});
   }
 
   /**
@@ -63,15 +69,13 @@ public class JsonHandler {
    * @throws IllegalArgumentException if email is not unique
    * @throws Exception if not found file
    */
-
   public User addUser(String firstname, String lastname, String email, String password) throws IllegalArgumentException, Exception {
     try {
       List<User> users = loadJsonUserList();
-      System.out.println(users);
 
       for (User user : users) {
         if (user.getEmail().equals(email)) {
-          System.out.println(
+          throw new IllegalArgumentException(
               "A user with this email already exists, please try another one"
           );
         }
@@ -79,8 +83,7 @@ public class JsonHandler {
       User newUser = new User(firstname, lastname, email, password);
 
       users.add(newUser);
-
-      mapper.writeValue(new File(Paths.get("").toAbsolutePath() + "/src/main/resources/users.json"), users);
+      mapper.writeValue(new File(this.path + "users.json"), users);
       return newUser;
     } catch (Exception e) {
       throw new Exception(e);
@@ -169,6 +172,14 @@ public class JsonHandler {
       throw new Exception(e);
     }
   }
+
+  /**
+   * Load wish from given file in "wishLists" in the this' path
+   * @param wishList wishList to compare
+   * @param name name of wish
+   * @return wish if it exists
+   * @throws Exception
+   */
   public Optional<Wish> loadWish(WishList wishList, String name) throws Exception {
 
     try {
