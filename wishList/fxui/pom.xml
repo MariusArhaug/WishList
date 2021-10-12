@@ -89,7 +89,7 @@
                 <!-- Default configuration for running -->
                 <!-- Usage: mvn javafx:run -->
                 <configuration>
-                    <mainClass>WishListApp</mainClass>
+                    <mainClass>wishList.ui.WishListApp</mainClass>
                 </configuration>
             </plugin>
 
