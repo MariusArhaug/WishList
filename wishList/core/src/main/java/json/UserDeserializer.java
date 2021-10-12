@@ -11,12 +11,24 @@ import core.WishList;
 
 import java.io.IOException;
 
+/*
+Deserialize user JSON object into Java User object.
+ */
 public class UserDeserializer extends JsonDeserializer<User> {
 
   private final WishListDeserializer wishListDeserializer = new WishListDeserializer();
 
+  /**
+   * Deserialize user object from json.
+   *
+   * @param jsonParser what parser we use
+   * @param deserializationContext context
+   * @return user object
+   * @throws IOException file not found
+   */
   @Override
-  public User deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+  public User deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
+      throws IOException {
     TreeNode userNode = jsonParser.getCodec().readTree(jsonParser);
     return deserializeUser((JsonNode) userNode);
   }

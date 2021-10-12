@@ -9,10 +9,11 @@ import java.io.IOException;
 
 public class WishSerializer extends JsonSerializer<Wish> {
   @Override
-  public void serialize(Wish wish, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+  public void serialize(
+      Wish wish, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
+      throws IOException {
     jsonGenerator.writeStartObject();
     jsonGenerator.writeStringField("name", wish.getName());
     jsonGenerator.writeObjectField("belongTo", wish.getBelongTo());
-
   }
 }

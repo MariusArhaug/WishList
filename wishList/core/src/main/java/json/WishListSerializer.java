@@ -10,7 +10,9 @@ import java.io.IOException;
 
 public class WishListSerializer extends JsonSerializer<WishList> {
   @Override
-  public void serialize(WishList wishList, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+  public void serialize(
+      WishList wishList, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
+      throws IOException {
     jsonGenerator.writeStartObject();
     jsonGenerator.writeStringField("name", wishList.getName());
     jsonGenerator.writeBooleanField("hideInfoFromOwner", wishList.getHideInfoFromOwner());

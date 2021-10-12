@@ -1,4 +1,3 @@
-import core.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -14,6 +13,7 @@ public class RegisterViewController extends AbstractController {
 
   private JsonHandler jsonHandler;
 
+  @Override
   @FXML
   public void initialize() {
     this.jsonHandler = new JsonHandler();
@@ -21,9 +21,11 @@ public class RegisterViewController extends AbstractController {
 
   /**
    * Change scene to LoginView.fxml
+   *
    * @param event gets state
    * @throws IOException if file is not found
    */
+  @Override
   @FXML
   public void changeToLoginView(ActionEvent event) throws IOException {
     this.changeScene("LoginView.fxml", event);
@@ -31,6 +33,7 @@ public class RegisterViewController extends AbstractController {
 
   /**
    * Change scene to ShowListView.fxml
+   *
    * @param event gets state
    * @throws IOException if file is not found
    */
@@ -39,28 +42,31 @@ public class RegisterViewController extends AbstractController {
     this.changeScene("ShowListView.fxml", event);
   }
 
-
   /**
    * Change scene to MainView.fxml
+   *
    * @param event gets state
    * @throws IOException if file is not found
    */
+  @Override
   public void changeToMainView(ActionEvent event) throws IOException {
     this.changeScene("MainView.fxml", event);
   }
 
   /**
    * Change scene to RegisterView.fxml
+   *
    * @param event gets state
    * @throws IOException if file is not found
    */
   @Override
-  public void changeToRegisterView(ActionEvent event) throws IOException{
+  public void changeToRegisterView(ActionEvent event) throws IOException {
     this.changeScene("RegisterView.fxml", event);
   }
 
   /**
    * Sign up user
+   *
    * @param event gets state
    */
   @FXML
@@ -71,16 +77,11 @@ public class RegisterViewController extends AbstractController {
     String password = passwordSignUp.getText();
 
     try {
-      this.updateUser(
-          jsonHandler.addUser(firstName, lastName, email, password)
-      );
-
+      this.updateUser(jsonHandler.addUser(firstName, lastName, email, password));
 
       changeToMainView(event);
     } catch (Exception e) {
       e.printStackTrace();
     }
-
   }
-
 }
