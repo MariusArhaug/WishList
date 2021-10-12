@@ -5,8 +5,6 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 public class ShowListViewController extends AbstractController {
-  private ListView chosenList;
-  private TextField addItemField;
 
   @Override
   public void initialize() {
