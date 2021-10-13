@@ -69,9 +69,9 @@ wishList/core/src/test/java
 
 wishList/core/src/main/java/core
 
-- [User.java](./wishList/core/src/main/java/core/User.java)
-- [WishList.java](./wishList/core/src/main/java/core/WishList.java)
-- [Wish.java](./wishList/core/src/main/java/core/Wish.java)
+- [User.java](wishList/core/src/main/java/wishList/core/User.java)
+- [WishList.java](wishList/core/src/main/java/wishList/core/WishList.java)
+- [Wish.java](wishList/core/src/main/java/wishList/core/Wish.java)
 
 ### Controller-App-View
 
@@ -79,24 +79,24 @@ wishList/core/src/main/java/core
 
 wishList/fxui/src/main/java
 
-- [AbstractController.java](./wishList/fxui/src/main/java/AbstractController.java)
+- [wishList.ui.AbstractController.java](./wishList/fxui/src/main/java/AbstractController.java)
 - [CreateListViewController.java](./wishList/fxui/src/main/java/CreateListViewController.java)
-- [LoginViewController.java](./wishList/fxui/src/main/java/LoginViewController.java)
-- [MainViewController.java](./wishList/fxui/src/main/java/MainViewController.java)
-- [RegisterViewController.java](./wishList/fxui/src/main/java/RegisterViewController.java)
-- [ShowListViewController.java](./wishList/fxui/src/main/java/ShowListViewController.java)
-- [ViewChanger.java](./wishList/fxui/src/main/java/ViewChanger.java)
-- [WishListApp.java](./wishList/fxui/src/main/java/WishListApp.java)
+- [wishList.ui.LoginViewController.java](./wishList/fxui/src/main/java/LoginViewController.java)
+- [wishList.ui.MainViewController.java](./wishList/fxui/src/main/java/MainViewController.java)
+- [wishList.ui.RegisterViewController.java](./wishList/fxui/src/main/java/RegisterViewController.java)
+- [wishList.ui.ShowListViewController.java](./wishList/fxui/src/main/java/ShowListViewController.java)
+- [wishList.ui.ViewChanger.java](./wishList/fxui/src/main/java/ViewChanger.java)
+- [wishList.ui.WishListApp.java](./wishList/fxui/src/main/java/WishListApp.java)
 
 #### FXML
 
 wishList/fxui/src/main/resources
 
 - [CreateListView.fxml](./wishList/fxui/src/main/resources/CreateListView.fxml)
-- [LoginView.fxml](./wishList/fxui/src/main/resources/LoginView.fxml)
-- [MainView.fxml](./wishList/fxui/src/main/resources/MainView.fxml)
-- [RegisterView.fxml](./wishList/fxui/src/main/resources/RegisterView.fxml)
-- [ShowListView.fxml](./wishList/fxui/src/main/resources/ShowListView.fxml)
+- [LoginView.fxml](wishList/fxui/src/main/resources/wishList.ui/LoginView.fxml)
+- [MainView.fxml](wishList/fxui/src/main/resources/wishList.ui/MainView.fxml)
+- [RegisterView.fxml](wishList/fxui/src/main/resources/wishList.ui/RegisterView.fxml)
+- [ShowListView.fxml](wishList/fxui/src/main/resources/wishList.ui/ShowListView.fxml)
 
 ### JSON
 
