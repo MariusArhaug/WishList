@@ -11,9 +11,9 @@ stages:
 build:
     stage: build
     script: 
-        - cd wishList && mvn install -B -DskipTests
+        - cd wishList && mvn install -B -DskipTests -DskipUiTests=true
         - mvn clean compile
-        - mvn verify
+        - mvn verify -DskipUiTests=true
         - cat core/target/site/jacoco/index.html
     artifacts:
         paths:
@@ -21,4 +21,4 @@ build:
 
 test:
     stage: test
-    script: cd wishList &&  mvn test
+    script: cd wishList &&  mvn test -DskipUiTests=true
