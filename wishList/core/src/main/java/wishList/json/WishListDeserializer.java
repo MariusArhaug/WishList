@@ -11,9 +11,9 @@ import wishList.core.Wish;
 import wishList.core.WishList;
 
 
-/*
+/**
 Deserializer for WishList.
- */
+ **/
 public class WishListDeserializer extends JsonDeserializer<WishList> {
 
   private final WishDeserializer wishDeserializer = new WishDeserializer();
@@ -34,12 +34,12 @@ public class WishListDeserializer extends JsonDeserializer<WishList> {
   }
 
   /**
-   * Deserialize wishList from JSON Node.
+   * Deserialize WishList from JSON to object.
    *
-   * @param node JSON node from JSON file
-   * @return WishList object
+   * @param node wishList JSON object
+   * @return wishList object
    */
-  public WishList deserializeWishList(JsonNode node) {
+  WishList deserializeWishList(JsonNode node) {
     if (node instanceof ObjectNode) {
       WishList wishList = new WishList(node.get("name").asText());
       JsonNode wishes = node.get("wishes");

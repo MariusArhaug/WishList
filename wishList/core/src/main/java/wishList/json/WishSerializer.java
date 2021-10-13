@@ -16,5 +16,6 @@ public class WishSerializer extends JsonSerializer<Wish> {
     jsonGenerator.writeStartObject();
     jsonGenerator.writeStringField("name", wish.getName());
     jsonGenerator.writeObjectField("belongTo", wish.getBelongTo());
+    jsonGenerator.writeEndObject();
   }
 }
