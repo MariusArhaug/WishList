@@ -27,9 +27,9 @@ verify:
   script:
     - mvn verify -DskipUiTests=true
     - cat core/target/site/jacoco/index.html
-    artifacts:
-      paths:
-        - core/target/site/jacoco/index.html
+  artifacts:
+    paths:
+      - core/target/site/jacoco/index.html
 
 test:
   stage: test
