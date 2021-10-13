@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -25,6 +23,8 @@ import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.TextMatchers;
 import org.testfx.toolkit.impl.ToolkitServiceImpl;
 import wishList.json.JsonHandler;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(ApplicationExtension.class)
 public class LoginViewControllerTest extends ApplicationTest{
@@ -40,10 +40,11 @@ public class LoginViewControllerTest extends ApplicationTest{
         stage.show();
     }
 
-    //TextField inputEmail = (TextField) root2.lookup("#loginEmailInput");
+
     @BeforeEach
     public void setup(FxRobot robot){
-
+        //TextField inputEmail = (TextField) lookup("#loginEmailInput");
+        //System.out.println(inputEmail);
     }
 
     @Test
@@ -61,9 +62,9 @@ public class LoginViewControllerTest extends ApplicationTest{
     @Test
     public void verifyThatLabelChanges(FxRobot robot){
         FxAssert.verifyThat("#errorMessage", LabeledMatchers.hasText("Label"));
-
         robot.clickOn("#login");
         FxAssert.verifyThat("#errorMessage", LabeledMatchers.hasText("E-mail or password is incorrect"));
+        FxAssert.verifyThat(controller.errorMessage, LabeledMatchers.hasText("E-mail or password is incorrect"));
     }
 
     /*
@@ -74,7 +75,15 @@ public class LoginViewControllerTest extends ApplicationTest{
 
     @Test
     public void verifyTextFields(FxRobot robot){
-        FxAssert.verifyThat("#loginEmailInput", NodeMatchers.isNotNull());
+        assertEquals(controller.loginEmailInput.getText(), "");
+        robot.clickOn("#loginEmailInput");
+        robot.write("Hello");
+        assertEquals(controller.loginEmailInput.getText(), "Hello");
+
+        assertEquals(controller.loginPasswordInput.getText(), "");
+        robot.clickOn("#loginPasswordInput");
+        robot.write("there");
+        assertEquals(controller.loginPasswordInput.getText(), "there");
     }
 
 }
