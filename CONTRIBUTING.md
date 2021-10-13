@@ -1,4 +1,16 @@
-# Group 21 Repo - core.WishList
+# Group 21 Repo - WishList
+
+## Get started
+
+In order to run this project or in a new environment do the following:
+
+- `mvn clean install`
+- `mvn compile`
+- `mvn -pl fxui javafx:run` : To run JavaFX.
+
+Tests can be run with
+
+- `mvn test`
 
 ## Naming conventions
 

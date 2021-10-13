@@ -8,6 +8,29 @@ Test coverage:
 Pipeline status: 
 [![pipeline status](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121/badges/master/pipeline.svg)](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121/-/commits/master)
 
+
+
+## How to contribute and our codeing :
+
+[CONTRIBUTING.md](CONTRIBUTING.md)
+
+Elaboration of user story, and description og apps purpose and functionality:
+
+[README.md](wishList/core/src/README.md)
+
+
+
+# Documentation agile development iterations:
+
+[1. iteration](docs/release1/README.md)
+
+[2. iteration](docs/release2/README.md)
+
+
+# Overview of code structure
+
+All the code can be found inside the wishList folder
+
 ## Modules
 
 The project is built with `maven` and to be structured using a modular style. Where you can the parent pom.xml file at the root of this repo.
@@ -23,93 +46,36 @@ Our repo supports the following
 - Testing (maven-sunfire-plugin)
 - JavaFX running (javafx-maven-plugin)
 
-## README
 
-Explaining groups usage of git:
+## Core
 
-[CONTRIBUTING.md](CONTRIBUTING.md)
+[**Documentation**](./wishList/core/src)
 
-Elaboration of user story, and description og apps purpose and functionality:
+[**Core**](./wishList/core/src/main/java/wishList/core): Core functionality to be used throughout application
 
-[README.md](wishList/core/src/README.md)
+[**JSON**](./wishList/core/src/main/java/wishList/json): Serializer/Deserializers for saving objects to JSON files
 
-Description of main folder:
+[**Utils**](./wishList/core/src/main/java/wishList/utils): Utility methods that can be used as functional components
 
-[README.md](wishList/core/README.md)
+### Core test
 
-Release 1:
+[**Core tests**](./wishList/core/src/test/java/wishList): Tests for all sub directories in core
 
-[README.md](docs/release1/README.md)
 
-## Get started
+## FXUI
 
-In order to run this project or in a new environment do the following:
+### Controllers
+[**Documentation**](./wishList/fxui/src)
 
-- `mvn clean install`
-- `mvn compile`
-- `mvn -pl fxui javafx:run` : To run JavaFX.
+[**Controllers**](./wishList/fxui/src/main/java/wishList/ui): Controllers for every FXML scene
 
-Tests can be run with
+### FXML
 
-- `mvn -pl core test`
+[**FXML**](./wishList/fxui/src/main/resources/wishList/ui): Each FXML file is its own unqiue scene
 
-## Directory of the coding project
+### FXUI Test
+[**Fxui tests**](./wishList/fxui/src/test/java/wishList): FXML tests
 
-All the code can be found inside the wishList folder
-
-### Test
-
-wishList/core/src/test/java
-
-- [UserTest.java](./wishList/core/src/test/java/UserTest.java)
-- [WishListTest.java](./wishList/core/src/test/java/WishListTest.java)
-- [WishTest.java](./wishList/core/src/test/java/WishTest.java)
-
-### Java class logic
-
-wishList/core/src/main/java/core
-
-- [User.java](wishList/core/src/main/java/wishList/core/User.java)
-- [WishList.java](wishList/core/src/main/java/wishList/core/WishList.java)
-- [Wish.java](wishList/core/src/main/java/wishList/core/Wish.java)
-
-### Controller-App-View
-
-#### App and controller and interface
-
-wishList/fxui/src/main/java
-
-- [wishList.ui.AbstractController.java](./wishList/fxui/src/main/java/AbstractController.java)
-- [CreateListViewController.java](./wishList/fxui/src/main/java/CreateListViewController.java)
-- [wishList.ui.LoginViewController.java](./wishList/fxui/src/main/java/LoginViewController.java)
-- [wishList.ui.MainViewController.java](./wishList/fxui/src/main/java/MainViewController.java)
-- [wishList.ui.RegisterViewController.java](./wishList/fxui/src/main/java/RegisterViewController.java)
-- [wishList.ui.ShowListViewController.java](./wishList/fxui/src/main/java/ShowListViewController.java)
-- [wishList.ui.ViewChanger.java](./wishList/fxui/src/main/java/ViewChanger.java)
-- [wishList.ui.WishListApp.java](./wishList/fxui/src/main/java/WishListApp.java)
-
-#### FXML
-
-wishList/fxui/src/main/resources
-
-- [CreateListView.fxml](./wishList/fxui/src/main/resources/CreateListView.fxml)
-- [LoginView.fxml](wishList/fxui/src/main/resources/wishList.ui/LoginView.fxml)
-- [MainView.fxml](wishList/fxui/src/main/resources/wishList.ui/MainView.fxml)
-- [RegisterView.fxml](wishList/fxui/src/main/resources/wishList.ui/RegisterView.fxml)
-- [ShowListView.fxml](wishList/fxui/src/main/resources/wishList.ui/ShowListView.fxml)
-
-### JSON
-
-wishList/core/src/main/java/json
-
-- [JsonHandler.java](./wishList/core/src/main/java/json/JsonHandler.java)
-- [JsonModule.java](./wishList/core/src/main/java/json/JsonModule.java)
-- [UserDeserializer.java](./wishList/core/src/main/java/json/UserDeserializer.java)
-- [UserSerializer.java](./wishList/core/src/main/java/json/UserSerializer.java)
-- [WishDeserializer.java](./wishList/core/src/main/java/json/WishDeserializer.java)
-- [WishListDeserializer.java](./wishList/core/src/main/java/json/WishListDeserializer.java)
-- [WishSerializer.java](./wishList/core/src/main/java/json/WishSerializer.java)
-- [WishListSerializer.java](./wishList/core/src/main/java/json/WishListSerializer.java)
 
 ## Dividing of FXML files and the use of multiple controllers
 
