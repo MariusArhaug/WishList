@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -22,6 +21,7 @@ import org.testfx.matcher.control.ButtonMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.TextMatchers;
 import org.testfx.toolkit.impl.ToolkitServiceImpl;
+import wishList.core.User;
 import wishList.json.JsonHandler;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LoginViewControllerTest extends ApplicationTest{
     private LoginViewController controller;
     private JsonHandler jsonHandler= new JsonHandler();
+    private User user;
 
     @Override
     public void start(final Stage stage) throws Exception {
@@ -67,10 +68,18 @@ public class LoginViewControllerTest extends ApplicationTest{
         FxAssert.verifyThat(controller.errorMessage, LabeledMatchers.hasText("E-mail or password is incorrect"));
     }
 
+    //Problemet er at den accesser feil json-fil
+
     /*
     @Test
     public void verifyThatUserExists(FxRobot robot){
+        robot.clickOn("#loginEmailInput");
+        robot.write("jane@doe");
+        robot.clickOn("#loginPasswordInput");
+        robot.write("qwerty");
         robot.clickOn("#login");
+
+        assertNotNull(user);
     } */
 
     @Test

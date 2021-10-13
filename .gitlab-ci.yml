@@ -15,6 +15,7 @@ build:
         - mvn clean compile
         - mvn verify
         - cat core/target/site/jacoco/index.html
+        - mvn -DskipUiTests=true
     artifacts:
         paths:
             - core/target/site/jacoco/index.html
