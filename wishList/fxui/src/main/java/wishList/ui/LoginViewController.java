@@ -50,6 +50,19 @@ public class LoginViewController extends AbstractController {
      */
     @FXML
     public void changeToMainView(ActionEvent event) throws IOException {
+        //this.checkUser();
+        try {
+            if (checkUser()) {
+                this.changeScene("/wishList/ui/MainView.fxml", event, this.user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public Boolean checkUser(){
         String email = loginEmailInput.getText();
         String password = loginPasswordInput.getText();
 
@@ -58,16 +71,16 @@ public class LoginViewController extends AbstractController {
             if (tryUser.isPresent()) {
                 this.user = tryUser.get();
                 System.out.println(this.user.getFirstName());
-                this.changeScene("/wishList/ui/MainView.fxml", event, this.user);
+                return true;
             }
             else {
                 errorMessage.setText("E-mail or password is incorrect");
+                return false;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
+        return false;
     }
 
     /**
