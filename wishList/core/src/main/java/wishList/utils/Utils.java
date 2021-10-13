@@ -1,7 +1,7 @@
-package utils;
+package wishList.utils;
 
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 /**
@@ -51,6 +51,7 @@ public class Utils {
 
   /**
    * Add file separator to path if it needs it.
+   *
    * @param path path to be updated
    * @return updated path
    */
@@ -60,19 +61,24 @@ public class Utils {
 
   /**
    * Reset JSON file.
+   *
    * @param path path of file
    * @param filename filename
    * @throws Exception if file not found
    */
   public static void resetFile(String path, String filename) throws Exception {
-    String finalPath = hasFileSeparatorAtEnd(path)
-                    ? path + filename
-                    : path + getFileSeparator() + filename;
+    String finalPath = addFileSeparatorAtEnd(path) + filename;
 
-    new File(finalPath).delete();
-    new File(finalPath).createNewFile();
-    FileWriter fileWriter = new FileWriter(finalPath);
-    fileWriter.write("[]");
-    fileWriter.close();
+    if (new File(finalPath).delete() && new File(finalPath).createNewFile()) {
+      try (
+              Writer w = new OutputStreamWriter(
+                      new FileOutputStream(finalPath),
+                      StandardCharsets.UTF_8
+              );
+              PrintWriter pw = new PrintWriter(w)
+      ) {
+        pw.println("[]");
+      }
+    }
   }
 }

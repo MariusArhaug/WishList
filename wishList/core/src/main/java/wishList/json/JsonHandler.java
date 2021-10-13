@@ -2,17 +2,15 @@ package wishList.json;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import core.User;
-import core.Wish;
-import core.WishList;
+import wishList.core.User;
+import wishList.core.Wish;
+import wishList.core.WishList;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.util.List;
 import java.util.Optional;
-import wishList.core.User;
-
 
 /** Handle JSON requests. */
 public class JsonHandler {
@@ -23,7 +21,7 @@ public class JsonHandler {
   /**
    * Create jsonHandler with a given path.
    *
-   * @param path path to json files
+   * @param path path to wishList.json files
    */
   public JsonHandler(String path) {
     this.mapper = new ObjectMapper();
@@ -45,7 +43,7 @@ public class JsonHandler {
   }
 
   /**
-   * Load all users from users.json.
+   * Load all users from users.wishList.json.
    *
    * @return List of users
    * @throws IOException if not able to find file
@@ -68,7 +66,7 @@ public class JsonHandler {
   }
 
   /**
-   * Add user to users.json if it has an unique email
+   * Add user to users.wishList.json if it has an unique email
    *
    * @param firstname firstname
    * @param lastname lastname
@@ -111,8 +109,6 @@ public class JsonHandler {
     try {
 
       List<WishList> ownedWishLists = user.getWishLists();
-      System.out.println("add wish");
-      System.out.println(ownedWishLists);
       for (WishList w : ownedWishLists) {
         if (w.getName().equals(name)) {
           throw new IllegalArgumentException("This user already has a wish list with this name!");
@@ -120,13 +116,11 @@ public class JsonHandler {
       }
       List<WishList> wishLists = loadJsonWishLists();
       WishList newWishList = new WishList(name, user);
-      System.out.println("wishList");
-      System.out.println(newWishList);
       ;
 
       wishLists.add(newWishList);
 
-      mapper.writeValue(this.toFile("wishLists.json"), wishLists);
+      mapper.writeValue(this.toFile("wishList.json"), wishLists);
       return newWishList;
     } catch (IOException e) {
       throw new Exception();
@@ -146,16 +140,17 @@ public class JsonHandler {
       List<Wish> ownedWishes = wishList.getWishes();
       for (Wish w : ownedWishes) {
         if (w.getName().equals(name)) {
-          System.out.println("This wish list already has a wish with this name!");
+          throw new IllegalArgumentException("This wish list already has a wish with this name!");
         }
       }
 
       List<Wish> wishes = this.loadJsonWishes();
       Wish newWish = new Wish(name);
+      wishList.addWish(newWish);
 
       wishes.add(newWish);
 
-      mapper.writeValue(this.toFile("wishes.json"), wishes);
+      mapper.writeValue(this.toFile("wishList.json"), wishes);
       return newWish;
     } catch (Exception e) {
       throw new Exception(e);
@@ -205,7 +200,7 @@ public class JsonHandler {
   }
 
   /**
-   * Load wish from given file in "wishLists" in the this' path
+   * Load wish from given file in "wishLists" in the this' path.
    *
    * @param wishList wishList to compare
    * @param name name of wish

@@ -1,12 +1,12 @@
-package json;
+package wishList.json;
 
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import core.Wish;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import wishList.core.Wish;
 
 import java.io.File;
 import java.io.IOException;

@@ -43,9 +43,7 @@ public class Wish {
    * @return this object
    */
   public Wish setBelongTo(WishList list) {
-    if (!list.hasWish(this)) {
-      this.belongTo = list;
-    }
+    this.belongTo = list;
     return this;
   }
 
