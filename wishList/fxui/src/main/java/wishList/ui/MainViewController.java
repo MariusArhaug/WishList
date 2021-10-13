@@ -1,12 +1,11 @@
 package wishList.ui;
 
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class MainViewController extends AbstractController {
     @FXML private Button signOut;
@@ -15,13 +14,14 @@ public class MainViewController extends AbstractController {
 
     @Override
     public void initialize() {
-        if(this.user != null) {
+        if (this.user != null) {
             mainNameOfUser.setText(this.user.getFirstName());
         }
     }
 
     /**
      * Change scene to MainView.fxml
+
      * @param event gets state
      * @throws IOException if the file is not found
      */
@@ -33,6 +33,7 @@ public class MainViewController extends AbstractController {
 
     /**
      * Change scene to RegisterView.fxml
+
      * @param event gets state
      * @throws IOException if the file is not found
      */
@@ -43,6 +44,7 @@ public class MainViewController extends AbstractController {
 
     /**
      * Change scene to LoginView.fxml
+
      * @param event gets state
      * @throws IOException if file is not found
      */
@@ -55,6 +57,7 @@ public class MainViewController extends AbstractController {
 
     /**
      * Change scene to ShowListView.fxml
+
      * @param event gets state
      * @throws IOException if file is not found
      */
@@ -64,9 +67,9 @@ public class MainViewController extends AbstractController {
     }
 
     /**
-     * Close app
+     * Close app.
      */
-    public void closeApp(){
+    public void closeApp() {
         Stage stage = (Stage) signOut.getScene().getWindow();
         stage.close();
     }

@@ -1,20 +1,23 @@
 package wishList.ui;
 
-import wishList.core.User;
+import java.io.IOException;
+import java.util.Optional;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.event.ActionEvent;
+import wishList.core.User;
 import wishList.json.JsonHandler;
 
-import java.io.IOException;
-import java.util.Optional;
 
 
 public class LoginViewController extends AbstractController {
-    @FXML private TextField loginEmailInput;
-    @FXML private TextField loginPasswordInput;
-    @FXML private Label errorMessage;
+    @FXML
+    private TextField loginEmailInput;
+    @FXML
+    private TextField loginPasswordInput;
+    @FXML
+    private Label errorMessage;
 
     private JsonHandler jsonHandler;
 
@@ -24,6 +27,7 @@ public class LoginViewController extends AbstractController {
 
     /**
      * Change scene to RegisterView.fxml
+     *
      * @param event gets state
      * @throws IOException if file is not found
      */
@@ -34,6 +38,7 @@ public class LoginViewController extends AbstractController {
 
     /**
      * Change scene to LoginView.fxml
+     *
      * @param event gets state
      * @throws IOException if file is not found
      */
@@ -45,6 +50,7 @@ public class LoginViewController extends AbstractController {
     /**
      * Change scene to MainView.fxml
      * Will only change scene if e-mail and password match
+     *
      * @param event
      * @throws IOException
      */
@@ -59,8 +65,7 @@ public class LoginViewController extends AbstractController {
                 this.user = tryUser.get();
                 System.out.println(this.user.getFirstName());
                 this.changeScene("/wishList/ui/MainView.fxml", event, this.user);
-            }
-            else {
+            } else {
                 errorMessage.setText("E-mail or password is incorrect");
             }
         } catch (Exception e) {
@@ -72,6 +77,7 @@ public class LoginViewController extends AbstractController {
 
     /**
      * Change scene to ShowListView.fxml
+     *
      * @param event gets state
      * @throws IOException if file is not found
      */
