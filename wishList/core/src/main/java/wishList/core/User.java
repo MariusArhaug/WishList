@@ -2,6 +2,7 @@ package wishList.core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -10,35 +11,68 @@ import java.util.stream.Collectors;
  */
 public class User {
 
-  private final String firstName;
-  private final String lastName;
-  private final String email;
-  private final String password;
-
   private final List<WishList> wishLists = new ArrayList<>();
+  private String email;
+  private String password;
+  private String firstName;
+  private String lastName;
 
+  /**
+   * Create user with firstname, lastname, email and password.
+   *
+   * @param firstName firstname
+   * @param lastName lastname
+   * @param email email
+   * @param password password
+   * @throws IllegalArgumentException if first or lastname don't match with constraints
+   */
   public User(String firstName, String lastName, String email, String password)
       throws IllegalArgumentException {
-    if (firstName.length() == 0 || firstName.length() > 20) {
-      throw new IllegalArgumentException(
-          "A user must have a first name and it can not surpass 20 characters!");
-    }
-    if (lastName.length() == 0 || lastName.length() > 20) {
-      throw new IllegalArgumentException(
-          "A user must have a last name and it can not surpass 20 characters!");
-    }
-    this.firstName = firstName;
-    this.lastName = lastName;
+    this.setFirstName(firstName);
+    this.setLastName(lastName);
     this.email = email;
     this.password = password;
   }
+
+  public User() {}
 
   public String getFirstName() {
     return this.firstName;
   }
 
+  /**
+   * Set firstname of user.
+   *
+   * @param firstName name
+   * @return user object
+   * @throws IllegalArgumentException if name is not sufficient.
+   */
+  public User setFirstName(String firstName) throws IllegalArgumentException {
+    if (firstName.length() == 0 || firstName.length() > 20) {
+      throw new IllegalArgumentException(
+          "A user must have a first name and it can not surpass 20 characters!");
+    }
+    this.firstName = firstName;
+    return this;
+  }
+
   public String getLastName() {
     return this.lastName;
+  }
+
+  /**
+   * Set lastname of user.
+   *
+   * @param lastName name
+   * @return User object
+   */
+  public User setLastName(String lastName) throws IllegalArgumentException {
+    if (lastName.length() == 0 || lastName.length() > 20) {
+      throw new IllegalArgumentException(
+          "A user must have a last name and it can not surpass 20 characters!");
+    }
+    this.lastName = lastName;
+    return this;
   }
 
   public String getEmail() {
@@ -83,7 +117,7 @@ public class User {
    */
   public void makeWishList(String name) {
     if (!wishListsExist(name)) {
-      this.wishLists.add(new WishList(this, name));
+      this.wishLists.add(new WishList(name, this));
     }
   }
 
@@ -162,7 +196,20 @@ public class User {
     wishLists.stream().filter(wl -> wl.equals(wishList)).forEach(wl -> wl.addWish(wish));
   }
 
+  @Override
   public String toString() {
     return "" + this.firstName + "," + this.lastName + "," + this.email + "," + this.password + "";
+  }
+
+  /**
+   * Get wishList matching the name.
+   *
+   * @param name name of wishList
+   * @return wishList
+   */
+  public Optional<WishList> getWishList(String name) {
+    return this.getWishLists().stream()
+        .filter(wishList -> name.equals(wishList.getName()))
+        .findAny();
   }
 }

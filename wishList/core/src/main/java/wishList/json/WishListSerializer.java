@@ -8,6 +8,7 @@ import wishList.core.Wish;
 import wishList.core.WishList;
 
 
+/** Serializer for wishList. */
 public class WishListSerializer extends JsonSerializer<WishList> {
   @Override
   public void serialize(
@@ -22,5 +23,6 @@ public class WishListSerializer extends JsonSerializer<WishList> {
       jsonGenerator.writeObject(wish);
     }
     jsonGenerator.writeEndArray();
+    jsonGenerator.writeEndObject();
   }
 }
