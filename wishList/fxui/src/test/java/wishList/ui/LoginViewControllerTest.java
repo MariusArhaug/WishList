@@ -1,13 +1,8 @@
 package wishList.ui;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,8 +14,6 @@ import org.testfx.api.FxRobot;
 import org.testfx.matcher.base.NodeMatchers;
 import org.testfx.matcher.control.ButtonMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
-import org.testfx.matcher.control.TextMatchers;
-import org.testfx.toolkit.impl.ToolkitServiceImpl;
 import wishList.core.User;
 import wishList.json.JsonHandler;
 
@@ -41,16 +34,15 @@ public class LoginViewControllerTest extends ApplicationTest{
         stage.show();
     }
 
-
     @BeforeEach
-    public void setup(FxRobot robot){
-        //TextField inputEmail = (TextField) lookup("#loginEmailInput");
-        //System.out.println(inputEmail);
+    public void setup(){
+        this.user = null;
     }
 
     @Test
     public void testController(){
         assertNotNull(this.controller);
+        assertNull(this.user);
     }
 
     @Test
@@ -70,7 +62,6 @@ public class LoginViewControllerTest extends ApplicationTest{
 
     //Problemet er at den accesser feil json-fil
 
-    /*
     @Test
     public void verifyThatUserExists(FxRobot robot){
         robot.clickOn("#loginEmailInput");
@@ -78,9 +69,9 @@ public class LoginViewControllerTest extends ApplicationTest{
         robot.clickOn("#loginPasswordInput");
         robot.write("qwerty");
         robot.clickOn("#login");
-
-        assertNotNull(user);
-    } */
+        //assertEquals(user.getFirstName(), "Jane");
+        //assertNotNull(user);
+    }
 
     @Test
     public void verifyTextFields(FxRobot robot){

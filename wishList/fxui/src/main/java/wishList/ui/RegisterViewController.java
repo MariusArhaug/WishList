@@ -66,6 +66,17 @@ public class RegisterViewController extends AbstractController {
    */
   @FXML
   public void registerUser(ActionEvent event) {
+    try{
+      this.addUser();
+      changeToMainView(event);
+
+    } catch (Exception e){
+      e.printStackTrace();
+    }
+
+  }
+
+  public void addUser(){
     String firstName = firstNameSignUp.getText();
     String lastName = lastNameSignUp.getText();
     String email = emailSignUp.getText();
@@ -73,15 +84,12 @@ public class RegisterViewController extends AbstractController {
 
     try {
       this.updateUser(
-          jsonHandler.addUser(firstName, lastName, email, password)
+              jsonHandler.addUser(firstName, lastName, email, password)
       );
 
-
-      changeToMainView(event);
     } catch (Exception e) {
       e.printStackTrace();
     }
-
   }
 
 }
