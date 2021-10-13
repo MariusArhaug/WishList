@@ -2,15 +2,15 @@ package wishList.json;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import wishList.core.User;
-import wishList.core.Wish;
-import wishList.core.WishList;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.util.List;
 import java.util.Optional;
+import wishList.core.User;
+import wishList.core.Wish;
+import wishList.core.WishList;
+
 
 /** Handle JSON requests. */
 public class JsonHandler {
@@ -66,7 +66,7 @@ public class JsonHandler {
   }
 
   /**
-   * Add user to users.wishList.json if it has an unique email
+   * Add user to users.wishList.json if it has a unique email
    *
    * @param firstname firstname
    * @param lastname lastname
@@ -116,7 +116,6 @@ public class JsonHandler {
       }
       List<WishList> wishLists = loadJsonWishLists();
       WishList newWishList = new WishList(name, user);
-      ;
 
       wishLists.add(newWishList);
 
@@ -166,10 +165,8 @@ public class JsonHandler {
    * @throws Exception could not load file.
    */
   public Optional<User> loadUser(String email, String password) throws Exception {
-
     try {
       List<User> users = loadJsonUserList();
-
       for (User user : users) {
         if (user.checkCredentials(email, password)) {
           return Optional.of(user);

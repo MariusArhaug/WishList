@@ -1,11 +1,13 @@
 package wishList.ui;
 
-import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import wishList.json.JsonHandler;
 
+import java.io.IOException;
+
+/** Controller for RegisterView fxml file. */
 public class RegisterViewController extends AbstractController {
   @FXML private TextField firstNameSignUp;
   @FXML private TextField lastNameSignUp;
@@ -13,6 +15,10 @@ public class RegisterViewController extends AbstractController {
   @FXML private TextField passwordSignUp;
 
   private JsonHandler jsonHandler;
+
+  public RegisterViewController() {
+    jsonHandler = new JsonHandler(this.resourcesPath);
+  }
 
   @Override
   @FXML
@@ -29,7 +35,7 @@ public class RegisterViewController extends AbstractController {
   @Override
   @FXML
   public void changeToLoginView(ActionEvent event) throws IOException {
-    this.changeScene("/wishList/ui/LoginView.fxml", event, this.user);
+    this.changeScene("LoginView.fxml", event, this.user);
   }
 
   /**
@@ -40,7 +46,7 @@ public class RegisterViewController extends AbstractController {
    */
   @Override
   public void changeToShowListView(ActionEvent event) throws IOException {
-    this.changeScene("/wishList/ui/ShowListView.fxml", event, this.user);
+    this.changeScene("ShowListView.fxml", event, this.user);
   }
 
   /**
@@ -51,7 +57,7 @@ public class RegisterViewController extends AbstractController {
    */
   @Override
   public void changeToMainView(ActionEvent event) throws IOException {
-    this.changeScene("/wishList/ui/MainView.fxml", event, this.user);
+    this.changeScene("MainView.fxml", event, this.user);
   }
 
   /**
@@ -62,7 +68,7 @@ public class RegisterViewController extends AbstractController {
    */
   @Override
   public void changeToRegisterView(ActionEvent event) throws IOException {
-    this.changeScene("/wishList/ui/RegisterView.fxml", event, this.user);
+    this.changeScene("RegisterView.fxml", event, this.user);
   }
 
   /**
