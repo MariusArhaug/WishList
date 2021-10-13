@@ -13,7 +13,7 @@ build:
     script: 
         - cd wishList && mvn install -B -DskipTests -DskipUiTests=true
         - mvn clean compile
-        - mvn verify -DskipUiTests=true
+        - mvn verify -B -DskipUiTests=true
         - cat core/target/site/jacoco/index.html
     artifacts:
         paths:
