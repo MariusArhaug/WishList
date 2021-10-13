@@ -12,9 +12,9 @@ import java.util.Optional;
 
 
 public class LoginViewController extends AbstractController {
-    @FXML private TextField loginEmailInput;
-    @FXML private TextField loginPasswordInput;
-    @FXML private Label errorMessage;
+    @FXML protected TextField loginEmailInput;
+    @FXML protected TextField loginPasswordInput;
+    @FXML protected Label errorMessage;
 
     private JsonHandler jsonHandler;
 
@@ -79,6 +79,11 @@ public class LoginViewController extends AbstractController {
     public void changeToShowListView(ActionEvent event) throws IOException {
         this.changeScene("/wishList/ui/ShowListView.fxml", event, this.user);
     }
+
+    /*
+    public Label getLabel(){
+        return errorMessage;
+    } */
 
 }
 
