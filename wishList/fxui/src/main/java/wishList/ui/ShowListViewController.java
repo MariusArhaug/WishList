@@ -1,14 +1,12 @@
 package wishList.ui;
 
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-import java.io.IOException;
 
 public class ShowListViewController extends AbstractController {
-  private ListView chosenList;
-  private TextField addItemField;
 
   @Override
   public void initialize() {
@@ -17,6 +15,7 @@ public class ShowListViewController extends AbstractController {
 
   /**
    * Change scene to MainView.fxml
+
    * @param event gets state
    * @throws IOException if file is not found
    */
@@ -26,6 +25,7 @@ public class ShowListViewController extends AbstractController {
 
   /**
    * Change scene to RegisterView.fxml
+
    * @param event gets state
    * @throws IOException if file is not found
    */
@@ -36,6 +36,7 @@ public class ShowListViewController extends AbstractController {
 
   /**
    * Change scene to LoginView.fxml
+
    * @param event gets state
    * @throws IOException if file is not found
    */
@@ -45,7 +46,8 @@ public class ShowListViewController extends AbstractController {
   }
 
   /**
-   * Change scene to ShowListView
+   * Change scene to ShowListView.
+
    * @param event gets state
    * @throws IOException if file is not found
    */

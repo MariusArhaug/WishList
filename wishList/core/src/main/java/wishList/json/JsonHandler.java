@@ -2,13 +2,13 @@ package wishList.json;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import wishList.core.User;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import wishList.core.User;
+
 
 public class JsonHandler {
 
@@ -22,26 +22,27 @@ public class JsonHandler {
   }
 
   /**
-   * Convert string to file name + path
+   * Convert string to file name + path.
+   *
    * @return file object
    */
-
   private File toFile() {
     return new File(this.path + "/users.json");
   }
 
   /**
    * Load all users from users.json
+   *
    * @return List of users
    * @throws IOException if not able to find file
    */
-
   private List<User> loadJsonUserList() throws IOException {
-    return mapper.readValue(toFile(), new TypeReference<List<User>>(){});
+    return mapper.readValue(toFile(), new TypeReference<List<User>>() {});
   }
 
   /**
    * Add user to users.json if it has an unique email
+   *
    * @param firstname firstname
    * @param lastname lastname
    * @param email email
@@ -50,16 +51,14 @@ public class JsonHandler {
    * @throws IllegalArgumentException if email is not unique
    * @throws Exception if not found file
    */
-
-  public User addUser(String firstname, String lastname, String email, String password) throws IllegalArgumentException, Exception {
+  public User addUser(String firstname, String lastname, String email, String password)
+      throws IllegalArgumentException, Exception {
     try {
       List<User> users = loadJsonUserList();
 
       for (User user : users) {
         if (user.getEmail().equals(email)) {
-          System.out.println(
-              "An user with this email already exists, please try another one"
-          );
+          System.out.println("An user with this email already exists, please try another one");
         }
       }
       User newUser = new User(firstname, lastname, email, password);
@@ -72,7 +71,6 @@ public class JsonHandler {
       throw new Exception(e);
     }
   }
-
 
   public Optional<User> loadUser(String email, String password) throws Exception {
 

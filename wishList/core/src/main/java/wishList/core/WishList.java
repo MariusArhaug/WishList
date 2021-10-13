@@ -1,7 +1,6 @@
 package wishList.core;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class WishList {
@@ -47,7 +46,9 @@ public class WishList {
   }
 
   /**
-   * When a wishList is shared the owner can choose to hide information about who is covering each wish from himself/herself
+   * When a wishList is shared the owner can choose to hide information about who is covering each
+   * wish from himself/herself.
+   *
    * @param hideInfoFromOwner Boolean to hide information from owner or not
    */
   public void setHideInfoFromOwner(boolean hideInfoFromOwner) {
@@ -55,7 +56,8 @@ public class WishList {
   }
 
   /**
-   * Add wish to wish list
+   * Add wish to wish list.
+   *
    * @param wish wish to add
    */
   public void addWish(Wish wish) {
@@ -64,7 +66,8 @@ public class WishList {
   }
 
   /**
-   * A wish can be removed from a wishList
+   * A wish can be removed from a wishList.
+   *
    * @param wish core.Wish to remove
    */
   public void removeWish(Wish wish) {

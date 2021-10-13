@@ -11,7 +11,7 @@ stages:
 build:
     stage: build
     script: 
-        - cd wishList && mvn install -B -DskipTests
+        - cd wishList && mvn clean install -B -DskipTests
         - mvn clean compile
         - mvn verify
         - cat core/target/site/jacoco/index.html

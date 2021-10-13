@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * User class saves various user data such as:
- * contacts list of {@link User}
- * wish Lists of {@link WishList}
+ * User class saves various user data such as: contacts list of {@link User} wish Lists of {@link
+ * WishList}.
  */
 public class User {
 
@@ -18,12 +17,15 @@ public class User {
 
   private final List<WishList> wishLists = new ArrayList<>();
 
-  public User(String firstName, String lastName, String email, String password) throws IllegalArgumentException {
+  public User(String firstName, String lastName, String email, String password)
+      throws IllegalArgumentException {
     if (firstName.length() == 0 || firstName.length() > 20) {
-      throw new IllegalArgumentException("A user must have a first name and it can not surpass 20 characters!");
+      throw new IllegalArgumentException(
+          "A user must have a first name and it can not surpass 20 characters!");
     }
     if (lastName.length() == 0 || lastName.length() > 20) {
-      throw new IllegalArgumentException("A user must have a last name and it can not surpass 20 characters!");
+      throw new IllegalArgumentException(
+          "A user must have a last name and it can not surpass 20 characters!");
     }
     this.firstName = firstName;
     this.lastName = lastName;
@@ -51,9 +53,9 @@ public class User {
     return this.wishLists;
   }
 
-
   /**
-   * Changes if the user that owns the wishlist can se hidden information or not
+   * Changes if the user that owns the wishlist can se hidden information or not.
+   *
    * @param wishList Wishlist to edit
    * @param hideInfoFromOwner Boolean to hide information from owner or not
    */
@@ -64,7 +66,8 @@ public class User {
   }
 
   /**
-   * Checks to see if user's email and passwords match with inputs
+   * Checks to see if user's email and passwords match with inputs.
+   *
    * @param email email string
    * @param password password string
    * @return boolean
@@ -74,7 +77,8 @@ public class User {
   }
 
   /**
-   * Make a new wish list
+   * Make a new wish list.
+   *
    * @param name name string
    */
   public void makeWishList(String name) {
@@ -84,7 +88,8 @@ public class User {
   }
 
   /**
-   * Removes existing wish list
+   * Removes existing wish list.
+   *
    * @param name name string
    */
   public void removeWishList(String name) {
@@ -92,17 +97,18 @@ public class User {
       this.wishLists.remove(
           this.wishLists.stream()
               .filter(e -> e.getName().equals(name))
-              .collect(Collectors.toList()).get(0)
-      );
+              .collect(Collectors.toList())
+              .get(0));
     }
   }
 
   /**
-   * Owner of wish list can remove it
+   * Owner of wish list can remove it.
+
    * @param list Wish list to remove
    * @throws IllegalCallerException
    */
-  public void removeWishList(WishList list) throws IllegalCallerException{
+  public void removeWishList(WishList list) throws IllegalCallerException {
     if (list.getOwner() != this) {
       throw new IllegalCallerException("You can only remove your own list!");
     }
@@ -113,21 +119,22 @@ public class User {
   }
 
   /**
-   * Remove wish from wish list
+   * Remove wish from wish list.
+   *
    * @param wishListName wish list to remove wish from
    * @param wishName wish to remove
    */
   public void removeWish(String wishListName, String wishName) {
     if (wishListsExist(wishListName)) {
-      this.wishLists
-          .stream()
+      this.wishLists.stream()
           .filter(w -> w.getName().equals(wishListName))
           .forEach(e -> e.removeWish(new Wish(wishName)));
     }
   }
 
   /**
-   * Checks if wish list exists
+   * Checks if wish list exists.
+   *
    * @param name wish list to check for
    * @return boolean
    */
@@ -136,7 +143,8 @@ public class User {
   }
 
   /**
-   * Add new wish list
+   * Add new wish list.
+   *
    * @param list wish list to add
    */
   public void addWishList(WishList list) {
@@ -145,7 +153,8 @@ public class User {
   }
 
   /**
-   * Add wish to wish list
+   * Add wish to wish list.
+   *
    * @param wishList wish list to add wish to
    * @param wish wish to add
    */

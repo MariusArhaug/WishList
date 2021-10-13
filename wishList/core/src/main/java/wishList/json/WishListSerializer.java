@@ -3,14 +3,16 @@ package wishList.json;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import java.io.IOException;
 import wishList.core.Wish;
 import wishList.core.WishList;
 
-import java.io.IOException;
 
 public class WishListSerializer extends JsonSerializer<WishList> {
   @Override
-  public void serialize(WishList wishList, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+  public void serialize(
+      WishList wishList, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
+      throws IOException {
     jsonGenerator.writeStartObject();
     jsonGenerator.writeStringField("name", wishList.getName());
     jsonGenerator.writeBooleanField("hideInfoFromOwner", wishList.getHideInfoFromOwner());
