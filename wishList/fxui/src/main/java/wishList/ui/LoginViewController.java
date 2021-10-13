@@ -70,7 +70,6 @@ public class LoginViewController extends AbstractController {
             Optional<User> tryUser = jsonHandler.loadUser(email, password);
             if (tryUser.isPresent()) {
                 this.user = tryUser.get();
-                System.out.println(this.user.getFirstName());
                 return true;
             }
             else {

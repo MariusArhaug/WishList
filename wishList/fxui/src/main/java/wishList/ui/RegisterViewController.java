@@ -8,10 +8,10 @@ import wishList.json.JsonHandler;
 import java.io.IOException;
 
 public class RegisterViewController extends AbstractController {
-  @FXML private TextField firstNameSignUp;
-  @FXML private TextField lastNameSignUp;
-  @FXML private TextField emailSignUp;
-  @FXML private TextField passwordSignUp;
+  @FXML protected TextField firstNameSignUp;
+  @FXML protected TextField lastNameSignUp;
+  @FXML protected TextField emailSignUp;
+  @FXML protected TextField passwordSignUp;
 
   private JsonHandler jsonHandler;
 
