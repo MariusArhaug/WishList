@@ -9,7 +9,6 @@ cache:
 
 stages:
   - build
-  - check_style
   - test
   - verify
 
