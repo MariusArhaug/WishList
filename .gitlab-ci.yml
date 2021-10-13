@@ -19,15 +19,15 @@ build:
     - mvn install -B -DskipTests -DskipUiTests
     - mvn clean compile
 
-check_style:
-  stage: check_style
-  script:
-    - cd wishList
-    - mvn checkstyle:checkstyle
-    - cat core/target/site/checkstyle.html
-  artifacts:
-    paths:
-      - core/target/site/checkstyle.html
+#check_style:
+#  stage: check_style
+#  script:
+#    - cd wishList
+#    - mvn checkstyle:checkstyle
+#    - cat core/target/site/checkstyle.html
+#  artifacts:
+#    paths:
+#      - core/target/site/checkstyle.html
 
 verify:
   stage: verify
