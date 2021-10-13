@@ -1,5 +1,8 @@
 image: maven:3.8.3-openjdk-16-slim
 
+include:
+  - template: Code-Quality.gitlab-ci.yml
+
 cache:
   paths:
     - .m2/repository
@@ -13,14 +16,17 @@ stages:
 build:
   stage: build
   script:
-    - cd wishList && mvn install -B -DskipTests
+    - cd wishList && mvn install -B -DskipTests -DskipUiTests
     - mvn clean compile
 
 check_style:
   stage: check_style
   script:
     - mvn checkstyle:checkstyle
-    - cat checkstyle-result.xml
+    - cat core/target/site/checkstyle.html
+  artifacts:
+    paths:
+      - core/target/site/checkstyle.html
 
 verify:
   stage: verify
