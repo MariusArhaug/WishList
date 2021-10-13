@@ -8,9 +8,12 @@ import core.WishList;
 
 import java.io.IOException;
 
+/** Serializer for wishList. */
 public class WishListSerializer extends JsonSerializer<WishList> {
   @Override
-  public void serialize(WishList wishList, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+  public void serialize(
+      WishList wishList, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
+      throws IOException {
     jsonGenerator.writeStartObject();
     jsonGenerator.writeStringField("name", wishList.getName());
     jsonGenerator.writeBooleanField("hideInfoFromOwner", wishList.getHideInfoFromOwner());
@@ -20,5 +23,6 @@ public class WishListSerializer extends JsonSerializer<WishList> {
       jsonGenerator.writeObject(wish);
     }
     jsonGenerator.writeEndArray();
+    jsonGenerator.writeEndObject();
   }
 }

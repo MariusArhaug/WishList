@@ -24,37 +24,22 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserSerializerTest {
-    UserSerializer userSerializer;
-    User user;
-    String json;
-    ObjectMapper mapper;
-    JsonFactory factory;
-    JsonGenerator jsonGenerator;
-    SerializerProvider serializerProvider;
-    File usersTestFile = new File(JsonHandlerTest.testFolder + "users.json");
+    private User user;
+    private ObjectMapper mapper;
+    private final File usersTestFile = new File(JsonHandlerTest.testFolder + "users.json");
 
 
     @BeforeEach
     void setUp() throws IOException {
         user = new User("first", "last", "user@gmail.com", "123Password!");
-        json = "{\"firstName\":\"first\",\"lastName\":\"last\",\"email\":\"user@gmail.com\",\"password\":\"123Password!\",\"wishLists\":[]}";
         mapper = new ObjectMapper();
-        factory = mapper.getFactory();
-
-        jsonGenerator = factory.createGenerator(usersTestFile, JsonEncoding.UTF8);
-        userSerializer = new UserSerializer();
-        serializerProvider = mapper.getSerializerProvider();
+        mapper.getFactory().createGenerator(usersTestFile, JsonEncoding.UTF8);
     }
 
     @AfterEach
     void tearDown() {
         user = null;
-        json = null;
         mapper = null;
-        factory = null;
-        jsonGenerator = null;
-        userSerializer = null;
-        serializerProvider = null;
     }
 
     @Test

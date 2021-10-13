@@ -16,7 +16,7 @@ class WishTest {
     void setUp() {
         john = new User("John", "Smith", "John.Smith@gmail.com", "!Password123");
         jane = new User("Jane", "Doe", "Jane.Doe@gmail.com", "123Password!");
-        wishList = new WishList(john, "Birthday");
+        wishList = new WishList("Birthday", john);
     }
 
     @AfterEach
@@ -28,12 +28,12 @@ class WishTest {
 
     @Test
     void Wish() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Wish("");
-        });
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Wish("MoreThanTwentyFiveCharacters!");
-        });
+        assertThrows(IllegalArgumentException.class, () ->
+            new Wish("")
+        );
+        assertThrows(IllegalArgumentException.class, () ->
+            new Wish("MoreThanTwentyFiveCharacters!")
+        );
     }
 
     @Test

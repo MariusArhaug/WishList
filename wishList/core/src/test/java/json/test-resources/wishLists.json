@@ -1,1 +1,1 @@
-[{"name":"Birthday","wishes":[],"owner":null,"hideInfoFromOwner":false}]
+[{"name":"Wedding","hideInfoFromOwner":false,"owner":null,"wishes":[]},{"name":"Wedding","hideInfoFromOwner":false,"owner":{"firstName":"FirstName","lastName":"LastName","email":"gmail@gmail.com","password":"Password123!","wishLists":[]},"wishes":[]}]

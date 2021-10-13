@@ -9,58 +9,65 @@ import core.WishList;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+/** Handle JSON requests. */
 public class JsonHandler {
 
   private final ObjectMapper mapper;
   private final String path;
 
+  /**
+   * Create jsonHandler with a given path.
+   *
+   * @param path path to json files
+   */
   public JsonHandler(String path) {
     this.mapper = new ObjectMapper();
     this.mapper.registerModule(new JsonModule());
     this.path = path;
   }
-    public String getPath() {
+
+  public String getPath() {
     return this.path;
   }
 
   /**
-   * Convert string to file name + path
+   * Convert string to file name + path.
+   *
    * @return file object
    */
   private File toFile(String fileName) throws NoSuchFileException {
-    if (!fileName.equals("wishLists.json")
-        && !fileName.equals("wishes.json")
-        && !fileName.equals("users.json")
-    ) {
-      throw new NoSuchFileException("Expected filename of type wishLists, wishes or users, got: " + fileName);
-    }
-
     return new File(this.path + fileName);
   }
 
   /**
-   * Load all users from users.json
+   * Load all users from users.json.
+   *
    * @return List of users
    * @throws IOException if not able to find file
    */
   private List<User> loadJsonUserList() throws IOException {
-    return mapper.readValue(toFile("users.json"), new TypeReference<List<User>>(){});
+    return mapper.readValue(toFile("users.json"), new TypeReference<List<User>>() {});
   }
-  private WishList[] loadJsonWishListList() throws IOException {
-    return mapper.readValue(toFile("wishLists.json"), new TypeReference<WishList[]>(){});
+
+  private List<WishList> loadJsonWishLists() throws IOException {
+    return mapper.readValue(toFile("wishLists.json"), new TypeReference<List<WishList>>() {});
   }
-  private Wish[] loadJsonWishList() throws IOException {
-    return mapper.readValue(toFile("wishes.json"), new TypeReference<Wish[]>(){});
+
+  private List<Wish> loadJsonWishes() throws IOException {
+    return mapper.readValue(toFile("wishes.json"), new TypeReference<List<Wish>>() {});
+  }
+
+  User addUser(User user) throws Exception {
+    return this.addUser(
+        user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
   }
 
   /**
    * Add user to users.json if it has an unique email
+   *
    * @param firstname firstname
    * @param lastname lastname
    * @param email email
@@ -69,15 +76,15 @@ public class JsonHandler {
    * @throws IllegalArgumentException if email is not unique
    * @throws Exception if not found file
    */
-  public User addUser(String firstname, String lastname, String email, String password) throws IllegalArgumentException, Exception {
+  public User addUser(String firstname, String lastname, String email, String password)
+      throws IllegalArgumentException, Exception {
     try {
       List<User> users = loadJsonUserList();
 
       for (User user : users) {
         if (user.getEmail().equals(email)) {
           throw new IllegalArgumentException(
-              "A user with this email already exists, please try another one"
-          );
+              "A user with this email already exists, please try another one");
         }
       }
       User newUser = new User(firstname, lastname, email, password);
@@ -85,61 +92,82 @@ public class JsonHandler {
       users.add(newUser);
       mapper.writeValue(new File(this.path + "users.json"), users);
       return newUser;
-    } catch (Exception e) {
+    } catch (IOException e) {
       throw new Exception(e);
     }
   }
 
-  public WishList addWishList(String name, User user) throws Exception {
+  /**
+   * Add wishList to JSON file.
+   *
+   * @param name name of wishlist
+   * @param user owner of wishlist
+   * @return wishList object created
+   * @throws Exception If user already has wishlist with that name or IO Exception
+   */
+  WishList addWishList(String name, User user) throws Exception {
     try {
-      WishList[] wishLists = loadJsonWishListList();
+
       List<WishList> ownedWishLists = user.getWishLists();
+      System.out.println("add wish");
+      System.out.println(ownedWishLists);
       for (WishList w : ownedWishLists) {
         if (w.getName().equals(name)) {
-          System.out.println(
-                  "This user already has a wish list with this name!"
-          );
+          throw new IllegalArgumentException("This user already has a wish list with this name!");
         }
       }
+      List<WishList> wishLists = loadJsonWishLists();
+      WishList newWishList = new WishList(name, user);
+      System.out.println("wishList");
+      System.out.println(newWishList);
+      ;
 
-      WishList newWishList = new WishList(name);
+      wishLists.add(newWishList);
 
-      ArrayList<WishList> wishListsList = new ArrayList<>(Arrays.asList(wishLists));
-
-      wishListsList.add(newWishList);
-
-      mapper.writeValue(this.toFile("wishLists"), wishListsList);
+      mapper.writeValue(this.toFile("wishLists.json"), wishLists);
       return newWishList;
-    } catch (Exception e) {
-      throw new Exception(e);
+    } catch (IOException e) {
+      throw new Exception();
     }
   }
 
-  public Wish addWish(String name, WishList wishList) throws Exception {
+  /**
+   * Add wish to wishList file.
+   *
+   * @param name name of wish
+   * @param wishList wishList to add wish in
+   * @return wish
+   * @throws Exception file not found
+   */
+  Wish addWish(String name, WishList wishList) throws Exception {
     try {
-      Wish[] wishes = loadJsonWishList();
       List<Wish> ownedWishes = wishList.getWishes();
       for (Wish w : ownedWishes) {
         if (w.getName().equals(name)) {
-          System.out.println(
-                  "This wish list already has a wish with this name!"
-          );
+          System.out.println("This wish list already has a wish with this name!");
         }
       }
 
+      List<Wish> wishes = this.loadJsonWishes();
       Wish newWish = new Wish(name);
 
-      ArrayList<Wish> wishesList = new ArrayList<>(Arrays.asList(wishes));
+      wishes.add(newWish);
 
-      wishesList.add(newWish);
-
-      mapper.writeValue(this.toFile("wishes"), wishesList);
+      mapper.writeValue(this.toFile("wishes.json"), wishes);
       return newWish;
     } catch (Exception e) {
       throw new Exception(e);
     }
   }
 
+  /**
+   * Load user with given email and password.
+   *
+   * @param email email of user
+   * @param password password of user
+   * @return user if he exists
+   * @throws Exception could not load file.
+   */
   public Optional<User> loadUser(String email, String password) throws Exception {
 
     try {
@@ -156,14 +184,15 @@ public class JsonHandler {
       throw new Exception(e);
     }
   }
-  public Optional<WishList> loadWishList(User user, String name) throws Exception {
 
+  Optional<WishList> loadWishList(String name, User user) throws Exception {
     try {
-      List<User> users = loadJsonUserList();
+      List<WishList> wishLists = loadJsonWishLists();
+      System.out.println(wishLists);
 
-      for (User u : users) {
-        if (u == user) {
-          return Optional.of(u.getWishList(name));
+      for (WishList w : wishLists) {
+        if (user.equals(w.getOwner()) && w.getName().equals(name)) {
+          return Optional.of(w);
         }
       }
       return Optional.empty();
@@ -175,19 +204,21 @@ public class JsonHandler {
 
   /**
    * Load wish from given file in "wishLists" in the this' path
+   *
    * @param wishList wishList to compare
    * @param name name of wish
    * @return wish if it exists
-   * @throws Exception
+   * @throws Exception file not found
    */
-  public Optional<Wish> loadWish(WishList wishList, String name) throws Exception {
+  Optional<Wish> loadWish(WishList wishList, String name) throws Exception {
 
     try {
-      WishList[] wishLists = loadJsonWishListList();
+      List<WishList> wishLists = this.loadJsonWishLists();
 
       for (WishList w : wishLists) {
-        if (w == wishList) {
-          return Optional.of(w.getWish(name));
+        if (w.getOwner().getEmail().equals(wishList.getOwner().getEmail())
+            && w.getName().equals(wishList.getName())) {
+          return w.getWish(name);
         }
       }
       return Optional.empty();

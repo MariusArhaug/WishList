@@ -14,7 +14,7 @@ class WishListTest {
     @BeforeEach
     void setUp() {
         john = new User("John", "Smith", "John.Smith@gmail.com", "!Password123");
-        wishList = new WishList(john, "Birthday");
+        wishList = new WishList("Birthday", john);
     }
 
     @AfterEach
@@ -26,13 +26,20 @@ class WishListTest {
     @Test
     void WishList() {
         assertThrows(IllegalArgumentException.class, () ->
-            new WishList(john, "")
+            new WishList("", john)
         );
         assertThrows(IllegalArgumentException.class, () ->
-            new WishList(john, "MoreThanTwentyFiveCharacters!")
+            new WishList("MoreThanTwentyFiveCharacters!", john)
         );
-        assertThrows(IllegalArgumentException.class, () ->
-            new WishList(null, "Wedding")
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            WishList wishList = new WishList("OneOwner", john);
+            wishList.setOwner(new User(
+                    "dave",
+                    "smith",
+                    "Dave.Smith@gmail.com",
+                    "!Password123"));
+            }
         );
     }
 
