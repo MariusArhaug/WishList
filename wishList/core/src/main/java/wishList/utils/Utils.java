@@ -22,7 +22,7 @@ public class Utils {
     return
         Arrays
         .stream(newPaths)
-        .reduce(addFileSeparatorAtEnd(path),
+        .reduce(removeFileSeparatorAtEnd(path),
             (finalPath, p) -> finalPath + getFileSeparator() + p)
         + getFileSeparator();
   }
@@ -33,7 +33,7 @@ public class Utils {
    * @return a string of file separator "/" linux , "\" windows etc
    *
    */
-  private static String getFileSeparator() {
+  public static String getFileSeparator() {
     return switch (os) {
       case "Windows" -> "\\";
       default -> "/";
@@ -42,10 +42,11 @@ public class Utils {
 
   /**
    * Check if path has file separator at end.
+   *
    * @param path path to be checked
    * @return true/false
    */
-  private static boolean hasFileSeparatorAtEnd(String path) {
+  public static boolean hasFileSeparatorAtEnd(String path) {
     return path.substring(path.length() - 1).equals(getFileSeparator());
   }
 
@@ -55,8 +56,12 @@ public class Utils {
    * @param path path to be updated
    * @return updated path
    */
-  private static String addFileSeparatorAtEnd(String path) {
+  public static String addFileSeparatorAtEnd(String path) {
     return hasFileSeparatorAtEnd(path) ? path : path + getFileSeparator();
+  }
+
+  public static String removeFileSeparatorAtEnd(String path) {
+    return hasFileSeparatorAtEnd(path) ? path.substring(path.length() - 1) : path;
   }
 
   /**
