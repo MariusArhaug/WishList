@@ -4,6 +4,9 @@ module wishList.core {
 
     exports wishList.core;
     exports wishList.json;
+    exports wishList.utils;
 
     opens wishList.core;
+    opens wishList.json;
+    opens wishList.utils;
 }

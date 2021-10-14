@@ -7,6 +7,7 @@ import wishList.json.JsonHandler;
 
 import java.io.IOException;
 
+/** Controller for RegisterView fxml file. */
 public class RegisterViewController extends AbstractController {
   @FXML protected TextField firstNameSignUp;
   @FXML protected TextField lastNameSignUp;
@@ -15,53 +16,64 @@ public class RegisterViewController extends AbstractController {
 
   private JsonHandler jsonHandler;
 
+  public RegisterViewController() {
+    jsonHandler = new JsonHandler(this.resourcesPath);
+  }
+
+  @Override
   @FXML
   public void initialize() {
-    this.jsonHandler = new JsonHandler();
+    this.jsonHandler = new JsonHandler("");
   }
 
   /**
    * Change scene to LoginView.fxml
+   *
    * @param event gets state
    * @throws IOException if file is not found
    */
+  @Override
   @FXML
   public void changeToLoginView(ActionEvent event) throws IOException {
-    this.changeScene("/wishList/ui/LoginView.fxml", event, this.user);
+    this.changeScene("LoginView.fxml", event, this.user);
   }
 
   /**
    * Change scene to ShowListView.fxml
+   *
    * @param event gets state
    * @throws IOException if file is not found
    */
   @Override
   public void changeToShowListView(ActionEvent event) throws IOException {
-    this.changeScene("/wishList/ui/ShowListView.fxml", event, this.user);
+    this.changeScene("ShowListView.fxml", event, this.user);
   }
-
 
   /**
    * Change scene to MainView.fxml
-   * @param event gets state
-   * @throws IOException if file is not found
-   */
-  public void changeToMainView(ActionEvent event) throws IOException {
-    this.changeScene("/wishList/ui/MainView.fxml", event, this.user);
-  }
-
-  /**
-   * Change scene to RegisterView.fxml
+   *
    * @param event gets state
    * @throws IOException if file is not found
    */
   @Override
-  public void changeToRegisterView(ActionEvent event) throws IOException{
-    this.changeScene("/wishList/ui/RegisterView.fxml", event, this.user);
+  public void changeToMainView(ActionEvent event) throws IOException {
+    this.changeScene("MainView.fxml", event, this.user);
   }
 
   /**
-   * Sign up user
+   * Change scene to RegisterView.fxml
+   *
+   * @param event gets state
+   * @throws IOException if file is not found
+   */
+  @Override
+  public void changeToRegisterView(ActionEvent event) throws IOException {
+    this.changeScene("RegisterView.fxml", event, this.user);
+  }
+
+  /**
+   * Sign up user.
+   *
    * @param event gets state
    */
   @FXML
@@ -83,13 +95,11 @@ public class RegisterViewController extends AbstractController {
     String password = passwordSignUp.getText();
 
     try {
-      this.updateUser(
-              jsonHandler.addUser(firstName, lastName, email, password)
-      );
+      this.updateUser(jsonHandler.addUser(firstName, lastName, email, password));
 
+      changeToMainView(event);
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
-
 }
