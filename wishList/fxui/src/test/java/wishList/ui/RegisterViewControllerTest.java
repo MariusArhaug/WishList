@@ -9,15 +9,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
-import wishList.core.User;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(ApplicationExtension.class)
 public class RegisterViewControllerTest extends ApplicationTest {
     private RegisterViewController controller;
-    private User user;
 
     @Override
     public void start(final Stage stage) throws Exception {
@@ -31,11 +29,10 @@ public class RegisterViewControllerTest extends ApplicationTest {
     @Test
     public void testController(){
         assertNotNull(this.controller);
-        assertNull(this.user);
     }
 
     @Test
-    public void verifyTextFields(FxRobot robot){
+    public void testCorrectUser(FxRobot robot){
         assertEquals(controller.emailSignUp.getText(), "");
         robot.clickOn("#emailSignUp");
         robot.write("abc");
@@ -62,4 +59,11 @@ public class RegisterViewControllerTest extends ApplicationTest {
         assertEquals(controller.lastNameSignUp.getText(), "ghi");
         assertEquals(controller.passwordSignUp.getText(), "jkl");
     }
+
+    /*
+    @Test
+    public void testFaultyInput(FxRobot robot){
+
+        //assertThrows(IllegalArgumentException.class, () -> robot.clickOn("#signup"));
+    } */
 }

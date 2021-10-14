@@ -11,7 +11,7 @@
       <TextField id="lastNameSignUp" fx:id="lastNameSignUp" layoutY="27.0" />
       <TextField id="emailSignUp" fx:id="emailSignUp" layoutY="52.0" />
       <TextField id="passwordSignUp" fx:id="passwordSignUp" layoutY="77.0" />
-      <Button id="signup" fx:id="signup" layoutY="102.0" mnemonicParsing="false" onAction="#registerUser" text="Sign up" />
+      <Button id="signup" fx:id="signup" layoutY="102.0" mnemonicParsing="false" text="Sign up" />
       <Button id="back" fx:id="back" layoutY="127.0" mnemonicParsing="false" onAction="#changeToLoginView" text="Back" />
    </children>
 </AnchorPane>

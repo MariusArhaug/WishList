@@ -81,7 +81,7 @@ public class LoginViewControllerTest extends ApplicationTest{
     }
 
     @Test
-    public void verifyTextFields(FxRobot robot){
+    public void testTextFields(FxRobot robot){
         assertEquals(controller.loginEmailInput.getText(), "");
         robot.clickOn("#loginEmailInput");
         robot.write("Hello");
