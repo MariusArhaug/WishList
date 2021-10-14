@@ -9,10 +9,10 @@ import java.io.IOException;
 
 /** Controller for RegisterView fxml file. */
 public class RegisterViewController extends AbstractController {
-  @FXML private TextField firstNameSignUp;
-  @FXML private TextField lastNameSignUp;
-  @FXML private TextField emailSignUp;
-  @FXML private TextField passwordSignUp;
+  @FXML protected TextField firstNameSignUp;
+  @FXML protected TextField lastNameSignUp;
+  @FXML protected TextField emailSignUp;
+  @FXML protected TextField passwordSignUp;
 
   private JsonHandler jsonHandler;
 
@@ -78,6 +78,16 @@ public class RegisterViewController extends AbstractController {
    */
   @FXML
   public void registerUser(ActionEvent event) {
+    try {
+      this.addUser(event);
+      changeToMainView(event);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  private void addUser(ActionEvent event) {
     String firstName = firstNameSignUp.getText();
     String lastName = lastNameSignUp.getText();
     String email = emailSignUp.getText();
