@@ -8,14 +8,17 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
-import wishList.core.User;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(ApplicationExtension.class)
 public class ShowListViewControllerTest extends ApplicationTest {
     private ShowListViewController controller;
 
+    /**
+     * Load test fxml file. Get controller from file
+     * @param stage
+     * @throws Exception if file is not found
+     */
     @Override
     public void start(final Stage stage) throws Exception {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("ShowListViewTest.fxml"));
@@ -25,6 +28,9 @@ public class ShowListViewControllerTest extends ApplicationTest {
         stage.show();
     }
 
+    /**
+     * Check that controller from fxml file is not null
+     */
     @Test
     public void testController(){
         assertNotNull(this.controller);

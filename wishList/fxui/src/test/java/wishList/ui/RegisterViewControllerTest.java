@@ -11,12 +11,17 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(ApplicationExtension.class)
 public class RegisterViewControllerTest extends ApplicationTest {
     private RegisterViewController controller;
 
+    /**
+     * Load the test fxml file that is connected to RegisterViewController
+     * Get controller, save as attribute
+     * @param stage
+     * @throws Exception if file is not found
+     */
     @Override
     public void start(final Stage stage) throws Exception {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterViewTest.fxml"));
@@ -26,11 +31,18 @@ public class RegisterViewControllerTest extends ApplicationTest {
         stage.show();
     }
 
+    /**
+     * Check that controller from fxml file is not null
+     */
     @Test
     public void testController(){
         assertNotNull(this.controller);
     }
 
+    /**
+     * Check that test fields work when input is correct
+     * @param robot executes operations in the GUI
+     */
     @Test
     public void testCorrectUser(FxRobot robot){
         assertEquals(controller.emailSignUp.getText(), "");
@@ -59,11 +71,4 @@ public class RegisterViewControllerTest extends ApplicationTest {
         assertEquals(controller.lastNameSignUp.getText(), "ghi");
         assertEquals(controller.passwordSignUp.getText(), "jkl");
     }
-
-    /*
-    @Test
-    public void testFaultyInput(FxRobot robot){
-
-        //assertThrows(IllegalArgumentException.class, () -> robot.clickOn("#signup"));
-    } */
 }

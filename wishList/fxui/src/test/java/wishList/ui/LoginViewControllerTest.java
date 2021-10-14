@@ -1,10 +1,8 @@
 package wishList.ui;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,13 +11,8 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
-import org.testfx.matcher.base.NodeMatchers;
-import org.testfx.matcher.control.ButtonMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 import wishList.core.User;
-import wishList.json.JsonHandler;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,6 +21,13 @@ public class LoginViewControllerTest extends ApplicationTest{
     private LoginViewController controller;
     private User user;
 
+    /**
+     *
+     * @param stage
+     * @throws Exception if file is not found
+     *
+     * Load fxml file, get controller from file
+     */
     @Override
     public void start(final Stage stage) throws Exception {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginViewTest.fxml"));
@@ -37,17 +37,27 @@ public class LoginViewControllerTest extends ApplicationTest{
         stage.show();
     }
 
+    /**
+     * Check if user is null
+     */
     @BeforeEach
     public void setup(){
         this.user = null;
     }
 
+    /**
+     * Test that attributes' states are correct
+     */
     @Test
     public void testController(){
         assertNotNull(this.controller);
         assertNull(this.user);
     }
 
+    /**
+     * Check that the label that displays error message works as planned
+     * @param robot executes operations in the GUI
+     */
     @Test
     public void verifyThatLabelChanges(FxRobot robot){
         FxAssert.verifyThat("#errorMessage", LabeledMatchers.hasText("Label"));
@@ -60,6 +70,12 @@ public class LoginViewControllerTest extends ApplicationTest{
         assertEquals(controller.errorMessage.getText(), "E-mail or password is incorrect");
     }
 
+    /**
+     * Test if existing user can be found in json file
+     * The user was added to file before the test
+     * @param robot executes the operations in the GUI
+     * @throws Exception
+     */
     @Test
     public void verifyThatUserExists(FxRobot robot) throws Exception {
         robot.clickOn("#loginEmailInput");
@@ -80,6 +96,10 @@ public class LoginViewControllerTest extends ApplicationTest{
 
     }
 
+    /**
+     * Test if text fields work correctly
+     * @param robot executes operations in the GUI
+     */
     @Test
     public void testTextFields(FxRobot robot){
         assertEquals(controller.loginEmailInput.getText(), "");
@@ -96,16 +116,4 @@ public class LoginViewControllerTest extends ApplicationTest{
         robot.clickOn("#login");
         assertEquals(controller.loginPasswordInput.getText(), "there");
     }
-
-    /*
-    @FXML Button newUserButton;
-
-    @Test
-    public void verifySignUpButton(){
-        //lagre en string og sjekk om den er lik knappen elns
-        //nei for det må registreres at man trykker på den
-        int isClicked = 0;
-        newUserButton.setOnAction(e -> (isClicked += 1));
-    } */
-
 }
