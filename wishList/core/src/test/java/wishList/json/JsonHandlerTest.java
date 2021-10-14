@@ -28,6 +28,12 @@ public class JsonHandlerTest {
   private Wish wish;
   private JsonHandler jsonHandler;
 
+  private static void resetFiles() throws Exception {
+    Utils.resetFile(testFolder, "users.json");
+    Utils.resetFile(testFolder, "wishes.json");
+    Utils.resetFile(testFolder, "wishLists.json");
+  }
+
   @BeforeEach
   void setUp() throws Exception {
     resetFiles();
@@ -46,10 +52,9 @@ public class JsonHandlerTest {
     jsonHandler = null;
   }
 
-  static void resetFiles() throws Exception {
-    Utils.resetFile(testFolder, "users.json");
-    Utils.resetFile(testFolder, "wishes.json");
-    Utils.resetFile(testFolder, "wishLists.json");
+  @Test
+  void getPathTest() {
+    assertEquals(testFolder, jsonHandler.getPath());
   }
 
   @Test
@@ -71,4 +76,20 @@ public class JsonHandlerTest {
     assertTrue(loadedUser.isPresent());
     assertEquals(user.getEmail(), loadedUser.get().getEmail());
   }
+
+  @Test
+  void addWishTest() {
+    Wish wishOne = new Wish("Chair");
+    WishList wishList = new WishList("Decorations");
+    wishList.addWish(wishOne);
+    user.addWishList(wishList);
+
+    assertThrows(IllegalArgumentException.class, () -> jsonHandler.addWish("Chair", wishList));
+    assertThrows(
+        IllegalArgumentException.class, () -> jsonHandler.addWishList("Decorations", user));
+    JsonHandler jsonHandler1 = new JsonHandler("");
+    assertThrows(Exception.class, () -> jsonHandler1.addWish("throw", wishList));
+    assertThrows(Exception.class, () -> jsonHandler1.addWishList("throw2", user));
+  }
+
 }

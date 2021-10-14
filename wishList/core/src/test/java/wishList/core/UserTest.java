@@ -1,17 +1,14 @@
 package wishList.core;
 
-import wishList.core.User;
-import wishList.core.WishList;
-import wishList.core.Wish;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
   private User john;
@@ -71,15 +68,13 @@ class UserTest {
     List<WishList> emptyOwnList = new ArrayList<>();
     assertEquals(john.getWishLists(), emptyOwnList);
     john.makeWishList("Baby shower");
-    assertEquals(
-        john.getWishLists().toString(),
-        "[Baby shower, John,Smith,John.Smith@gmail.com,!Password123, false]");
+    assertEquals("Baby shower", john.getWishLists().get(0).getName());
   }
 
   @Test
   void TestAddWish() {
-    WishList wishList = new WishList("Christmas", john);
-    john.makeWishList("Christmas");
+    WishList wishList = new WishList("Christmas");
+    john.addWishList(wishList);
 
     assertEquals(
         wishList.getWishes().toString(), john.getWishLists().get(0).getWishes().toString());
@@ -90,6 +85,16 @@ class UserTest {
 
     assertEquals(
         wishList.getWishes().toString(), john.getWishLists().get(0).getWishes().toString());
+
+    john.removeWishList("Christmas");
+    assertTrue(john.getWishLists().isEmpty());
+
+    WishList wishList2 = new WishList("Second wishes");
+    john.addWishList(wishList2);
+    assertTrue(john.getWishList("Second wishes").isPresent());
+    assertEquals(wishList2, john.getWishList("Second wishes").get());
+
+    assertEquals(john, wishList2.getOwner());
   }
 
   @Test
@@ -115,10 +120,37 @@ class UserTest {
 
   @Test
   void TestRemoveWishList() {
+    System.out.println(john.getWishLists());
     john.makeWishList("Christmas");
+    assertTrue(john.getWishList("Christmas").isPresent());
     assertThrows(
         IllegalCallerException.class, () -> jane.removeWishList(john.getWishLists().get(0)));
-    john.removeWishList(john.getWishLists().get(0));
-    assertEquals(john.getWishLists().toString(), "[]");
+    System.out.println(john.getWishLists());
+    john.removeWishList(john.getWishList("Christmas").get());
+    System.out.println(john.getWishLists());
+    assertTrue(john.getWishLists().isEmpty());
+
+    john.makeWishList("Dinner");
+    assertEquals("Dinner", john.getWishLists().get(0).getName());
+    john.removeWishList("Dinner");
+    assertTrue(john.getWishLists().isEmpty());
+  }
+
+  @Test
+  void testIterable() {
+    WishList wishList1 = new WishList("One");
+    WishList wishList2 = new WishList("Two");
+    WishList wishList3 = new WishList("Three");
+
+
+    john.addWishList(wishList1);
+    john.addWishList(wishList2);
+    john.addWishList(wishList3);
+
+    Iterator<WishList> iterator = john.iterator();
+    assertEquals(wishList1, iterator.next());
+    assertEquals(wishList2, iterator.next());
+    assertEquals(wishList3, iterator.next());
+
   }
 }

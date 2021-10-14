@@ -137,6 +137,7 @@ public class JsonHandler {
   Wish addWish(String name, WishList wishList) throws Exception {
     try {
       List<Wish> ownedWishes = wishList.getWishes();
+      System.out.println(ownedWishes);
       for (Wish w : ownedWishes) {
         if (w.getName().equals(name)) {
           throw new IllegalArgumentException("This wish list already has a wish with this name!");
@@ -151,7 +152,7 @@ public class JsonHandler {
 
       mapper.writeValue(this.toFile("wishList.json"), wishes);
       return newWish;
-    } catch (Exception e) {
+    } catch (IOException e) {
       throw new Exception(e);
     }
   }

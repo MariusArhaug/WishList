@@ -82,7 +82,7 @@ public class Utils {
               );
               PrintWriter pw = new PrintWriter(w)
       ) {
-        pw.println("[]");
+        pw.print("[]");
       }
     }
   }

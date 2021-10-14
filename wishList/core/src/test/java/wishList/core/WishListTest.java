@@ -7,6 +7,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class WishListTest {
@@ -77,5 +79,24 @@ class WishListTest {
         wishList.addWish(wish);
         wishList.removeWish(wishList.getWishes().get(0));
         assertEquals(wishList.getWishes().toString(), "[]");
+    }
+
+    @Test
+    void getWishTest() {
+        Wish wishOne = new Wish("Car");
+        Wish wishTwo = new Wish("Door");
+        Wish wishThree = new Wish("Ice");
+        wishList.addWish(wishOne);
+        wishList.addWish(wishTwo);
+        wishList.addWish(wishThree);
+
+
+        Optional<Wish> optionalWishOne= wishList.getWish("Car");
+        assertTrue(optionalWishOne.isPresent());
+
+        Optional<Wish> optionalWishTwo = wishList.getWish("Not here");
+        assertFalse(optionalWishTwo.isPresent());
+
+
     }
 }
