@@ -1,6 +1,7 @@
 package wishList.core;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,7 +10,7 @@ import java.util.stream.Collectors;
  * User class saves various user data such as: contacts list of {@link User} wish Lists of {@link
  * WishList}.
  */
-public class User {
+public class User implements Iterable<WishList> {
 
   private final List<WishList> wishLists = new ArrayList<>();
   private String email;
@@ -116,7 +117,7 @@ public class User {
    *
    * @param name name string
    */
-  public void makeWishList(String name) {
+  void makeWishList(String name) {
     if (!wishListsExist(name)) {
       this.wishLists.add(new WishList(name, this));
     }
@@ -127,7 +128,7 @@ public class User {
    *
    * @param name name string
    */
-  public void removeWishList(String name) {
+  void removeWishList(String name) {
     if (wishListsExist(name)) {
       this.wishLists.remove(
           this.wishLists.stream()
@@ -139,11 +140,11 @@ public class User {
 
   /**
    * Owner of wish list can remove it.
-
+   *
    * @param list Wish list to remove
    * @throws IllegalCallerException
    */
-  public void removeWishList(WishList list) throws IllegalCallerException {
+  void removeWishList(WishList list) throws IllegalCallerException {
     if (list.getOwner() != this) {
       throw new IllegalCallerException("You can only remove your own list!");
     }
@@ -159,7 +160,7 @@ public class User {
    * @param wishListName wish list to remove wish from
    * @param wishName wish to remove
    */
-  public void removeWish(String wishListName, String wishName) {
+  void removeWish(String wishListName, String wishName) {
     if (wishListsExist(wishListName)) {
       this.wishLists.stream()
           .filter(w -> w.getName().equals(wishListName))
@@ -193,7 +194,7 @@ public class User {
    * @param wishList wish list to add wish to
    * @param wish wish to add
    */
-  public void addWish(WishList wishList, Wish wish) {
+  void addWish(WishList wishList, Wish wish) {
     wishLists.stream().filter(wl -> wl.equals(wishList)).forEach(wl -> wl.addWish(wish));
   }
 
@@ -208,9 +209,14 @@ public class User {
    * @param name name of wishList
    * @return wishList
    */
-  public Optional<WishList> getWishList(String name) {
+  Optional<WishList> getWishList(String name) {
     return this.getWishLists().stream()
         .filter(wishList -> name.equals(wishList.getName()))
         .findAny();
+  }
+
+  @Override
+  public Iterator<WishList> iterator() {
+    return this.wishLists.iterator();
   }
 }

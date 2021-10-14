@@ -1,11 +1,12 @@
 package wishList.core;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 /** WishList object to hold information about wishes. */
-public class WishList {
+public class WishList implements Iterable<Wish> {
 
   private final List<Wish> wishes = new ArrayList<>();
   private String name;
@@ -57,7 +58,10 @@ public class WishList {
    * @return wishList
    * @throws IllegalArgumentException input is null or wishList already has owner
    */
-  public WishList setOwner(User owner) throws IllegalArgumentException {
+  WishList setOwner(User owner) throws IllegalArgumentException {
+    if (this.owner == owner) {
+      return this;
+    }
     if (this.owner != null) {
       throw new IllegalArgumentException("This wishlist already has a owner!");
     }
@@ -91,7 +95,7 @@ public class WishList {
     }
   }
 
-  boolean hasWish(Wish wish) {
+  private boolean hasWish(Wish wish) {
     return this.wishes.contains(wish);
   }
 
@@ -100,7 +104,7 @@ public class WishList {
    *
    * @param wish core.Wish to remove
    */
-  public void removeWish(Wish wish) {
+  void removeWish(Wish wish) {
     wishes.remove(wish);
   }
 
@@ -123,5 +127,10 @@ public class WishList {
       }
     }
     return Optional.empty();
+  }
+
+  @Override
+  public Iterator<Wish> iterator() {
+    return this.wishes.iterator();
   }
 }
