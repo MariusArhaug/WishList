@@ -13,9 +13,9 @@ import java.util.Optional;
 /** Controller for LoginView fxml file. */
 public class LoginViewController extends AbstractController {
   private final JsonHandler jsonHandler;
-  @FXML private TextField loginEmailInput;
-  @FXML private TextField loginPasswordInput;
-  @FXML private Label errorMessage;
+  @FXML protected TextField loginEmailInput;
+  @FXML protected TextField loginPasswordInput;
+  @FXML protected Label errorMessage;
 
   public LoginViewController() {
     jsonHandler = new JsonHandler(this.resourcesPath);
@@ -56,19 +56,35 @@ public class LoginViewController extends AbstractController {
   @Override
   @FXML
   public void changeToMainView(ActionEvent event) throws IOException {
+    if (this.checkUser()) {
+      this.changeScene("MainView.fxml", event, this.user);
+    } else {
+      errorMessage.setText("E-mail or password is incorrect");
+    }
+  }
+
+  /**
+   * Checks that user is present.
+   *
+   * @return true or false if user is present
+   */
+  boolean checkUser() {
     String email = loginEmailInput.getText();
     String password = loginPasswordInput.getText();
+
     try {
       Optional<User> tryUser = jsonHandler.loadUser(email, password);
+
       if (tryUser.isPresent()) {
         this.user = tryUser.get();
-        System.out.println(this.user.getFirstName());
-        this.changeScene("MainView.fxml", event, this.user);
+        return true;
       } else {
         errorMessage.setText("E-mail or password is incorrect");
+        return false;
       }
     } catch (Exception e) {
-      e.printStackTrace();
+      errorMessage.setText("E-mail or password incorrect");
+      return false;
     }
   }
 

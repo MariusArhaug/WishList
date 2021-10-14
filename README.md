@@ -1,16 +1,18 @@
 # Group gr2121 repository
 
-GitPod Link: [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121)
+GitPod
+Link: [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121)
 
-Test coverage: 
+Test coverage:
 [![coverage report](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121/badges/master/coverage.svg)](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121/-/commits/master)
 
-Pipeline status: 
+Pipeline status:
 [![pipeline status](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121/badges/master/pipeline.svg)](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121/-/commits/master)
 
 ## Modules
 
-The project is built with `maven` and to be structured using a modular style. Where you can the parent pom.xml file at the root of this repo.
+The project is built with `maven` and to be structured using a modular style. Where you can the parent pom.xml file at
+the root of this repo.
 
 Following sub-modules are:
 
@@ -100,17 +102,19 @@ wishList/fxui/src/main/resources
 
 ### JSON
 
-wishList/core/src/main/java/json
+wishList/core/src/main/java/wishList.json
 
-- [JsonHandler.java](./wishList/core/src/main/java/json/JsonHandler.java)
-- [JsonModule.java](./wishList/core/src/main/java/json/JsonModule.java)
-- [UserDeserializer.java](./wishList/core/src/main/java/json/UserDeserializer.java)
-- [UserSerializer.java](./wishList/core/src/main/java/json/UserSerializer.java)
-- [WishDeserializer.java](./wishList/core/src/main/java/json/WishDeserializer.java)
-- [WishListDeserializer.java](./wishList/core/src/main/java/json/WishListDeserializer.java)
-- [WishSerializer.java](./wishList/core/src/main/java/json/WishSerializer.java)
-- [WishListSerializer.java](./wishList/core/src/main/java/json/WishListSerializer.java)
+- [JsonHandler.java](./wishList/core/src/main/java/wishList.json/JsonHandler.java)
+- [JsonModule.java](./wishList/core/src/main/java/wishList.json/JsonModule.java)
+- [UserDeserializer.java](./wishList/core/src/main/java/wishList.json/UserDeserializer.java)
+- [UserSerializer.java](./wishList/core/src/main/java/wishList.json/UserSerializer.java)
+- [WishDeserializer.java](./wishList/core/src/main/java/wishList.json/WishDeserializer.java)
+- [WishListDeserializer.java](./wishList/core/src/main/java/wishList.json/WishListDeserializer.java)
+- [WishSerializer.java](./wishList/core/src/main/java/wishList.json/WishSerializer.java)
+- [WishListSerializer.java](./wishList/core/src/main/java/wishList.json/WishListSerializer.java)
 
 ## Dividing of FXML files and the use of multiple controllers
 
-In order to avoid a huge incomprehensible controller we have divided the controller into multiple smaller controllers. One for each FXML file to be exact. All the related JavaFX content for one scene in the app is grouped in its own controller.
+In order to avoid a huge incomprehensible controller we have divided the controller into multiple smaller controllers.
+One for each FXML file to be exact. All the related JavaFX content for one scene in the app is grouped in its own
+controller.
