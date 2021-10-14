@@ -84,7 +84,8 @@ public class User {
   }
 
   public List<WishList> getWishLists() {
-    return this.wishLists;
+    List<WishList> listToReturn = new ArrayList<>(this.wishLists);
+    return listToReturn;
   }
 
   /**
