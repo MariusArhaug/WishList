@@ -37,7 +37,7 @@ public class Wish {
   }
 
   /**
-   * Set wishList as parent to wish
+   * Set wishList as parent to wish.
    *
    * @param list wishList parent
    * @return this object

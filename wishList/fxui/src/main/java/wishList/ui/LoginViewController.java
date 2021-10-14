@@ -1,14 +1,13 @@
 package wishList.ui;
 
+import java.io.IOException;
+import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import wishList.core.User;
 import wishList.json.JsonHandler;
-
-import java.io.IOException;
-import java.util.Optional;
 
 /** Controller for LoginView fxml file. */
 public class LoginViewController extends AbstractController {

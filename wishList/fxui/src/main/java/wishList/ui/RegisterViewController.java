@@ -1,11 +1,10 @@
 package wishList.ui;
 
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import wishList.json.JsonHandler;
-
-import java.io.IOException;
 
 /** Controller for RegisterView fxml file. */
 public class RegisterViewController extends AbstractController {
