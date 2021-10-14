@@ -1,5 +1,7 @@
 package wishList.ui;
 
+import java.io.File;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -8,9 +10,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import wishList.core.User;
 import wishList.utils.Utils;
-
-import java.io.File;
-import java.io.IOException;
 
 /** Abstract controller with changeScene method that all other controllers inherits. */
 public abstract class AbstractController implements ViewChanger {
@@ -28,14 +27,13 @@ public abstract class AbstractController implements ViewChanger {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(AbstractController.class.getResource("/wishList/ui/" + fileName));
     Parent newParent = loader.load();
+    Scene newScene = new Scene(newParent);
+    Stage currentWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    currentWindow.setScene(newScene);
     AbstractController newController = loader.getController();
     this.user = user;
     newController.updateUser(this.user);
     newController.initialize();
-
-    Scene newScene = new Scene(newParent);
-    Stage currentWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    currentWindow.setScene(newScene);
     currentWindow.show();
   }
 }
