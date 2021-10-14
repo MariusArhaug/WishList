@@ -23,7 +23,7 @@ public class LoginViewControllerTest extends ApplicationTest{
 
     /**
      *
-     * @param stage
+     * @param stage stage
      * @throws Exception if file is not found
      *
      * Load fxml file, get controller from file

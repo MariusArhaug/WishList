@@ -78,17 +78,16 @@ public class RegisterViewController extends AbstractController {
    */
   @FXML
   public void registerUser(ActionEvent event) {
-    try{
-      this.addUser();
+    try {
+      this.addUser(event);
       changeToMainView(event);
 
-    } catch (Exception e){
+    } catch (Exception e) {
       e.printStackTrace();
     }
-
   }
 
-  public void addUser(){
+  private void addUser(ActionEvent event) {
     String firstName = firstNameSignUp.getText();
     String lastName = lastNameSignUp.getText();
     String email = emailSignUp.getText();

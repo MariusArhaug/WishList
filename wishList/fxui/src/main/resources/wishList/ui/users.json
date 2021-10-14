@@ -26,5 +26,13 @@
     "email": "axelegkor@gmail.com",
     "password": "noe123",
     "wishLists": []
+  },
+  {
+    "firstname": "Jane",
+    "lastname": "Doe",
+    "email": "jane@doe",
+    "password": "qwerty",
+    "wishLists": []
+
   }
 ]
