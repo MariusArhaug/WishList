@@ -4,7 +4,9 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-
+/**
+ * Interface ViewChanger.
+ */
 public interface ViewChanger {
 
   @FXML
