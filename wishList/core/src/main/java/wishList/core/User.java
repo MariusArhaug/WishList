@@ -85,7 +85,7 @@ public class User implements Iterable<WishList> {
   }
 
   public List<WishList> getWishLists() {
-    return this.wishLists;
+    return new ArrayList<>(this.wishLists);
   }
 
   /**
