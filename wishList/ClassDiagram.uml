@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>C:/Programmering/gr2121/wishList</OriginalElement>
+  <nodes>
+    <node x="444.0" y="1456.0">wishList.json.WishDeserializer</node>
+    <node x="0.0" y="1076.0">wishList.json.WishListSerializerTest</node>
+    <node x="998.0" y="1456.0">wishList.json.WishListSerializer</node>
+    <node x="1073.0" y="776.0">wishList.utils.Utils</node>
+    <node x="957.0" y="1076.0">wishList.ui.ViewChanger</node>
+    <node x="1339.0" y="1288.0">wishList.ui.ShowListViewControllerTest</node>
+    <node x="194.0" y="454.0">wishList.json.WishDeserializerTest</node>
+    <node x="587.0" y="0.0">wishList.json.JsonHandler</node>
+    <node x="741.0" y="1602.0">wishList.json.JsonModule</node>
+    <node x="1184.0" y="454.0">wishList.ui.LoginViewController</node>
+    <node x="0.0" y="1288.0">wishList.ui.AbstractController</node>
+    <node x="0.0" y="776.0">wishList.core.WishList</node>
+    <node x="0.0" y="0.0">wishList.core.User</node>
+    <node x="472.0" y="1076.0">wishList.json.UserSerializerTest</node>
+    <node x="304.0" y="0.0">wishList.core.UserTest</node>
+    <node x="877.0" y="776.0">wishList.core.WishTest</node>
+    <node x="524.0" y="454.0">wishList.json.UserDeserializerTest</node>
+    <node x="806.0" y="1456.0">wishList.ui.WishListApp</node>
+    <node x="0.0" y="454.0">wishList.core.WishListTest</node>
+    <node x="252.0" y="1456.0">wishList.core.Wish</node>
+    <node x="326.0" y="1288.0">wishList.ui.RegisterViewControllerTest</node>
+    <node x="924.0" y="0.0">wishList.ui.RegisterViewController</node>
+    <node x="599.0" y="1288.0">wishList.json.WishListDeserializer</node>
+    <node x="267.0" y="776.0">wishList.ui.MainViewController</node>
+    <node x="0.0" y="1456.0">wishList.ui.MainViewControllerTest</node>
+    <node x="580.0" y="776.0">wishList.ui.LoginViewControllerTest</node>
+    <node x="0.0" y="1602.0">wishList.json.WishSerializer</node>
+    <node x="689.0" y="1076.0">wishList.utils.UtilsTest</node>
+    <node x="979.0" y="1288.0">wishList.json.UserDeserializer</node>
+    <node x="372.0" y="1602.0">wishList.json.UserSerializer</node>
+    <node x="1270.0" y="1076.0">wishList.ui.ShowListViewController</node>
+    <node x="1237.0" y="0.0">wishList.json.JsonHandlerTest</node>
+    <node x="236.0" y="1076.0">wishList.json.WishSerializerTest</node>
+    <node x="854.0" y="454.0">wishList.json.WishListDeserializerTest</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic" zoom="0.7080452920143029" showDependencies="false" x="296.55744465954035" y="295.7713997138287" />
+  <SelectedNodes>
+    <node>wishList.core.UserTest</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
