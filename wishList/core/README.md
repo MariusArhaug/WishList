@@ -26,7 +26,10 @@ Where each class has its own **Serializer** and **Deserializer** such as:
 These serializers/deserializers are then being used in the `JsonModule.java` file to tell **Jackson** how to save/load
 these objects.
 
+# Main/Utils
+
+When we have simple problems we want to solve like checking if a path has a separator at the end, it is simpler to create pure functions that does not recreate any side-effects and that behave in a deterministic manner. This is what the class `Utils.java` achieves. its more like an module than a class. And ith static methods we achieve this functional behaviour. Some methods are used to create paths from another given patch, and this in turn makes it able to be run wether you are using a Windows OS or Linux OS.  
+
 # Test
 
-Some simple unit tests have been made for our three classes respectively. Each tests is declared with a descriptive
-method name and only tests a few cases per tests as to make the code easy to read and maintain.
+Tests have also been splitt into their own packages reflecting how its done in the main folder. The goal is to cover as much code as possible with the tests. 
