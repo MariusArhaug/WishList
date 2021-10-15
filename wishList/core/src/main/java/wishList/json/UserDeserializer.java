@@ -10,7 +10,7 @@ import java.io.IOException;
 import wishList.core.User;
 import wishList.core.WishList;
 
-/*
+/**
 Deserialize user JSON object into Java User object.
  */
 public class UserDeserializer extends JsonDeserializer<User> {

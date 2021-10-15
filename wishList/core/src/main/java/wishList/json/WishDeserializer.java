@@ -7,6 +7,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.io.IOException;
 import wishList.core.Wish;
 
+/**
+ * Wish deserializer from JSON.
+ */
 public class WishDeserializer extends JsonDeserializer<Wish> {
   /**
    * Deserialize wish from JSON.

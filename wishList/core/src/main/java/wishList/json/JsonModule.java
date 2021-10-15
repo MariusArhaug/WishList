@@ -6,10 +6,12 @@ import wishList.core.User;
 import wishList.core.Wish;
 import wishList.core.WishList;
 
+/** Json Module for adding serializers/deserializers. */
 public class JsonModule extends SimpleModule {
 
   private static final String NAME = "JSON_MODULE";
 
+  /** constructor. */
   public JsonModule() {
     super(NAME, Version.unknownVersion());
     addSerializer(User.class, new UserSerializer());

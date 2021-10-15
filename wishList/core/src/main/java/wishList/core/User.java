@@ -140,8 +140,9 @@ public class User implements Iterable<WishList> {
   /**
    * Owner of wish list can remove it.
    *
-   * @param list Wish list to remove
-   * @throws IllegalCallerException
+   * @param list Wishlist to remove
+   *
+   * @throws IllegalCallerException if you try to remove wishlist that you don't own.
    */
   void removeWishList(WishList list) throws IllegalCallerException {
     if (list.getOwner() != this) {
