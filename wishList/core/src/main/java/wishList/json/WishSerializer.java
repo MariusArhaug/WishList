@@ -7,7 +7,9 @@ import java.io.IOException;
 import wishList.core.Wish;
 
 
-
+/**
+ * Class WishSerializer. It extends JsonSerializer.
+ */
 public class WishSerializer extends JsonSerializer<Wish> {
   @Override
   public void serialize(
