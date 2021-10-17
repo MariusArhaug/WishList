@@ -13,7 +13,7 @@ public class RegisterViewController extends AbstractController {
   @FXML protected TextField emailSignUp;
   @FXML protected TextField passwordSignUp;
 
-  private JsonHandler jsonHandler;
+  private final JsonHandler jsonHandler;
 
   public RegisterViewController() {
     jsonHandler = new JsonHandler(this.resourcesPath);
@@ -22,7 +22,7 @@ public class RegisterViewController extends AbstractController {
   @Override
   @FXML
   public void initialize() {
-    this.jsonHandler = new JsonHandler("");
+
   }
 
   /**
