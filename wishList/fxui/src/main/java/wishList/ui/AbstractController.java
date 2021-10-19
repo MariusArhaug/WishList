@@ -16,8 +16,8 @@ public abstract class AbstractController implements ViewChanger {
 
   User user;
   public final String resourcesPath =
-      Utils.updatePathForAnyOs(
-          new File("").getAbsolutePath(), "src", "main", "resources", "wishList", "ui");
+          Utils.updatePathForAnyOs(
+                  new File("").getAbsolutePath(), "src", "main", "resources", "wishList", "ui");
 
   void updateUser(User user) {
     this.user = user;

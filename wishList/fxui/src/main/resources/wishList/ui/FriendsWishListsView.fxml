@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="" prefHeight="441.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.MainViewController">
+   <children>
+      <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#closeApp" style="-fx-background-color: black;" text="Sign out" textFill="WHITE" />
+      <Button id="yourWishLists" fx:id="yourWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Your wish lists" textFill="WHITE" />
+      <Button id="yourFriends" fx:id="yourFriends" layoutX="120.0" layoutY="402.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Your friends" textFill="WHITE" />
+      <Label layoutX="62.0" layoutY="23.0" text="Your friends' wish lists">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <ScrollPane hbarPolicy="NEVER" layoutX="-1.0" layoutY="54.0" prefHeight="333.0" prefWidth="320.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="333.0" prefWidth="319.0">
+               <children>
+                  <TableView id="friendsWishListTable" fx:id="friendsWishListTable" prefHeight="334.0" prefWidth="320.0">
+                    <columns>
+                      <TableColumn id="wishListNameColumn" fx:id="wishListNameColumn" prefWidth="159.20001524686813" text="Wish list name" />
+                      <TableColumn id="ownerColumn" fx:id="ownerColumn" prefWidth="159.99998474121094" text="Owner" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

@@ -5,13 +5,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="277.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="wishList.ui.RegisterViewController">
+<AnchorPane prefHeight="400.0" prefWidth="277.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.RegisterViewController">
    <TextField id="firstNameSignUp" fx:id="firstNameSignUp" layoutX="69.0" layoutY="80.0" />
    <TextField id="lastNameSignUp" fx:id="lastNameSignUp" layoutX="69.0" layoutY="140.0" />
    <TextField id="emailSignUp" fx:id="emailSignUp" layoutX="69.0" layoutY="200.0" />
    <TextField id="passwordSignUp" fx:id="passwordSignUp" layoutX="69.0" layoutY="255.0" />
-   <Button id="backToLogIn" layoutX="16.0" layoutY="21.0" mnemonicParsing="false" onAction="#changeToLoginView" text="⬅" />
-   <Button id="signUpButton" layoutX="113.0" layoutY="300.0" mnemonicParsing="false" onAction="#registerUser" text="Sign up" />
+   <Button id="backToLogIn" fx:id="backToLogin" cancelButton="true" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeToLoginView" style="-fx-background-color: black;" text="⬅" textFill="WHITE" />
+   <Button id="signUpButton" fx:id="signUpButton" layoutX="113.0" layoutY="300.0" mnemonicParsing="false" onAction="#registerUser" style="-fx-background-color: black;" text="Sign up" textFill="WHITE" />
    <Label layoutX="69.0" layoutY="63.0" prefHeight="17.0" prefWidth="86.0" text="First name:" />
    <Label layoutX="69.0" layoutY="123.0" text="Last name:" />
    <Label layoutX="69.0" layoutY="183.0" text="E-mail:" />

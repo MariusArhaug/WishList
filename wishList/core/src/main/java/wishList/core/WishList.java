@@ -58,10 +58,7 @@ public class WishList implements Iterable<Wish> {
    * @return wishList
    * @throws IllegalArgumentException input is null or wishList already has owner
    */
-  WishList setOwner(User owner) throws IllegalArgumentException {
-    if (this.owner == owner) {
-      return this;
-    }
+  public WishList setOwner(User owner) throws IllegalArgumentException {
     if (this.owner != null) {
       throw new IllegalArgumentException("This wishlist already has a owner!");
     }
