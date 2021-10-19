@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="291.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.LoginViewController">
-   <TextField id="loginEmailInput" fx:id="loginEmailInput" layoutX="70.0" layoutY="132.0" />
-   <TextField id="loginPasswordInput" fx:id="loginPasswordInput" layoutX="71.0" layoutY="180.0" />
-   <Label layoutX="31.0" layoutY="136.0" text="E-mail:" />
-   <Label layoutX="14.0" layoutY="184.0" text="Password:" />
-   <Button id="logInButton" layoutX="111.0" layoutY="244.0" mnemonicParsing="false" onAction="#changeToMainView" prefHeight="25.0" prefWidth="66.0" text="Log in" />
-   <Button id="newUserButton" layoutX="111.0" layoutY="292.0" mnemonicParsing="false" onAction="#changeToRegisterView" prefHeight="25.0" prefWidth="66.0" text="New user" />
+<AnchorPane prefHeight="400.0" prefWidth="291.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="wishList.ui.LoginViewController">
+   <TextField id="loginEmailInput" fx:id="loginEmailInput" layoutX="87.0" layoutY="139.0" />
+   <TextField id="loginPasswordInput" fx:id="loginPasswordInput" layoutX="88.0" layoutY="187.0" />
+   <Label layoutX="48.0" layoutY="143.0" text="E-mail:" />
+   <Label layoutX="31.0" layoutY="191.0" text="Password:" />
+   <Button id="logInButton" fx:id="logInButton" layoutX="111.0" layoutY="244.0" mnemonicParsing="false" onAction="#changeToMainView" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: black;" text="Log in" textFill="WHITE" />
+   <Button id="newUserButton" fx:id="newUserButton" layoutX="111.0" layoutY="292.0" mnemonicParsing="false" onAction="#changeToRegisterView" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: black;" text="New user" textFill="WHITE" />
    <Label layoutX="89.0" layoutY="44.0" text="Wishlist">
       <font>
          <Font size="33.0" />

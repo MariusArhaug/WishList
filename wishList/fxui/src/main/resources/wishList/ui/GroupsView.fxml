@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="" prefHeight="441.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.MainViewController">
+   <children>
+      <Button id="makeNewGroup" fx:id="makeNewGroup" layoutX="99.0" layoutY="88.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: black;" text="Make new group" textFill="WHITE" />
+      <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#closeApp" style="-fx-background-color: black;" text="Sign out" textFill="WHITE" />
+      <Button id="friendWishLists" fx:id="friendWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Friends’ wish lists" textFill="WHITE" />
+      <Button id="yourFriends" fx:id="yourFriends" layoutX="127.0" layoutY="402.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Your friends" textFill="WHITE" />
+      <Label id="wishListName" fx:id="wishListName" layoutX="29.0" layoutY="130.0" text="Your groups:" />
+      <Label layoutX="27.0" layoutY="55.0" prefHeight="26.0" prefWidth="266.0" text="Choose a group or make a new one!">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Label layoutX="55.0" layoutY="14.0" text="Share wish list with friends">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button id="backToShowListView" fx:id="backToShowListView" cancelButton="true" layoutX="13.0" layoutY="15.0" mnemonicParsing="false" style="-fx-background-color: black;" text="⬅" textFill="WHITE" />
+      <ScrollPane hbarPolicy="NEVER" layoutX="-1.0" layoutY="148.0" prefHeight="244.0" prefWidth="320.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="242.0" prefWidth="321.0">
+               <children>
+                  <ListView id="groupNamesTable" fx:id="groupNamesTable" prefHeight="244.0" prefWidth="320.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

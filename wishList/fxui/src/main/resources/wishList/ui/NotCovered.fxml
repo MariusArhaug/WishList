@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="" prefHeight="138.0" prefWidth="235.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.MainViewController">
+   <children>
+      <Label id="notCoveredWishName" fx:id="notCoveredWishName" alignment="CENTER" layoutX="48.0" layoutY="28.0" prefHeight="30.0" prefWidth="138.0" text="#wish" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button id="exitCover" fx:id="exitCover" layoutX="194.0" layoutY="17.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" style="-fx-background-color: black;" text="X" textFill="WHITE" />
+      <Button id="coverThisWish" fx:id="coverThisWish" layoutX="70.0" layoutY="78.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Cover this wish" textFill="WHITE" />
+   </children>
+</AnchorPane>
