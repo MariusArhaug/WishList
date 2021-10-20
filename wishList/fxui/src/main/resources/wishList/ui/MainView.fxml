@@ -9,11 +9,11 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="addList" prefHeight="441.0" prefWidth="320.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="wishList.ui.MainViewController">
-   <Button id="addNewList" fx:id="addNewList" layoutX="185.0" layoutY="94.0" mnemonicParsing="false" onAction="#updateMainView" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: black;" text="Make new wish list" textFill="WHITE" />
+   <Button id="addNewList" fx:id="addNewList" layoutX="185.0" layoutY="94.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: black;" text="Make new wish list" textFill="WHITE" />
    <Label layoutX="29.0" layoutY="130.0" text="Your wish lists:" />
-   <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#closeApp" style="-fx-background-color: black;" text="Sign out" textFill="WHITE" />
-   <Button id="friendWishLists" fx:id="friendWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Friends’ wish lists" textFill="WHITE" />
-   <Button id="yourFriends" fx:id="yourFriends" layoutX="127.0" layoutY="402.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Your friends" textFill="WHITE" />
+   <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#signOut" style="-fx-background-color: black;" text="Sign out" textFill="WHITE" />
+   <Button id="friendWishLists" fx:id="friendWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToFriendsWishListsView" style="-fx-background-color: black;" text="Friends’ wish lists" textFill="WHITE" />
+   <Button id="yourFriends" fx:id="yourFriends" layoutX="127.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToFriendsView" style="-fx-background-color: black;" text="Your friends" textFill="WHITE" />
    <TextField id="addNewListField" fx:id="addNewListField" layoutX="27.0" layoutY="94.0" />
    <Label layoutX="27.0" layoutY="77.0" prefHeight="17.0" prefWidth="121.0" text="Name of wish list:" />
    <Label layoutX="27.0" layoutY="26.0" text="Welcome,">

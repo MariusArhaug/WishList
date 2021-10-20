@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="" prefHeight="138.0" prefWidth="235.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.MainViewController">
+<AnchorPane fx:id="" prefHeight="138.0" prefWidth="235.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.CoveredController">
    <children>
       <Label id="coveredWishName" fx:id="coveredWishName" alignment="CENTER" layoutX="43.0" layoutY="28.0" prefHeight="30.0" prefWidth="148.0" text="#wish" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Button id="exitCover" fx:id="exitCover" layoutX="194.0" layoutY="17.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="26.0" style="-fx-background-color: black;" text="X" textFill="WHITE" />
+      <Button id="exitCover" fx:id="exitCover" layoutX="194.0" layoutY="17.0" mnemonicParsing="false" onAction="#changeToFriendsWishesView" prefHeight="26.0" prefWidth="26.0" style="-fx-background-color: black;" text="X" textFill="WHITE" />
       <Label layoutX="17.0" layoutY="77.0" text="This wish is covered by someone else!" />
    </children>
 </AnchorPane>
