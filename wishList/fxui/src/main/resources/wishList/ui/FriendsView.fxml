@@ -8,12 +8,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="" prefHeight="441.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.MainViewController">
+<AnchorPane fx:id="" prefHeight="441.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.FriendsViewController">
    <children>
       <Button id="addNewFriendButton" fx:id="addNewFriendButton" layoutX="185.0" layoutY="94.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: black;" text="Add new friend" textFill="WHITE" />
-      <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#closeApp" style="-fx-background-color: black;" text="Sign out" textFill="WHITE" />
-      <Button id="yourWishLists" fx:id="yourWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Your wish lists" textFill="WHITE" />
-      <Button id="friendsWishLists" fx:id="friendsWishLists" layoutX="120.0" layoutY="402.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Friends' wish list" textFill="WHITE" />
+      <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#signOut" style="-fx-background-color: black;" text="Sign out" textFill="WHITE" />
+      <Button id="yourWishLists" fx:id="yourWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToMainView" style="-fx-background-color: black;" text="Your wish lists" textFill="WHITE" />
+      <Button id="friendsWishLists" fx:id="friendsWishLists" layoutX="120.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToFriendsWishListsView" style="-fx-background-color: black;" text="Friends' wish list" textFill="WHITE" />
       <Label id="wishListName" fx:id="wishListName" layoutX="29.0" layoutY="130.0" text="Friends:" />
       <TextField id="friendEmailField" fx:id="friendEmailField" layoutX="27.0" layoutY="94.0" />
       <Label layoutX="27.0" layoutY="77.0" prefHeight="18.0" prefWidth="150.0" text="Email:" />

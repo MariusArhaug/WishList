@@ -7,8 +7,7 @@ FXUI has the following classes:
 
 - **WishListApp** : Starts the program; Launch FXML and controllers.
 
-- **AbstractController**: A main controller tha implements changeView methods from the interface **
-  wishList.ui.ViewChanger**
+- **AbstractController**: A main controller that has all the cunctions to change betwwen FXML scenes.
 
 - **LoginViewController**: Controller for login scene, that sends user input to **JsonHandler** to checks if
   the user exists or not and then decides to whether let users go to main scene or not.

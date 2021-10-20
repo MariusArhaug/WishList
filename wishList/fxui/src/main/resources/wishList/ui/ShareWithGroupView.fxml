@@ -7,19 +7,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="" prefHeight="441.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.MainViewController">
+<AnchorPane fx:id="" prefHeight="441.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.ShareWithGroupViewController">
    <children>
       <Button id="shareListButton" fx:id="shareListButton" contentDisplay="CENTER" layoutX="106.0" layoutY="61.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="107.0" style="-fx-background-color: black;" text="Share wish list with this group" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
-      <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#closeApp" style="-fx-background-color: black;" text="Sign out" textFill="WHITE" />
-      <Button id="friendWishLists" fx:id="friendWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Friends’ wish lists" textFill="WHITE" />
-      <Button id="yourFriends" fx:id="yourFriends" layoutX="127.0" layoutY="402.0" mnemonicParsing="false" style="-fx-background-color: black;" text="Your friends" textFill="WHITE" />
+      <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#signOut" style="-fx-background-color: black;" text="Sign out" textFill="WHITE" />
+      <Button id="friendWishLists" fx:id="friendWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToFriendsWishListsView" style="-fx-background-color: black;" text="Friends’ wish lists" textFill="WHITE" />
+      <Button id="yourFriends" fx:id="yourFriends" layoutX="127.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToFriendsView" style="-fx-background-color: black;" text="Your friends" textFill="WHITE" />
       <Label id="wishListName" fx:id="wishListName" layoutX="29.0" layoutY="130.0" text="Members in this group:" />
       <Label layoutX="55.0" layoutY="14.0" text="Share wish list with friends">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button id="backToGroupsView" fx:id="backToGroupsView" cancelButton="true" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" style="-fx-background-color: black;" text="⬅" textFill="WHITE" />
+      <Button id="backToGroupsView" fx:id="backToGroupsView" cancelButton="true" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#changeToGroupsView" style="-fx-background-color: black;" text="⬅" textFill="WHITE" />
       <ScrollPane hbarPolicy="NEVER" layoutY="148.0" prefHeight="246.0" prefWidth="320.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="246.0" prefWidth="318.0">
