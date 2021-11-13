@@ -33,13 +33,12 @@ public class RegisterViewController extends AbstractController {
     try {
       this.addUser(event);
       changeToMainView(event);
-
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
-  private void addUser(ActionEvent event) {
+  private void addUser(ActionEvent event) throws Exception {
     String firstName = firstNameSignUp.getText();
     String lastName = lastNameSignUp.getText();
     String email = emailSignUp.getText();
@@ -47,9 +46,8 @@ public class RegisterViewController extends AbstractController {
 
     try {
       this.updateUser(jsonHandler.addUser(firstName, lastName, email, password));
-
       changeToMainView(event);
-    } catch (Exception e) {
+    } catch (IllegalArgumentException e) {
       e.printStackTrace();
     }
   }

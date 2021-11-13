@@ -26,13 +26,12 @@ public class LoginViewController extends AbstractController {
    *
    * @return true or false if user is present
    */
-  boolean checkUser() {
+  public boolean checkUser() {
     String email = loginEmailInput.getText();
     String password = loginPasswordInput.getText();
 
     try {
       Optional<User> tryUser = jsonHandler.loadUser(email, password);
-
       if (tryUser.isPresent()) {
         this.user = tryUser.get();
         return true;

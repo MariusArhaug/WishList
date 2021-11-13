@@ -4,13 +4,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class WishTest {
   private User john;
   private User jane;
   private WishList wishList;
+  private WishList element;
 
   @BeforeEach
   void setUp() {
@@ -24,19 +24,20 @@ class WishTest {
     wishList = null;
     jane = null;
     john = null;
+    element = null;
   }
 
   @Test
   void Wish() {
     assertThrows(IllegalArgumentException.class, () -> new Wish(""));
-    assertThrows(IllegalArgumentException.class, () -> new Wish("MoreThanTwentyFiveCharacters!"));
   }
 
   @Test
   void getWish() {
     jane.makeWishList("Moving party");
-    jane.getWishLists().get(0).addWish(new Wish("Surf board"));
-    assertEquals(jane.getWishLists().get(0).getWishes().get(0).getName(), "Surf board");
+    WishList element = jane.iterator().next();
+    element.addWish(new Wish("Surf board"));
+    assertEquals(element.getWishes().get(0).getName(), "Surf board");
   }
 
   @Test

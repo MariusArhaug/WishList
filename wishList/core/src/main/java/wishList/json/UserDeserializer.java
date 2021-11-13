@@ -7,6 +7,9 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import wishList.core.User;
 import wishList.core.WishList;
 
@@ -44,13 +47,48 @@ public class UserDeserializer extends JsonDeserializer<User> {
     String email = node.get("email").asText();
     String password = node.get("password").asText();
     User newUser = new User(firstName, lastName, email, password);
-    JsonNode wishListsNode = node.get("wishLists");
-    if (wishListsNode instanceof ArrayNode && loadDetails) {
-      for (JsonNode wishListNode : wishListsNode) {
-        WishList wishList = wishListDeserializer.deserializeWishList(wishListNode);
+    JsonNode ownedWishListsNode = node.get("ownedWishLists");
+    if (ownedWishListsNode instanceof ArrayNode && loadDetails) {
+      for (JsonNode ownedWishListNode : ownedWishListsNode) {
+        WishList wishList = wishListDeserializer.deserializeWishList(ownedWishListNode);
         if (wishList != null) {
           newUser.addWishList(wishList);
         }
+      }
+    }
+    JsonNode invitedWishListsNode = node.get("invitedWishLists");
+    if (invitedWishListsNode instanceof ArrayNode && loadDetails) {
+      for (JsonNode initedWishListNode : invitedWishListsNode) {
+        WishList wishList = wishListDeserializer.deserializeWishList(initedWishListNode);
+        if (wishList != null) {
+          newUser.getInvitedWishLists().add(wishList);
+        }
+      }
+    }
+    JsonNode groupsNode = node.get("wishListGroups");
+    if (groupsNode instanceof ArrayNode && loadDetails) {
+      for (JsonNode groupNode : groupsNode) {
+        List<User> group = new ArrayList<>();
+        for (JsonNode groupMember : groupNode) {
+          String firstNameMember = groupMember.get("firstName").asText();
+          String lastNameMember = groupMember.get("lastName").asText();
+          String emailMember = groupMember.get("email").asText();
+          String passwordMember = groupMember.get("password").asText();
+          User member = new User(firstNameMember, lastNameMember, emailMember, passwordMember);
+          group.add(member);
+        }
+        newUser.getWishListGroups().add(group);
+      }
+    }
+    JsonNode contactsNode = node.get("contacts");
+    if (contactsNode instanceof ArrayNode && loadDetails) {
+      for (JsonNode contactNode : contactsNode) {
+        String firstNameContact = contactNode.get("firstName").asText();
+        String lastNameContact = contactNode.get("lastName").asText();
+        String emailContact = contactNode.get("email").asText();
+        String passwordContact = contactNode.get("password").asText();
+        User contact = new User(firstNameContact, lastNameContact, emailContact, passwordContact);
+        newUser.addContact(contact);
       }
     }
     return newUser;
