@@ -32,9 +32,6 @@ class WishListTest {
         assertThrows(IllegalArgumentException.class, () ->
             new WishList("", john)
         );
-        assertThrows(IllegalArgumentException.class, () ->
-            new WishList("MoreThanTwentyFiveCharacters!", john)
-        );
 
         assertThrows(IllegalArgumentException.class, () -> {
             WishList wishList = new WishList("OneOwner", john);

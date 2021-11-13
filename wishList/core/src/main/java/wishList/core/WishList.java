@@ -11,25 +11,31 @@ public class WishList implements Iterable<Wish> {
   private final List<Wish> wishes = new ArrayList<>();
   private String name;
   private User owner;
-  private boolean hideInfoFromOwner;
 
+  /**
+   * Empty constructor for json test purposes.
+   */
   public WishList() {}
 
   public WishList(String name) {
     this.setName(name);
   }
 
-  public WishList(String name, User user) {
-    this(name);
-    this.setOwner(user);
+  public WishList(String name, User owner) {
+    this.setName(name).setOwner(owner);
   }
 
   public List<Wish> getWishes() {
-    return this.wishes;
+    List<Wish> copy = new ArrayList<>(this.wishes);
+    return copy;
   }
 
   public String getName() {
     return this.name;
+  }
+
+  public User getOwner() {
+    return this.owner;
   }
 
   /**
@@ -40,15 +46,11 @@ public class WishList implements Iterable<Wish> {
    * @throws IllegalArgumentException if name is not sufficient
    */
   public WishList setName(String name) throws IllegalArgumentException {
-    if (name.length() == 0 || name.length() > 25) {
-      throw new IllegalArgumentException("The name can not be empty or surpass 25 character!");
+    if (name.length() == 0) {
+      throw new IllegalArgumentException("The name can not be empty!");
     }
     this.name = name;
     return this;
-  }
-
-  public User getOwner() {
-    return this.owner;
   }
 
   /**
@@ -64,20 +66,6 @@ public class WishList implements Iterable<Wish> {
     }
     this.owner = owner;
     return this;
-  }
-
-  public boolean getHideInfoFromOwner() {
-    return this.hideInfoFromOwner;
-  }
-
-  /**
-   * When a wishList is shared the owner can choose to hide information about who is covering each
-   * wish from himself/herself.
-   *
-   * @param hideInfoFromOwner Boolean to hide information from owner or not
-   */
-  void setHideInfoFromOwner(boolean hideInfoFromOwner) {
-    this.hideInfoFromOwner = hideInfoFromOwner;
   }
 
   /**
@@ -105,9 +93,40 @@ public class WishList implements Iterable<Wish> {
     wishes.remove(wish);
   }
 
+  /**
+   * A wish can be removed from a wishList.
+   *
+   * @param name remove wish with this name
+   */
+  void removeWish(String name) {
+    if (wishExist(name)) {
+      this.wishes.remove(findWish(name));
+    }
+  }
+
+  /**
+   * Find wish from name.
+   *
+   * @param name name of wish
+   * @return first wish with this name
+   */
+  private Wish findWish(String name) {
+    return this.wishes.stream().filter(e -> e.getName().equals(name)).findFirst().orElse(null);
+  }
+
+  /**
+   * Checks if wish exists.
+   *
+   * @param name wish to check for
+   * @return boolean
+   */
+  private boolean wishExist(String name) {
+    return this.findWish(name) != null;
+  }
+
   @Override
   public String toString() {
-    return "" + this.name + ", " + this.owner + ", " + this.hideInfoFromOwner + "";
+    return "" + this.name + ", " + this.owner + "";
   }
 
   /**
@@ -117,8 +136,7 @@ public class WishList implements Iterable<Wish> {
    * @return wish
    */
   public Optional<Wish> getWish(String name) {
-    List<Wish> wishes = this.getWishes();
-    for (Wish w : wishes) {
+    for (Wish w : this.wishes) {
       if (w.getName().equals(name)) {
         return Optional.of(w);
       }

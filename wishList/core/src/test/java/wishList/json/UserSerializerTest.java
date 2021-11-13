@@ -12,6 +12,7 @@ import wishList.core.WishList;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -46,7 +47,15 @@ class UserSerializerTest {
     assertEquals(usersFromFile[0].getLastName(), "last");
     assertEquals(usersFromFile[0].getEmail(), "user@gmail.com");
     assertEquals(usersFromFile[0].getPassword(), "123Password!");
-    List<WishList> wishLists = new ArrayList<>();
-    assertEquals(usersFromFile[0].getWishLists(), wishLists);
+    List<WishList> emptyOwnList = new ArrayList<>();
+    List<WishList> iteratorList = new ArrayList<>();
+    usersFromFile[0].iterator().forEachRemaining(iteratorList::add);
+    assertEquals(iteratorList, emptyOwnList);
+    List<WishList> invitedWishLists = new ArrayList<>();
+    assertEquals(usersFromFile[0].getInvitedWishLists(), invitedWishLists);
+    List<List<User>> groups = new ArrayList<>();
+    assertEquals(usersFromFile[0].getWishListGroups(), groups);
+    List<User> contacts = new ArrayList<>();
+    assertEquals(usersFromFile[0].getContacts(), contacts);
   }
 }

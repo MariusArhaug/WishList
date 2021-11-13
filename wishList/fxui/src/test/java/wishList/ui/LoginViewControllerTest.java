@@ -12,7 +12,12 @@ import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
 import org.testfx.matcher.control.LabeledMatchers;
+import org.w3c.dom.ls.LSOutput;
 import wishList.core.User;
+import wishList.json.JsonHandler;
+import wishList.utils.Utils;
+
+import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,6 +25,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LoginViewControllerTest extends ApplicationTest{
     private LoginViewController controller;
     private User user;
+
+    //public final String path =
+            //Utils.updatePathForAnyOs(
+                    //new File("").getAbsolutePath(), "src", "test", "resources", "wishList", "ui");
+
+    //private JsonHandler jsonHandler = new JsonHandler(path);
 
     /**
      *
@@ -79,9 +90,9 @@ public class LoginViewControllerTest extends ApplicationTest{
     @Test
     public void verifyThatUserExists(FxRobot robot) throws Exception {
         robot.clickOn("#loginEmailInput");
-        robot.write("jane@doe");
+        robot.write("jane@doe.com");
         robot.clickOn("#loginPasswordInput");
-        robot.write("qwerty");
+        robot.write("qwerty123");
         robot.clickOn("#login");
 
         //If errorMessage is "Label" after clicking on login,

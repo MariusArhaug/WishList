@@ -6,14 +6,36 @@ public class Wish {
   private String name;
   private WishList belongTo;
 
+  /**
+   * Empty constructor for json test purposes.
+   */
   public Wish() {}
 
+  /**
+   * Create a wish with only name. For test purposes.
+   *
+   * @param name content of wish
+   */
   public Wish(String name) {
     this.setName(name);
   }
 
+  /**
+   * Create a wish with name and its belonging wish list.
+   *
+   * @param name content of wish
+   * @param belongTo wish belongs to this wish list
+   */
+  public Wish(String name, WishList belongTo) {
+    this.setName(name).setBelongTo(belongTo);
+  }
+
   public String getName() {
     return this.name;
+  }
+
+  public WishList getBelongTo() {
+    return this.belongTo;
   }
 
   /**
@@ -24,26 +46,24 @@ public class Wish {
    * @throws IllegalArgumentException when name is not matching constraint
    */
   public Wish setName(String name) throws IllegalArgumentException {
-    if (name.length() == 0 || name.length() > 25) {
-
-      throw new IllegalArgumentException("The wish can not be empty or surpass 25 character!");
+    if (name.length() == 0) {
+      throw new IllegalArgumentException("The wish can not be empty!");
     }
     this.name = name;
     return this;
   }
 
-  public WishList getBelongTo() {
-    return this.belongTo;
-  }
-
   /**
-   * Set wishList as parent to wish.
+   * Set wishList as parent to wish.wq
    *
-   * @param list wishList parent
-   * @return this object
+   * @param belongTo wishList parent
    */
-  public Wish setBelongTo(WishList list) {
-    this.belongTo = list;
+  public Wish setBelongTo(WishList belongTo) /*throws IllegalArgumentException*/ {
+    //wishes made of the test connstructor is unable to use this function:o
+    /*if (belongTo == null) {
+      throw new IllegalArgumentException("A wish must belong to an existing wish list!");
+    }*/
+    this.belongTo = belongTo;
     return this;
   }
 

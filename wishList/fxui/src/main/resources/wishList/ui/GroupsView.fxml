@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="" prefHeight="441.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.GroupsViewController">
    <children>
-      <Button id="makeNewGroup" fx:id="makeNewGroup" layoutX="99.0" layoutY="88.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: black;" text="Make new group" textFill="WHITE" />
+      <Button id="makeNewGroup" fx:id="makeNewGroup" layoutX="99.0" layoutY="83.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: black;" text="Make new group" textFill="WHITE" />
       <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#signOut" style="-fx-background-color: black;" text="Sign out" textFill="WHITE" />
       <Button id="friendWishLists" fx:id="friendWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToFriendsWishListsView" style="-fx-background-color: black;" text="Friends’ wish lists" textFill="WHITE" />
       <Button id="yourFriends" fx:id="yourFriends" layoutX="127.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToFriendsView" style="-fx-background-color: black;" text="Your friends" textFill="WHITE" />

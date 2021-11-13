@@ -100,15 +100,6 @@ public abstract class AbstractController {
     this.changeScene("ShowListView.fxml", event, this.user);
   }
 
-  /**
-   * Change scene to Covered.fxml
-   *
-   * @param event gets state
-   * @throws IOException if file is not found
-   */
-  public void changeToCovered(ActionEvent event) throws IOException {
-    this.changeScene("Covered.fxml", event, this.user);
-  }
 
   /**
    * Change scene to FriendsView.fxml
@@ -158,16 +149,6 @@ public abstract class AbstractController {
    */
   public void changeToMakeNewGroupView(ActionEvent event) throws IOException {
     this.changeScene("MakeNewGroupView.fxml", event, this.user);
-  }
-
-  /**
-   * Change scene to NotCovered.fxml
-   *
-   * @param event gets state
-   * @throws IOException if file is not found
-   */
-  public void changeToNotCovered(ActionEvent event) throws IOException {
-    this.changeScene("NotCovered.fxml", event, this.user);
   }
 
   /**

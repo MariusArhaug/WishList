@@ -4,11 +4,11 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+
 import wishList.core.User;
 import wishList.core.WishList;
-
-
-
 
 /**
  * Class for serialization of users.
@@ -33,9 +33,25 @@ public class UserSerializer extends JsonSerializer<User> {
     jsonGenerator.writeStringField("email", user.getEmail());
     jsonGenerator.writeStringField("password", user.getPassword());
 
-    jsonGenerator.writeArrayFieldStart("wishLists");
-    for (WishList list : user.getWishLists()) {
+    jsonGenerator.writeArrayFieldStart("ownedWishLists");
+    while (user.iterator().hasNext()) {
+      WishList list = user.iterator().next();
       jsonGenerator.writeObject(list);
+    }
+    jsonGenerator.writeEndArray();
+    jsonGenerator.writeArrayFieldStart("invitedWishLists");
+    for (WishList w : user.getInvitedWishLists()) {
+      jsonGenerator.writeObject(w);
+    }
+    jsonGenerator.writeEndArray();
+    jsonGenerator.writeArrayFieldStart("wishListGroups");
+    for (List<User> l : user.getWishListGroups()) {
+      jsonGenerator.writeObject(l);
+    }
+    jsonGenerator.writeEndArray();
+    jsonGenerator.writeArrayFieldStart("contacts");
+    for (User u : user.getContacts()) {
+      jsonGenerator.writeObject(u);
     }
     jsonGenerator.writeEndArray();
     jsonGenerator.writeEndObject();
