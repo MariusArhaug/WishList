@@ -9,8 +9,6 @@ import java.util.Arrays;
  */
 public class Utils {
 
-  private static final String os = System.getProperty("os.name");
-
   /**
    * Send in path with additional sub-directories and create path based on os.
    *
@@ -23,21 +21,8 @@ public class Utils {
         Arrays
         .stream(newPaths)
         .reduce(removeFileSeparatorAtEnd(path),
-            (finalPath, p) -> finalPath + getFileSeparator() + p)
-        + getFileSeparator();
-  }
-
-  /**
-   * Get correct file separator depending on os.
-   *
-   * @return a string of file separator "/" linux , "\" windows etc
-   *
-   */
-  public static String getFileSeparator() {
-    return switch (os) {
-      case "Windows" -> "\\";
-      default -> "/";
-    };
+            (finalPath, p) -> finalPath + File.pathSeparator + p)
+        + File.pathSeparator;
   }
 
   /**
@@ -47,7 +32,7 @@ public class Utils {
    * @return true/false
    */
   public static boolean hasFileSeparatorAtEnd(String path) {
-    return path.substring(path.length() - 1).equals(getFileSeparator());
+    return path.substring(path.length() - 1).equals(File.pathSeparator);
   }
 
   /**
@@ -57,7 +42,7 @@ public class Utils {
    * @return updated path
    */
   public static String addFileSeparatorAtEnd(String path) {
-    return hasFileSeparatorAtEnd(path) ? path : path + getFileSeparator();
+    return hasFileSeparatorAtEnd(path) ? path : path + File.pathSeparator;
   }
 
   public static String removeFileSeparatorAtEnd(String path) {

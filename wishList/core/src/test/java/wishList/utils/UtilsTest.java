@@ -13,8 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class UtilsTest {
 
-    private static final String os = System.getProperty("os.name");
-
     @BeforeEach
     void setup() {
 
@@ -28,25 +26,13 @@ class UtilsTest {
     @Test
     void updatePathForAnyOsTest() {
         String cwd = new File("").getAbsolutePath();
-        String finalPath = switch (os) {
-            case "Windows" -> cwd + "\\some\\folder\\here\\";
-            default -> cwd + "/some/folder/here/";
-        };
+        String finalPath = "some" + File.pathSeparator + "folder" + File.pathSeparator + "here" + File.pathSeparator;
         assertEquals(finalPath, Utils.updatePathForAnyOs(cwd, "some", "folder", "here"));
     }
 
     @Test
     void hasFileSeparatorAtEndTest() {
-        switch (os) {
-            case "Windows" -> {
-                assertTrue(Utils.hasFileSeparatorAtEnd("path\\"));
-                assertFalse(Utils.hasFileSeparatorAtEnd("path"));
-            }
-            default -> {
-                assertTrue(Utils.hasFileSeparatorAtEnd("path/"));
-                assertFalse(Utils.hasFileSeparatorAtEnd("path"));
-            }
-        }
-
+        assertTrue(Utils.hasFileSeparatorAtEnd("path\\"));
+        assertTrue(Utils.hasFileSeparatorAtEnd("path/"));
     }
 }
