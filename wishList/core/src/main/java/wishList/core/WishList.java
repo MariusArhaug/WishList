@@ -12,9 +12,7 @@ public class WishList implements Iterable<Wish> {
   private String name;
   private User owner;
 
-  /**
-   * Empty constructor for json test purposes.
-   */
+  /** Empty constructor for json test purposes. */
   public WishList() {}
 
   public WishList(String name) {
@@ -26,16 +24,11 @@ public class WishList implements Iterable<Wish> {
   }
 
   public List<Wish> getWishes() {
-    List<Wish> copy = new ArrayList<>(this.wishes);
-    return copy;
+    return new ArrayList<>(this.wishes);
   }
 
   public String getName() {
     return this.name;
-  }
-
-  public User getOwner() {
-    return this.owner;
   }
 
   /**
@@ -51,6 +44,10 @@ public class WishList implements Iterable<Wish> {
     }
     this.name = name;
     return this;
+  }
+
+  public User getOwner() {
+    return this.owner;
   }
 
   /**

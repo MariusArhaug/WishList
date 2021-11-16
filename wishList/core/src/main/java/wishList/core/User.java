@@ -75,13 +75,11 @@ public class User implements Iterable<WishList> {
   }
 
   public List<WishList> getInvitedWishLists() {
-    List<WishList> copy = new ArrayList<>(this.invitedWishLists);
-    return copy;
+    return new ArrayList<>(this.invitedWishLists);
   }
 
   public List<List<User>> getWishListGroups() {
-    List<List<User>> copy = new ArrayList<>(this.wishListGroups);
-    return copy;
+    return new ArrayList<>(this.wishListGroups);
   }
 
   public List<User> getContacts() {
@@ -149,7 +147,7 @@ public class User implements Iterable<WishList> {
       throw new IllegalArgumentException(
               "A user must have a password!");
     }
-    else if (password.length() < 8) {
+    if (password.length() < 8) {
       throw new IllegalArgumentException(
               "The password must be at least eight characters!");
     }
@@ -187,19 +185,19 @@ public class User implements Iterable<WishList> {
    * @param name name string
    */
   public String removeWishList(String name) throws IllegalArgumentException {
-    if (wishListsExist(name)) {
-      WishList wishList = this.findWishList(name);
-      this.ownedWishLists.remove(wishList);
-      List<User> group = this.groupSharedWith(wishList);
-      if (group != null) {
-        for (User u : group) {
-          u.invitedWishLists.remove(wishList);
-        }
-      }
-      return "Wish list has been removed!";
-    } else {
+    if (!wishListsExist(name)) {
       throw new IllegalArgumentException("You do not own a wishList with this name!");
     }
+    WishList wishList = this.findWishList(name);
+    List<User> group = this.groupSharedWith(wishList);
+    if (group != null) {
+      for (User u : group) {
+        u.invitedWishLists.remove(wishList);
+      }
+    }
+    this.ownedWishLists.remove(wishList);
+    return "Wish list has been removed!";
+
   }
 
   /**
