@@ -1,7 +1,5 @@
 package wishList.ui;
 
-import java.io.File;
-import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,24 +10,26 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import wishList.core.User;
-import wishList.utils.Utils;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 
 /** Abstract controller with changeScene method that all other controllers inherits. */
 public abstract class AbstractController {
 
-  User user;
+  final String resourcesPath =
+      Paths.get(new File("").getAbsolutePath(), "src", "main", "resources", "wishList", "ui")
+          .toString();
   @FXML protected Label errorMessage;
+  User user;
   @FXML private Button signOut;
-
-  public final String resourcesPath =
-          Utils.updatePathForAnyOs(
-                  new File("").getAbsolutePath(), "src", "main", "resources", "wishList", "ui");
 
   void updateUser(User user) {
     this.user = user;
   }
 
-  void changeScene(String fileName, ActionEvent event, User user) throws IOException {
+  private void changeScene(String fileName, ActionEvent event, User user) throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(AbstractController.class.getResource("/wishList/ui/" + fileName));
     Parent newParent = loader.load();
@@ -46,9 +46,7 @@ public abstract class AbstractController {
     }
   }
 
-  void initialize() {
-
-  }
+  void initialize() {}
 
   /**
    * Change scene to MainView.fxml
@@ -63,8 +61,7 @@ public abstract class AbstractController {
       } else {
         errorMessage.setText("E-mail or password is incorrect");
       }
-    }
-    else {
+    } else {
       this.changeScene("MainView.fxml", event, this.user);
     }
   }
@@ -87,7 +84,6 @@ public abstract class AbstractController {
    */
   public void changeToLoginView(ActionEvent event) throws IOException {
     this.changeScene("LoginView.fxml", event, this.user);
-
   }
 
   /**
@@ -99,7 +95,6 @@ public abstract class AbstractController {
   public void changeToShowListView(ActionEvent event) throws IOException {
     this.changeScene("ShowListView.fxml", event, this.user);
   }
-
 
   /**
    * Change scene to FriendsView.fxml
@@ -165,7 +160,5 @@ public abstract class AbstractController {
   public void signOut(ActionEvent event) throws IOException {
     this.changeScene("LoginView.fxml", event, this.user);
     this.user = null;
-    /*Stage stage = (Stage) signOut.getScene().getWindow();
-    stage.close();*/
   }
 }

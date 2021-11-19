@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 class WishSerializerTest {
-  private final File wishTestFile = new File(JsonHandlerTest.testFolder + "wishes.json");
+  private final File wishTestFile = new File(JsonHandlerTest.testFolder, "wishes.json");
   private Wish wish;
   private ObjectMapper mapper;
 
