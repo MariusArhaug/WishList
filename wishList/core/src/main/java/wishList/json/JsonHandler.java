@@ -2,6 +2,10 @@ package wishList.json;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import wishList.core.User;
+import wishList.core.Wish;
+import wishList.core.WishList;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
@@ -11,6 +15,8 @@ import wishList.core.User;
 import wishList.core.Wish;
 import wishList.core.WishList;
 
+import java.util.List;
+import java.util.Optional;
 
 /** Handle JSON requests. */
 public class JsonHandler {
@@ -29,7 +35,7 @@ public class JsonHandler {
     this.path = path;
   }
 
-  public String getPath() {
+  String getPath() {
     return this.path;
   }
 
@@ -39,7 +45,7 @@ public class JsonHandler {
    * @return file object
    */
   private File toFile(String fileName) throws NoSuchFileException {
-    return new File(this.path + fileName);
+    return new File(this.path, fileName);
   }
 
   /**
@@ -89,7 +95,7 @@ public class JsonHandler {
 
   User addUser(User user) throws Exception {
     return this.addUser(
-            user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
+        user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
   }
 
   /**
@@ -104,19 +110,18 @@ public class JsonHandler {
    * @throws Exception if not found file
    */
   public User addUser(String firstname, String lastname, String email, String password)
-          throws IllegalArgumentException, Exception {
+      throws IllegalArgumentException, Exception {
     try {
       List<User> users = loadJsonUserList();
       for (User user : users) {
         if (user.getEmail().equals(email)) {
           throw new IllegalArgumentException(
-                  "A user with this email already exists, please try another one");
+              "A user with this email already exists, please try another one");
         }
       }
       User newUser = new User(firstname, lastname, email, password);
-
-      //users.add(newUser);
-      mapper.writeValue(new File(this.path + userFileName(newUser) + ".json"), newUser);
+      users.add(newUser);
+      mapper.writeValue(toFile("users.json"), users);
       return newUser;
     } catch (IOException e) {
       throw new Exception(e);
@@ -418,7 +423,7 @@ public class JsonHandler {
 
       for (WishList w : wishLists) {
         if (w.getOwner().getEmail().equals(wishList.getOwner().getEmail())
-                && w.getName().equals(wishList.getName())) {
+            && w.getName().equals(wishList.getName())) {
           return w.getWish(name);
         }
       }

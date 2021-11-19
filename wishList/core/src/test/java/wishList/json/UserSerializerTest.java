@@ -14,13 +14,12 @@ import wishList.core.WishList;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserSerializerTest {
-  private final File usersTestFile = new File(JsonHandlerTest.testFolder + "user@gmailcom.json");
+  private final File usersTestFile = new File(JsonHandlerTest.testFolder, "user@gmailcom.json");
   private JsonHandler jsonHandler;
   private User user;
   private ObjectMapper mapper;

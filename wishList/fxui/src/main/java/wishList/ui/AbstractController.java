@@ -1,7 +1,5 @@
 package wishList.ui;
 
-import java.io.File;
-import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,17 +13,21 @@ import wishList.core.User;
 import wishList.core.WishList;
 import wishList.utils.Utils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+
 /** Abstract controller with changeScene method that all other controllers inherits. */
 public abstract class AbstractController {
 
   User user;
   WishList wishListToShare;
+  final String resourcesPath =
+      Paths.get(new File("").getAbsolutePath(), "src", "main", "resources", "wishList", "ui")
+          .toString();
   @FXML protected Label errorMessage;
+  User user;
   @FXML private Button signOut;
-
-  public final String resourcesPath =
-          Utils.updatePathForAnyOs(
-                  new File("").getAbsolutePath(), "src", "main", "resources", "wishList", "users");
 
   void updateUser(User user) {
     this.user = user;

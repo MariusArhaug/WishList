@@ -10,20 +10,15 @@ import wishList.core.WishList;
 import wishList.utils.Utils;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonHandlerTest {
   static String testFolder =
-      Utils.updatePathForAnyOs(
-          new File("").getAbsolutePath(),
-          "src",
-          "test",
-          "java",
-          "wishList",
-          "json",
-          "test-resources");
+      Paths.get(new File("").getAbsolutePath(), "src", "test", "java", "wishList", "json", "test-resources")
+          .toString();
   private User user;
   private WishList wishList;
   private Wish wish;
@@ -99,5 +94,4 @@ public class JsonHandlerTest {
     assertThrows(Exception.class, () -> jsonHandler1.addWish("throw", wishList));
     assertThrows(Exception.class, () -> jsonHandler1.addWishList("throw2", user));
   }
-
 }
