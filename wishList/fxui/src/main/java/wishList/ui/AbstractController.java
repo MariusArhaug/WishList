@@ -10,17 +10,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import wishList.core.User;
+import wishList.json.JsonHandler;
 import wishList.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
 
 /** Abstract controller with changeScene method that all other controllers inherits. */
-public abstract class AbstractController {
+public abstract class AbstractController implements Controller {
 
   final String resourcesPath =
       Utils.updatePathForAnyOs(
           new File("").getAbsolutePath(), "src", "main", "resources", "wishList", "ui");
+  private final JsonHandler jsonHandler = new JsonHandler(this.resourcesPath);
   @FXML protected Label errorMessage;
   User user;
   @FXML private Button signOut;
@@ -54,8 +56,6 @@ public abstract class AbstractController {
       currentWindow.show();
     }
   }
-
-  void initialize() {}
 
   /**
    * Change scene to MainView.fxml
@@ -177,12 +177,17 @@ public abstract class AbstractController {
     this.changeScene("ShareWithGroupView.fxml", event, this.user);
   }
 
+  void changeToWishListView(Object source) throws IOException {
+    this.changeScene("WishListView.fxml", source, this.user);
+  }
+
   /** Close app. */
   public void signOut(ActionEvent event) throws IOException {
     this.changeScene("LoginView.fxml", event, this.user);
-    // TODO: save user state to json
+  }
+
+  void save() {
+    this.jsonHandler.saveUser(this.user);
     this.user = null;
-    /*Stage stage = (Stage) signOut.getScene().getWindow();
-    stage.close();*/
   }
 }
