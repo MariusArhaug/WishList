@@ -33,9 +33,7 @@ public class User implements Iterable<WishList> {
     this.setFirstName(firstName).setLastName(lastName).setEmail(email).setPassword(password);
   }
 
-  /**
-   * Empty constructor for json test purposes.
-   */
+  /** Empty constructor for json test purposes. */
   public User() {}
 
   /**
@@ -48,12 +46,41 @@ public class User implements Iterable<WishList> {
   }
 
   /**
+   * Set firstname of user.
+   *
+   * @param firstName name
+   * @return user object
+   * @throws IllegalArgumentException if name is not sufficient.
+   */
+  public User setFirstName(String firstName) throws IllegalArgumentException {
+    if (firstName.length() == 0) {
+      throw new IllegalArgumentException("A user must have a first name!");
+    }
+    this.firstName = firstName;
+    return this;
+  }
+
+  /**
    * Get last name of user.
    *
    * @return User's last name
    */
   public String getLastName() {
     return this.lastName;
+  }
+
+  /**
+   * Set lastname of user.
+   *
+   * @param lastName name
+   * @return User object
+   */
+  public User setLastName(String lastName) throws IllegalArgumentException {
+    if (lastName.length() == 0) {
+      throw new IllegalArgumentException("A user must have a last name!");
+    }
+    this.lastName = lastName;
+    return this;
   }
 
   /**
@@ -66,12 +93,48 @@ public class User implements Iterable<WishList> {
   }
 
   /**
+   * Set email of user.
+   *
+   * @param email name
+   */
+  public User setEmail(String email) {
+    if (email.length() == 0) {
+      throw new IllegalArgumentException("A user must have a email address!");
+    }
+    Pattern emailPattern =
+        Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+    Matcher emailMatcher = emailPattern.matcher(email);
+    boolean validEmail = emailMatcher.find();
+    if (!validEmail) {
+      throw new IllegalArgumentException("This is not a valid email address!");
+    }
+    this.email = email;
+    return this;
+  }
+
+  /**
    * Get password of user.
    *
    * @return User's password
    */
   public String getPassword() {
     return this.password;
+  }
+
+  /**
+   * Set password of user.
+   *
+   * @param password name
+   */
+  public User setPassword(String password) throws IllegalArgumentException {
+    if (password.length() == 0) {
+      throw new IllegalArgumentException("A user must have a password!");
+    }
+    if (password.length() < 8) {
+      throw new IllegalArgumentException("The password must be at least eight characters!");
+    }
+    this.password = password;
+    return this;
   }
 
   public List<WishList> getInvitedWishLists() {
@@ -84,75 +147,6 @@ public class User implements Iterable<WishList> {
 
   public List<User> getContacts() {
     return this.contacts;
-  }
-
-  /**
-   * Set firstname of user.
-   *
-   * @param firstName name
-   * @return user object
-   * @throws IllegalArgumentException if name is not sufficient.
-   */
-  public User setFirstName(String firstName) throws IllegalArgumentException {
-    if (firstName.length() == 0) {
-      throw new IllegalArgumentException(
-          "A user must have a first name!");
-    }
-    this.firstName = firstName;
-    return this;
-  }
-
-  /**
-   * Set lastname of user.
-   *
-   * @param lastName name
-   * @return User object
-   */
-  public User setLastName(String lastName) throws IllegalArgumentException {
-    if (lastName.length() == 0) {
-      throw new IllegalArgumentException(
-          "A user must have a last name!");
-    }
-    this.lastName = lastName;
-    return this;
-  }
-
-  /**
-   * Set email of user.
-   *
-   * @param email name
-   */
-  public User setEmail(String email) {
-    if (email.length() == 0) {
-      throw new IllegalArgumentException(
-              "A user must have a email address!");
-    }
-    Pattern emailPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-    Matcher emailMatcher   = emailPattern.matcher(email);
-    boolean validEmail = emailMatcher.find();
-    if (!validEmail) {
-      throw new IllegalArgumentException("This is not a valid email address!");
-    }
-    this.email = email;
-    return this;
-  }
-
-  /**
-   * Set password of user.
-   *
-   * @param password name
-   */
-  public User setPassword(String password) throws IllegalArgumentException {
-    if (password.length() == 0) {
-      throw new IllegalArgumentException(
-              "A user must have a password!");
-    }
-    if (password.length() < 8) {
-      throw new IllegalArgumentException(
-              "The password must be at least eight characters!");
-    }
-    this.password = password;
-    return this;
   }
 
   /**
@@ -171,12 +165,12 @@ public class User implements Iterable<WishList> {
    *
    * @param name name string
    */
-  public String makeWishList(String name) {
-      if(!wishListsExist(name)) {
-        this.ownedWishLists.add(new WishList(name, this));
-        return "New wish list added!";
-      }
-      return "You already have a wishlist with this name!";
+  String makeWishList(String name) {
+    if (!wishListsExist(name)) {
+      this.ownedWishLists.add(new WishList(name, this));
+      return "New wish list added!";
+    }
+    return "You already have a wishlist with this name!";
   }
 
   /**
@@ -184,7 +178,7 @@ public class User implements Iterable<WishList> {
    *
    * @param name name string
    */
-  public String removeWishList(String name) throws IllegalArgumentException {
+  String removeWishList(String name) throws IllegalArgumentException {
     if (!wishListsExist(name)) {
       throw new IllegalArgumentException("You do not own a wishList with this name!");
     }
@@ -197,12 +191,9 @@ public class User implements Iterable<WishList> {
     }
     this.ownedWishLists.remove(wishList);
     return "Wish list has been removed!";
-
   }
 
   /**
-   *
-   *
    * @param wishList Wish list that
    * @return group invited to wish list
    */
@@ -221,7 +212,7 @@ public class User implements Iterable<WishList> {
    * @param wishListName wish list to remove wish from
    * @param wishName wish to remove
    */
-  public void removeWish(String wishListName, String wishName) {
+  void removeWish(String wishListName, String wishName) {
     if (wishListsExist(wishListName)) {
       this.findWishList(wishListName).removeWish(wishName);
     }
@@ -234,7 +225,10 @@ public class User implements Iterable<WishList> {
    * @return wish list with this name
    */
   private WishList findWishList(String name) {
-    return this.ownedWishLists.stream().filter(e -> e.getName().equals(name)).findFirst().orElse(null);
+    return this.ownedWishLists.stream()
+        .filter(e -> e.getName().equals(name))
+        .findFirst()
+        .orElse(null);
   }
 
   /**
@@ -243,7 +237,7 @@ public class User implements Iterable<WishList> {
    * @param name wish list to check for
    * @return boolean
    */
-  private boolean wishListsExist(String name) {
+  public boolean wishListsExist(String name) {
     return this.findWishList(name) != null;
   }
 
@@ -263,7 +257,7 @@ public class User implements Iterable<WishList> {
    * @param wishList wish list to add wish to
    * @param wish wish to add
    */
-  public void addWish(WishList wishList, Wish wish) {
+  void addWish(WishList wishList, Wish wish) {
     ownedWishLists.stream().filter(wl -> wl.equals(wishList)).forEach(wl -> wl.addWish(wish));
   }
 
@@ -272,7 +266,7 @@ public class User implements Iterable<WishList> {
    *
    * @param notContact contact to remove
    */
-  public void removeContact(User notContact) {
+  void removeContact(User notContact) {
     this.contacts.remove(notContact);
     notContact.getContacts().remove(this);
   }
@@ -293,7 +287,7 @@ public class User implements Iterable<WishList> {
    * @param wishList wish list to share
    * @param group group to share with
    */
-  public void shareWishList(WishList wishList, List<User> group) {
+  void shareWishList(WishList wishList, List<User> group) {
     if (wishListsExist(wishList.getName())) {
       for (User u : group) {
         u.addInvitedToWishList(wishList);
@@ -312,13 +306,12 @@ public class User implements Iterable<WishList> {
     this.invitedWishLists.add(wishList);
   }
 
-
   /**
    * Create a group with contacts.
    *
    * @param chosenContactsArray users to make group out of
    */
-  public void makeGroup(User... chosenContactsArray) {
+  void makeGroup(User... chosenContactsArray) {
     List<User> chosenContactsList = new ArrayList<>();
     Collections.addAll(chosenContactsList, chosenContactsArray);
     addGroup(chosenContactsList);
@@ -339,7 +332,7 @@ public class User implements Iterable<WishList> {
    * @param name name of wishList
    * @return wishList
    */
-  public Optional<WishList> getWishList(String name) {
+  Optional<WishList> getWishList(String name) {
     return this.ownedWishLists.stream()
         .filter(wishList -> name.equals(wishList.getName()))
         .findAny();
