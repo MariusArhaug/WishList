@@ -37,6 +37,9 @@ public class LoginViewController extends AbstractController {
         });
   }
 
+  @Override
+  public void stop() {}
+
   /**
    * Checks that user is present.
    *

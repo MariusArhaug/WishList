@@ -1,5 +1,9 @@
 package wishList.ui;
 
 public class ShareWithGroupViewController extends AbstractController {
-    public void initialize() {}
+  @Override
+  public void initialize() {}
+
+  @Override
+  public void stop() {}
 }

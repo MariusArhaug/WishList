@@ -38,6 +38,9 @@ public class RegisterViewController extends AbstractController {
         });
   }
 
+  @Override
+  public void stop() {}
+
   /**
    * Sign up user.
    *
