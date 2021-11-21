@@ -76,20 +76,4 @@ public class JsonHandlerTest {
     assertTrue(loadedUser.isPresent());
     assertEquals(user.getEmail(), loadedUser.get().getEmail());
   }
-
-  @Test
-  void addWishTest() {
-    Wish wishOne = new Wish("Chair");
-    WishList wishList = new WishList("Decorations");
-    wishList.addWish(wishOne);
-    user.addWishList(wishList);
-
-    assertThrows(IllegalArgumentException.class, () -> jsonHandler.addWish("Chair", wishList));
-    assertThrows(
-        IllegalArgumentException.class, () -> jsonHandler.addWishList("Decorations", user));
-    JsonHandler jsonHandler1 = new JsonHandler("");
-    assertThrows(Exception.class, () -> jsonHandler1.addWish("throw", wishList));
-    assertThrows(Exception.class, () -> jsonHandler1.addWishList("throw2", user));
-  }
-
 }

@@ -2,16 +2,15 @@ package wishList.json;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.NoSuchFileException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
 import wishList.core.User;
 import wishList.core.Wish;
 import wishList.core.WishList;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.NoSuchFileException;
+import java.util.List;
+import java.util.Optional;
 
 /** Handle JSON requests. */
 public class JsonHandler {
@@ -30,7 +29,7 @@ public class JsonHandler {
     this.path = path;
   }
 
-  public String getPath() {
+  String getPath() {
     return this.path;
   }
 
@@ -63,7 +62,7 @@ public class JsonHandler {
 
   User addUser(User user) throws Exception {
     return this.addUser(
-            user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
+        user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
   }
 
   /**
@@ -78,14 +77,14 @@ public class JsonHandler {
    * @throws Exception if not found file
    */
   public User addUser(String firstname, String lastname, String email, String password)
-          throws IllegalArgumentException, Exception {
+      throws IllegalArgumentException, Exception {
     try {
       List<User> users = loadJsonUserList();
 
       for (User user : users) {
         if (user.getEmail().equals(email)) {
           throw new IllegalArgumentException(
-                  "A user with this email already exists, please try another one");
+              "A user with this email already exists, please try another one");
         }
       }
       User newUser = new User(firstname, lastname, email, password);
@@ -93,65 +92,6 @@ public class JsonHandler {
       users.add(newUser);
       mapper.writeValue(new File(this.path + "users.json"), users);
       return newUser;
-    } catch (IOException e) {
-      throw new Exception(e);
-    }
-  }
-
-  /**
-   * Add wishList to JSON file.
-   *
-   * @param name name of wishlist
-   * @param user owner of wishlist
-   * @return wishList object created
-   * @throws Exception If user already has wishlist with that name or IO Exception
-   */
-  WishList addWishList(String name, User user) throws Exception {
-    try {
-
-      for (WishList w : user) {
-        if (w.getName().equals(name)) {
-          throw new IllegalArgumentException("This user already has a wish list with this name!");
-        }
-      }
-      List<WishList> wishLists = loadJsonWishLists();
-      WishList newWishList = new WishList(name, user);
-
-      wishLists.add(newWishList);
-
-      mapper.writeValue(this.toFile("wishList.json"), wishLists);
-      return newWishList;
-    } catch (IOException e) {
-      throw new Exception();
-    }
-  }
-
-  /**
-   * Add wish to wishList file.
-   *
-   * @param name name of wish
-   * @param wishList wishList to add wish in
-   * @return wish
-   * @throws Exception file not found
-   */
-  Wish addWish(String name, WishList wishList) throws Exception {
-    try {
-      List<Wish> ownedWishes = wishList.getWishes();
-      System.out.println(ownedWishes);
-      for (Wish w : ownedWishes) {
-        if (w.getName().equals(name)) {
-          throw new IllegalArgumentException("This wish list already has a wish with this name!");
-        }
-      }
-
-      List<Wish> wishes = this.loadJsonWishes();
-      Wish newWish = new Wish(name);
-      wishList.addWish(newWish);
-
-      wishes.add(newWish);
-
-      mapper.writeValue(this.toFile("wishList.json"), wishes);
-      return newWish;
     } catch (IOException e) {
       throw new Exception(e);
     }
@@ -180,46 +120,12 @@ public class JsonHandler {
     }
   }
 
-  Optional<WishList> loadWishList(String name, User user) throws Exception {
+  public String saveUser(User user) {
     try {
-      List<WishList> wishLists = loadJsonWishLists();
-      System.out.println(wishLists);
-
-      for (WishList w : wishLists) {
-        if (user.equals(w.getOwner()) && w.getName().equals(name)) {
-          return Optional.of(w);
-        }
-      }
-      return Optional.empty();
-
-    } catch (IOException e) {
-      throw new Exception(e);
-    }
-  }
-
-  /**
-   * Load wish from given file in "wishLists" in the this' path.
-   *
-   * @param wishList wishList to compare
-   * @param name name of wish
-   * @return wish if it exists
-   * @throws Exception file not found
-   */
-  Optional<Wish> loadWish(WishList wishList, String name) throws Exception {
-
-    try {
-      List<WishList> wishLists = this.loadJsonWishLists();
-
-      for (WishList w : wishLists) {
-        if (w.getOwner().getEmail().equals(wishList.getOwner().getEmail())
-                && w.getName().equals(wishList.getName())) {
-          return w.getWish(name);
-        }
-      }
-      return Optional.empty();
-
-    } catch (IOException e) {
-      throw new Exception(e);
+      this.mapper.writeValue(toFile("users.json"), user);
+      return "Successfully saved changes!";
+    } catch (Exception e) {
+      return "An error occurred! Failed to save user data";
     }
   }
 }
