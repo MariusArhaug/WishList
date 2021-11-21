@@ -180,6 +180,7 @@ public abstract class AbstractController {
   /** Close app. */
   public void signOut(ActionEvent event) throws IOException {
     this.changeScene("LoginView.fxml", event, this.user);
+    // TODO: save user state to json
     this.user = null;
     /*Stage stage = (Stage) signOut.getScene().getWindow();
     stage.close();*/

@@ -28,6 +28,7 @@ public class LoginViewController extends AbstractController {
         event -> {
           if (event.getCode().equals(KeyCode.ENTER)) {
             try {
+              System.out.println(this.resourcesPath);
               this.changeToMainView(event.getSource());
             } catch (IOException e) {
               e.printStackTrace();
