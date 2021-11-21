@@ -1,32 +1,47 @@
 package wishList.ui;
 
-import java.io.IOException;
-import java.util.Optional;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import wishList.core.User;
 import wishList.json.JsonHandler;
+
+import java.io.IOException;
+import java.util.Optional;
 
 /** Controller for LoginView fxml file. */
 public class LoginViewController extends AbstractController {
   private final JsonHandler jsonHandler;
   @FXML protected TextField loginEmailInput;
-  @FXML protected TextField loginPasswordInput;
+  @FXML protected PasswordField loginPasswordInput;
+  @FXML protected AnchorPane loginPane;
 
   public LoginViewController() {
     jsonHandler = new JsonHandler(this.resourcesPath);
   }
 
-  public void initialize() {}
+  @Override
+  public void initialize() {
+    this.loginPane.setOnKeyPressed(
+        event -> {
+          if (event.getCode().equals(KeyCode.ENTER)) {
+            try {
+              this.changeToMainView(event.getSource());
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          }
+        });
+  }
 
   /**
    * Checks that user is present.
    *
    * @return true or false if user is present
    */
-  public boolean checkUser() {
+  boolean checkUser() {
     String email = loginEmailInput.getText();
     String password = loginPasswordInput.getText();
 
@@ -44,5 +59,4 @@ public class LoginViewController extends AbstractController {
       return false;
     }
   }
-
 }

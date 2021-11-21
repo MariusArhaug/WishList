@@ -15,6 +15,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
+import java.io.File;
+import java.io.IOException;
+
 /** Abstract controller with changeScene method that all other controllers inherits. */
 public abstract class AbstractController {
 
@@ -30,11 +33,20 @@ public abstract class AbstractController {
   }
 
   private void changeScene(String fileName, ActionEvent event, User user) throws IOException {
+    Stage currentWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    this.changeSceneCore(fileName, user, currentWindow);
+  }
+
+  private void changeScene(String fileName, Object source, User user) throws IOException {
+    Stage currentWindow = (Stage) ((Node) source).getScene().getWindow();
+    this.changeSceneCore(fileName, user, currentWindow);
+  }
+
+  private void changeSceneCore(String fileName, User user, Stage currentWindow) throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(AbstractController.class.getResource("/wishList/ui/" + fileName));
     Parent newParent = loader.load();
     Scene newScene = new Scene(newParent);
-    Stage currentWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
     AbstractController newController = loader.getController();
     this.user = user;
@@ -63,6 +75,18 @@ public abstract class AbstractController {
       }
     } else {
       this.changeScene("MainView.fxml", event, this.user);
+    }
+  }
+
+  void changeToMainView(Object source) throws IOException {
+    if (this instanceof LoginViewController) {
+      if (((LoginViewController) this).checkUser()) {
+        this.changeScene("MainView.fxml", source, this.user);
+      } else {
+        errorMessage.setText("E-mail or password is incorrect");
+      }
+    } else {
+      this.changeScene("MainView.fxml", source, this.user);
     }
   }
 

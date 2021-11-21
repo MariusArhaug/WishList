@@ -2,8 +2,13 @@ package wishList.ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import wishList.json.JsonHandler;
+
+import java.io.IOException;
 
 /** Controller for RegisterView fxml file. */
 public class RegisterViewController extends AbstractController {
@@ -11,15 +16,27 @@ public class RegisterViewController extends AbstractController {
   @FXML protected TextField firstNameSignUp;
   @FXML protected TextField lastNameSignUp;
   @FXML protected TextField emailSignUp;
-  @FXML protected TextField passwordSignUp;
+  @FXML protected PasswordField passwordSignUp;
+  @FXML protected AnchorPane registerPane;
 
   public RegisterViewController() {
     jsonHandler = new JsonHandler(this.resourcesPath);
   }
 
-  @Override
   @FXML
-  public void initialize() {}
+  @Override
+  public void initialize() {
+    this.registerPane.setOnKeyPressed(
+        event -> {
+          if (event.getCode().equals(KeyCode.ENTER)) {
+            try {
+              this.changeToMainView(event.getSource());
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          }
+        });
+  }
 
   /**
    * Sign up user.
