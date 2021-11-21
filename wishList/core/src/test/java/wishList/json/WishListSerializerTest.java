@@ -50,6 +50,5 @@ class WishListSerializerTest {
     List<Wish> wishes = new ArrayList<>();
     assertEquals(wishListsFromFile.get(0).getWishes(), wishes);
     assertNull(wishList.getOwner());
-    assertFalse(wishList.getHideInfoFromOwner());
   }
 }

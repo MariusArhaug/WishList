@@ -13,6 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserTest {
   private User john;
   private User jane;
+  private Iterator<WishList> iterator;
+  private WishList element;
 
   @BeforeEach
   void SetUp() {
@@ -24,15 +26,16 @@ class UserTest {
   void TearDown() {
     jane = null;
     john = null;
+    iterator = null;
+    element = null;
   }
 
   @Test
   void TestUserConstructor() {
     String[][] illegalNames = {
       {"", ""},
-      {"moreThanTwentyFiveCharacters", ""},
-      {"", "moreThanTwentyFiveCharacters"},
-      {"moreThanTwentyFiveCharacters", "moreThanTwentyFiveCharacters"}
+      {"firstName", ""},
+      {"", "lastName"},
     };
 
     for (int i = 0; i < illegalNames.length; i++) {
@@ -64,30 +67,100 @@ class UserTest {
   }
 
   @Test
+  void getContacts() {
+    List<User> emptyContactList = new ArrayList<>();
+    assertEquals(john.getContacts(), emptyContactList);
+    john.addContact(jane);
+    emptyContactList.add(jane);
+    assertEquals(john.getContacts(), emptyContactList);
+  }
+
+  @Test
+  void getInvitedWishLists() {
+    List<WishList> emptyInvitedList = new ArrayList<>();
+    assertEquals(john.getInvitedWishLists(), emptyInvitedList);
+    jane.makeWishList("Baby shower");
+    jane.addContact(john);
+    User[] group = new User[]{john};
+    jane.makeGroup(group);
+    jane.shareWishList(jane.iterator().next(), jane.getWishListGroups().get(0));
+    assertEquals(john.getInvitedWishLists().toString(), "[Baby shower, Jane,Doe,Jane.Doe@gmail.com,123Password!]");
+  }
+
+  @Test
+  void getWishListGroups() {
+    List<List<User>> emptyGroupList = new ArrayList<>();
+    assertEquals(john.getWishListGroups(), emptyGroupList);
+    jane.addContact(john);
+    User[] group = new User[]{john};
+    jane.makeGroup(group);
+    assertEquals(jane.getWishListGroups().toString(), "[[John,Smith,John.Smith@gmail.com,!Password123]]");
+  }
+
+  @Test
+  void makeGroup() {
+    jane.addContact(john);
+    User[] group = new User[]{john};
+    jane.makeGroup(group);
+    assertEquals(jane.getWishListGroups().toString(), "[[John,Smith,John.Smith@gmail.com,!Password123]]");
+  }
+
+  @Test
+  void shareWishList() {
+    john.makeWishList("Christmas");
+    jane.addContact(john);
+    User[] group = new User[]{jane};
+    john.makeGroup(group);
+    element = john.iterator().next();
+    john.shareWishList(element, john.getWishListGroups().get(0));
+    assertThrows(IllegalCallerException.class, () -> {
+      jane.shareWishList(element, john.getWishListGroups().get(0));
+    });
+    assertEquals(jane.getInvitedWishLists().get(0), element);
+  }
+
+  @Test
+  void addContact() {
+    jane.addContact(john);
+    assertEquals(jane.getContacts().toString(), "[John,Smith,John.Smith@gmail.com,!Password123]");
+    assertEquals(john.getContacts().toString(), "[Jane,Doe,Jane.Doe@gmail.com,123Password!]");
+  }
+
+  @Test
+  void removeContact() {
+    jane.addContact(john);
+    jane.removeContact(john);
+    assertEquals(jane.getContacts().toString(), "[]");
+    assertEquals(john.getContacts().toString(), "[]");
+  }
+
+  @Test
   void TestGetWishListsAndToString() {
     List<WishList> emptyOwnList = new ArrayList<>();
-    assertEquals(john.getWishLists(), emptyOwnList);
+    List<WishList> iteratorList = new ArrayList<>();
+    john.iterator().forEachRemaining(iteratorList::add);
+    assertEquals(iteratorList, emptyOwnList);
     john.makeWishList("Baby shower");
-    assertEquals("Baby shower", john.getWishLists().get(0).getName());
+    assertEquals("Baby shower", john.iterator().next().getName());
   }
 
   @Test
   void TestAddWish() {
     WishList wishList = new WishList("Christmas");
     john.addWishList(wishList);
-
+    iterator = john.iterator();
+    element = iterator.next();
     assertEquals(
-        wishList.getWishes().toString(), john.getWishLists().get(0).getWishes().toString());
+        wishList.getWishes().toString(), element.getWishes().toString());
 
     Wish wish = new Wish("Book");
     wishList.addWish(wish);
-    john.addWish(john.getWishLists().get(0), wish);
-
+    john.addWish(element, wish);
     assertEquals(
-        wishList.getWishes().toString(), john.getWishLists().get(0).getWishes().toString());
+        wishList.getWishes().toString(), element.getWishes().toString());
 
     john.removeWishList("Christmas");
-    assertTrue(john.getWishLists().isEmpty());
+    assertFalse(john.iterator().hasNext());
 
     WishList wishList2 = new WishList("Second wishes");
     john.addWishList(wishList2);
@@ -104,36 +177,42 @@ class UserTest {
     wishList.addWish(wish);
     john.makeWishList("Christmas");
     john.addWish(wishList, wish);
-    assertEquals(wishList.toString(), john.getWishLists().get(0).toString());
+    iterator = john.iterator();
+    element = iterator.next();
+    assertEquals(wishList.toString(), element.toString());
     john.removeWish("Christmas", "Book");
     wishList.removeWish(wish);
-    assertEquals(wishList.toString(), john.getWishLists().get(0).toString());
+    iterator = john.iterator();
+    element = iterator.next();
+    assertEquals(wishList.toString(), element.toString());
   }
 
   @Test
   void TestMakeWishList() {
     john.makeWishList("Christmas");
+    iterator = john.iterator();
     assertEquals(
-        john.getWishLists().toString(),
-        "[Christmas, John,Smith,John.Smith@gmail.com,!Password123, false]");
+            iterator.next().toString(),
+        "Christmas, John,Smith,John.Smith@gmail.com,!Password123");
   }
 
   @Test
   void TestRemoveWishList() {
-    System.out.println(john.getWishLists());
     john.makeWishList("Christmas");
     assertTrue(john.getWishList("Christmas").isPresent());
+    iterator = john.iterator();
+    element = iterator.next();
     assertThrows(
-        IllegalCallerException.class, () -> jane.removeWishList(john.getWishLists().get(0)));
-    System.out.println(john.getWishLists());
-    john.removeWishList(john.getWishList("Christmas").get());
-    System.out.println(john.getWishLists());
-    assertTrue(john.getWishLists().isEmpty());
+        IllegalArgumentException.class, () -> jane.removeWishList(element.getName()));
+    john.removeWishList(john.getWishList("Christmas").get().getName());
+    assertFalse(john.iterator().hasNext());
 
     john.makeWishList("Dinner");
-    assertEquals("Dinner", john.getWishLists().get(0).getName());
+    iterator = john.iterator();
+    element = iterator.next();
+    assertEquals("Dinner", element.getName());
     john.removeWishList("Dinner");
-    assertTrue(john.getWishLists().isEmpty());
+    assertFalse(john.iterator().hasNext());
   }
 
   @Test

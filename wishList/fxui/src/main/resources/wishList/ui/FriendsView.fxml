@@ -6,30 +6,34 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="" prefHeight="441.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.FriendsViewController">
    <children>
-      <Button id="addNewFriendButton" fx:id="addNewFriendButton" layoutX="185.0" layoutY="94.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: black;" text="Add new friend" textFill="WHITE" />
+      <Button id="addNewFriendButton" fx:id="addNewFriendButton" layoutX="178.0" layoutY="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: black;" text="Add new friend" textFill="WHITE" />
       <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#signOut" style="-fx-background-color: black;" text="Sign out" textFill="WHITE" />
       <Button id="yourWishLists" fx:id="yourWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToMainView" style="-fx-background-color: black;" text="Your wish lists" textFill="WHITE" />
       <Button id="friendsWishLists" fx:id="friendsWishLists" layoutX="120.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToFriendsWishListsView" style="-fx-background-color: black;" text="Friends' wish list" textFill="WHITE" />
       <Label id="wishListName" fx:id="wishListName" layoutX="29.0" layoutY="130.0" text="Friends:" />
-      <TextField id="friendEmailField" fx:id="friendEmailField" layoutX="27.0" layoutY="94.0" />
-      <Label layoutX="27.0" layoutY="77.0" prefHeight="18.0" prefWidth="150.0" text="Email:" />
+      <TextField id="friendEmailField" fx:id="friendEmailField" layoutX="20.0" layoutY="80.0" />
+      <Label layoutX="20.0" layoutY="63.0" prefHeight="18.0" prefWidth="150.0" text="Email:" />
       <Label layoutX="104.0" layoutY="24.0" text="Your friends">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <ScrollPane hbarPolicy="NEVER" layoutX="-1.0" layoutY="148.0" prefHeight="245.0" prefWidth="320.0">
+      <ScrollPane hbarPolicy="NEVER" layoutX="-1.0" layoutY="148.0" prefHeight="214.0" prefWidth="320.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="245.0" prefWidth="320.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="214.0" prefWidth="320.0">
                <children>
-                  <ListView id="yourFriendsList" fx:id="yourFriendsList" prefHeight="244.0" prefWidth="320.0" />
+                  <ListView id="yourFriendsList" fx:id="yourFriendsList" prefHeight="214.0" prefWidth="320.0" />
                </children>
             </AnchorPane>
         </content>
       </ScrollPane>
+      <Line endX="219.0" endY="-1.52587890625E-5" layoutX="99.0" layoutY="400.0" startX="-100.0" />
+      <Button id="removeFriend" fx:id="removeFriend" layoutX="85.0" layoutY="368.0" mnemonicParsing="false" onAction="#changeToFriendsWishListsView" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: black;" text="Remove selected friend" textFill="WHITE" />
+      <Label id="yourFriendsFeedback" fx:id="yourFriendsFeedback" layoutX="20.0" layoutY="106.0" prefHeight="18.0" prefWidth="278.0" />
    </children>
 </AnchorPane>

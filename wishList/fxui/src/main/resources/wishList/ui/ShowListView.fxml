@@ -6,27 +6,31 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 
 <AnchorPane fx:id="" prefHeight="441.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.ShowListViewController">
    <children>
-      <Button id="addNewWishButton" fx:id="addNewWishButton" layoutX="185.0" layoutY="94.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: black;" text="Add new wish" textFill="WHITE" />
+      <Button id="addNewWishButton" fx:id="addNewWishButton" layoutX="185.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: black;" text="Add new wish" textFill="WHITE" />
       <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#signOut" style="-fx-background-color: black;" text="Sign out" textFill="WHITE" />
       <Button id="friendWishLists" fx:id="friendWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToFriendsWishListsView" style="-fx-background-color: black;" text="Friends’ wish lists" textFill="WHITE" />
       <Button id="yourFriends" fx:id="yourFriends" layoutX="127.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToFriendsView" style="-fx-background-color: black;" text="Your friends" textFill="WHITE" />
       <Label id="wishListName" fx:id="wishListName" layoutX="29.0" layoutY="130.0" text="#wishListName:" />
-      <TextField id="addNewWishField" fx:id="addNewWishField" layoutX="27.0" layoutY="94.0" />
-      <Label layoutX="27.0" layoutY="77.0" prefHeight="18.0" prefWidth="150.0" text="What do you want to add?:" />
+      <TextField id="addNewWishField" fx:id="addNewWishField" layoutX="27.0" layoutY="87.0" />
+      <Label layoutX="27.0" layoutY="70.0" prefHeight="18.0" prefWidth="150.0" text="What do you want to add?:" />
       <Button id="shareList" fx:id="shareList" layoutX="103.0" layoutY="36.0" mnemonicParsing="false" onAction="#changeToGroupsView" style="-fx-background-color: black;" text="Share this wish list" textFill="WHITE" />
       <Label layoutX="54.0" layoutY="14.0" text="Want to share this wish list with friends?" />
       <Button id="backToYourWishLists" fx:id="backToYourWishLists" cancelButton="true" layoutX="13.0" layoutY="10.0" mnemonicParsing="false" onAction="#changeToMainView" style="-fx-background-color: black;" text="⬅" textFill="WHITE" />
-      <ScrollPane hbarPolicy="NEVER" layoutX="-3.0" layoutY="148.0" prefHeight="248.0" prefWidth="320.0">
+      <ScrollPane hbarPolicy="NEVER" layoutX="-3.0" layoutY="148.0" prefHeight="215.0" prefWidth="320.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="246.0" prefWidth="322.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="214.0" prefWidth="322.0">
                <children>
-                  <ListView id="wishesListView" fx:id="wishesListView" prefHeight="248.0" prefWidth="320.0" />
+                  <ListView id="wishesListView" fx:id="wishesListView" prefHeight="215.0" prefWidth="320.0" />
                </children>
             </AnchorPane>
         </content>
       </ScrollPane>
+      <Label id="addWishFeedback" fx:id="addWishFeedback" alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="113.0" prefHeight="18.0" prefWidth="278.0" textAlignment="CENTER" />
+      <Line endX="216.99996948242188" layoutX="103.0" layoutY="400.0" startX="-100.0" />
+      <Button id="removeWish" fx:id="removeWish" layoutX="91.0" layoutY="368.0" mnemonicParsing="false" onAction="#changeToFriendsView" style="-fx-background-color: black;" text="Remove selected wish" textFill="WHITE" />
    </children>
 </AnchorPane>

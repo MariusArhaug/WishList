@@ -1,7 +1,5 @@
 package wishList.ui;
 
-import java.io.File;
-import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,27 +12,38 @@ import javafx.stage.Stage;
 import wishList.core.User;
 import wishList.utils.Utils;
 
+import java.io.File;
+import java.io.IOException;
+
 /** Abstract controller with changeScene method that all other controllers inherits. */
 public abstract class AbstractController {
 
-  User user;
+  final String resourcesPath =
+      Utils.updatePathForAnyOs(
+          new File("").getAbsolutePath(), "src", "main", "resources", "wishList", "ui");
   @FXML protected Label errorMessage;
+  User user;
   @FXML private Button signOut;
-
-  public final String resourcesPath =
-          Utils.updatePathForAnyOs(
-                  new File("").getAbsolutePath(), "src", "main", "resources", "wishList", "ui");
 
   void updateUser(User user) {
     this.user = user;
   }
 
-  void changeScene(String fileName, ActionEvent event, User user) throws IOException {
+  private void changeScene(String fileName, ActionEvent event, User user) throws IOException {
+    Stage currentWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    this.changeSceneCore(fileName, user, currentWindow);
+  }
+
+  private void changeScene(String fileName, Object source, User user) throws IOException {
+    Stage currentWindow = (Stage) ((Node) source).getScene().getWindow();
+    this.changeSceneCore(fileName, user, currentWindow);
+  }
+
+  private void changeSceneCore(String fileName, User user, Stage currentWindow) throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(AbstractController.class.getResource("/wishList/ui/" + fileName));
     Parent newParent = loader.load();
     Scene newScene = new Scene(newParent);
-    Stage currentWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
     AbstractController newController = loader.getController();
     this.user = user;
@@ -46,9 +55,7 @@ public abstract class AbstractController {
     }
   }
 
-  void initialize() {
-
-  }
+  void initialize() {}
 
   /**
    * Change scene to MainView.fxml
@@ -63,9 +70,20 @@ public abstract class AbstractController {
       } else {
         errorMessage.setText("E-mail or password is incorrect");
       }
-    }
-    else {
+    } else {
       this.changeScene("MainView.fxml", event, this.user);
+    }
+  }
+
+  void changeToMainView(Object source) throws IOException {
+    if (this instanceof LoginViewController) {
+      if (((LoginViewController) this).checkUser()) {
+        this.changeScene("MainView.fxml", source, this.user);
+      } else {
+        errorMessage.setText("E-mail or password is incorrect");
+      }
+    } else {
+      this.changeScene("MainView.fxml", source, this.user);
     }
   }
 
@@ -87,7 +105,6 @@ public abstract class AbstractController {
    */
   public void changeToLoginView(ActionEvent event) throws IOException {
     this.changeScene("LoginView.fxml", event, this.user);
-
   }
 
   /**
@@ -98,16 +115,6 @@ public abstract class AbstractController {
    */
   public void changeToShowListView(ActionEvent event) throws IOException {
     this.changeScene("ShowListView.fxml", event, this.user);
-  }
-
-  /**
-   * Change scene to Covered.fxml
-   *
-   * @param event gets state
-   * @throws IOException if file is not found
-   */
-  public void changeToCovered(ActionEvent event) throws IOException {
-    this.changeScene("Covered.fxml", event, this.user);
   }
 
   /**
@@ -158,16 +165,6 @@ public abstract class AbstractController {
    */
   public void changeToMakeNewGroupView(ActionEvent event) throws IOException {
     this.changeScene("MakeNewGroupView.fxml", event, this.user);
-  }
-
-  /**
-   * Change scene to NotCovered.fxml
-   *
-   * @param event gets state
-   * @throws IOException if file is not found
-   */
-  public void changeToNotCovered(ActionEvent event) throws IOException {
-    this.changeScene("NotCovered.fxml", event, this.user);
   }
 
   /**

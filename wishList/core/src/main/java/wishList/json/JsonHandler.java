@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import wishList.core.User;
@@ -108,8 +109,7 @@ public class JsonHandler {
   WishList addWishList(String name, User user) throws Exception {
     try {
 
-      List<WishList> ownedWishLists = user.getWishLists();
-      for (WishList w : ownedWishLists) {
+      for (WishList w : user) {
         if (w.getName().equals(name)) {
           throw new IllegalArgumentException("This user already has a wish list with this name!");
         }

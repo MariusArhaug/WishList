@@ -1,26 +1,41 @@
 package wishList.ui;
 
-import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import wishList.json.JsonHandler;
+
+import java.io.IOException;
 
 /** Controller for RegisterView fxml file. */
 public class RegisterViewController extends AbstractController {
+  private final JsonHandler jsonHandler;
   @FXML protected TextField firstNameSignUp;
   @FXML protected TextField lastNameSignUp;
   @FXML protected TextField emailSignUp;
-  @FXML protected TextField passwordSignUp;
-
-  private final JsonHandler jsonHandler;
+  @FXML protected PasswordField passwordSignUp;
+  @FXML protected AnchorPane registerPane;
 
   public RegisterViewController() {
     jsonHandler = new JsonHandler(this.resourcesPath);
   }
-  @FXML
-  public void initialize() {
 
+  @FXML
+  @Override
+  public void initialize() {
+    this.registerPane.setOnKeyPressed(
+        event -> {
+          if (event.getCode().equals(KeyCode.ENTER)) {
+            try {
+              this.changeToMainView(event.getSource());
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          }
+        });
   }
 
   /**
@@ -33,13 +48,12 @@ public class RegisterViewController extends AbstractController {
     try {
       this.addUser(event);
       changeToMainView(event);
-
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
-  private void addUser(ActionEvent event) {
+  private void addUser(ActionEvent event) throws Exception {
     String firstName = firstNameSignUp.getText();
     String lastName = lastNameSignUp.getText();
     String email = emailSignUp.getText();
@@ -47,9 +61,8 @@ public class RegisterViewController extends AbstractController {
 
     try {
       this.updateUser(jsonHandler.addUser(firstName, lastName, email, password));
-
       changeToMainView(event);
-    } catch (Exception e) {
+    } catch (IllegalArgumentException e) {
       e.printStackTrace();
     }
   }
