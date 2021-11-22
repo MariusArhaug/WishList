@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import wishList.core.User;
 import wishList.core.WishList;
-import wishList.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,20 +19,20 @@ import java.nio.file.Paths;
 /** Abstract controller with changeScene method that all other controllers inherits. */
 public abstract class AbstractController {
 
-  User user;
-  WishList wishListToShare;
   final String resourcesPath =
       Paths.get(new File("").getAbsolutePath(), "src", "main", "resources", "wishList", "ui")
           .toString();
   @FXML protected Label errorMessage;
   User user;
+  WishList wishListToShare;
   @FXML private Button signOut;
 
   void updateUser(User user) {
     this.user = user;
   }
 
-  private void changeScene(String fileName, ActionEvent event, User user, WishList wishList) throws IOException {
+  private void changeScene(String fileName, ActionEvent event, User user, WishList wishList)
+      throws IOException {
     Stage currentWindow = (Stage) ((Node) event.getSource()).getScene().getWindow();
     this.changeSceneCore(fileName, user, currentWindow, wishList);
   }
@@ -43,7 +42,9 @@ public abstract class AbstractController {
     this.changeSceneCore(fileName, user, currentWindow, null);
   }
 
-  private void changeSceneCore(String fileName, User user, Stage currentWindow, WishList wishListToShare) throws IOException {
+  private void changeSceneCore(
+      String fileName, User user, Stage currentWindow, WishList wishListToShare)
+      throws IOException {
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(AbstractController.class.getResource("/wishList/ui/" + fileName));
     Parent newParent = loader.load();
@@ -63,10 +64,7 @@ public abstract class AbstractController {
     }
   }
 
-  void initialize() {
-  }
-
-
+  void initialize() {}
 
   /**
    * Change scene to MainView.fxml
@@ -81,8 +79,7 @@ public abstract class AbstractController {
       } else {
         errorMessage.setText("E-mail or password is incorrect");
       }
-    }
-    else {
+    } else {
       this.changeScene("MainView.fxml", event, this.user, wishListToShare);
     }
   }
@@ -117,7 +114,6 @@ public abstract class AbstractController {
    */
   public void changeToLoginView(ActionEvent event) throws IOException {
     this.changeScene("LoginView.fxml", event, this.user, this.wishListToShare);
-
   }
 
   /**
@@ -136,7 +132,7 @@ public abstract class AbstractController {
    * @param event gets state
    * @throws IOException if file is not found
    */
-  public void changeToShowListView(ActionEvent event, String wishListName) throws IOException {
+  void changeToShowListView(ActionEvent event, String wishListName) throws IOException {
     this.changeScene("ShowListView.fxml", event, this.user, user.getWishList(wishListName).get());
   }
 
@@ -150,14 +146,13 @@ public abstract class AbstractController {
     this.changeScene("FriendsView.fxml", event, this.user, this.wishListToShare);
   }
 
-
   /**
    * Change scene to FriendsWishesView.fxml
    *
    * @param event gets state
    * @throws IOException if file is not found
    */
-  public void changeToFriendsWishesView(ActionEvent event, WishList wishList) throws IOException {
+  void changeToFriendsWishesView(ActionEvent event, WishList wishList) throws IOException {
     this.changeScene("FriendsWishesView.fxml", event, this.user, wishList);
   }
 
