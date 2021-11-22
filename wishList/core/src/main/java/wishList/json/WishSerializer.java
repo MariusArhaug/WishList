@@ -17,9 +17,7 @@ public class WishSerializer extends JsonSerializer<Wish> {
       throws IOException {
     jsonGenerator.writeStartObject();
     jsonGenerator.writeStringField("name", wish.getName());
-    System.out.println("1");
-    jsonGenerator.writeObjectField("belongTo", wish.getBelongTo());
-    System.out.println("2");
+    jsonGenerator.writeObjectField("belongTo", wish.getBelongTo().getName());
     jsonGenerator.writeEndObject();
   }
 }

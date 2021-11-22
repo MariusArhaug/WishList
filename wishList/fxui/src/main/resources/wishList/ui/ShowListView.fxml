@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="" prefHeight="441.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.ShowListViewController">
    <children>
-      <Button id="addNewWishButton" fx:id="addNewWishButton" layoutX="185.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: black;" text="Add new wish" textFill="WHITE" />
+      <Button id="addNewWishButton" fx:id="addNewWishButton" layoutX="185.0" layoutY="87.0" mnemonicParsing="false" onAction="#addWish" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: black;" text="Add new wish" textFill="WHITE" />
       <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#signOut" style="-fx-background-color: black;" text="Sign out" textFill="WHITE" />
       <Button id="friendWishLists" fx:id="friendWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToFriendsWishListsView" style="-fx-background-color: black;" text="Friends’ wish lists" textFill="WHITE" />
       <Button id="yourFriends" fx:id="yourFriends" layoutX="127.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToFriendsView" style="-fx-background-color: black;" text="Your friends" textFill="WHITE" />
@@ -31,6 +31,6 @@
       </ScrollPane>
       <Label id="addWishFeedback" fx:id="addWishFeedback" alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="113.0" prefHeight="18.0" prefWidth="278.0" textAlignment="CENTER" />
       <Line endX="216.99996948242188" layoutX="103.0" layoutY="400.0" startX="-100.0" />
-      <Button id="removeWish" fx:id="removeWish" layoutX="91.0" layoutY="368.0" mnemonicParsing="false" onAction="#changeToFriendsView" style="-fx-background-color: black;" text="Remove selected wish" textFill="WHITE" />
+      <Button id="removeWish" fx:id="removeWish" layoutX="91.0" layoutY="368.0" mnemonicParsing="false" onAction="#removeWish" style="-fx-background-color: black;" text="Remove selected wish" textFill="WHITE" />
    </children>
 </AnchorPane>

@@ -4,11 +4,13 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import wishList.core.User;
 
+import java.io.File;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -41,6 +43,12 @@ class UserDeserializerTest {
     factory = null;
     parser = null;
     userDeserializer = null;
+  }
+
+  @AfterAll
+  static void finish() {
+    File file = new File(JsonHandlerTest.testFolder + "user@gmailcom.json");
+    file.delete();
   }
 
   @Test

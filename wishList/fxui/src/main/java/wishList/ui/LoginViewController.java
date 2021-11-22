@@ -44,7 +44,6 @@ public class LoginViewController extends AbstractController {
   boolean checkUser() {
     String email = loginEmailInput.getText();
     String password = loginPasswordInput.getText();
-
     try {
       Optional<User> tryUser = jsonHandler.loadUser(email, password);
       if (tryUser.isPresent()) {

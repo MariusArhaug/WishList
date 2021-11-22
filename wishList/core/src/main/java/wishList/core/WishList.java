@@ -123,7 +123,7 @@ public class WishList implements Iterable<Wish> {
 
   @Override
   public String toString() {
-    return "" + this.name + ", " + this.owner + "";
+    return "" + this.name + "," + this.owner + "";
   }
 
   /**

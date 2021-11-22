@@ -3,6 +3,8 @@ package wishList.json;
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.JsonPath;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +20,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserSerializerTest {
-  private final File usersTestFile = new File(JsonHandlerTest.testFolder + "users.json");
+  private final File usersTestFile = new File(JsonHandlerTest.testFolder + "user@gmailcom.json");
+  private JsonHandler jsonHandler;
   private User user;
   private ObjectMapper mapper;
 
@@ -27,6 +30,7 @@ class UserSerializerTest {
     user = new User("first", "last", "user@gmail.com", "123Password!");
     mapper = new ObjectMapper();
     mapper.getFactory().createGenerator(usersTestFile, JsonEncoding.UTF8);
+    jsonHandler = new JsonHandler(JsonHandlerTest.testFolder);
   }
 
   @AfterEach
@@ -35,27 +39,29 @@ class UserSerializerTest {
     mapper = null;
   }
 
+  @AfterAll
+  static void finish() {
+    File file = new File(JsonHandlerTest.testFolder + "user@gmailcom.json");
+    file.delete();
+  }
+
   @Test
   void userSerializerTest() throws Exception {
-    List<User> users = new ArrayList<>();
-    users.add(user);
-    mapper.writeValue(usersTestFile, users);
-
-    User[] usersFromFile = mapper.readValue(usersTestFile, new TypeReference<User[]>() {});
-
-    assertEquals(usersFromFile[0].getFirstName(), "first");
-    assertEquals(usersFromFile[0].getLastName(), "last");
-    assertEquals(usersFromFile[0].getEmail(), "user@gmail.com");
-    assertEquals(usersFromFile[0].getPassword(), "123Password!");
+    jsonHandler.addUser(user);
+    //mapper.writeValue(usersTestFile, user);
+    User userFromFile = jsonHandler.loadUser(user.getEmail(), user.getPassword()).get();
+    //User userFromFile = mapper.readValue(usersTestFile, User.class);
+    assertEquals(userFromFile.getFirstName(), "first");
+    assertEquals(userFromFile.getLastName(), "last");
+    assertEquals(userFromFile.getEmail(), "user@gmail.com");
+    assertEquals(userFromFile.getPassword(), "123Password!");
     List<WishList> emptyOwnList = new ArrayList<>();
     List<WishList> iteratorList = new ArrayList<>();
-    usersFromFile[0].iterator().forEachRemaining(iteratorList::add);
+    userFromFile.iterator().forEachRemaining(iteratorList::add);
     assertEquals(iteratorList, emptyOwnList);
     List<WishList> invitedWishLists = new ArrayList<>();
-    assertEquals(usersFromFile[0].getInvitedWishLists(), invitedWishLists);
-    List<List<User>> groups = new ArrayList<>();
-    assertEquals(usersFromFile[0].getWishListGroups(), groups);
+    assertEquals(userFromFile.getInvitedWishLists(), invitedWishLists);
     List<User> contacts = new ArrayList<>();
-    assertEquals(usersFromFile[0].getContacts(), contacts);
+    assertEquals(userFromFile.getContacts(), contacts);
   }
 }
