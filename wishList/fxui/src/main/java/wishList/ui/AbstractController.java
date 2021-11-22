@@ -20,7 +20,7 @@ import java.nio.file.Paths;
 public abstract class AbstractController {
 
   final String resourcesPath =
-      Paths.get(new File("").getAbsolutePath(), "src", "main", "resources", "wishList", "ui")
+      Paths.get(new File("").getAbsolutePath(), "src", "main", "resources", "wishList", "users")
           .toString();
   @FXML protected Label errorMessage;
   User user;
