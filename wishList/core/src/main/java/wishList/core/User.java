@@ -9,11 +9,10 @@ import java.util.regex.Pattern;
  * WishList}.
  */
 public class User implements Iterable<WishList> {
-
+  private static List<User> users = new ArrayList<>();
   private final List<WishList> ownedWishLists = new ArrayList<>();
-  private final List<WishList> invitedWishLists = new ArrayList<>();
-  private final List<List<User>> wishListGroups = new ArrayList<>();
-  private final List<User> contacts = new ArrayList<>();
+  private List<WishList> invitedWishLists = new ArrayList<>();
+  private final List<String> contacts = new ArrayList<>();
   private String email;
   private String password;
   private String firstName;
@@ -31,12 +30,15 @@ public class User implements Iterable<WishList> {
   public User(String firstName, String lastName, String email, String password)
       throws IllegalArgumentException {
     this.setFirstName(firstName).setLastName(lastName).setEmail(email).setPassword(password);
+    users.add(this);
   }
 
   /**
    * Empty constructor for json test purposes.
    */
-  public User() {}
+  public User() {
+    users.add(this);
+  }
 
   /**
    * Get first name of user.
@@ -78,12 +80,13 @@ public class User implements Iterable<WishList> {
     return new ArrayList<>(this.invitedWishLists);
   }
 
-  public List<List<User>> getWishListGroups() {
-    return new ArrayList<>(this.wishListGroups);
-  }
-
   public List<User> getContacts() {
-    return this.contacts;
+    List<User> myContacts = new ArrayList<>();
+    for (String s : this.contacts) {
+      User u = users.stream().filter(e -> e.getEmail().equals(s)).findFirst().orElse(null);
+      myContacts.add(u);
+    }
+    return myContacts;
   }
 
   /**
@@ -204,15 +207,16 @@ public class User implements Iterable<WishList> {
    *
    *
    * @param wishList Wish list that
-   * @return group invited to wish list
+   * @return group of users invited to wish list
    */
   private List<User> groupSharedWith(WishList wishList) {
-    for (List<User> g : this.getWishListGroups()) {
-      if (g.get(0).getInvitedWishLists().contains(wishList)) {
-        return g;
+    List<User> group = new ArrayList<>();
+    for (User u : users) {
+      if (u.getInvitedWishLists().contains(wishList)) {
+        group.add(u);
       }
     }
-    return null;
+    return group;
   }
 
   /**
@@ -270,11 +274,17 @@ public class User implements Iterable<WishList> {
   /**
    * Remove contact.
    *
-   * @param notContact contact to remove
+   * @param user contact to remove
    */
-  public void removeContact(User notContact) {
-    this.contacts.remove(notContact);
-    notContact.getContacts().remove(this);
+  public void removeContact(User user) {
+    this.removeContact(user.getEmail());
+  }
+
+  public void removeContact(String email) {
+    this.contacts.remove(this.contacts.stream()
+            .filter(e -> e.equals(email))
+            .findFirst()
+            .orElse(null));
   }
 
   /**
@@ -283,8 +293,11 @@ public class User implements Iterable<WishList> {
    * @param newContact contact to add
    */
   public void addContact(User newContact) {
-    this.contacts.add(newContact);
-    newContact.getContacts().add(this);
+    this.contacts.add(newContact.getEmail());
+  }
+
+  public void addContact(String email) {
+    this.contacts.add(email);
   }
 
   /**
@@ -296,7 +309,7 @@ public class User implements Iterable<WishList> {
   public void shareWishList(WishList wishList, List<User> group) {
     if (wishListsExist(wishList.getName())) {
       for (User u : group) {
-        u.addInvitedToWishList(wishList);
+        u.addInvitedToWishList(wishList);  
       }
     } else {
       throw new IllegalCallerException("You do not own this wishlist so you can not share it!");
@@ -312,27 +325,6 @@ public class User implements Iterable<WishList> {
     this.invitedWishLists.add(wishList);
   }
 
-
-  /**
-   * Create a group with contacts.
-   *
-   * @param chosenContactsArray users to make group out of
-   */
-  public void makeGroup(User... chosenContactsArray) {
-    List<User> chosenContactsList = new ArrayList<>();
-    Collections.addAll(chosenContactsList, chosenContactsArray);
-    addGroup(chosenContactsList);
-  }
-
-  /**
-   * Add new group of people into this user's list of previously used groups.
-   *
-   * @param newGroup group to add
-   */
-  private void addGroup(List<User> newGroup) {
-    this.wishListGroups.add(newGroup);
-  }
-
   /**
    * Get wishList matching the name.
    *
@@ -343,6 +335,10 @@ public class User implements Iterable<WishList> {
     return this.ownedWishLists.stream()
         .filter(wishList -> name.equals(wishList.getName()))
         .findAny();
+  }
+
+  public static List<User> getUsers() {
+    return new ArrayList<>(users);
   }
 
   @Override

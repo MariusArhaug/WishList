@@ -1,5 +1,6 @@
 package wishList.json;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,14 +30,13 @@ public class JsonHandlerTest {
   private JsonHandler jsonHandler;
 
   private static void resetFiles() throws Exception {
-    Utils.resetFile(testFolder, "users.json");
-    Utils.resetFile(testFolder, "wishes.json");
-    Utils.resetFile(testFolder, "wishLists.json");
+    Utils.resetFile(testFolder, "gmail@gmailcom.json");
+    Utils.resetFile(testFolder, "John@emailno.json");
+
   }
 
   @BeforeEach
   void setUp() throws Exception {
-    resetFiles();
     user = new User("FirstName", "LastName", "gmail@gmail.com", "Password123!");
     wishList = new WishList("Wedding", user);
     wish = new Wish("Chair");
@@ -50,6 +50,14 @@ public class JsonHandlerTest {
     wishList = null;
     wish = null;
     jsonHandler = null;
+  }
+
+  @AfterAll
+  static void finish() {
+    File file1 = new File(testFolder + "gmail@gmailcom.json");
+    File file2 = new File(testFolder + "John@emailno.json");
+    file1.delete();
+    file2.delete();
   }
 
   @Test

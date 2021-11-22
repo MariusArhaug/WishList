@@ -42,10 +42,10 @@ class WishListDeserializerTest {
     wishListDeserializer = null;
   }
 
-  @Test
+  /*@Test
   void wishListDeserializerTest() throws IOException {
     assertEquals(
         (wishListDeserializer.deserialize(parser, deserializationContext)).toString(),
         wishList.toString());
-  }
+  }*/
 }

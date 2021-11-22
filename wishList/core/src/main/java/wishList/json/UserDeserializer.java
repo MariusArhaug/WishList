@@ -57,38 +57,22 @@ public class UserDeserializer extends JsonDeserializer<User> {
       }
     }
     JsonNode invitedWishListsNode = node.get("invitedWishLists");
+    System.out.println(invitedWishListsNode);
     if (invitedWishListsNode instanceof ArrayNode && loadDetails) {
-      for (JsonNode initedWishListNode : invitedWishListsNode) {
-        WishList wishList = wishListDeserializer.deserializeWishList(initedWishListNode);
+      for (JsonNode invitedWishListNode : invitedWishListsNode) {
+        WishList wishList = wishListDeserializer.deserializeWishList(invitedWishListNode);
+        System.out.println("den!" + wishList);
         if (wishList != null) {
+          System.out.println("get into if");
           newUser.getInvitedWishLists().add(wishList);
         }
-      }
-    }
-    JsonNode groupsNode = node.get("wishListGroups");
-    if (groupsNode instanceof ArrayNode && loadDetails) {
-      for (JsonNode groupNode : groupsNode) {
-        List<User> group = new ArrayList<>();
-        for (JsonNode groupMember : groupNode) {
-          String firstNameMember = groupMember.get("firstName").asText();
-          String lastNameMember = groupMember.get("lastName").asText();
-          String emailMember = groupMember.get("email").asText();
-          String passwordMember = groupMember.get("password").asText();
-          User member = new User(firstNameMember, lastNameMember, emailMember, passwordMember);
-          group.add(member);
-        }
-        newUser.getWishListGroups().add(group);
       }
     }
     JsonNode contactsNode = node.get("contacts");
     if (contactsNode instanceof ArrayNode && loadDetails) {
       for (JsonNode contactNode : contactsNode) {
-        String firstNameContact = contactNode.get("firstName").asText();
-        String lastNameContact = contactNode.get("lastName").asText();
-        String emailContact = contactNode.get("email").asText();
-        String passwordContact = contactNode.get("password").asText();
-        User contact = new User(firstNameContact, lastNameContact, emailContact, passwordContact);
-        newUser.addContact(contact);
+        String emailContact = contactNode.asText();
+        newUser.addContact(emailContact);
       }
     }
     return newUser;

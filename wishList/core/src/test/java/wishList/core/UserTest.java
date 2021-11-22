@@ -1,8 +1,6 @@
 package wishList.core;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,11 +13,11 @@ class UserTest {
   private User jane;
   private Iterator<WishList> iterator;
   private WishList element;
-
+  
   @BeforeEach
   void SetUp() {
-    john = new User("John", "Smith", "John.Smith@gmail.com", "!Password123");
-    jane = new User("Jane", "Doe", "Jane.Doe@gmail.com", "123Password!");
+        john = new User("John", "Smith", "John.Smith@gmail.com", "!Password123");
+        jane = new User("Jane", "Doe", "Jane.Doe@gmail.com", "123Password!");
   }
 
   @AfterEach
@@ -72,7 +70,8 @@ class UserTest {
     assertEquals(john.getContacts(), emptyContactList);
     john.addContact(jane);
     emptyContactList.add(jane);
-    assertEquals(john.getContacts(), emptyContactList);
+    System.out.println(john.getContacts());
+    assertEquals(john.getContacts().toString(), emptyContactList.toString());
   }
 
   @Test
@@ -81,40 +80,22 @@ class UserTest {
     assertEquals(john.getInvitedWishLists(), emptyInvitedList);
     jane.makeWishList("Baby shower");
     jane.addContact(john);
-    User[] group = new User[]{john};
-    jane.makeGroup(group);
-    jane.shareWishList(jane.iterator().next(), jane.getWishListGroups().get(0));
-    assertEquals(john.getInvitedWishLists().toString(), "[Baby shower, Jane,Doe,Jane.Doe@gmail.com,123Password!]");
-  }
-
-  @Test
-  void getWishListGroups() {
-    List<List<User>> emptyGroupList = new ArrayList<>();
-    assertEquals(john.getWishListGroups(), emptyGroupList);
-    jane.addContact(john);
-    User[] group = new User[]{john};
-    jane.makeGroup(group);
-    assertEquals(jane.getWishListGroups().toString(), "[[John,Smith,John.Smith@gmail.com,!Password123]]");
-  }
-
-  @Test
-  void makeGroup() {
-    jane.addContact(john);
-    User[] group = new User[]{john};
-    jane.makeGroup(group);
-    assertEquals(jane.getWishListGroups().toString(), "[[John,Smith,John.Smith@gmail.com,!Password123]]");
+    List<User> group = new ArrayList<>();
+    group.add(john);
+    jane.shareWishList(jane.iterator().next(), group);
+    assertEquals(john.getInvitedWishLists().toString(), "[Baby shower,Jane,Doe,Jane.Doe@gmail.com,123Password!]");
   }
 
   @Test
   void shareWishList() {
     john.makeWishList("Christmas");
     jane.addContact(john);
-    User[] group = new User[]{jane};
-    john.makeGroup(group);
+    List<User> group = new ArrayList<>();
+    group.add(jane);
     element = john.iterator().next();
-    john.shareWishList(element, john.getWishListGroups().get(0));
+    john.shareWishList(element, group);
     assertThrows(IllegalCallerException.class, () -> {
-      jane.shareWishList(element, john.getWishListGroups().get(0));
+      jane.shareWishList(element, group);
     });
     assertEquals(jane.getInvitedWishLists().get(0), element);
   }
@@ -123,7 +104,6 @@ class UserTest {
   void addContact() {
     jane.addContact(john);
     assertEquals(jane.getContacts().toString(), "[John,Smith,John.Smith@gmail.com,!Password123]");
-    assertEquals(john.getContacts().toString(), "[Jane,Doe,Jane.Doe@gmail.com,123Password!]");
   }
 
   @Test
@@ -193,7 +173,7 @@ class UserTest {
     iterator = john.iterator();
     assertEquals(
             iterator.next().toString(),
-        "Christmas, John,Smith,John.Smith@gmail.com,!Password123");
+        "Christmas,John,Smith,John.Smith@gmail.com,!Password123");
   }
 
   @Test

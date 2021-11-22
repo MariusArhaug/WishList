@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -32,11 +33,12 @@ public class UserSerializer extends JsonSerializer<User> {
     jsonGenerator.writeStringField("lastName", user.getLastName());
     jsonGenerator.writeStringField("email", user.getEmail());
     jsonGenerator.writeStringField("password", user.getPassword());
-
     jsonGenerator.writeArrayFieldStart("ownedWishLists");
-    while (user.iterator().hasNext()) {
-      WishList list = user.iterator().next();
-      jsonGenerator.writeObject(list);
+    List<WishList> ownedWishLists = new ArrayList<>();
+    Iterator<WishList> iteratorWishLists = user.iterator();
+    iteratorWishLists.forEachRemaining(ownedWishLists::add);
+    for (WishList w : ownedWishLists) {
+      jsonGenerator.writeObject(w);
     }
     jsonGenerator.writeEndArray();
     jsonGenerator.writeArrayFieldStart("invitedWishLists");
@@ -44,14 +46,9 @@ public class UserSerializer extends JsonSerializer<User> {
       jsonGenerator.writeObject(w);
     }
     jsonGenerator.writeEndArray();
-    jsonGenerator.writeArrayFieldStart("wishListGroups");
-    for (List<User> l : user.getWishListGroups()) {
-      jsonGenerator.writeObject(l);
-    }
-    jsonGenerator.writeEndArray();
     jsonGenerator.writeArrayFieldStart("contacts");
     for (User u : user.getContacts()) {
-      jsonGenerator.writeObject(u);
+      jsonGenerator.writeObject(u.getEmail());
     }
     jsonGenerator.writeEndArray();
     jsonGenerator.writeEndObject();

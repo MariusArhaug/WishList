@@ -69,6 +69,6 @@ public class Wish {
 
   @Override
   public String toString() {
-    return "" + this.name + "," + this.belongTo + ",";
+    return "" + this.name + "," + this.belongTo + "";
   }
 }

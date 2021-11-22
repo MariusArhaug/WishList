@@ -46,11 +46,8 @@ public class WishListDeserializer extends JsonDeserializer<WishList> {
       WishList wishList = new WishList(node.get("name").asText());
       JsonNode ownerNode = node.get("owner");
       if (ownerNode instanceof ObjectNode) {
-        String firstName = ownerNode.get("firstName").asText();
-        String lastName = ownerNode.get("lastName").asText();
         String email = ownerNode.get("email").asText();
-        String password = ownerNode.get("password").asText();
-        User user = new User(firstName, lastName, email, password);
+        User user = User.getUsers().stream().filter(e -> e.getEmail().equals(email)).findFirst().orElse(null);
         wishList.setOwner(user);
       }
 
