@@ -32,6 +32,47 @@ wish lists for different events. After creating a wish list, wishes can be added
 - When making a wish list: Give the list a desired name, and see all the lists the user has already made
 - When adding wishes: Have the ability to see all the wishes stored in a wish list, and be able to add new ones
 
+## See own wish lists (#Story-3):
+
+As a user, I want to have a way of seeing all the wishlists I have created.
+
+The user should have an easy way of seeing all the wishlists they have created. They should also be able to see the
+content of these wishlists. This would be a good place to allow the user to add and remove items from a wishlist.
+
+## Important points (#Story-3):
+
+- A list of the user's wishlists should be ordered in a proper fashion
+- How a user can edit the content of a wishlist should be intuitive
+
+## Add friends (#Story-4)
+
+As a user, I want to have a list of my friends who also uses the app. I want to be able to share my wishlists with my
+friends, and I want them to be able to share theirs with me.
+
+The user needs to be able to add friends. It should be clear and straight-forward how this is done. The most practical
+way of adding friends would be to add them by the email they have registered. If they want to unfriend a friend, they
+should be able to do so. The user should also be able to share their wishlists with the friends of their choice.
+
+## Important points (#Story-4)
+
+- The "add friends" button should be visible and easy to see
+- It should be intuitive and easy to delete someone as a friend if the user wishes to do so
+- The user should be able to choose which friends to share a certain wishlist with
+- It should be possible to share a certain wishlist with friends both straight after creating the wishlist, and later
+
+## See wishlists shared with the user (#Story-5)
+
+As a user, I want to have easy way of seeing what wishlists have been shared with me, and see who shared it with me. I
+of course also want to see the content of the wishlists shared with me.
+
+The user should be able to get a list of the wishlists shared with them, as well as who the creator/sharer is. The
+content of these wishlists should of course also be available to see.
+
+## Important points (#Story-5)
+
+- A list of the wishlists shared with the user should be available and ordered in a proper fashion
+- How a user get to see the content of the wishlists should be intuitive
+
 ## Sprint 1:
 
 During the planning of this first iteration our main goal was to implement some core functionalty such as user login and
