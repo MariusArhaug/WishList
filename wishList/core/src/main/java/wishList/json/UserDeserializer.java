@@ -41,7 +41,7 @@ public class UserDeserializer extends JsonDeserializer<User> {
    * @param node user JSON node
    * @return User object
    */
-  private User deserializeUser(JsonNode node, boolean loadDetails) {
+  public User deserializeUser(JsonNode node, boolean loadDetails) {
     String firstName = node.get("firstName").asText();
     String lastName = node.get("lastName").asText();
     String email = node.get("email").asText();
