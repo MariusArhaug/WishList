@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
  * User class saves various user data such as: contacts list of {@link User} wish Lists of {@link
  * WishList}.
  */
+//@Entity
 public class User implements Iterable<WishList> {
   private static List<User> users = new ArrayList<>();
   private final List<WishList> ownedWishLists = new ArrayList<>();
@@ -174,6 +175,7 @@ public class User implements Iterable<WishList> {
    *
    * @param name name string
    */
+
   public String makeWishList(String name) {
       if(!wishListsExist(name)) {
         this.ownedWishLists.add(new WishList(name, this));
