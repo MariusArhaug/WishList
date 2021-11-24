@@ -4,7 +4,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class WishTest {
   private User john;
@@ -35,7 +36,7 @@ class WishTest {
   @Test
   void getWish() {
     jane.makeWishList("Moving party");
-    WishList element = jane.iterator().next();
+    WishList element = jane.getNthOwnedWishList(0);
     element.addWish(new Wish("Surf board"));
     assertEquals(element.getWishes().get(0).getName(), "Surf board");
   }

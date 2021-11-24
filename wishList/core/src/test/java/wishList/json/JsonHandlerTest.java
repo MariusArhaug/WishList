@@ -1,12 +1,9 @@
 package wishList.json;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import wishList.core.User;
-import wishList.core.Wish;
-import wishList.core.WishList;
 import wishList.utils.Utils;
 
 import java.io.File;
@@ -25,21 +22,16 @@ public class JsonHandlerTest {
           "json",
           "test-resources");
   private User user;
-  private WishList wishList;
-  private Wish wish;
   private JsonHandler jsonHandler;
 
   private static void resetFiles() throws Exception {
     Utils.resetFile(testFolder, "gmail@gmailcom.json");
     Utils.resetFile(testFolder, "John@emailno.json");
-
   }
 
   @BeforeEach
-  void setUp() throws Exception {
+  void setUp() {
     user = new User("FirstName", "LastName", "gmail@gmail.com", "Password123!");
-    wishList = new WishList("Wedding", user);
-    wish = new Wish("Chair");
     jsonHandler = new JsonHandler(testFolder);
   }
 
@@ -47,17 +39,7 @@ public class JsonHandlerTest {
   void tearDown() throws Exception {
     resetFiles();
     user = null;
-    wishList = null;
-    wish = null;
     jsonHandler = null;
-  }
-
-  @AfterAll
-  static void finish() {
-    File file1 = new File(testFolder + "gmail@gmailcom.json");
-    File file2 = new File(testFolder + "John@emailno.json");
-    file1.delete();
-    file2.delete();
   }
 
   @Test
@@ -84,20 +66,4 @@ public class JsonHandlerTest {
     assertTrue(loadedUser.isPresent());
     assertEquals(user.getEmail(), loadedUser.get().getEmail());
   }
-
-  @Test
-  void addWishTest() {
-    Wish wishOne = new Wish("Chair");
-    WishList wishList = new WishList("Decorations");
-    wishList.addWish(wishOne);
-    user.addWishList(wishList);
-
-    assertThrows(IllegalArgumentException.class, () -> jsonHandler.addWish("Chair", wishList));
-    assertThrows(
-        IllegalArgumentException.class, () -> jsonHandler.addWishList("Decorations", user));
-    JsonHandler jsonHandler1 = new JsonHandler("");
-    assertThrows(Exception.class, () -> jsonHandler1.addWish("throw", wishList));
-    assertThrows(Exception.class, () -> jsonHandler1.addWishList("throw2", user));
-  }
-
 }
