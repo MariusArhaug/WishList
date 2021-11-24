@@ -44,8 +44,13 @@ public class LoginViewController extends AbstractController {
   boolean checkUser() {
     String email = loginEmailInput.getText();
     String password = loginPasswordInput.getText();
+    if (email.isBlank() || password.isBlank()) {
+      errorMessage.setText("You must fill out both email and password!");
+      return false;
+    }
     try {
-      Optional<User> tryUser = jsonHandler.loadUser(email, password);
+      // Optional<User> tryUser = jsonHandler.loadUser(email, password);
+      Optional<User> tryUser = httpController.getUser(email, password);
       if (tryUser.isPresent()) {
         this.user = tryUser.get();
         return true;
@@ -54,6 +59,7 @@ public class LoginViewController extends AbstractController {
         return false;
       }
     } catch (Exception e) {
+      e.printStackTrace();
       errorMessage.setText("E-mail or password incorrect");
       return false;
     }

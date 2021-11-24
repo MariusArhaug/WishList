@@ -3,36 +3,38 @@ package wishList.restapi;
 import org.springframework.web.bind.annotation.*;
 import wishList.core.User;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+
 /** REST controller. * */
 @RestController
 @RequestMapping(ControllerForRest.wishListPath)
 public class ControllerForRest {
 
-  static final String wishListPath = "wishlist";
-  private final WishListService wishListService;
+  static final String wishListPath = "wishList";
 
-  public ControllerForRest() {
-    this.wishListService = new WishListService();
+  @GetMapping("/users/")
+  @ResponseBody()
+  public List<User> getUsers() throws IOException {
+    return WishListService.getUsers();
   }
 
-  @GetMapping("/{email}/{password}")
-  public User findUser(@PathVariable String email, @PathVariable String password) throws Exception {
-    return this.wishListService.findUser(email, password);
+  @GetMapping("/user/{email}/{password}")
+  @ResponseBody()
+  public Optional<User> findUser(@PathVariable String email, @PathVariable String password)
+      throws Exception {
+    return WishListService.findUser(email, password);
   }
 
-  @PostMapping(path = "/createUser")
+  @PostMapping(path = "/create/user")
+  @ResponseBody()
   public User createUser(
       @RequestParam("firstName") String firstName,
       @RequestParam("lastName") String lastName,
       @RequestParam("email") String email,
       @RequestParam("password") String password)
       throws Exception {
-
-    return this.wishListService.createUser(firstName, lastName, email, password);
-  }
-
-  @PostMapping(path = "")
-  public void createWishList() {
-    this.wishListService.createWishList("hallo");
+    return WishListService.createUser(firstName, lastName, email, password);
   }
 }

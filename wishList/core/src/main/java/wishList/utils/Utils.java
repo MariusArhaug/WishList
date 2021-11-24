@@ -3,6 +3,10 @@ package wishList.utils;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Utility methods to be used everywhere.
@@ -33,7 +37,7 @@ public class Utils {
    * @return a string of file separator "/" linux , "\" windows etc
    *
    */
-  public static String getFileSeparator() {
+  private static String getFileSeparator() {
     return switch (os) {
       case "Windows" -> "\\";
       default -> "/";
@@ -46,7 +50,7 @@ public class Utils {
    * @param path path to be checked
    * @return true/false
    */
-  public static boolean hasFileSeparatorAtEnd(String path) {
+  static boolean hasFileSeparatorAtEnd(String path) {
     return path.substring(path.length() - 1).equals(getFileSeparator());
   }
 
@@ -56,11 +60,11 @@ public class Utils {
    * @param path path to be updated
    * @return updated path
    */
-  public static String addFileSeparatorAtEnd(String path) {
+  private static String addFileSeparatorAtEnd(String path) {
     return hasFileSeparatorAtEnd(path) ? path : path + getFileSeparator();
   }
 
-  public static String removeFileSeparatorAtEnd(String path) {
+  private static String removeFileSeparatorAtEnd(String path) {
     return hasFileSeparatorAtEnd(path) ? path.substring(path.length() - 1) : path;
   }
 
@@ -85,5 +89,34 @@ public class Utils {
         pw.print("[]");
       }
     }
+  }
+
+  /**
+   * Find first element or null.
+   *
+   * @param list list to be searched
+   * @param predicate predicate for search
+   * @param <T> Type of list
+   * @return element or null
+   */
+  public static <T> T findFirstOrNull(List<T> list, Predicate<T> predicate) {
+    return list.stream().filter(predicate).findFirst().orElse(null);
+  }
+
+  public static <T> boolean existInList(List<T> list, Predicate<T> predicate) {
+    return findFirstOrNull(list, predicate) != null;
+  }
+
+  /**
+   * Map list to another list.
+   *
+   * @param list list to be mapped
+   * @param fun function to be used in mapping
+   * @param <T> Original type
+   * @param <V> Mapped type
+   * @return Mapped list
+   */
+  public static <T, V> List<V> map(List<T> list, Function<T, V> fun) {
+    return list.stream().map(fun).collect(Collectors.toList());
   }
 }

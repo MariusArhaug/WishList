@@ -3,17 +3,12 @@ package wishList.json;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import wishList.core.User;
 import wishList.core.WishList;
 
-/**
- * Class for serialization of users.
- */
+import java.io.IOException;
+
+/** Class for serialization of users. */
 public class UserSerializer extends JsonSerializer<User> {
 
   /**
@@ -34,10 +29,7 @@ public class UserSerializer extends JsonSerializer<User> {
     jsonGenerator.writeStringField("email", user.getEmail());
     jsonGenerator.writeStringField("password", user.getPassword());
     jsonGenerator.writeArrayFieldStart("ownedWishLists");
-    List<WishList> ownedWishLists = new ArrayList<>();
-    Iterator<WishList> iteratorWishLists = user.iterator();
-    iteratorWishLists.forEachRemaining(ownedWishLists::add);
-    for (WishList w : ownedWishLists) {
+    for (WishList w : user.getOwnedWishLists()) {
       jsonGenerator.writeObject(w);
     }
     jsonGenerator.writeEndArray();

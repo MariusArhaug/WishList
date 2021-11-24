@@ -6,16 +6,12 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import wishList.core.User;
 import wishList.core.WishList;
 
-/**
-Deserialize user JSON object into Java User object.
- */
+import java.io.IOException;
+
+/** Deserialize user JSON object into Java User object. */
 public class UserDeserializer extends JsonDeserializer<User> {
 
   private final WishListDeserializer wishListDeserializer = new WishListDeserializer();
@@ -41,7 +37,7 @@ public class UserDeserializer extends JsonDeserializer<User> {
    * @param node user JSON node
    * @return User object
    */
-  public User deserializeUser(JsonNode node, boolean loadDetails) {
+  private User deserializeUser(JsonNode node, boolean loadDetails) {
     String firstName = node.get("firstName").asText();
     String lastName = node.get("lastName").asText();
     String email = node.get("email").asText();
@@ -57,13 +53,10 @@ public class UserDeserializer extends JsonDeserializer<User> {
       }
     }
     JsonNode invitedWishListsNode = node.get("invitedWishLists");
-    System.out.println(invitedWishListsNode);
     if (invitedWishListsNode instanceof ArrayNode && loadDetails) {
       for (JsonNode invitedWishListNode : invitedWishListsNode) {
         WishList wishList = wishListDeserializer.deserializeWishList(invitedWishListNode);
-        System.out.println("den!" + wishList);
         if (wishList != null) {
-          System.out.println("get into if");
           newUser.getInvitedWishLists().add(wishList);
         }
       }

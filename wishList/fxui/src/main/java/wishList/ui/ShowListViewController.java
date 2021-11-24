@@ -1,24 +1,18 @@
 package wishList.ui;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import wishList.core.Wish;
-import wishList.core.WishList;
 import wishList.json.JsonHandler;
 
-/**
- * Controller for show list view.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+/** Controller for show list view. */
 public class ShowListViewController extends AbstractController {
   private final JsonHandler jsonHandler;
   @FXML protected ListView<String> wishesListView;
@@ -33,7 +27,7 @@ public class ShowListViewController extends AbstractController {
     jsonHandler = new JsonHandler(this.resourcesPath);
   }
 
-
+  @Override
   public void initialize() {
     if (this.user != null && this.wishListToShare != null) {
       wishListName.setText(this.wishListToShare.getName());
@@ -43,13 +37,11 @@ public class ShowListViewController extends AbstractController {
 
   private void updateWishesView() {
     List<Wish> wishes = wishListToShare.getWishes();
-    System.out.println(wishes);
     List<String> wishNames = new ArrayList<>();
     for (Wish w : wishes) {
       wishNames.add(w.getName());
     }
     wishesListView.setItems(FXCollections.observableList(wishNames));
-
   }
 
   public void addWish() throws Exception {
@@ -57,7 +49,11 @@ public class ShowListViewController extends AbstractController {
     if (wishName.length() == 0) {
       addWishFeedback.setText("Wish must have content!");
     } else {
-      Wish wish = this.wishListToShare.getWishes().stream().filter(e -> e.getName().equals(wishName)).findFirst().orElse(null);
+      Wish wish =
+          this.wishListToShare.getWishes().stream()
+              .filter(e -> e.getName().equals(wishName))
+              .findFirst()
+              .orElse(null);
       if (wish != null) {
         addWishFeedback.setText("This wish list already contains that wish!");
       } else {
@@ -65,7 +61,6 @@ public class ShowListViewController extends AbstractController {
         addWishFeedback.setText("Wish was added!");
         addNewWishField.clear();
       }
-
     }
     this.updateWishesView();
   }

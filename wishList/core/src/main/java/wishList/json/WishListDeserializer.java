@@ -6,16 +6,14 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import java.io.IOException;
-
 import wishList.core.User;
 import wishList.core.Wish;
 import wishList.core.WishList;
+import wishList.utils.Utils;
 
+import java.io.IOException;
 
-/**
-Deserializer for WishList.
- **/
+/** Deserializer for WishList. */
 public class WishListDeserializer extends JsonDeserializer<WishList> {
 
   private final WishDeserializer wishDeserializer = new WishDeserializer();
@@ -47,7 +45,7 @@ public class WishListDeserializer extends JsonDeserializer<WishList> {
       JsonNode ownerNode = node.get("owner");
       if (ownerNode instanceof ObjectNode) {
         String email = ownerNode.get("email").asText();
-        User user = User.getUsers().stream().filter(e -> e.getEmail().equals(email)).findFirst().orElse(null);
+        User user = Utils.findFirstOrNull(User.getUsers(), e -> e.getEmail().equals(email));
         wishList.setOwner(user);
       }
 
