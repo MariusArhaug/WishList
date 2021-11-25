@@ -2,7 +2,7 @@
 
 ## Functionality
 
-We have chosen to keep JavaFX as the technology for our frontend in order to prioritize other aspects of the app, such as expansion. The quality of the code is still checked by CheckStyle and Spotbugs. We have expanded the tests for every module, as described below.
+We have chosen to keep JavaFX as the technology for our frontend in order to prioritize other aspects of the app, such as expansion. The quality of the code is still checked by CheckStyle and Spotbugs. This is also being checked in the gitlab pipeline checkout .gitlab-ci.yml. Using the pipeline to check whether the code is compiling or not has made it easier to discover errors before attempting to merge. We have expanded the tests for every module, as described below. Jacoco is used to display our test coverage. We have strived to keep our test coverage at 70-80% for the same reasons as mentioned in release2.
 
 
 ## Sprint 3
