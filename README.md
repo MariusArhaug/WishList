@@ -84,4 +84,6 @@ In order to avoid having one controller that maintains multiple function calls t
 [**Fxui tests**](./wishList/fxui/src/test/java/wishList): FXML tests
 
 # Rest
+[**Documentation**](./wishList/rest)
+
 
