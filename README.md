@@ -42,6 +42,8 @@ Following sub-modules are:
 
 - [**fxui**](wishList/fxui): Here lies javafx-code for GUI as well as controllers for different _views_
 
+- [**rest**](wishList/rest): Here lies the code for the rest server
+
 Our repo supports the following
 
 - Testing (maven-sunfire-plugin)
@@ -80,4 +82,6 @@ In order to avoid having one controller that maintains multiple function calls t
 
 ## FXUI Test
 [**Fxui tests**](./wishList/fxui/src/test/java/wishList): FXML tests
+
+# Rest
 
