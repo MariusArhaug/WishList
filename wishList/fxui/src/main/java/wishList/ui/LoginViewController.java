@@ -6,21 +6,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import wishList.core.User;
-import wishList.json.JsonHandler;
 
 import java.io.IOException;
 import java.util.Optional;
 
 /** Controller for LoginView fxml file. */
 public class LoginViewController extends AbstractController {
-  private final JsonHandler jsonHandler;
   @FXML protected TextField loginEmailInput;
   @FXML protected PasswordField loginPasswordInput;
   @FXML protected AnchorPane loginPane;
-
-  public LoginViewController() {
-    jsonHandler = new JsonHandler(this.resourcesPath);
-  }
 
   @Override
   public void initialize() {
@@ -49,7 +43,6 @@ public class LoginViewController extends AbstractController {
       return false;
     }
     try {
-      // Optional<User> tryUser = jsonHandler.loadUser(email, password);
       Optional<User> tryUser = httpController.getUser(email, password);
       if (tryUser.isPresent()) {
         this.user = tryUser.get();

@@ -57,7 +57,7 @@ public class WishList implements Iterable<Wish> {
    * @return wishList
    * @throws IllegalArgumentException input is null or wishList already has owner
    */
-  public WishList setOwner(User owner) throws IllegalArgumentException {
+  WishList setOwner(User owner) throws IllegalArgumentException {
     if (this.owner != null) {
       throw new IllegalArgumentException("This wishlist already has a owner!");
     }
@@ -123,7 +123,7 @@ public class WishList implements Iterable<Wish> {
 
   @Override
   public String toString() {
-    return "" + this.name + "," + this.owner + "";
+    return "" + this.name + "," + this.owner + "," + this.wishes;
   }
 
   /**
@@ -132,7 +132,7 @@ public class WishList implements Iterable<Wish> {
    * @param name name of wish
    * @return wish
    */
-  public Optional<Wish> getWish(String name) {
+  Optional<Wish> getWish(String name) {
     for (Wish w : this.wishes) {
       if (w.getName().equals(name)) {
         return Optional.of(w);

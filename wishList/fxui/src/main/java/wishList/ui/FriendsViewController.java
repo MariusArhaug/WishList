@@ -7,24 +7,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import wishList.core.User;
-import wishList.json.JsonHandler;
 import wishList.utils.Utils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /** Controller for friend actions. * */
 public class FriendsViewController extends AbstractController {
-  private final JsonHandler jsonHandler;
   @FXML protected TextField friendEmailField;
   @FXML protected Button addNewFriendButton;
   @FXML protected Button removeFriend;
   @FXML protected ListView<String> yourFriendsList;
   @FXML protected Label yourFriendsFeedback;
-
-  public FriendsViewController() {
-    jsonHandler = new JsonHandler(this.resourcesPath);
-  }
 
   @Override
   public void initialize() {
@@ -33,60 +28,68 @@ public class FriendsViewController extends AbstractController {
     }
   }
 
-  /**
-   * Add friend.
-   *
-   * @throws Exception file not found.
-   */
-  public void addFriend() throws Exception {
+  /** Add friend. */
+  public void addFriend() {
     yourFriendsFeedback.setText("");
     String email = friendEmailField.getText();
     if (email.equals(user.getEmail())) {
       yourFriendsFeedback.setText("You can not befriend yourself!");
       return;
     }
-    if (Utils.existInList(user.getContacts(), e -> e.getEmail().equals(email))) {
+    if (Utils.existInList(user.getContacts(), e -> e.equals(email))) {
       yourFriendsFeedback.setText("You are already friends with this user!");
       return;
     }
-    User newFriend = Utils.findFirstOrNull(User.getUsers(), e -> e.getEmail().equals(email));
-    if (newFriend == null) {
-      yourFriendsFeedback.setText("No user with this email exists!");
+    User newFriend;
+    try {
+      this.user = httpController.addContact(email, user);
+      if (httpController.getUser(email).isEmpty()) {
+        throw new IllegalArgumentException("No user exist with this email");
+      }
+      newFriend = httpController.getUser(email).get();
+
+    } catch (IllegalArgumentException e) {
+      yourFriendsFeedback.setText(e.getMessage());
+      return;
+    } catch (Exception e) {
+      yourFriendsFeedback.setText("Something unexpected happened! :(");
       return;
     }
-    jsonHandler.addContact(newFriend, user);
+
     String name = newFriend.getFirstName() + " " + newFriend.getLastName();
     friendEmailField.setText("");
     yourFriendsFeedback.setText("Added " + name + " to your contacts!");
     this.updateListView();
   }
 
-  /**
-   * Remove friend.
-   *
-   * @throws Exception file not found exception
-   */
-  public void removeFriend() throws Exception {
+  /** Remove friend. */
+  public void removeFriend() {
     String userInfo = yourFriendsList.getSelectionModel().getSelectedItem();
     String[] userInfos = userInfo.split("; ");
-    jsonHandler.removeContact(userInfos[1], user);
+    try {
+      this.user = httpController.removeContact(userInfos[1], this.user);
+    } catch (Exception e) {
+      yourFriendsFeedback.setText("Something unexpected happened!");
+      return;
+    }
     yourFriendsFeedback.setText("Removed " + userInfos[0] + " from your contacts!");
     this.updateListView();
   }
 
   private void updateListView() {
-    List<User> friends = user.getContacts();
-    List<String> names = new ArrayList<>();
-    if (friends.size() > 0) {
-      for (User u : friends) {
-        if (Utils.existInList(User.getUsers(), e -> e.getEmail().equals(u.getEmail()))) {
-          continue;
+    try {
+      List<String> fxNames = new ArrayList<>();
+      List<User> users = httpController.getUsers();
+      for (String email : this.user.getContacts()) {
+        for (User u : users) {
+          if (u.getEmail().equals(email)) {
+            fxNames.add("" + u.getFirstName() + " " + u.getLastName() + "; " + u.getEmail());
+          }
         }
-        String fullName = "" + u.getFirstName() + " " + u.getLastName() + "; " + u.getEmail();
-        ;
-        names.add(fullName);
       }
-      yourFriendsList.setItems(FXCollections.observableList(names));
+      yourFriendsList.setItems(FXCollections.observableList(fxNames));
+    } catch (IOException | InterruptedException e) {
+      yourFriendsFeedback.setText("Something unexpected happened!");
     }
   }
 }

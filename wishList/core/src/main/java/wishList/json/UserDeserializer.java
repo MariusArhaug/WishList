@@ -57,7 +57,7 @@ public class UserDeserializer extends JsonDeserializer<User> {
       for (JsonNode invitedWishListNode : invitedWishListsNode) {
         WishList wishList = wishListDeserializer.deserializeWishList(invitedWishListNode);
         if (wishList != null) {
-          newUser.getInvitedWishLists().add(wishList);
+          newUser.addInvitedWishList(wishList);
         }
       }
     }
