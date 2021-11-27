@@ -1,12 +1,13 @@
 package wishList.json;
 
 import com.fasterxml.jackson.core.JsonEncoding;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import wishList.core.Wish;
+import wishList.core.User;
+import wishList.core.WishList;
+import wishList.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,36 +15,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 class WishSerializerTest {
-  /*private final File wishTestFile = new File(JsonHandlerTest.testFolder + "wishes.json");
-  private Wish wish;
-  private ObjectMapper mapper;
+  private JsonHandler jsonHandler;
+  private User user;
+
+  private static void resetFiles() throws Exception {
+    Utils.resetFile(JsonHandlerTest.testFolder, "user5@gmailcom.json");
+  }
 
   @BeforeEach
-  void setUp() throws IOException {
-    wish = new Wish("Toy");
-    mapper = new ObjectMapper();
-    mapper.getFactory().createGenerator(wishTestFile, JsonEncoding.UTF8);
+  void setUp() {
+    user = new User("first", "last", "user5@gmail.com", "123Password!");
+    jsonHandler = new JsonHandler(JsonHandlerTest.testFolder);
   }
 
   @AfterEach
-  void tearDown() {
-    wish = null;
-    mapper = null;
+  void tearDown() throws Exception {
+    resetFiles();
+    user = null;
   }
 
   @Test
-  void wishListSerializerTest() throws Exception {
-
-    List<Wish> wishes = new ArrayList<>();
-    wishes.add(wish);
-    mapper.writeValue(wishTestFile, wishes);
-
-    Wish[] wishesFromFile = mapper.readValue(wishTestFile, new TypeReference<Wish[]>() {});
-
-    assertEquals(wishesFromFile[0].getName(), "Toy");
-    assertNull(wishesFromFile[0].getBelongTo());
-  }*/
+  void wishSerializerTest() throws Exception {
+    jsonHandler.addUser(user);
+    User userFromFile = jsonHandler.loadUser(user.getEmail(), user.getPassword()).get();
+    jsonHandler.makeWishList("Test", userFromFile);
+    User loadedUser = jsonHandler.loadUser(user.getEmail(), user.getPassword()).get();
+    jsonHandler.addWish("TestItem", loadedUser.getOwnedWishLists().get(0), loadedUser);
+    User loadedUserAgain = jsonHandler.loadUser(user.getEmail(), user.getPassword()).get();
+    assertEquals(loadedUserAgain.getOwnedWishLists().get(0).getWishes().toString(),"[TestItem]");
+  }
 }

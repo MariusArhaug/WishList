@@ -1,54 +1,58 @@
 package wishList.json;
 
 import com.fasterxml.jackson.core.JsonEncoding;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import wishList.core.Wish;
+import wishList.core.User;
 import wishList.core.WishList;
+import wishList.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WishListSerializerTest {
-  /*private final File wishListsFile = new File(JsonHandlerTest.testFolder + "wishLists.json");
-  private WishList wishList;
-  private ObjectMapper mapper;
+  private JsonHandler jsonHandler;
+  private User user;
+  private User user2;
+
+  private static void resetFiles() throws Exception {
+    Utils.resetFile(JsonHandlerTest.testFolder, "user2@gmailcom.json");
+    Utils.resetFile(JsonHandlerTest.testFolder, "user3@gmailcom.json");
+
+  }
 
   @BeforeEach
-  void setUp() throws IOException {
-    wishList = new WishList("Birthday");
-    mapper = new ObjectMapper();
-    mapper.getFactory().createGenerator(wishListsFile, JsonEncoding.UTF8);
+  public void setUp() {
+    user = new User("first", "last", "user2@gmail.com", "123Password!");
+    user2 = new User("first", "last", "user3@gmail.com", "123Password!");
+    jsonHandler = new JsonHandler(JsonHandlerTest.testFolder);
   }
 
   @AfterEach
-  void tearDown() {
-    wishList = null;
-    mapper = null;
+  public void tearDown() throws Exception {
+    resetFiles();
+    user = null;
+    user2 = null;
   }
 
   @Test
-  void wishListSerializerTest() throws Exception {
-
-    List<WishList> wishLists = new ArrayList<>(List.of(wishList));
-    mapper.writeValue(wishListsFile, wishLists);
-
-    List<WishList> wishListsFromFile =
-        mapper.readValue(wishListsFile, new TypeReference<List<WishList>>() {});
-    System.out.println(wishListsFromFile);
-
-    WishList wishList = wishListsFromFile.get(0);
-    assertEquals(wishList.getName(), "Birthday");
-
-    List<Wish> wishes = new ArrayList<>();
-    assertEquals(wishListsFromFile.get(0).getWishes(), wishes);
-    assertNull(wishList.getOwner());
-  }*/
+  public void wishListSerializerTest() throws Exception {
+    jsonHandler.addUser(user);
+    jsonHandler.addUser(user2);
+    User userFromFile = jsonHandler.loadUser(user.getEmail(), user.getPassword()).get();
+    jsonHandler.makeWishList("Test", userFromFile);
+    User loadedUser = jsonHandler.loadUser(user.getEmail(), user.getPassword()).get();
+    assertEquals(loadedUser.getOwnedWishLists().toString(), "[Test,first,last,user2@gmail.com,123Password!,[]]");
+    List<User> group = new ArrayList<>();
+    group.add(user2);
+    jsonHandler.shareWishList(loadedUser, loadedUser.getOwnedWishLists().get(0), group);
+    User loadedUser2 = jsonHandler.loadUser(user2.getEmail(), user2.getPassword()).get();
+    assertEquals(loadedUser2.getNthInvitedWishList(0).toString(), "Test,null,[]");
+  }
 }

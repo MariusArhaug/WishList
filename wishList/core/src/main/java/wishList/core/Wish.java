@@ -47,7 +47,7 @@ public class Wish {
     return this;
   }
 
-  WishList getBelongTo() {
+  public WishList getBelongTo() {
     return this.belongTo;
   }
 
@@ -56,7 +56,7 @@ public class Wish {
    *
    * @param belongTo wishList parent
    */
-  Wish setBelongTo(WishList belongTo) {
+  public Wish setBelongTo(WishList belongTo) {
     this.belongTo = belongTo;
     return this;
   }

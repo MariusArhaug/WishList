@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import wishList.core.User;
 import wishList.core.WishList;
+import wishList.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,27 +17,27 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserSerializerTest {
-  private final File usersTestFile = new File(JsonHandlerTest.testFolder, "user@gmailcom.json");
   private JsonHandler jsonHandler;
   private User user;
-  private ObjectMapper mapper;
+
+  private static void resetFiles() throws Exception {
+    Utils.resetFile(JsonHandlerTest.testFolder, "user@gmailcom.json");
+  }
 
   @BeforeEach
-  void setUp() throws IOException {
+  public void setUp() throws IOException {
     user = new User("first", "last", "user@gmail.com", "123Password!");
-    mapper = new ObjectMapper();
-    mapper.getFactory().createGenerator(usersTestFile, JsonEncoding.UTF8);
     jsonHandler = new JsonHandler(JsonHandlerTest.testFolder);
   }
 
   @AfterEach
-  void tearDown() {
+  public void tearDown() throws Exception {
+    resetFiles();
     user = null;
-    mapper = null;
   }
 
   @Test
-  void userSerializerTest() throws Exception {
+  public void userSerializerTest() throws Exception {
     jsonHandler.addUser(user);
     User userFromFile = jsonHandler.loadUser(user.getEmail(), user.getPassword()).get();
     assertEquals(userFromFile.getFirstName(), "first");
@@ -47,7 +48,7 @@ class UserSerializerTest {
     assertEquals(userFromFile.getOwnedWishLists(), emptyOwnList);
     List<WishList> invitedWishLists = new ArrayList<>();
     assertEquals(userFromFile.getInvitedWishLists(), invitedWishLists);
-    List<User> contacts = new ArrayList<>();
+    List<String> contacts = new ArrayList<>();
     assertEquals(userFromFile.getContacts(), contacts);
   }
 }

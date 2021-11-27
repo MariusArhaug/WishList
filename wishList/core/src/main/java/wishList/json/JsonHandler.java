@@ -29,7 +29,7 @@ public class JsonHandler {
     this.path = path;
   }
 
-  String getPath() {
+  public String getPath() {
     return this.path;
   }
 
@@ -77,7 +77,7 @@ public class JsonHandler {
    * @throws IllegalArgumentException if email is not unique
    * @throws IOException if not found file
    */
-  User addUser(String firstname, String lastname, String email, String password)
+  public User addUser(String firstname, String lastname, String email, String password)
       throws IllegalArgumentException, IOException {
 
     List<User> users = loadJsonUserList();
