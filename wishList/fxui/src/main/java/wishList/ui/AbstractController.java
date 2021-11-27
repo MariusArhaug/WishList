@@ -6,29 +6,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import wishList.core.User;
 import wishList.core.WishList;
-import wishList.utils.Utils;
 
-import java.io.File;
 import java.io.IOException;
 
 /** Abstract controller with changeScene method that all other controllers inherits. */
 public abstract class AbstractController {
 
-  final String resourcesPath =
-      Utils.updatePathForAnyOs(
-          new File("").getAbsolutePath(), "src", "main", "resources", "wishList", "users");
   final HTTPController httpController = new HTTPController();
   @FXML protected Label errorMessage;
-  User user;
+  protected User user;
   WishList wishListToShare;
-  @FXML private Button signOut;
 
-  void updateUser(User user) {
+  private void updateUser(User user) {
     this.user = user;
   }
 

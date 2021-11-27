@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
  */
 // @Entity
 public class User {
-  private static final List<User> users = new ArrayList<>();
   private final List<WishList> ownedWishLists = new ArrayList<>();
   private final List<WishList> invitedWishLists = new ArrayList<>();
   private final List<String> contacts = new ArrayList<>();
@@ -33,17 +32,10 @@ public class User {
   public User(String firstName, String lastName, String email, String password)
       throws IllegalArgumentException {
     this.setFirstName(firstName).setLastName(lastName).setEmail(email).setPassword(password);
-    users.add(this);
   }
 
   /** Empty constructor for json test purposes. */
-  public User() {
-    users.add(this);
-  }
-
-  public static List<User> getUsers() {
-    return new ArrayList<>(users);
-  }
+  public User() {}
 
   /**
    * Get first name of user.
@@ -154,13 +146,13 @@ public class User {
     return new ArrayList<>(this.ownedWishLists);
   }
 
-  public List<User> getContacts() {
-    List<User> myContacts = new ArrayList<>();
-    for (String s : this.contacts) {
-      User u = users.stream().filter(e -> e.getEmail().equals(s)).findFirst().orElse(null);
-      myContacts.add(u);
-    }
-    return myContacts;
+  /**
+   * Get contacts.
+   *
+   * @return contacts
+   */
+  public List<String> getContacts() {
+    return new ArrayList<>(contacts);
   }
 
   /**
@@ -225,26 +217,8 @@ public class User {
       throw new IllegalArgumentException("You do not own a wishList with this name!");
     }
     WishList wishList = this.findWishList(name);
-    List<User> group = this.groupSharedWith(wishList);
-    for (User u : group) {
-      u.invitedWishLists.remove(wishList);
-    }
     this.ownedWishLists.remove(wishList);
     return "Wish list has been removed!";
-  }
-
-  /**
-   * @param wishList Wish list that
-   * @return group of users invited to wish list
-   */
-  private List<User> groupSharedWith(WishList wishList) {
-    List<User> group = new ArrayList<>();
-    for (User u : users) {
-      if (u.getInvitedWishLists().contains(wishList)) {
-        group.add(u);
-      }
-    }
-    return group;
   }
 
   /**
@@ -293,13 +267,26 @@ public class User {
   }
 
   /**
+   * Add new invitied wishList.
+   *
+   * @param list invited wishList.
+   */
+  public void addInvitedWishList(WishList list) {
+    this.invitedWishLists.add(list);
+  }
+
+  /**
    * Add wish to wish list.
    *
    * @param wishList wish list to add wish to
    * @param wish wish to add
    */
   public void addWish(WishList wishList, Wish wish) {
-    ownedWishLists.stream().filter(wl -> wl.equals(wishList)).forEach(wl -> wl.addWish(wish));
+    for (WishList wl : this.ownedWishLists) {
+      if (wl.getName().equals(wishList.getName())) {
+        wl.addWish(wish);
+      }
+    }
   }
 
   /**
@@ -317,8 +304,7 @@ public class User {
    * @param email email of contact
    */
   public void removeContact(String email) {
-    this.contacts.remove(
-        this.contacts.stream().filter(e -> e.equals(email)).findFirst().orElse(null));
+    this.contacts.remove(email);
   }
 
   /**
@@ -326,7 +312,7 @@ public class User {
    *
    * @param newContact contact to add
    */
-  public void addContact(User newContact) {
+  void addContact(User newContact) {
     this.contacts.add(newContact.getEmail());
   }
 

@@ -29,12 +29,12 @@ public class FriendsWishListsViewController extends AbstractController {
    * @param event action event
    * @throws IOException file not found
    */
-  public void enterFriendsWishList(ActionEvent event) throws IOException {
+  public void enterFriendsWishList(ActionEvent event) throws IOException, InterruptedException {
     String wishListAndOwner = friendsWishListView.getSelectionModel().getSelectedItem();
     String[] wishListInfo = wishListAndOwner.split(" : ");
     String email = wishListInfo[0];
     String wishListName = wishListInfo[1];
-    if (!Utils.existInList(User.getUsers(), e -> e.getEmail().equals(email))) {
+    if (!Utils.existInList(httpController.getUsers(), e -> e.getEmail().equals(email))) {
       this.changeToFriendsWishesView(
           event,
           Utils.findFirstOrNull(user.getOwnedWishLists(), e -> e.getName().equals(wishListName)));

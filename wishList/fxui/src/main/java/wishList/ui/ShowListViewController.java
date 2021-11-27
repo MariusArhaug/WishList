@@ -7,14 +7,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import wishList.core.Wish;
-import wishList.json.JsonHandler;
+import wishList.core.WishList;
+import wishList.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** Controller for show list view. */
 public class ShowListViewController extends AbstractController {
-  private final JsonHandler jsonHandler;
   @FXML protected ListView<String> wishesListView;
   @FXML protected Button shareList;
   @FXML protected Button addNewWishButton;
@@ -22,10 +22,6 @@ public class ShowListViewController extends AbstractController {
   @FXML protected Button removeWish;
   @FXML protected Label wishListName;
   @FXML protected Label addWishFeedback;
-
-  public ShowListViewController() {
-    jsonHandler = new JsonHandler(this.resourcesPath);
-  }
 
   @Override
   public void initialize() {
@@ -36,43 +32,56 @@ public class ShowListViewController extends AbstractController {
   }
 
   private void updateWishesView() {
-    List<Wish> wishes = wishListToShare.getWishes();
+    WishList wishList = this.user.getWishList(wishListToShare.getName()).get();
     List<String> wishNames = new ArrayList<>();
-    for (Wish w : wishes) {
+    for (Wish w : wishList) {
       wishNames.add(w.getName());
     }
     wishesListView.setItems(FXCollections.observableList(wishNames));
   }
 
-  public void addWish() throws Exception {
+  /** Add wish. */
+  public void addWish() {
     String wishName = addNewWishField.getText();
     if (wishName.length() == 0) {
       addWishFeedback.setText("Wish must have content!");
-    } else {
-      Wish wish =
-          this.wishListToShare.getWishes().stream()
-              .filter(e -> e.getName().equals(wishName))
-              .findFirst()
-              .orElse(null);
-      if (wish != null) {
-        addWishFeedback.setText("This wish list already contains that wish!");
-      } else {
-        jsonHandler.addWish(wishName, wishListToShare, user);
-        addWishFeedback.setText("Wish was added!");
-        addNewWishField.clear();
-      }
+      return;
     }
+    Wish wish =
+        Utils.findFirstOrNull(this.wishListToShare.getWishes(), e -> e.getName().equals(wishName));
+
+    if (wish != null) {
+      addWishFeedback.setText("This wish list already contains that wish!");
+      return;
+    }
+
+    try {
+      this.user = httpController.addWish(wishName, wishListToShare, user);
+    } catch (Exception e) {
+      errorMessage.setText("Something unexpected happened!");
+      return;
+    }
+    addWishFeedback.setText("Wish was added!");
+    addNewWishField.clear();
+
     this.updateWishesView();
   }
 
-  public void removeWish() throws Exception {
+  /** Remove wish. */
+  public void removeWish() {
     String wishName = wishesListView.getSelectionModel().getSelectedItem();
     if (wishName == null) {
       addWishFeedback.setText("You must choose a wish to remove!");
-    } else {
-      jsonHandler.removeWish(wishName, wishListToShare, user);
-      addWishFeedback.setText("Wish was removed!");
+      return;
     }
+    try {
+      this.user = httpController.removeWish(wishName, wishListToShare, user);
+    } catch (Exception e) {
+      errorMessage.setText("Something unexpected happened!");
+      return;
+    }
+    addWishFeedback.setText("Wish was removed!");
+
     this.updateWishesView();
   }
 }
