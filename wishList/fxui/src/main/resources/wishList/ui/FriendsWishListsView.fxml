@@ -3,31 +3,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="" prefHeight="441.0" prefWidth="320.0"
-            xmlns="http://javafx.com/javafx" fx:controller="wishList.ui.FriendsWishListsViewController">
-    <children>
-        <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#signOut"
-                style="-fx-background-color: black;" text="Sign out" textFill="WHITE"/>
-        <Button id="yourWishLists" fx:id="yourWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false"
-                onAction="#changeToMainView" style="-fx-background-color: black;" text="Your wish lists"
-                textFill="WHITE"/>
-        <Button id="yourFriends" fx:id="yourFriends" layoutX="120.0" layoutY="402.0" mnemonicParsing="false"
-                onAction="#changeToFriendsView" style="-fx-background-color: black;" text="Your friends"
-                textFill="WHITE"/>
-        <Label layoutX="62.0" layoutY="23.0" text="Your friends' wish lists">
-            <font>
-                <Font size="20.0"/>
-            </font>
-        </Label>
-        <ScrollPane hbarPolicy="NEVER" layoutX="-1.0" layoutY="54.0" prefHeight="333.0" prefWidth="320.0">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="333.0" prefWidth="319.0">
-                    <children>
-                        <ListView id="friendsWishListView" fx:id="friendsWishListView" prefHeight="334.0"
-                                  prefWidth="320.0"/>
-                    </children>
-                </AnchorPane>
-            </content>
-        </ScrollPane>
-    </children>
+
+<AnchorPane fx:id="friendsWishListsView" prefHeight="441.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.FriendsWishListsViewController">
+   <children>
+      <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#signOut" style="-fx-background-color: black;" text="Sign out" textFill="WHITE" />
+      <Button id="yourWishLists" fx:id="yourWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToMainView" style="-fx-background-color: black;" text="Your wish lists" textFill="WHITE" />
+      <Button id="yourFriends" fx:id="yourFriends" layoutX="120.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToFriendsView" style="-fx-background-color: black;" text="Your friends" textFill="WHITE" />
+      <Label layoutX="62.0" layoutY="23.0" text="Your friends' wish lists">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <ScrollPane hbarPolicy="NEVER" layoutX="-1.0" layoutY="54.0" prefHeight="333.0" prefWidth="320.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="333.0" prefWidth="319.0">
+               <children>
+                  <ListView id="friendsWishListView" fx:id="friendsWishListView" prefHeight="334.0" prefWidth="320.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
 </AnchorPane>

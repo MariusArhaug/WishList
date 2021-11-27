@@ -11,17 +11,28 @@ import javafx.stage.Stage;
 import wishList.core.User;
 import wishList.core.WishList;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 /** Abstract controller with changeScene method that all other controllers inherits. */
 public abstract class AbstractController {
 
-  final HTTPController httpController = new HTTPController();
+  public final HTTPController httpController = new HTTPController();
   @FXML protected Label errorMessage;
   protected User user;
-  WishList wishListToShare;
+  public String resourcesPath =
+      Paths.get(
+              new File("").getAbsolutePath(),
+              "src",
+              "main",
+              "resources",
+              "wishList",
+              "users")
+          .toString();
+  protected WishList wishListToShare;
 
-  private void updateUser(User user) {
+  void updateUser(User user) {
     this.user = user;
   }
 
@@ -58,7 +69,7 @@ public abstract class AbstractController {
     }
   }
 
-  void initialize() {}
+  public void initialize() {}
 
   /**
    * Change scene to MainView.fxml
@@ -78,7 +89,7 @@ public abstract class AbstractController {
     }
   }
 
-  void changeToMainView(Object source) throws IOException {
+  public void changeToMainView(Object source) throws IOException {
     if (this instanceof LoginViewController) {
       if (((LoginViewController) this).checkUser()) {
         this.changeScene("MainView.fxml", source, this.user);

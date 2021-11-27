@@ -12,12 +12,13 @@ import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.control.LabeledMatchers;
+import org.testfx.util.WaitForAsyncUtils;
 import wishList.core.User;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(ApplicationExtension.class)
-public class LoginViewControllerTest extends ApplicationTest {
+public class LoginViewControllerTest extends AbstractTestFxui {
   private LoginViewController controller;
   private User user;
 
@@ -51,14 +52,13 @@ public class LoginViewControllerTest extends ApplicationTest {
   /**
    * Check that the label that displays error message works as planned
    *
-   * @param robot executes operations in the GUI
    */
   @Test
-  public void verifyThatLabelChanges(FxRobot robot) {
-    FxAssert.verifyThat("#errorMessage", LabeledMatchers.hasText("Label"));
-    assertEquals(controller.errorMessage.getText(), "Label");
+  public void verifyThatLabelChanges() {
+    FxAssert.verifyThat("#errorMessage", LabeledMatchers.hasText(""));
+    assertEquals(controller.errorMessage.getText(), "");
 
-    robot.clickOn("#login");
+    clickOn("#login");
 
     FxAssert.verifyThat(
         "#errorMessage", LabeledMatchers.hasText("E-mail or password is incorrect"));
@@ -68,21 +68,19 @@ public class LoginViewControllerTest extends ApplicationTest {
   }
 
   /**
-   * Test if existing user can be found in json file The user was added to file before the test
-   *
-   * @param robot executes the operations in the GUI
+   * Test if existing user can be found in json file
+   * The user was added before the tests
    */
   @Test
-  public void verifyThatUserExists(FxRobot robot) {
-    robot.clickOn("#loginEmailInput");
-    robot.write("jane@doe.com");
-    robot.clickOn("#loginPasswordInput");
-    robot.write("qwerty123");
-    robot.clickOn("#login");
-
-    // If errorMessage is "Label" after clicking on login,
-    // the user was found in the json file
-    assertEquals(controller.errorMessage.getText(), "Label");
+  public void verifyThatUserExists() {
+    clickOn("#loginEmailInput");
+    write("jane@doe.com");
+    clickOn("#loginPasswordInput");
+    write("qwerty123");
+    clickOn("#login");
+    WaitForAsyncUtils.waitForFxEvents();
+    assertNotNull(findSceneRootWithId("addList"));
+    assertEquals(controller.errorMessage.getText(), "");
 
     controller.checkUser();
     this.user = controller.user;
@@ -94,22 +92,31 @@ public class LoginViewControllerTest extends ApplicationTest {
   /**
    * Test if text fields work correctly
    *
-   * @param robot executes operations in the GUI
    */
   @Test
-  public void testTextFields(FxRobot robot) {
+  public void testTextFields() {
     assertEquals(controller.loginEmailInput.getText(), "");
-    robot.clickOn("#loginEmailInput");
-    robot.write("Hello");
+    clickOn("#loginEmailInput");
+    write("Hello");
     assertEquals(controller.loginEmailInput.getText(), "Hello");
-    robot.clickOn("#login");
+    clickOn("#login");
     assertEquals(controller.loginEmailInput.getText(), "Hello");
 
     assertEquals(controller.loginPasswordInput.getText(), "");
-    robot.clickOn("#loginPasswordInput");
-    robot.write("there");
+    clickOn("#loginPasswordInput");
+    write("there");
     assertEquals(controller.loginPasswordInput.getText(), "there");
-    robot.clickOn("#login");
+    clickOn("#login");
     assertEquals(controller.loginPasswordInput.getText(), "there");
+  }
+
+  /**
+   * Test that newUserButton changes to correct scene
+   */
+  @Test
+  public void testNewUserButton(){
+    clickOn("#newUserButton");
+    WaitForAsyncUtils.waitForFxEvents();
+    assertNotNull(findSceneRootWithId("registerPane"));
   }
 }

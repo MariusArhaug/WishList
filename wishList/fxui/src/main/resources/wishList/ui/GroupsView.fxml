@@ -3,54 +3,37 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="" prefHeight="441.0" prefWidth="320.0"
-            xmlns="http://javafx.com/javafx" fx:controller="wishList.ui.GroupsViewController">
-    <children>
-        <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#signOut"
-                style="-fx-background-color: black;" text="Sign out" textFill="WHITE"/>
-        <Button id="friendWishLists" fx:id="friendWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false"
-                onAction="#changeToFriendsWishListsView" style="-fx-background-color: black;" text="Friends’ wish lists"
-                textFill="WHITE"/>
-        <Button id="yourFriends" fx:id="yourFriends" layoutX="127.0" layoutY="402.0" mnemonicParsing="false"
-                onAction="#changeToFriendsView" style="-fx-background-color: black;" text="Your friends"
-                textFill="WHITE"/>
-        <Label id="wishListName" fx:id="wishListName" layoutX="41.0" layoutY="130.0" text="Your friends:"/>
-        <Label layoutX="27.0" layoutY="41.0" prefHeight="26.0" prefWidth="266.0"
-               text="Choose friends to share this wish list with!">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Label>
-        <Label layoutX="55.0" layoutY="14.0" text="Share wish list with friends">
-            <font>
-                <Font size="18.0"/>
-            </font>
-        </Label>
-        <Button id="backToShowListView" fx:id="backToShowListView" cancelButton="true" layoutX="13.0" layoutY="15.0"
-                mnemonicParsing="false" onAction="#changeToShowListView" style="-fx-background-color: black;" text="⬅"
-                textFill="WHITE"/>
-        <ScrollPane hbarPolicy="NEVER" layoutX="-1.0" layoutY="148.0" prefHeight="244.0" prefWidth="320.0">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="242.0" prefWidth="321.0">
-                    <children>
-                        <ListView id="yourFriendsList" fx:id="yourFriendsList" prefHeight="244.0" prefWidth="157.0"/>
-                        <ListView id="yourGroupList" fx:id="yourGroupList" layoutX="158.0" prefHeight="244.0"
-                                  prefWidth="157.0"/>
-                    </children>
-                </AnchorPane>
-            </content>
-        </ScrollPane>
-        <Label id="wishListName" fx:id="wishListName1" layoutX="201.0" layoutY="130.0" text="Your group:"/>
-        <Button id="moveOutOfGroup" fx:id="moveOutOfGroup" cancelButton="true" layoutX="121.0" layoutY="117.0"
-                mnemonicParsing="false" onAction="#moveOutOfGroup" style="-fx-background-color: black;" text="⬅"
-                textFill="WHITE"/>
-        <Button id="moveToGroup" fx:id="moveToGroup" cancelButton="true" layoutX="167.0" layoutY="117.0"
-                mnemonicParsing="false" onAction="#moveToGroup" style="-fx-background-color: black;" text="➡"
-                textFill="WHITE"/>
-        <Button id="shareWithGroup" fx:id="shareWithGroup" layoutX="73.0" layoutY="67.0" mnemonicParsing="false"
-                onAction="#shareWishList" style="-fx-background-color: black;" text="Share wish list with this group"
-                textFill="WHITE"/>
-        <Label id="shareWithGroupFeedback" fx:id="shareWithGroupFeedback" alignment="CENTER" contentDisplay="CENTER"
-               layoutX="3.0" layoutY="93.0" prefHeight="18.0" prefWidth="312.0"/>
-    </children>
+
+<AnchorPane fx:id="groupsView" prefHeight="441.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.GroupsViewController">
+   <children>
+      <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#signOut" style="-fx-background-color: black;" text="Sign out" textFill="WHITE" />
+      <Button id="friendWishLists" fx:id="friendWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToFriendsWishListsView" style="-fx-background-color: black;" text="Friends’ wish lists" textFill="WHITE" />
+      <Button id="yourFriends" fx:id="yourFriends" layoutX="127.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToFriendsView" style="-fx-background-color: black;" text="Your friends" textFill="WHITE" />
+      <Label id="wishListName" fx:id="wishListName" layoutX="41.0" layoutY="130.0" text="Your friends:" />
+      <Label layoutX="27.0" layoutY="41.0" prefHeight="26.0" prefWidth="266.0" text="Choose friends to share this wish list with!">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="55.0" layoutY="14.0" text="Share wish list with friends">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button id="backToShowListView" fx:id="backToShowListView" cancelButton="true" layoutX="13.0" layoutY="15.0" mnemonicParsing="false" onAction="#changeToShowListView" style="-fx-background-color: black;" text="⬅" textFill="WHITE" />
+      <ScrollPane hbarPolicy="NEVER" layoutX="-1.0" layoutY="148.0" prefHeight="244.0" prefWidth="320.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="242.0" prefWidth="321.0">
+               <children>
+                  <ListView id="yourFriendsList" fx:id="yourFriendsList" prefHeight="244.0" prefWidth="157.0" />
+                  <ListView id="yourGroupList" fx:id="yourGroupList" layoutX="158.0" prefHeight="244.0" prefWidth="157.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Label id="wishListName" fx:id="wishListName1" layoutX="201.0" layoutY="130.0" text="Your group:" />
+      <Button id="moveOutOfGroup" fx:id="moveOutOfGroup" cancelButton="true" layoutX="121.0" layoutY="117.0" mnemonicParsing="false" onAction="#moveOutOfGroup" style="-fx-background-color: black;" text="⬅" textFill="WHITE" />
+      <Button id="moveToGroup" fx:id="moveToGroup" cancelButton="true" layoutX="167.0" layoutY="117.0" mnemonicParsing="false" onAction="#moveToGroup" style="-fx-background-color: black;" text="➡" textFill="WHITE" />
+      <Button id="shareWithGroup" fx:id="shareWithGroup" layoutX="73.0" layoutY="67.0" mnemonicParsing="false" onAction="#shareWishList" style="-fx-background-color: black;" text="Share wish list with this group" textFill="WHITE" />
+      <Label id="shareWithGroupFeedback" fx:id="shareWithGroupFeedback" alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="93.0" prefHeight="18.0" prefWidth="312.0" />
+   </children>
 </AnchorPane>

@@ -16,8 +16,8 @@ build:
   stage: build
   script:
     - cd wishList
-    - mvn install -B -DskipTests -DskipUiTests
-    - mvn clean compile
+    - mvn clean install -B -DskipTests -DskipUiTests
+    - mvn compile
 
 #check_style:
 #  stage: check_style

@@ -54,8 +54,9 @@ class HTTPController {
       throw new Error("Something went wrong!");
     }
 
-    System.out.println("\n" + response.body() + "\n");
-
+    if(objectMapper.readValue(response.body(), User.class) == null){
+      return null;
+    }
     return objectMapper.readValue(response.body(), User.class);
   }
 
@@ -101,7 +102,7 @@ class HTTPController {
     HttpRequest request = GET_REQUEST("/user/" + email + "/" + password + "/");
 
     HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-    return Optional.of(handleResponse(response));
+    return Optional.ofNullable(handleResponse(response));
   }
 
   /**
