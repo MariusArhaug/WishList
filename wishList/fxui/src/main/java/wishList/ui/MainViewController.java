@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import wishList.core.WishList;
-import wishList.json.JsonHandler;
 import wishList.utils.Utils;
 
 import java.io.IOException;
@@ -17,7 +16,6 @@ import java.util.List;
 
 /** controller for main view. */
 public class MainViewController extends AbstractController {
-  private final JsonHandler jsonHandler;
   @FXML protected Button signOut;
   @FXML protected Label newWishListFeedback;
   @FXML protected Button addNewList;
@@ -26,10 +24,6 @@ public class MainViewController extends AbstractController {
   @FXML protected TextField addNewListField;
   @FXML protected ListView<String> list;
   @FXML private Label mainNameOfUser;
-
-  public MainViewController() {
-    jsonHandler = new JsonHandler(this.resourcesPath);
-  }
 
   /** Initialize. */
   @Override
@@ -57,7 +51,7 @@ public class MainViewController extends AbstractController {
       return;
     }
     addNewListField.clear();
-    jsonHandler.makeWishList(wishListName, user);
+    this.user = httpController.addWishList(wishListName, user);
     newWishListFeedback.setText("New wish list added!");
     this.updateWishListView();
   }
@@ -73,7 +67,7 @@ public class MainViewController extends AbstractController {
       newWishListFeedback.setText("You must choose a wish list to remove!");
       return;
     }
-    jsonHandler.removeWishList(wishListName, user);
+    this.user = httpController.removeWishList(wishListName, user);
     newWishListFeedback.setText("The wish list was removed!");
 
     this.updateWishListView();

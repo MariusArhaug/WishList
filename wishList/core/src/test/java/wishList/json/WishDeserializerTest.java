@@ -8,6 +8,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import wishList.core.Wish;
+import wishList.core.WishList;
 
 import java.io.IOException;
 

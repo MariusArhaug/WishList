@@ -7,7 +7,6 @@ import wishList.core.WishList;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,15 +33,6 @@ public class JsonHandler {
   }
 
   /**
-   * Convert string to file name + path.
-   *
-   * @return file object
-   */
-  private File toFile(String fileName) throws NoSuchFileException {
-    return new File(this.path + fileName);
-  }
-
-  /**
    * Load all users from users.wishList.json.
    *
    * @return List of users
@@ -56,8 +46,11 @@ public class JsonHandler {
       return null;
     }
     for (File child : directoryListing) {
-      if ((child.length() > 2) && (mapper.readValue(child, User.class) != null)) {
-        users.add(mapper.readValue(child, User.class));
+      if ((child.length() > 2)) {
+        User user = mapper.readValue(child, User.class);
+        if (user != null) {
+          users.add(user);
+        }
       }
     }
     return users;
@@ -67,7 +60,7 @@ public class JsonHandler {
     return this.loadJsonUserList();
   }
 
-  public User addUser(User user) throws Exception {
+  public User addUser(User user) throws IOException {
     return this.addUser(
         user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
   }
@@ -81,25 +74,25 @@ public class JsonHandler {
    * @param password password
    * @return user created
    * @throws IllegalArgumentException if email is not unique
-   * @throws Exception if not found file
+   * @throws IOException if not found file
    */
-  public User addUser(String firstname, String lastname, String email, String password)
-      throws IllegalArgumentException, Exception {
-    try {
-      List<User> users = loadJsonUserList();
-      for (User user : users) {
-        if (user.getEmail().equals(email)) {
-          throw new IllegalArgumentException(
-              "A user with this email already exists, please try another one");
-        }
-      }
-      User newUser = new User(firstname, lastname, email, password);
+  User addUser(String firstname, String lastname, String email, String password)
+      throws IllegalArgumentException, IOException {
 
-      mapper.writeValue(new File(this.path + userFileName(newUser) + ".json"), newUser);
-      return newUser;
-    } catch (IOException e) {
-      throw new Exception(e);
+    List<User> users = loadJsonUserList();
+    if (users == null) {
+      throw new IOException("Couldn't load users from file");
     }
+    for (User user : users) {
+      if (user.getEmail().equals(email)) {
+        throw new IllegalArgumentException(
+            "A user with this email already exists, please try another one");
+      }
+    }
+    User newUser = new User(firstname, lastname, email, password);
+
+    mapper.writeValue(new File(this.path + "/" + userFileName(newUser) + ".json"), newUser);
+    return newUser;
   }
 
   /**
@@ -143,39 +136,34 @@ public class JsonHandler {
   /**
    * Add contact to user file.
    *
-   * @param newContact contact to add
+   * @param newContactEmail contact to add
    * @param user add to this users friends list
-   * @throws Exception file not found
+   * @return updated user
+   * @throws IOException file not found
+   * @throws IllegalArgumentException user has that contact as friend already.
    */
-  public void addContact(User newContact, User user) throws Exception {
-    try {
-      List<User> friends = user.getContacts();
-      for (User u : friends) {
-        if (u == newContact) {
-          throw new IllegalArgumentException("This user is already friends with that user!");
-        }
+  public User addContact(String newContactEmail, User user)
+      throws IOException, IllegalArgumentException {
+    for (String email : user.getContacts()) {
+      if (email.equals(newContactEmail)) {
+        throw new IllegalArgumentException("This user is already friends with that user!");
       }
-      user.addContact(newContact);
-      this.remakeUserInFile(user);
-    } catch (IOException e) {
-      throw new Exception(e);
     }
+    user.addContact(newContactEmail);
+    return this.remakeUserInFile(user);
   }
 
   /**
    * remove contact from user file.
    *
    * @param email email of contact to remove
-   * @param user remove from this users friends list
-   * @throws Exception file not found
+   * @param user remove from this' users friends list
+   * @return updated user
+   * @throws IOException file not found
    */
-  public void removeContact(String email, User user) throws Exception {
-    try {
-      user.removeContact(email);
-      this.remakeUserInFile(user);
-    } catch (IOException e) {
-      throw new Exception(e);
-    }
+  public User removeContact(String email, User user) throws IOException {
+    user.removeContact(email);
+    return this.remakeUserInFile(user);
   }
 
   /**
@@ -183,15 +171,12 @@ public class JsonHandler {
    *
    * @param wishListName name of new wish list
    * @param user user that makes wish list
-   * @throws Exception file not found
+   * @return updated user.
+   * @throws IOException file not found
    */
-  public void makeWishList(String wishListName, User user) throws Exception {
-    try {
-      user.makeWishList(wishListName);
-      this.remakeUserInFile(user);
-    } catch (IOException e) {
-      throw new Exception(e);
-    }
+  public User makeWishList(String wishListName, User user) throws IOException {
+    user.makeWishList(wishListName);
+    return this.remakeUserInFile(user);
   }
 
   /**
@@ -199,15 +184,11 @@ public class JsonHandler {
    *
    * @param wishListName name of wish list to remove
    * @param user user that removes wish list
-   * @throws Exception file not found
+   * @throws IOException file not found
    */
-  public void removeWishList(String wishListName, User user) throws Exception {
-    try {
-      user.removeWishList(wishListName);
-      this.remakeUserInFile(user);
-    } catch (IOException e) {
-      throw new Exception(e);
-    }
+  public User removeWishList(String wishListName, User user) throws IOException {
+    user.removeWishList(wishListName);
+    return this.remakeUserInFile(user);
   }
 
   /**
@@ -216,15 +197,11 @@ public class JsonHandler {
    * @param wishName name of wish to add
    * @param wishList wish list to add to
    * @param user user to add to
-   * @throws Exception file not found
+   * @throws IOException file not found
    */
-  public void addWish(String wishName, WishList wishList, User user) throws Exception {
-    try {
-      user.addWish(wishList, new Wish(wishName, wishList));
-      this.remakeUserInFile(user);
-    } catch (IOException e) {
-      throw new Exception(e);
-    }
+  public User addWish(String wishName, WishList wishList, User user) throws IOException {
+    user.addWish(wishList, new Wish(wishName));
+    return this.remakeUserInFile(user);
   }
 
   /**
@@ -233,15 +210,12 @@ public class JsonHandler {
    * @param wishName name of wish to remove
    * @param wishList wish list to remove from
    * @param user user to remove from
-   * @throws Exception file not found
+   * @return updated user.
+   * @throws IOException file not found
    */
-  public void removeWish(String wishName, WishList wishList, User user) throws Exception {
-    try {
-      user.removeWish(wishList.getName(), wishName);
-      this.remakeUserInFile(user);
-    } catch (IOException e) {
-      throw new Exception(e);
-    }
+  public User removeWish(String wishName, WishList wishList, User user) throws IOException {
+    user.removeWish(wishList.getName(), wishName);
+    return this.remakeUserInFile(user);
   }
 
   /**
@@ -250,29 +224,27 @@ public class JsonHandler {
    * @param user user that shares wish list
    * @param wishList wish list to share
    * @param group group to share with
-   * @throws Exception file not found
+   * @return updated user.
+   * @throws IOException file not found
    */
-  public void shareWishList(User user, WishList wishList, List<User> group) throws Exception {
-    try {
-      user.shareWishList(wishList, group);
-      this.remakeUserInFile(user);
-      for (User u : group) {
-        this.remakeUserInFile(u);
-      }
-    } catch (IOException e) {
-      throw new Exception(e);
+  public User shareWishList(User user, WishList wishList, List<User> group) throws IOException {
+    user.shareWishList(wishList, group);
+    this.remakeUserInFile(user);
+    for (User u : group) {
+      this.remakeUserInFile(u);
     }
+    return user;
   }
 
   /**
-   * Update user in file
+   * Update user in file.
    *
    * @param user user to remake
-   * @return returns the remade user
+   * @return updated user from file.
    * @throws IOException if file not found
    */
   private User remakeUserInFile(User user) throws IOException {
-    mapper.writeValue(new File(this.path + userFileName(user) + ".json"), user);
+    mapper.writeValue(new File(this.path, userFileName(user) + ".json"), user);
     return user;
   }
 
@@ -282,20 +254,18 @@ public class JsonHandler {
    * @param email email of user
    * @param password password of user
    * @return user if he exists
-   * @throws Exception could not load file.
+   * @throws IOException could not load file.
    */
-  public Optional<User> loadUser(String email, String password) throws Exception {
-    try {
-      List<User> users = loadJsonUserList();
-      for (User user : users) {
-        if (user.checkCredentials(email, password)) {
-          return Optional.of(user);
-        }
-      }
-      return Optional.empty();
-
-    } catch (IOException e) {
-      throw new Exception(e);
+  public Optional<User> loadUser(String email, String password) throws IOException {
+    List<User> users = loadJsonUserList();
+    if (users == null) {
+      throw new Error("Something wrong happened!");
     }
+    for (User user : users) {
+      if (user.checkCredentials(email, password)) {
+        return Optional.of(user);
+      }
+    }
+    return Optional.empty();
   }
 }

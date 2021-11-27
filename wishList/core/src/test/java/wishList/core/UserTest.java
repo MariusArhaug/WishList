@@ -63,11 +63,8 @@ class UserTest {
 
   @Test
   void getContacts() {
-    List<User> emptyContactList = new ArrayList<>();
-    assertEquals(john.getContacts(), emptyContactList);
     john.addContact(jane);
-    emptyContactList.add(jane);
-    assertEquals(john.getContacts().toString(), emptyContactList.toString());
+    assertEquals("Jane.Doe@gmail.com", john.getContacts().get(0));
   }
 
   @Test
@@ -81,7 +78,7 @@ class UserTest {
     jane.shareWishList(jane.getNthOwnedWishList(0), group);
     assertEquals(
         john.getInvitedWishLists().toString(),
-        "[Baby shower,Jane,Doe,Jane.Doe@gmail.com,123Password!]");
+        "[Baby shower,Jane,Doe,Jane.Doe@gmail.com,123Password!,[]]");
   }
 
   @Test
@@ -99,7 +96,7 @@ class UserTest {
   @Test
   void addContact() {
     jane.addContact(john);
-    assertEquals(jane.getContacts().toString(), "[John,Smith,John.Smith@gmail.com,!Password123]");
+    assertEquals("John.Smith@gmail.com", jane.getContacts().get(0));
   }
 
   @Test
@@ -145,17 +142,17 @@ class UserTest {
 
   @Test
   void TestRemoveWish() {
-    Wish wish = new Wish("book");
-    WishList wishList = new WishList("Christmas", john);
-    wishList.addWish(wish);
     john.makeWishList("Christmas");
-    john.addWish(wishList, wish);
-
+    john.addWish(john.getNthOwnedWishList(0), new Wish("Book"));
     assertTrue(john.getWishList("Christmas").isPresent());
-    assertEquals(wishList.toString(), john.getWishList("Christmas").get().toString());
+
+    assertEquals(
+        john.getWishList("Christmas").get().toString(),
+        "Christmas,John,Smith,John.Smith@gmail.com,!Password123,[Book]");
     john.removeWish("Christmas", "Book");
-    wishList.removeWish(wish);
-    assertEquals(wishList.toString(), john.getWishList("Christmas").get().toString());
+    assertEquals(
+        john.getWishList("Christmas").get().toString(),
+        "Christmas,John,Smith,John.Smith@gmail.com,!Password123,[]");
   }
 
   @Test
@@ -163,7 +160,7 @@ class UserTest {
     john.makeWishList("Christmas");
     assertEquals(
         john.getNthOwnedWishList(0).toString(),
-        "Christmas,John,Smith,John.Smith@gmail.com,!Password123");
+        "Christmas,John,Smith,John.Smith@gmail.com,!Password123,[]");
   }
 
   @Test

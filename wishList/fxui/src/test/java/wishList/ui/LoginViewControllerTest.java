@@ -71,10 +71,9 @@ public class LoginViewControllerTest extends ApplicationTest {
    * Test if existing user can be found in json file The user was added to file before the test
    *
    * @param robot executes the operations in the GUI
-   * @throws Exception
    */
   @Test
-  public void verifyThatUserExists(FxRobot robot) throws Exception {
+  public void verifyThatUserExists(FxRobot robot) {
     robot.clickOn("#loginEmailInput");
     robot.write("jane@doe.com");
     robot.clickOn("#loginPasswordInput");
