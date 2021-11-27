@@ -62,6 +62,38 @@ class UserTest {
   }
 
   @Test
+  void TestSetFirstName() {
+    assertThrows(IllegalArgumentException.class, () -> jane.setFirstName(""));
+    john.setFirstName("Jon");
+    assertEquals(john.getFirstName(), "Jon");
+  }
+
+  @Test
+  void TestSetLastName() {
+    assertThrows(IllegalArgumentException.class, () -> jane.setLastName(""));
+    john.setLastName("Smitt");
+    assertEquals(john.getLastName(), "Smitt");
+  }
+
+  @Test
+  void TestSetEmail() {
+    john.setEmail("john.sm7@mail123.no");
+    assertEquals(john.getEmail(), "john.sm7@mail123.no");
+    assertThrows(IllegalArgumentException.class, () -> jane.setLastName(""));
+  }
+
+  @Test
+  void TestSetPassword() {
+    john.setPassword("asdfgh89210");
+    assertEquals(john.getPassword(), "asdfgh89210");
+    john.setPassword("gedcmz94");
+    assertEquals(john.getPassword(), "gedcmz94");
+    assertThrows(IllegalArgumentException.class, () -> jane.setPassword(""));
+    assertThrows(IllegalArgumentException.class, () -> john.setPassword("sdfset7"));
+  }
+
+
+  @Test
   void getContacts() {
     john.addContact(jane);
     assertEquals("Jane.Doe@gmail.com", john.getContacts().get(0));
@@ -79,6 +111,16 @@ class UserTest {
     assertEquals(
         john.getInvitedWishLists().toString(),
         "[Baby shower,Jane,Doe,Jane.Doe@gmail.com,123Password!,[]]");
+  }
+
+  @Test
+  void getOwnedWishLists() {
+    List<WishList> emptyOwnedList = new ArrayList<>();
+    assertEquals(john.getOwnedWishLists(), emptyOwnedList);
+    john.makeWishList("Wedding");
+    assertEquals(
+            john.getOwnedWishLists().toString(),
+            "[Wedding,John,Smith,John.Smith@gmail.com,!Password123,[]]");
   }
 
   @Test
