@@ -39,8 +39,8 @@ public class UserSerializer extends JsonSerializer<User> {
     }
     jsonGenerator.writeEndArray();
     jsonGenerator.writeArrayFieldStart("contacts");
-    for (User u : user.getContacts()) {
-      jsonGenerator.writeObject(u.getEmail());
+    for (String email : user.getContacts()) {
+      jsonGenerator.writeString(email);
     }
     jsonGenerator.writeEndArray();
     jsonGenerator.writeEndObject();

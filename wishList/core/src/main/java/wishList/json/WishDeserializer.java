@@ -4,9 +4,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import wishList.core.Wish;
-import wishList.core.WishList;
 
 import java.io.IOException;
 
@@ -28,15 +26,6 @@ public class WishDeserializer extends JsonDeserializer<Wish> {
   }
 
   Wish deserializeWish(JsonNode node) {
-    Wish wish = new Wish(node.get("name").asText());
-    JsonNode belongToNode = node.get("belongTo");
-    if (belongToNode instanceof ObjectNode) {
-      WishList wishList;
-      if (!belongToNode.get("name").isNull()) {
-        wishList = new WishList(belongToNode.get("name").asText());
-        wish.setBelongTo(wishList);
-      }
-    }
-    return wish;
+    return new Wish(node.get("name").asText());
   }
 }

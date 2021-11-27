@@ -9,23 +9,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import wishList.core.User;
 import wishList.core.WishList;
-import wishList.json.JsonHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class GroupsViewController extends AbstractController {
-  private final JsonHandler jsonHandler;
   @FXML protected Button shareWithGroup;
   @FXML protected Button moveToGroup;
   @FXML protected Button moveOutOfGroup;
   @FXML protected ListView<String> yourFriendsList;
   @FXML protected ListView<String> yourGroupList;
   @FXML protected Label shareWithGroupFeedback;
-
-  public GroupsViewController() {
-    jsonHandler = new JsonHandler(this.resourcesPath);
-  }
 
   @Override
   public void initialize() {
@@ -34,6 +29,7 @@ public class GroupsViewController extends AbstractController {
     }
   }
 
+  /** Move to group. */
   public void moveToGroup() {
     String friend = yourFriendsList.getSelectionModel().getSelectedItem();
     yourFriendsList.getSelectionModel().clearSelection();
@@ -51,6 +47,7 @@ public class GroupsViewController extends AbstractController {
     this.updateFriendsView();
   }
 
+  /** Move out of group. */
   public void moveOutOfGroup() {
     String friend = yourGroupList.getSelectionModel().getSelectedItem();
     yourGroupList.getSelectionModel().clearSelection();
@@ -69,54 +66,40 @@ public class GroupsViewController extends AbstractController {
   }
 
   private void updateFriendsView() {
-    List<User> friends = user.getContacts();
-    ObservableList<String> group = yourGroupList.getItems();
-    for (String member : group) {
-      User friend =
-          friends.stream().filter(e -> e.getEmail().equals(member)).findFirst().orElse(null);
-      if (friend != null) {
-        friends.remove(friend);
-      }
-    }
-    List<String> names = new ArrayList<>();
-    for (User u : friends) {
-      String name = u.getEmail();
-      names.add(name);
-    }
-    yourFriendsList.setItems(FXCollections.observableList(names));
+    yourFriendsList.setItems(FXCollections.observableList(this.user.getContacts()));
   }
 
+  /**
+   * Share wishList.
+   *
+   * @param event action event
+   * @throws Exception exception
+   */
   public void shareWishList(ActionEvent event) throws Exception {
     ObservableList<String> observableGroup = yourGroupList.getItems();
-    List<String> stringGroup = new ArrayList<>(observableGroup);
-    List<User> group = new ArrayList<>();
-    for (String s : stringGroup) {
-      User groupMember =
-          User.getUsers().stream().filter(e -> e.getEmail().equals(s)).findFirst().orElse(null);
-      group.add(groupMember);
+    List<String> emailGroup = new ArrayList<>(observableGroup);
+    List<User> yourGroup = new ArrayList<>();
+    for (String email : emailGroup) {
+      Optional<User> user = httpController.getUser(email);
+      user.ifPresent(yourGroup::add);
     }
-    if (group.size() == 0) {
+    if (yourGroup.size() == 0) {
       shareWithGroupFeedback.setText("You can not share list with empty group!");
       return;
     }
-    for (User u : group) {
-      WishList alreadyShared =
-          u.getInvitedWishLists().stream()
-              .filter(
-                  e ->
-                      e.getOwner().toString().equals(user.toString())
-                          && e.getName().equals(wishListToShare.getName()))
-              .findFirst()
-              .orElse(null);
-      if (alreadyShared != null) {
-        group.remove(u);
+    for (User user : yourGroup) {
+      for (WishList wishList : user.getInvitedWishLists()) {
+        if (wishList.getName().equals(wishListToShare.getName())) {
+          yourGroup.remove(user);
+          break;
+        }
       }
     }
-    if (group.size() == 0) {
+    if (yourGroup.size() == 0) {
       shareWithGroupFeedback.setText("This list has been shared with this group already!");
       return;
     }
-    jsonHandler.shareWishList(user, wishListToShare, group);
+    this.user = httpController.shareWishList(user, wishListToShare, yourGroup);
     this.wishListToShare = null;
     changeToMainView(event);
   }

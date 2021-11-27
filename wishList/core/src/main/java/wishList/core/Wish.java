@@ -6,9 +6,7 @@ public class Wish {
   private String name;
   private WishList belongTo;
 
-  /**
-   * Empty constructor for json test purposes.
-   */
+  /** Empty constructor for json test purposes. */
   public Wish() {}
 
   /**
@@ -34,10 +32,6 @@ public class Wish {
     return this.name;
   }
 
-  public WishList getBelongTo() {
-    return this.belongTo;
-  }
-
   /**
    * Set name of wish.
    *
@@ -53,22 +47,22 @@ public class Wish {
     return this;
   }
 
+  WishList getBelongTo() {
+    return this.belongTo;
+  }
+
   /**
    * Set wishList as parent to wish.wq
    *
    * @param belongTo wishList parent
    */
-  public Wish setBelongTo(WishList belongTo) /*throws IllegalArgumentException*/ {
-    //wishes made of the test connstructor is unable to use this function:o
-    /*if (belongTo == null) {
-      throw new IllegalArgumentException("A wish must belong to an existing wish list!");
-    }*/
+  Wish setBelongTo(WishList belongTo) {
     this.belongTo = belongTo;
     return this;
   }
 
   @Override
   public String toString() {
-    return "" + this.name + "," + this.belongTo + "";
+    return "" + this.name + "";
   }
 }
