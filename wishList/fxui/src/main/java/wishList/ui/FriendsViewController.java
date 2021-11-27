@@ -40,14 +40,18 @@ public class FriendsViewController extends AbstractController {
       yourFriendsFeedback.setText("You are already friends with this user!");
       return;
     }
+    if (email.length() == 0){
+      yourFriendsFeedback.setText("No user exist with this email");
+      return;
+    }
     User newFriend;
     try {
       this.user = httpController.addContact(email, user);
+      /*
       if (httpController.getUser(email).isEmpty()) {
         throw new IllegalArgumentException("No user exist with this email");
-      }
+      } */
       newFriend = httpController.getUser(email).get();
-
     } catch (IllegalArgumentException e) {
       yourFriendsFeedback.setText(e.getMessage());
       return;
@@ -65,6 +69,10 @@ public class FriendsViewController extends AbstractController {
   /** Remove friend. */
   public void removeFriend() {
     String userInfo = yourFriendsList.getSelectionModel().getSelectedItem();
+    if(userInfo == null){
+      yourFriendsFeedback.setText("You must choose a friend to delete!");
+      return;
+    }
     String[] userInfos = userInfo.split("; ");
     try {
       this.user = httpController.removeContact(userInfos[1], this.user);

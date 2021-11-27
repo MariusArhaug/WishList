@@ -1,5 +1,6 @@
 package wishList.json;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import wishList.core.User;
 import wishList.core.Wish;
@@ -267,5 +268,16 @@ public class JsonHandler {
       }
     }
     return Optional.empty();
+  }
+
+  /**
+   * load user from filename.
+   *
+   * @param filename filename
+   * @return User
+   * @throws IOException file not found
+   */
+  public User loadJsonUser(String filename) throws IOException {
+    return mapper.readValue(new File(this.path, filename + ".json"), new TypeReference<>() {});
   }
 }

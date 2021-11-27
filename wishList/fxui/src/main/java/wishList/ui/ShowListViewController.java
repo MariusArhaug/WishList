@@ -47,9 +47,8 @@ public class ShowListViewController extends AbstractController {
       addWishFeedback.setText("Wish must have content!");
       return;
     }
-    Wish wish =
-        Utils.findFirstOrNull(this.wishListToShare.getWishes(), e -> e.getName().equals(wishName));
 
+    Wish wish = Utils.findFirstOrNull(this.user.getWishList(wishListToShare.getName()).get().getWishes(), e -> e.getName().equals(wishName));
     if (wish != null) {
       addWishFeedback.setText("This wish list already contains that wish!");
       return;

@@ -65,7 +65,7 @@ public class GroupsViewController extends AbstractController {
     this.updateFriendsView();
   }
 
-  private void updateFriendsView() {
+  void updateFriendsView() {
     yourFriendsList.setItems(FXCollections.observableList(this.user.getContacts()));
   }
 

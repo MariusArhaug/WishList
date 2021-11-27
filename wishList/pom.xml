@@ -95,37 +95,17 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<version>2.5.4</version>
 		</dependency>
-
-		<!--
+		<!-- javafx -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-			<version>2.5.4</version>
-		</dependency> -->
-
-		<!--
-		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.1-api</artifactId>
-			<version>1.0.0.Final</version>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>16</version>
 		</dependency>
-
 		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>16</version>
 		</dependency>
-
-		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>persistence-api</artifactId>
-			<version>2.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-boot-starter</artifactId>
-			<version>3.0.0</version>
-		</dependency> -->
 	</dependencies>
 	</dependencyManagement>
 
@@ -197,7 +177,16 @@
 				</executions>
 			</plugin>
 
-
+			<plugin>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-maven-plugin</artifactId>
+				<version>0.0.6</version>
+				<!-- Default configuration for running -->
+				<!-- Usage: mvn javafx:run -->
+				<configuration>
+					<mainClass>wishList.ui.WishListApp</mainClass>
+				</configuration>
+			</plugin>
 
 			<!-- Configure jacoco code coverage -->
 			<plugin>
