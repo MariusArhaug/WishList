@@ -9,19 +9,17 @@ Test coverage:
 Pipeline status:
 [![pipeline status](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121/badges/master/pipeline.svg)](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121/-/commits/master)
 
-## How to contribute and coding routines:
-
-[CONTRIBUTING.md](./CONTRIBUTING.md)
-
-Elaboration of user story, and description og apps purpose and functionality:
-
-[README.md](wishList/core/src/README.md)
-
 # Documentation agile development iterations:
 
-[1. iteration](docs/release1/README.md)
+- [1. iteration](docs/release1/README.md)
 
-[2. iteration](docs/release2/README.md)
+- [2. iteration](docs/release2/README.md)
+
+- [3. iteration](docs/release3/README.md)
+
+## How to contribute and how to run application.
+
+- [**CONTRIBUTING.md**](./CONTRIBUTING.md)
 
 # Overview of code structure
 
@@ -47,40 +45,17 @@ Our repo supports the following
 
 # Core
 
-[**Documentation**](./wishList/core/src)
+The core module consists of all core logic this application uses. It is comprised of three core classes, **User**, **WishList** and **Wish** which has their own ways of interacting with each other set of methods and fields.
 
-[**Core**](./wishList/core/src/main/java/wishList/core): Core functionality to be used throughout application
+In here also lies all forms of json serialization and deserilaztion logic and how such core objects should be written to files and saved to acheive persistance.
 
-[**JSON**](./wishList/core/src/main/java/wishList/json): Serializer/Deserializers for saving objects to JSON files
-
-[**Utils**](./wishList/core/src/main/java/wishList/utils): Utility methods that can be used as functional components
-
-## Core test
-
-[**Core tests**](./wishList/core/src/test/java/wishList): Tests for all sub directories in core
+For further detailed documentation about core structure and logic click [**here**](./wishList/core/)
 
 # FXUI
 
-## Dividing of FXML files and the use of multiple controllers
+The FXUI pacakage acts as the client in this application. In here lies all the different scenes the user can interact with and the underlying controllers that handle these user interactions. There is no major logic or computation happeneing in this package aside from it being able to send **HTTP** requests to the server. This is on purpose to make the client as small as possible and not make it depend on underlying logic not direclty used by the user itself.
 
-In order to avoid having one controller that maintains multiple function calls to different scenes, we opted instead to
-have multiple controllers and views in order to make the code both maintainable if we were to introduce newer
-functionality as well as making the code easier to read and digest. This type of architecture is also used in Spring
-Boot, so we thought it would be usefull to use it elsewhere aswell.
-
-## Controllers
-
-[**Documentation**](./wishList/fxui/src)
-
-[**Controllers**](./wishList/fxui/src/main/java/wishList/ui): Controllers for every FXML scene
-
-## FXML
-
-[**FXML**](./wishList/fxui/src/main/resources/wishList/ui): Each FXML file is its own unqiue scene
-
-## FXUI Test
-
-[**Fxui tests**](./wishList/fxui/src/test/java/wishList): FXML tests
+For further documentation about structure click [**here**](./wishList/fxui/)
 
 # REST-API
 
