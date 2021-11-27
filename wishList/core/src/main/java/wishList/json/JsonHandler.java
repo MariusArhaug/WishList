@@ -39,7 +39,7 @@ public class JsonHandler {
    * @return List of users
    * @throws IOException if not able to find file
    */
-  private List<User> loadJsonUserList() throws IOException {
+  public List<User> loadJsonUserList() throws IOException {
     List<User> users = new ArrayList<>();
     File dir = new File(getPath());
     File[] directoryListing = dir.listFiles();

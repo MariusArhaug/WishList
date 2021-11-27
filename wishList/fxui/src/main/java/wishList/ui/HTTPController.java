@@ -54,7 +54,7 @@ class HTTPController {
       throw new Error("Something went wrong!");
     }
 
-    if(objectMapper.readValue(response.body(), User.class) == null){
+    if (objectMapper.readValue(response.body(), User.class) == null){
       return null;
     }
     return objectMapper.readValue(response.body(), User.class);
