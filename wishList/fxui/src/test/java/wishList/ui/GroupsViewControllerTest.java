@@ -1,5 +1,7 @@
 package wishList.ui;
 
+import java.io.IOException;
+import java.util.Optional;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,9 +16,6 @@ import org.testfx.util.WaitForAsyncUtils;
 import wishList.core.User;
 import wishList.core.WishList;
 import wishList.json.JsonHandler;
-
-import java.io.IOException;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

@@ -1,17 +1,16 @@
 package wishList.json;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import wishList.core.User;
-import wishList.core.WishList;
-import wishList.utils.Utils;
-
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import wishList.core.User;
+import wishList.utils.Utils;
 
 import static org.junit.jupiter.api.Assertions.*;
 

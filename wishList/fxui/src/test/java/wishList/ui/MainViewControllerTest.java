@@ -1,25 +1,18 @@
 package wishList.ui;
 
+import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.testfx.api.FxAssert;
-import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
-import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.util.WaitForAsyncUtils;
 import wishList.core.User;
 import wishList.json.JsonHandler;
-
-import javax.swing.text.html.ListView;
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 

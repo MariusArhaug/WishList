@@ -1,5 +1,8 @@
 package wishList.ui;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,10 +11,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import wishList.core.User;
 import wishList.utils.Utils;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /** Controller for friend actions. * */
 public class FriendsViewController extends AbstractController {
@@ -40,7 +39,7 @@ public class FriendsViewController extends AbstractController {
       yourFriendsFeedback.setText("You are already friends with this user!");
       return;
     }
-    if (email.length() == 0){
+    if (email.length() == 0) {
       yourFriendsFeedback.setText("No user exist with this email");
       return;
     }
@@ -69,7 +68,7 @@ public class FriendsViewController extends AbstractController {
   /** Remove friend. */
   public void removeFriend() {
     String userInfo = yourFriendsList.getSelectionModel().getSelectedItem();
-    if(userInfo == null){
+    if (userInfo == null) {
       yourFriendsFeedback.setText("You must choose a friend to delete!");
       return;
     }

@@ -3,10 +3,10 @@ package wishList.json;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import java.io.IOException;
 import wishList.core.Wish;
 import wishList.core.WishList;
 
-import java.io.IOException;
 
 /** Serializer for wishList. */
 public class WishListSerializer extends JsonSerializer<WishList> {

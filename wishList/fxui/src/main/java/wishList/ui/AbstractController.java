@@ -1,5 +1,8 @@
 package wishList.ui;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +13,6 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import wishList.core.User;
 import wishList.core.WishList;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
 
 /** Abstract controller with changeScene method that all other controllers inherits. */
 public abstract class AbstractController {
@@ -89,6 +88,12 @@ public abstract class AbstractController {
     }
   }
 
+  /**
+   * Change to MainView.
+   *
+   * @param source as a parameter to use in changeScene
+   * @throws IOException if file is not found
+   */
   public void changeToMainView(Object source) throws IOException {
     if (this instanceof LoginViewController) {
       if (((LoginViewController) this).checkUser()) {

@@ -1,6 +1,10 @@
 package wishList.utils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.List;
@@ -24,7 +28,7 @@ public class Utils {
     if (new File(finalPath).delete() && new File(finalPath).createNewFile()) {
       try (Writer w =
               new OutputStreamWriter(new FileOutputStream(finalPath), StandardCharsets.UTF_8);
-          PrintWriter pw = new PrintWriter(w)) {
+           PrintWriter pw = new PrintWriter(w)) {
         pw.print("[]");
       }
     }

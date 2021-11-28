@@ -1,5 +1,7 @@
 package wishList.ui;
 
+import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,9 +11,6 @@ import javafx.scene.control.TextField;
 import wishList.core.Wish;
 import wishList.core.WishList;
 import wishList.utils.Utils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /** Controller for show list view. */
 public class ShowListViewController extends AbstractController {
@@ -48,7 +47,9 @@ public class ShowListViewController extends AbstractController {
       return;
     }
 
-    Wish wish = Utils.findFirstOrNull(this.user.getWishList(wishListToShare.getName()).get().getWishes(), e -> e.getName().equals(wishName));
+    Wish wish = Utils.findFirstOrNull(this.user.getWishList(
+                    wishListToShare.getName()).get().getWishes(),
+                    e -> e.getName().equals(wishName));
     if (wish != null) {
       addWishFeedback.setText("This wish list already contains that wish!");
       return;
