@@ -16,7 +16,7 @@ public class WishTest {
   public void setUp() {
     john = new User("John", "Smith", "John.Smith@gmail.com", "!Password123");
     jane = new User("Jane", "Doe", "Jane.Doe@gmail.com", "123Password!");
-    wishList = new WishList("Birthday", john);
+    wishList = new WishList("Birthday", john.getEmail());
   }
 
   @AfterEach

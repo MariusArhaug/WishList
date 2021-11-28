@@ -201,7 +201,7 @@ public class User {
    */
   public String makeWishList(String name) {
     if (!wishListsExist(name)) {
-      this.ownedWishLists.add(new WishList(name, this));
+      this.ownedWishLists.add(new WishList(name, this.getEmail()));
       return "New wish list added!";
     }
     return "You already have a wishlist with this name!";
@@ -263,7 +263,7 @@ public class User {
    */
   public void addWishList(WishList list) {
     ownedWishLists.add(list);
-    list.setOwner(this);
+    list.setOwner(this.getEmail());
   }
 
   /**

@@ -9,7 +9,7 @@
                 onAction="#changeToMainView" text="Log in"/>
         <Button id="newUserButton" fx:id="newUserButton" layoutX="14.0" layoutY="45.0" mnemonicParsing="false"
                 onAction="#changeToRegisterView" text="Sign up"/>
-        <Label id="errorMessage" fx:id="errorMessage" layoutX="14.0" layoutY="70.0" text=""/>
+        <Label id="errorMessage" fx:id="errorMessage" layoutX="14.0" layoutY="70.0"/>
         <TextField id="loginEmailInput" fx:id="loginEmailInput" layoutX="14.0" layoutY="87.0"/>
         <PasswordField id="loginPasswordInput" fx:id="loginPasswordInput" layoutX="14.0" layoutY="112.0"/>
     </children>

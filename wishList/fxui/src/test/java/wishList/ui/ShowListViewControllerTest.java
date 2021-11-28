@@ -9,6 +9,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.util.WaitForAsyncUtils;
 import wishList.core.User;
@@ -44,7 +45,7 @@ public class ShowListViewControllerTest extends AbstractTestFxui {
     @BeforeEach
     public void setup() throws IOException {
         this.controller.addWishFeedback.setText("");
-        this.jsonHandler = new JsonHandler(this.controller.resourcesPath);
+        this.jsonHandler = new JsonHandler(MainViewControllerTest.directory);
         this.user = jsonHandler.loadJsonUser("jane@doecom");
         this.user.makeWishList("TestList");
         this.controller.updateUser(this.user);
@@ -79,11 +80,11 @@ public class ShowListViewControllerTest extends AbstractTestFxui {
     }
 
     /**
-     * Test that error messages correlated to adding wishes work correctly
-     * Test that
+     * Test that error messages correlated to adding wishes and removing wishes work correctly.
+     * Test that wishes are added and removed correctly.
      */
     @Test
-    public void testAddWish(){
+    public void testAddWishAndRemoveWish(){
         assertEquals(controller.addWishFeedback.getText(), "");
         clickOn("#addNewWishButton");
         assertEquals(controller.addWishFeedback.getText(), "Wish must have content!");
@@ -98,18 +99,6 @@ public class ShowListViewControllerTest extends AbstractTestFxui {
         write("foo");
         clickOn("#addNewWishButton");
         assertEquals(controller.addWishFeedback.getText(), "This wish list already contains that wish!");
-    }
-
-    /**
-     * Test that error messages correlated to removing wishes work correctly
-     * Test that wish is removed
-     */
-    @Test
-    public void testRemoveWish(){
-        //setup because list with foo got removed after test
-        clickOn("#addNewWishField");
-        write("foo");
-        clickOn("#addNewWishButton");
 
         clickOn("#removeWish");
         assertEquals(controller.addWishFeedback.getText(), "You must choose a wish to remove!");

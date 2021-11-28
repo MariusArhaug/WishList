@@ -44,6 +44,6 @@ public class WishDeserializerTest {
   @Test
   public void wishDeserializerTest() throws IOException {
     assertEquals(
-        (wishDeserializer.deserialize(parser, deserializationContext)).toString(), wish.toString());
+            (wishDeserializer.deserialize(parser, deserializationContext)).toString(), wish.toString());
   }
 }

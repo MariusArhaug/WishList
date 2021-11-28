@@ -35,6 +35,12 @@ public class RegisterViewController extends AbstractController {
     }
   }
 
+  /**
+   * Add user.
+   *
+   * @param event event
+   * @throws Exception if we can not get user
+   */
   private void addUser(ActionEvent event) throws Exception {
     String firstName = firstNameSignUp.getText();
     String lastName = lastNameSignUp.getText();

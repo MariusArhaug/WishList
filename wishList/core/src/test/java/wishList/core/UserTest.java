@@ -109,7 +109,7 @@ public class UserTest {
     jane.shareWishList(jane.getNthOwnedWishList(0), group);
     assertEquals(
         john.getInvitedWishLists().toString(),
-        "[Baby shower,Jane,Doe,Jane.Doe@gmail.com,123Password!,[]]");
+        "[Baby shower,Jane.Doe@gmail.com,[]]");
   }
 
   @Test
@@ -119,7 +119,7 @@ public class UserTest {
     john.makeWishList("Wedding");
     assertEquals(
             john.getOwnedWishLists().toString(),
-            "[Wedding,John,Smith,John.Smith@gmail.com,!Password123,[]]");
+            "[Wedding,John.Smith@gmail.com,[]]");
   }
 
   @Test
@@ -178,7 +178,7 @@ public class UserTest {
     assertTrue(john.getWishList("Second wishes").isPresent());
     assertEquals(wishList2, john.getWishList("Second wishes").get());
 
-    assertEquals(john, wishList2.getOwner());
+    assertEquals(john.getEmail(), wishList2.getOwner());
   }
 
   @Test
@@ -189,11 +189,11 @@ public class UserTest {
 
     assertEquals(
         john.getWishList("Christmas").get().toString(),
-        "Christmas,John,Smith,John.Smith@gmail.com,!Password123,[Book]");
+        "Christmas,John.Smith@gmail.com,[Book]");
     john.removeWish("Christmas", "Book");
     assertEquals(
         john.getWishList("Christmas").get().toString(),
-        "Christmas,John,Smith,John.Smith@gmail.com,!Password123,[]");
+        "Christmas,John.Smith@gmail.com,[]");
   }
 
   @Test
@@ -201,7 +201,7 @@ public class UserTest {
     john.makeWishList("Christmas");
     assertEquals(
         john.getNthOwnedWishList(0).toString(),
-        "Christmas,John,Smith,John.Smith@gmail.com,!Password123,[]");
+        "Christmas,John.Smith@gmail.com,[]");
   }
 
   @Test

@@ -1,18 +1,26 @@
 package wishList.ui;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.api.FxAssert;
+import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.util.WaitForAsyncUtils;
 import wishList.core.User;
 import wishList.json.JsonHandler;
+import wishList.utils.Utils;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,6 +29,18 @@ public class MainViewControllerTest extends AbstractTestFxui {
     private MainViewController controller;
     private User user;
     private JsonHandler jsonHandler;
+    static String[] paths = new File("").getAbsolutePath().split("fxui");
+
+    static String directory =
+            Paths.get(
+                    paths[0],
+                    "rest",
+                    "src",
+                    "main",
+                    "resources",
+                    "wishList",
+                    "users")
+            .toString();
 
     /**
      * Load test fxml file. Get controller from the file
@@ -41,12 +61,21 @@ public class MainViewControllerTest extends AbstractTestFxui {
      * @throws IOException if file is not found
      */
     @BeforeEach
-    public void setup() throws IOException {
+    public void setup() throws Exception {
         this.controller.newWishListFeedback.setText("");
-        this.jsonHandler = new JsonHandler(this.controller.resourcesPath);
-        this.user = jsonHandler.loadJsonUser("jane@doecom");
+        Utils.resetFile(directory, "jane@doecom.json");
+        this.jsonHandler = new JsonHandler(directory);
+        user = new User("Jane", "Doe", "jane@doe.com", "qwerty123");
+        this.user = jsonHandler.addUser(user);
         this.controller.updateUser(this.user);
     }
+    @AfterEach
+    public void tearDown() {
+        this.user = null;
+        jsonHandler = null;
+    }
+
+
 
     /**
      * Check that controller from file is not null
