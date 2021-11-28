@@ -42,10 +42,17 @@ Our repo supports the following
 
 - Testing (maven-sunfire-plugin)
 - JavaFX running (javafx-maven-plugin)
+- Spring Boot (java restapi framework)
 
 # Core
 
-The core module consists of all core logic this application uses. It is comprised of three core classes, **User**, **WishList** and **Wish** which has their own ways of interacting with each other set of methods and fields.
+The core module consists of all core logic this application uses. It is comprised of three core classes:
+
+- **User**
+- **WishList**
+- **Wish**
+
+These classes have their own ways of interacting with each other, and a set of methods and fields.
 
 In here also lies all forms of json serialization and deserilaztion logic and how such core objects should be written to files and saved to acheive persistance.
 
@@ -57,18 +64,14 @@ The FXUI pacakage acts as the client in this application. In here lies all the d
 
 For further documentation about structure click [**here**](./wishList/fxui/)
 
-# REST-API
+# Server
 
 [**Documentation**](./wishList/rest/)
 
-## Spring Boot
+Our server is a RESTful API created using [**Spring Boot**](https://spring.io/projects/spring-boot). For a server to be called a RESTful API it needs to follow a set of rules. Our server organizes entities and methods on unique _URIs_ often referred to as _endpoints_. Clients can get access to these resources using a **HTTP** request that follows a specific format that consists of which endpoint it is requesting, what type of _HTTP_ request being used an its request body (if nessecerray).
 
-We decided to use [**Spring Boot**](https://spring.io/projects/spring-boot) for our RESTful API seeing as it is the
-industry standard and therefore the most searched frameworks on google, allowing us to get as much help as possible.
+> REST standing for Representational State Transfer
 
-## HTTP Client
+> URI standing for Uniformed Resource Identifier
 
-We decided to use [**HTTP
-Client**](https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/package-summary.html) as a way
-of communicating from our FXUI to our REST API. It requires some boilerplate but it is still by far the cleaneast option
-out of all the various HTTP packages that Java supports
+For further documentation about structure click [**here**](./wishList/rest/)

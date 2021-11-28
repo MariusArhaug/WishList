@@ -8,7 +8,9 @@ We use `maven` for our project.
 
 The fxui tests will fail unless the server is running.
 
-Start with `mvn clean compile` inside the rest module.
+### Compile
+
+`mvn clean compile`
 
 Then run the server:
 
@@ -26,22 +28,22 @@ Then to run in the fxui module:
 
 ## Folder structure
 
-        rest
+        fxui
         ├── src                                 # Source directory
         |   └─ main
         │      ├── java
-        |      |    └──wishList.restapi
-        |      |         ├──RESTApplication     # Spring Boot app "mvn spring-boot:run"
-        |      |         ├──RESTController      # Controller for incomming HTTP requests
-        |      |         ├──WishListService     # Service that interacts with Core
+        |      |    └──wishList.ui
+        |      |         ├──WishListApp         # Main app to run application
+        |      |         ├──AbstractController  # Parent controller
+        |      |         ├──LoginViewController # Handle log in
+        |      |         ├──HTTPController      # Send http requests to server
         |      |         └──module-info.java
         |      |
         |      └── resources
         |            └──wishList
-        |                 ├──restapi
-        |                 └──users
+        |                 ├──ui                 # FXML files
+        |                 └──users              # Store user data locally
         |                     ├──#email#.json
-        ├──rest.iml           ├──#...#
         ├──pom.xml
         └──README.md
 
@@ -54,38 +56,27 @@ Boot, so we thought it would be usefull to use it elsewhere aswell.
 
 ## Controllers
 
-[**Documentation**](./wishList/fxui/src)
+[**Controllers**](./wishList/fxui/src/main/java/wishList/ui): Controllers for every FXML scene.
 
-[**Controllers**](./wishList/fxui/src/main/java/wishList/ui): Controllers for every FXML scene
+To make it very obvious which controller handled which action, we split up the controllers to handle each scene indivuduall. This causes some boilerplate code but common methods shared between the controllers are instead added into the parent controller **AbstractController** this controller in it self is not ment to to directly interact with any FXML scenes, but it gives all its children extra functionality and the ability to easily move user data from one scene to the other.
 
 ## FXML
 
-[**FXML**](./wishList/fxui/src/main/resources/wishList/ui): Each FXML file is its own unqiue scene
+[**FXML**](./wishList/fxui/src/main/resources/wishList/ui): Each FXML file is its own unqiue scene. All created using the **SceneBuilder** tool. We followd our own prototype previously designed and talked about in [**relase2**](../../docs/release2/README.md)
+
+<br />
 
 ## FXUI Test
 
 [**Fxui tests**](./wishList/fxui/src/test/java/wishList): FXML tests
 
-FXUI has the following classes:
+To make sure that our scenes act accordingly, there are now added a majority of tests to cover all the nesecarry functionality of each scene. Keep in mind that this is not done useing **Mocking** so in order to get these tests to work, you will have to boot up the server locally. All user changes made during the tests are swiftly removed after the tests are finished running, so no side effects should occur.
 
-- **WishListApp** : Starts the program; Launch FXML and controllers.
+> Ideally we would use mocking, but we ran out of time and instead felt this solution solved to of our problems if only temporary. These tests now also behaves as integration test seeing as they are interacting with the server and will fail if the server somehow manages to send the wrong data back during a HTTP request.
 
-- **AbstractController**: A main controller that has all the cunctions to change betwwen FXML scenes.
+<br />
 
-- **LoginViewController**: Controller for login scene, that sends user input to **JsonHandler** to checks if the user
-  exists or not and then decides to whether let users go to main scene or not.
-
-- **MainViewController** : Currently this controller has no extra functionality other than to serve as a boilerplate to
-  let other scenes interact with each other. This will be further improved in next sprint.
-
-- **RegisterViewController** : Lets user fill out register form and checks if this email is unique with other saved
-  users.
-
-- **ShowListViewController** : Shows all the wishLists that a user currently owns.
-
-**Resources** In resources you find the different fxml file/ "scenes", named such as _RegisterView.fxml_, etc..
-
-### Test users
+## Test users
 
 We've provided two test users to run this client alongside with the [**server**](../rest/README.md)
 

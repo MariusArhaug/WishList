@@ -95,6 +95,12 @@ We have expanded our tests to cover the new methods, as well as improved the tes
 
 We have continued to use issues as basis for working on the project. Like in last iteration, we have named our branches after the issues they are connected to, the number of the issue and whether the issue is a CHANGE, DRAFT etc. As an example, the branch used to update our readme files is called 49-change-update-all-readme-files. We have added all the issues from this iteration to the milestone Release3. We start our commit messages with the tags described in [**CONTRIBUTING**](/CONTRIBUTING.md), followed by a short description of what was committed. When merging a branch, we created a merge request and assigned a group member as reviewer. Like in the first iterations, we have written code reviews before merging.
 
+### Test Driven Development
+
+In the last release ([release2](../release2/README.md)), we brefily mentioned we wanted to further employ TDD (Test Driven Development) into our work rutines. In the start of this iteration we tried to follow this work routine, but we quickly figured out that due to how much our codebase would change, it would only increase the workload and probably introduce even more technical debt. We realised halfway that this approach would take too much time and decided to leave it out for now and rather use it when we are creating smaller features with less total number of changes.
+
+We feel that TDD walks a fine line between being very valuable but also being a major time consumer. Although trying it, and or just being aware of its principle, did give us a wider perspective on how to properly and safely implementing new features / and or refactoring without causing major code breaking changes.
+
 ## Diagrams and documentation
 
 [**Documentation of rest service**](./wishList/rest/README.md)

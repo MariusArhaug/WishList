@@ -2,22 +2,19 @@
 
 ## Folder structure
 
-        rest
+        core
         ├── src                                 # Source directory
-        |   └─ main
-        │      ├── java
-        |      |    └──wishList.restapi
-        |      |         ├──RESTApplication     # Spring Boot app "mvn spring-boot:run"
-        |      |         ├──RESTController      # Controller for incomming HTTP requests
-        |      |         ├──WishListService     # Service that interacts with Core
-        |      |         └──module-info.java
-        |      |
-        |      └── resources
-        |            └──wishList
-        |                 ├──restapi
-        |                 └──users
-        |                     ├──#email#.json
-        ├──rest.iml           ├──#...#
+        |   ├──main
+        │   |   └──java
+        |   |      └──wishList
+        |   |            ├──core                # core logic
+        |   |            ├──json                # JSON serializers / deserializers
+        |   |            └──utils               # Utility methods
+        |   └──test
+        |       ├──core                         # test core functionality
+        |       ├──json                         # test serializers
+        |       └──utils                        # Test util methods.
+        |
         ├──pom.xml
         └──README.md
 
@@ -38,15 +35,16 @@ In the folder **wishList.core** lies the main core logic. With the three classes
 
 [**JSON**](./src/main/java/wishList/json): Serializer/Deserializers for saving objects to JSON files
 
-In order to be able to save and load objects to JSON files such as `users.wishList.json` we need to make use of the **
-Jackson**
+In order to be able to save and load objects to JSON files we need to make use of the [**Jackson**](<https://en.wikipedia.org/wiki/Jackson_(API)>) package
 plugin and create our own **Serializers** and **Deserializers**
 
 Where each class has its own **Serializer** and **Deserializer** such as:
 
-- `UserSeralizer / UserDeserializer`
+- `UserSeralizer`
+- `UserDeserializer`
+- etc..
 
-These serializers/deserializers are then being used in the `JsonModule.java` file to tell **Jackson** how to save/load
+These serializers/deserializers are then being used in the `JsonModule.java` which then can be used to overload the standard serializer/deserializer methods **ObjectMapper** class in the **Jackson** package
 these objects.
 
 ## Core/Utils
