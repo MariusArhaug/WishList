@@ -12,11 +12,11 @@ This also allows clients to set up their own platform, if they so choose, that i
 
 You can run the server locally using *Maven*
 
-First you need to install and compile:
+First you need to install and compile (fxui tests will fail unless the server is running):
 
 `mvn clean install && mvn compile`
 
-Then to run:
+Then to run (mvn clean compile inside the rest module is often necessary before running the server):
 
 `mvn spring-boot:run`
 
