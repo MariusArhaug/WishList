@@ -19,7 +19,7 @@ public class RegisterViewControllerTest extends AbstractTestFxui {
     /**
      * Load the test fxml file that is connected to RegisterViewController
      * Get controller, save as attribute
-     * @param stage
+     * @param stage to be shown
      * @throws Exception if file is not found
      */
     @Override
@@ -64,11 +64,65 @@ public class RegisterViewControllerTest extends AbstractTestFxui {
         write("jkl");
         assertEquals(controller.passwordSignUp.getText(), "jkl");
 
-        clickOn("#signup");
+        clickOn("#signUpButton");
         assertEquals(controller.emailSignUp.getText(), "abc");
         assertEquals(controller.firstNameSignUp.getText(), "def");
         assertEquals(controller.lastNameSignUp.getText(), "ghi");
         assertEquals(controller.passwordSignUp.getText(), "jkl");
+        assertEquals(controller.registerFeedback.getText(), "This is not a valid email address!");
+    }
+
+    @Test
+    public void testEmptyFields(){
+        clickOn("#signUpButton");
+        assertEquals(controller.registerFeedback.getText(), "You need to fill out every field!");
+
+        clickOn("#firstNameSignUp");
+        write("jane");
+        clickOn("#signUpButton");
+        assertEquals(controller.registerFeedback.getText(), "You need to fill out every field!");
+
+        clickOn("#lastNameSignUp");
+        write("doe");
+        clickOn("#signUpButton");
+        assertEquals(controller.registerFeedback.getText(), "You need to fill out every field!");
+
+        clickOn("#emailSignUp");
+        write("jane@doe.com");
+        clickOn("#signUpButton");
+        assertEquals(controller.registerFeedback.getText(), "You need to fill out every field!");
+    }
+
+    @Test
+    public void testNotValidEmail(){
+        clickOn("#firstNameSignUp");
+        write("jane");
+
+        clickOn("#lastNameSignUp");
+        write("doe");
+
+        clickOn("#passwordSignUp");
+        write("12345678");
+
+        clickOn("#emailSignUp");
+        write("abcde");
+        clickOn("#signUpButton");
+        assertEquals(controller.registerFeedback.getText(), "This is not a valid email address!");
+    }
+
+    @Test
+    public void testNotValidPassword(){
+        clickOn("#firstNameSignUp");
+        write("jane");
+        clickOn("#lastNameSignUp");
+        write("doe");
+        clickOn("#emailSignUp");
+        write("jane@doe.com");
+        clickOn("#passwordSignUp");
+        write("1234567");
+        clickOn("#signUpButton");
+
+        assertEquals(controller.registerFeedback.getText(), "The password must be at least eight characters!");
     }
 
     /**

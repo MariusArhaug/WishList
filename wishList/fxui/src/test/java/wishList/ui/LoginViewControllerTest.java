@@ -59,7 +59,7 @@ public class LoginViewControllerTest extends AbstractTestFxui {
   }
 
   /**
-   * Check that the label that displays error message works as planned
+   * Check that the label that displays error message works as planned.
    *
    */
   @Test
@@ -67,7 +67,7 @@ public class LoginViewControllerTest extends AbstractTestFxui {
     FxAssert.verifyThat("#errorMessage", LabeledMatchers.hasText(""));
     assertEquals(controller.errorMessage.getText(), "");
 
-    clickOn("#login");
+    clickOn("#logInButton");
 
     FxAssert.verifyThat(
             "#errorMessage", LabeledMatchers.hasText("E-mail or password is incorrect"));
@@ -86,7 +86,7 @@ public class LoginViewControllerTest extends AbstractTestFxui {
     write("jane@doe.com");
     clickOn("#loginPasswordInput");
     write("qwerty123");
-    clickOn("#login");
+    clickOn("#logInButton");
     WaitForAsyncUtils.waitForFxEvents();
     assertNotNull(findSceneRootWithId("addList"));
     assertEquals(controller.errorMessage.getText(), "");
@@ -108,14 +108,14 @@ public class LoginViewControllerTest extends AbstractTestFxui {
     clickOn("#loginEmailInput");
     write("Hello");
     assertEquals(controller.loginEmailInput.getText(), "Hello");
-    clickOn("#login");
+    clickOn("#logInButton");
     assertEquals(controller.loginEmailInput.getText(), "Hello");
 
     assertEquals(controller.loginPasswordInput.getText(), "");
     clickOn("#loginPasswordInput");
     write("there");
     assertEquals(controller.loginPasswordInput.getText(), "there");
-    clickOn("#login");
+    clickOn("#logInButton");
     assertEquals(controller.loginPasswordInput.getText(), "there");
   }
 
