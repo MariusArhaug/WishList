@@ -57,6 +57,12 @@
             <artifactId>javafx-fxml</artifactId>
             <version>16</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>16</version>
+            <!-- <type>pom</type> -->
+        </dependency>
 
         <!-- TestFX -->
         <dependency>
@@ -71,6 +77,8 @@
             <version>4.0.16-alpha</version>
             <!-- <scope>test</scope> -->
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-media -->
+
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
@@ -95,6 +103,7 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -102,9 +111,9 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <!-- <scope>test</scope> -->
-        </dependency>
+            <artifactId>spring-boot-starter-test</artifactId> -->
+            <!-- <scope>test</scope>
+        </dependency> -->
     </dependencies>
     <build>
         <plugins>
@@ -137,6 +146,13 @@
                 <!-- Usage: mvn javafx:run -->
                 <configuration>
                     <mainClass>wishList.ui.WishListApp</mainClass>
+                    <compress>2</compress>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <stripDebug>true</stripDebug>
+                    <noManPages>true</noManPages>
+                    <launcher>wishlist</launcher>
+                    <jlinkImageName>wishlist</jlinkImageName>
+                    <jlinkZipName>wishlist</jlinkZipName>
                 </configuration>
             </plugin>
 
@@ -160,8 +176,34 @@
                 <configuration>
                     <propertyName>jaCoCoArgLine</propertyName>
                 </configuration>
-
             </plugin>
+
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <name>WishList</name>
+                    <appVersion>1.0.0</appVersion>
+                    <vendor>it1901</vendor>
+                    <destination>target/dist</destination>
+                    <module>wishList.ui/wishList.ui.WishListApp</module>
+                    <runtimeImage>target/wishlist</runtimeImage>
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                    </javaOptions>
+                    <!-- linux options -->
+                    <linuxShortcut>true</linuxShortcut>
+                    <linuxMenuGroup>WishList</linuxMenuGroup>
+
+                    <!-- windows options -->
+                    <winDirChooser>true</winDirChooser>
+                    <winShortcut>true</winShortcut>
+                    <winMenu>true</winMenu>
+                    <winMenuGroup>WishList</winMenuGroup>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 </project>
