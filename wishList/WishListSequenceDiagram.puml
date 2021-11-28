@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+User -> fxui: write wish list name
+fxui -> HTTPController: makeNewWishList(wishListName)
+HTTPController -> RESTController: addWishList(wishListName(), user)
+RESTController -> WishListService: createWishList()
+WishListService -> JsonHandler: makeWishList(wishListName, owner)
+JsonHandler -> core: makeNewWishList(wishListName)
+core -> JsonHandler: updated user
+JsonHandler -> WishListService: updated user
+WishListService -> RESTController: updated user
+RESTController -> HTTPController: updated user
+HTTPController -> fxui: updated user
+fxui -> User: updated user with the new wish list
+
+@enduml
