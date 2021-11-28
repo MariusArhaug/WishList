@@ -3,10 +3,6 @@ package wishList.ui;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import wishList.core.User;
-import wishList.core.WishList;
-import wishList.json.JsonModule;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -16,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import wishList.core.User;
+import wishList.core.WishList;
+import wishList.json.JsonModule;
 
 /** Control HTTP requests. * */
 class HTTPController {
@@ -54,7 +53,7 @@ class HTTPController {
       throw new Error("Something went wrong!");
     }
 
-    if (objectMapper.readValue(response.body(), User.class) == null){
+    if (objectMapper.readValue(response.body(), User.class) == null) {
       return null;
     }
     return objectMapper.readValue(response.body(), User.class);
@@ -180,6 +179,8 @@ class HTTPController {
   }
 
   /**
+   * Updates user.
+   *
    * @param userToSave user to save
    * @return updated user
    * @throws IOException file not found
@@ -194,12 +195,14 @@ class HTTPController {
   }
 
   /**
-   * @param wishName
-   * @param wishList
-   * @param user
-   * @return
-   * @throws IOException
-   * @throws InterruptedException
+   * POST request method for adding wish to list.
+   *
+   * @param wishName is the wish to be posted
+   * @param wishList is the list that wishName will belong to
+   * @param user is the user that the wishlist belongs to
+   * @return the HTTP response
+   * @throws IOException if file is not found
+   * @throws InterruptedException if interrupted
    */
   User addWish(String wishName, WishList wishList, User user)
       throws IOException, InterruptedException {
@@ -213,6 +216,8 @@ class HTTPController {
   }
 
   /**
+   * POST request method for removing wish from list.
+   *
    * @param wishName remove wish with name
    * @param wishList wishlist to remove it
    * @param user user's wishlist
@@ -289,6 +294,8 @@ class HTTPController {
   }
 
   /**
+   * POST method for sharing list with other users.
+   *
    * @param user share wishlist
    * @param wishList wishlist to be share
    * @param group group to share it to

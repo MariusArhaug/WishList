@@ -1,5 +1,9 @@
 package wishList.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -7,12 +11,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import wishList.core.User;
-import wishList.json.JsonHandler;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /** Controller for RegisterView fxml file. */
 public class RegisterViewController extends AbstractController {
@@ -65,10 +63,10 @@ public class RegisterViewController extends AbstractController {
     try {
       List<User> users = httpController.getUsers();
       List<String> emails = new ArrayList<>();
-      for(User u : users){
+      for (User u : users) {
         emails.add(u.getEmail());
       }
-      if(!emails.contains(email)){
+      if (!emails.contains(email)) {
         this.user = this.httpController.adduser(firstName, lastName, email, password);
         changeToMainView(event);
       }

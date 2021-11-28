@@ -1,5 +1,8 @@
 package wishList.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,10 +13,9 @@ import javafx.scene.control.ListView;
 import wishList.core.User;
 import wishList.core.WishList;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
+/**
+ * Controller for GroupsView.fxml
+ */
 public class GroupsViewController extends AbstractController {
   @FXML protected Button shareWithGroup;
   @FXML protected Button moveToGroup;

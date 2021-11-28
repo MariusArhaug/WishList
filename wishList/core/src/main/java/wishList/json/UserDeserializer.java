@@ -6,10 +6,10 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import java.io.IOException;
 import wishList.core.User;
 import wishList.core.WishList;
 
-import java.io.IOException;
 
 /** Deserialize user JSON object into Java User object. */
 public class UserDeserializer extends JsonDeserializer<User> {

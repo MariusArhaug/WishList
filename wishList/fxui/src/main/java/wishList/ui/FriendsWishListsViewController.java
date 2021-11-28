@@ -1,5 +1,8 @@
 package wishList.ui;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,10 +10,6 @@ import javafx.scene.control.ListView;
 import wishList.core.User;
 import wishList.core.WishList;
 import wishList.utils.Utils;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /** FriendWishList controller. */
 public class FriendsWishListsViewController extends AbstractController {
