@@ -83,17 +83,21 @@ public class GroupsViewController extends AbstractController {
     List<String> emailGroup = new ArrayList<>(observableGroup);
     List<User> yourGroup = new ArrayList<>();
     for (String email : emailGroup) {
-      Optional<User> user = httpController.getUser(email);
-      user.ifPresent(yourGroup::add);
+      Optional<User> optionalUser = httpController.getUser(email);
+      optionalUser.ifPresent(yourGroup::add);
     }
     if (yourGroup.size() == 0) {
       shareWithGroupFeedback.setText("You can not share list with empty group!");
       return;
     }
-    for (User user : yourGroup) {
-      for (WishList wishList : user.getInvitedWishLists()) {
-        if (wishList.getName().equals(wishListToShare.getName())) {
-          yourGroup.remove(user);
+    outerLoop:
+    for (User u : yourGroup) {
+      for (WishList wishList : u.getInvitedWishLists()) {
+        if (wishList.getName().equals(wishListToShare.getName()) && wishList.getOwner().equals(this.user.getEmail())) {
+          yourGroup.remove(u);
+          if (yourGroup.size() == 0) {
+            break outerLoop;
+          }
           break;
         }
       }
