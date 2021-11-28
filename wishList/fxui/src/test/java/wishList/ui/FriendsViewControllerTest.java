@@ -78,15 +78,14 @@ public class FriendsViewControllerTest extends AbstractTestFxui {
         assertEquals(controller.yourFriendsFeedback.getText(), "You must enter an email!");
 
         clickOn("#friendEmailField");
-        write("123@123.123");
-        clickOn("#addNewFriendButton");
-        assertEquals(controller.yourFriendsFeedback.getText(), "No user exist with this email!");
-        controller.friendEmailField.setText("");
-
-        clickOn("#friendEmailField");
         write(testFriend.getEmail());
         clickOn("#addNewFriendButton");
         assertEquals(controller.yourFriendsFeedback.getText(), "Added James Doe to your contacts!");
+
+        clickOn("#friendEmailField");
+        write("123@123.123");
+        clickOn("#addNewFriendButton");
+        assertEquals(controller.yourFriendsFeedback.getText(), "No user exist with this email!");
 
         clickOn("#removeFriend");
         assertEquals(controller.yourFriendsFeedback.getText(), "You must choose a friend to delete!");
