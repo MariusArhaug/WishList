@@ -1,0 +1,62 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class User {
+      List<WishList> ownedWishLists
+      List<WishList> invitedWishLists
+      List<String> contacts
+      private String email
+      private String password
+      private String firstName
+      private String lastName
+
+      WishList getNthOwnedWishList(int)
+      WishList getNthInvitedWishList(int)
+      boolean checkCredentials(String, String)
+      void removeWish(String, String)
+      WishList findWishList(String)
+      boolean wishListsExist(String)
+      void addWish(WishList wishList, Wish)
+      void shareWishList(WishList, List<User>)
+}
+
+class WishList {
+    List<Wish> wishes
+    String name
+    User owner
+
+    boolean hasWish(Wish)
+    boolean wishExist(String)
+    Wish findWish(String)
+    Iterator<Wish> iterator()
+}
+
+class Wish {
+    private String name;
+    private WishList belongTo;
+}
+
+User "1" -- "*" WishList : owner
+User -- "*" WishList : shared
+WishList "1" -- "*" Wish : item
+
+abstract AbstractController
+class FriendsViewController
+class FriendsWishesViewController
+class FriendsWishListsViewController
+class GroupsViewController
+class LoginViewController
+class MainViewController
+class RegisterViewController
+class ShowListViewController
+
+AbstractController <|-- FriendsViewController
+AbstractController <|-- FriendsWishesViewController
+AbstractController <|-- FriendsWishListsViewController
+AbstractController <|-- GroupsViewController
+AbstractController <|-- LoginViewController
+AbstractController <|-- MainViewController
+AbstractController <|-- RegisterViewController
+AbstractController <|-- ShowListViewController
+
+@enduml
