@@ -15,7 +15,7 @@ import wishList.utils.Utils;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonHandlerTest {
-  static String testFolder =
+  public static String testFolder =
       Paths.get(
               new File("").getAbsolutePath(),
               "src",

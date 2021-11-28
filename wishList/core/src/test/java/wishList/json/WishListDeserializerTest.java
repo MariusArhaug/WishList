@@ -13,7 +13,7 @@ import wishList.core.WishList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class WishListDeserializerTest {
+public class WishListDeserializerTest {
   private WishListDeserializer wishListDeserializer;
   private WishList wishList;
   private DeserializationContext deserializationContext;
@@ -23,7 +23,7 @@ class WishListDeserializerTest {
   private JsonFactory factory;
 
   @BeforeEach
-  void setUp() throws IOException {
+  public void setUp() throws IOException {
     wishList = new WishList("name");
     json = "{\"name\":\"name\"}";
     mapper = new ObjectMapper();
@@ -33,7 +33,7 @@ class WishListDeserializerTest {
   }
 
   @AfterEach
-  void tearDown() {
+  public void tearDown() {
     wishList = null;
     json = null;
     mapper = null;
@@ -43,7 +43,7 @@ class WishListDeserializerTest {
   }
 
   @Test
-  void wishListDeserializerTest() throws IOException {
+  public void wishListDeserializerTest() throws IOException {
     assertEquals(
         (wishListDeserializer.deserialize(parser, deserializationContext)).toString(),
         wishList.toString());

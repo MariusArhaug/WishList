@@ -8,24 +8,24 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserTest {
+public class UserTest {
   private User john;
   private User jane;
 
   @BeforeEach
-  void SetUp() {
+  public void SetUp() {
     john = new User("John", "Smith", "John.Smith@gmail.com", "!Password123");
     jane = new User("Jane", "Doe", "Jane.Doe@gmail.com", "123Password!");
   }
 
   @AfterEach
-  void TearDown() {
+  public void TearDown() {
     jane = null;
     john = null;
   }
 
   @Test
-  void TestUserConstructor() {
+  public void TestUserConstructor() {
     String[][] illegalNames = {
       {"", ""},
       {"firstName", ""},
@@ -41,48 +41,48 @@ class UserTest {
   }
 
   @Test
-  void TestGetFirstName() {
+  public void TestGetFirstName() {
     assertEquals(john.getFirstName(), "John");
   }
 
   @Test
-  void TestGetLastName() {
+  public void TestGetLastName() {
     assertEquals(john.getLastName(), "Smith");
   }
 
   @Test
-  void TestGetEmail() {
+  public void TestGetEmail() {
     assertEquals(john.getEmail(), "John.Smith@gmail.com");
   }
 
   @Test
-  void TestGetPassword() {
+  public void TestGetPassword() {
     assertEquals(john.getPassword(), "!Password123");
   }
 
   @Test
-  void TestSetFirstName() {
+  public void TestSetFirstName() {
     assertThrows(IllegalArgumentException.class, () -> jane.setFirstName(""));
     john.setFirstName("Jon");
     assertEquals(john.getFirstName(), "Jon");
   }
 
   @Test
-  void TestSetLastName() {
+  public void TestSetLastName() {
     assertThrows(IllegalArgumentException.class, () -> jane.setLastName(""));
     john.setLastName("Smitt");
     assertEquals(john.getLastName(), "Smitt");
   }
 
   @Test
-  void TestSetEmail() {
+  public void TestSetEmail() {
     john.setEmail("john.sm7@mail123.no");
     assertEquals(john.getEmail(), "john.sm7@mail123.no");
     assertThrows(IllegalArgumentException.class, () -> jane.setLastName(""));
   }
 
   @Test
-  void TestSetPassword() {
+  public void TestSetPassword() {
     john.setPassword("asdfgh89210");
     assertEquals(john.getPassword(), "asdfgh89210");
     john.setPassword("gedcmz94");
@@ -93,13 +93,13 @@ class UserTest {
 
 
   @Test
-  void getContacts() {
+  public void getContacts() {
     john.addContact(jane);
     assertEquals("Jane.Doe@gmail.com", john.getContacts().get(0));
   }
 
   @Test
-  void getInvitedWishLists() {
+  public void getInvitedWishLists() {
     List<WishList> emptyInvitedList = new ArrayList<>();
     assertEquals(john.getInvitedWishLists(), emptyInvitedList);
     jane.makeWishList("Baby shower");
@@ -113,7 +113,7 @@ class UserTest {
   }
 
   @Test
-  void getOwnedWishLists() {
+  public void getOwnedWishLists() {
     List<WishList> emptyOwnedList = new ArrayList<>();
     assertEquals(john.getOwnedWishLists(), emptyOwnedList);
     john.makeWishList("Wedding");
@@ -123,7 +123,7 @@ class UserTest {
   }
 
   @Test
-  void shareWishList() {
+  public void shareWishList() {
     john.makeWishList("Christmas");
     jane.addContact(john);
     List<User> group = new ArrayList<>();
@@ -135,13 +135,13 @@ class UserTest {
   }
 
   @Test
-  void addContact() {
+  public void addContact() {
     jane.addContact(john);
     assertEquals("John.Smith@gmail.com", jane.getContacts().get(0));
   }
 
   @Test
-  void removeContact() {
+  public void removeContact() {
     jane.addContact(john);
     jane.removeContact(john);
     assertEquals(jane.getContacts().toString(), "[]");
@@ -149,7 +149,7 @@ class UserTest {
   }
 
   @Test
-  void TestGetWishListsAndToString() {
+  public void TestGetWishListsAndToString() {
     List<WishList> emptyOwnList = new ArrayList<>();
     assertEquals(john.getOwnedWishLists(), emptyOwnList);
     john.makeWishList("Baby shower");
@@ -157,7 +157,7 @@ class UserTest {
   }
 
   @Test
-  void TestAddWish() {
+  public void TestAddWish() {
     WishList wishList = new WishList("Christmas");
     john.addWishList(wishList);
     assertTrue(john.getWishList("Christmas").isPresent());
@@ -182,7 +182,7 @@ class UserTest {
   }
 
   @Test
-  void TestRemoveWish() {
+  public void TestRemoveWish() {
     john.makeWishList("Christmas");
     john.addWish(john.getNthOwnedWishList(0), new Wish("Book"));
     assertTrue(john.getWishList("Christmas").isPresent());
@@ -197,7 +197,7 @@ class UserTest {
   }
 
   @Test
-  void TestMakeWishList() {
+  public void TestMakeWishList() {
     john.makeWishList("Christmas");
     assertEquals(
         john.getNthOwnedWishList(0).toString(),
@@ -205,7 +205,7 @@ class UserTest {
   }
 
   @Test
-  void TestRemoveWishList() {
+  public void TestRemoveWishList() {
     john.makeWishList("Christmas");
     assertTrue(john.getWishList("Christmas").isPresent());
 

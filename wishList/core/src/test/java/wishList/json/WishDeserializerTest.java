@@ -22,7 +22,7 @@ public class WishDeserializerTest {
   private JsonFactory factory;
 
   @BeforeEach
-  void setUp() throws IOException {
+  public void setUp() throws IOException {
     wish = new Wish("name");
     json = "{\"name\":\"name\"}";
     mapper = new ObjectMapper();
@@ -32,7 +32,7 @@ public class WishDeserializerTest {
   }
 
   @AfterEach
-  void tearDown() {
+  public void tearDown() {
     wish = null;
     json = null;
     mapper = null;
@@ -42,7 +42,7 @@ public class WishDeserializerTest {
   }
 
   @Test
-  void wishDeserializerTest() throws IOException {
+  public void wishDeserializerTest() throws IOException {
     assertEquals(
         (wishDeserializer.deserialize(parser, deserializationContext)).toString(), wish.toString());
   }

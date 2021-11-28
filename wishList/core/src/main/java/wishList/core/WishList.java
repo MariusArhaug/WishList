@@ -57,7 +57,7 @@ public class WishList implements Iterable<Wish> {
    * @return wishList
    * @throws IllegalArgumentException input is null or wishList already has owner
    */
-  WishList setOwner(User owner) throws IllegalArgumentException {
+  public WishList setOwner(User owner) throws IllegalArgumentException {
     if (this.owner != null) {
       throw new IllegalArgumentException("This wishlist already has a owner!");
     }
@@ -86,7 +86,7 @@ public class WishList implements Iterable<Wish> {
    *
    * @param wish core.Wish to remove
    */
-  void removeWish(Wish wish) {
+  public void removeWish(Wish wish) {
     wishes.remove(wish);
   }
 
@@ -95,7 +95,7 @@ public class WishList implements Iterable<Wish> {
    *
    * @param name remove wish with this name
    */
-  void removeWish(String name) {
+  public void removeWish(String name) {
     if (wishExist(name)) {
       this.wishes.remove(findWish(name));
     }
@@ -132,7 +132,7 @@ public class WishList implements Iterable<Wish> {
    * @param name name of wish
    * @return wish
    */
-  Optional<Wish> getWish(String name) {
+  public Optional<Wish> getWish(String name) {
     for (Wish w : this.wishes) {
       if (w.getName().equals(name)) {
         return Optional.of(w);

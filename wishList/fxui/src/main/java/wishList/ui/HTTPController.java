@@ -17,7 +17,7 @@ import wishList.core.WishList;
 import wishList.json.JsonModule;
 
 /** Control HTTP requests. * */
-class HTTPController {
+public class HTTPController {
   private static final String ENDPOINT_URI = "http://localhost:8080/wishList/api/v1";
   private final ObjectMapper objectMapper = new ObjectMapper();
   private final HttpClient client = HttpClient.newHttpClient();
@@ -66,7 +66,7 @@ class HTTPController {
    * @throws IOException file not found
    * @throws InterruptedException json error
    */
-  List<User> getUsers() throws IOException, InterruptedException {
+  public List<User> getUsers() throws IOException, InterruptedException {
     HttpRequest request = GET_REQUEST("/users/");
     HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -81,7 +81,7 @@ class HTTPController {
    * @throws IOException file not found
    * @throws InterruptedException json error
    */
-  Optional<User> getUser(String email) throws IOException, InterruptedException {
+  public Optional<User> getUser(String email) throws IOException, InterruptedException {
     HttpRequest request = GET_REQUEST("/user/" + email + "/");
 
     HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -97,7 +97,7 @@ class HTTPController {
    * @param password password of user
    * @return Optional user
    */
-  Optional<User> getUser(String email, String password) throws IOException, InterruptedException {
+  public Optional<User> getUser(String email, String password) throws IOException, InterruptedException {
     HttpRequest request = GET_REQUEST("/user/" + email + "/" + password + "/");
 
     HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -115,7 +115,7 @@ class HTTPController {
    * @throws IOException file not found error.
    * @throws InterruptedException json error
    */
-  User adduser(String firstname, String lastName, String email, String password)
+  public User adduser(String firstname, String lastName, String email, String password)
       throws IOException, InterruptedException {
     String requestBodyString =
         objectMapper.writeValueAsString(new User(firstname, lastName, email, password));
@@ -135,7 +135,7 @@ class HTTPController {
    * @throws IOException file not found
    * @throws InterruptedException json error
    */
-  User addContact(String newContactEmail, User user) throws IOException, InterruptedException {
+  public User addContact(String newContactEmail, User user) throws IOException, InterruptedException {
     Map<String, String> requestBody =
         new HashMap<>() {
           {
@@ -161,7 +161,7 @@ class HTTPController {
    * @throws IOException file not found
    * @throws InterruptedException json error
    */
-  User removeContact(String userEmailToBeRemoved, User user)
+  public User removeContact(String userEmailToBeRemoved, User user)
       throws IOException, InterruptedException {
     Map<String, String> requestBody =
         new HashMap<>() {
@@ -204,7 +204,7 @@ class HTTPController {
    * @throws IOException if file is not found
    * @throws InterruptedException if interrupted
    */
-  User addWish(String wishName, WishList wishList, User user)
+  public User addWish(String wishName, WishList wishList, User user)
       throws IOException, InterruptedException {
 
     String requestBodyString = getUpdateWishBody(wishName, wishList, user);
@@ -225,7 +225,7 @@ class HTTPController {
    * @throws IOException file not found
    * @throws InterruptedException json file error.
    */
-  User removeWish(String wishName, WishList wishList, User user)
+  public User removeWish(String wishName, WishList wishList, User user)
       throws IOException, InterruptedException {
     String requestBodyString = getUpdateWishBody(wishName, wishList, user);
 
@@ -255,7 +255,7 @@ class HTTPController {
    * @param user owner of wishList
    * @throws Exception from server.
    */
-  User addWishList(String wishListName, User user) throws Exception {
+  public User addWishList(String wishListName, User user) throws Exception {
     Map<String, String> requestBody =
         new HashMap<>() {
           {
@@ -277,7 +277,7 @@ class HTTPController {
    * @param user owner
    * @throws Exception from server.
    */
-  User removeWishList(String wishListName, User user) throws Exception {
+  public User removeWishList(String wishListName, User user) throws Exception {
     Map<String, String> requestBody =
         new HashMap<>() {
           {
@@ -302,7 +302,7 @@ class HTTPController {
    * @return updated user
    * @throws Exception error
    */
-  User shareWishList(User user, WishList wishList, List<User> group) throws Exception {
+  public User shareWishList(User user, WishList wishList, List<User> group) throws Exception {
     Map<String, String> requestBody =
         new HashMap<>() {
           {

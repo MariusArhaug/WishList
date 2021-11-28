@@ -161,7 +161,7 @@ public class User {
    * @param n number
    * @return wishlist or null
    */
-  WishList getNthOwnedWishList(int n) {
+  public WishList getNthOwnedWishList(int n) {
     try {
       return this.getOwnedWishLists().get(n);
     } catch (NullPointerException e) {
@@ -294,7 +294,7 @@ public class User {
    *
    * @param user contact to remove
    */
-  void removeContact(User user) {
+  public void removeContact(User user) {
     this.removeContact(user.getEmail());
   }
 
@@ -312,7 +312,7 @@ public class User {
    *
    * @param newContact contact to add
    */
-  void addContact(User newContact) {
+  public void addContact(User newContact) {
     this.contacts.add(newContact.getEmail());
   }
 

@@ -36,7 +36,7 @@ public class WishListDeserializer extends JsonDeserializer<WishList> {
    * @param node wishList JSON object
    * @return wishList object
    */
-  WishList deserializeWishList(JsonNode node) {
+  public WishList deserializeWishList(JsonNode node) {
     if (node instanceof ObjectNode) {
       WishList wishList = new WishList(node.get("name").asText());
       JsonNode wishes = node.get("wishes");

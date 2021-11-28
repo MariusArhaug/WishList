@@ -12,7 +12,7 @@ import wishList.utils.Utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class UserSerializerTest {
+public class UserSerializerTest {
   private JsonHandler jsonHandler;
   private User user;
 

@@ -7,24 +7,24 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class WishListTest {
+public class WishListTest {
   private User john;
   private WishList wishList;
 
   @BeforeEach
-  void setUp() {
+  public void setUp() {
     john = new User("John", "Smith", "John.Smith@gmail.com", "!Password123");
     wishList = new WishList("Birthday", john);
   }
 
   @AfterEach
-  void tearDown() {
+  public void tearDown() {
     wishList = null;
     john = null;
   }
 
   @Test
-  void WishList() {
+  public void WishList() {
     assertThrows(IllegalArgumentException.class, () -> new WishList("", john));
 
     assertThrows(
@@ -36,24 +36,24 @@ class WishListTest {
   }
 
   @Test
-  void getWishes() {
+  public void getWishes() {
     Wish wish = new Wish("Car");
     wishList.addWish(wish);
     assertEquals(wishList.getWishes().get(0).getName(), "Car");
   }
 
   @Test
-  void getName() {
+  public void getName() {
     assertEquals(wishList.getName(), "Birthday");
   }
 
   @Test
-  void getOwner() {
+  public void getOwner() {
     assertEquals(wishList.getOwner(), john);
   }
 
   @Test
-  void addWish() {
+  public void addWish() {
     Wish wishOne = new Wish("Car");
     Wish wishTwo = new Wish("Bicycle");
     wishList.addWish(wishOne);
@@ -62,7 +62,7 @@ class WishListTest {
   }
 
   @Test
-  void removeWish() {
+  public void removeWish() {
     Wish wish = new Wish("Car");
     wishList.addWish(wish);
     wishList.removeWish(wishList.getWishes().get(0));
@@ -70,7 +70,7 @@ class WishListTest {
   }
 
   @Test
-  void getWishTest() {
+  public void getWishTest() {
     Wish wishOne = new Wish("Car");
     Wish wishTwo = new Wish("Door");
     Wish wishThree = new Wish("Ice");

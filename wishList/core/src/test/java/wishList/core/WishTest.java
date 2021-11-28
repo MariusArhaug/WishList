@@ -7,34 +7,32 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class WishTest {
+public class WishTest {
   private User john;
   private User jane;
   private WishList wishList;
-  private WishList element;
 
   @BeforeEach
-  void setUp() {
+  public void setUp() {
     john = new User("John", "Smith", "John.Smith@gmail.com", "!Password123");
     jane = new User("Jane", "Doe", "Jane.Doe@gmail.com", "123Password!");
     wishList = new WishList("Birthday", john);
   }
 
   @AfterEach
-  void tearDown() {
+  public void tearDown() {
     wishList = null;
     jane = null;
     john = null;
-    element = null;
   }
 
   @Test
-  void Wish() {
+  public void Wish() {
     assertThrows(IllegalArgumentException.class, () -> new Wish(""));
   }
 
   @Test
-  void getWish() {
+  public void getWish() {
     jane.makeWishList("Moving party");
     WishList element = jane.getNthOwnedWishList(0);
     element.addWish(new Wish("Surf board"));
@@ -42,7 +40,7 @@ class WishTest {
   }
 
   @Test
-  void getBelongTo() {
+  public void getBelongTo() {
     wishList.addWish(new Wish("Surf board"));
     assertEquals(wishList.getWishes().get(0).getBelongTo(), wishList);
   }

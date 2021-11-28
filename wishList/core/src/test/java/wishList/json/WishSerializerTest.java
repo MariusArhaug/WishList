@@ -8,7 +8,7 @@ import wishList.utils.Utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class WishSerializerTest {
+public class WishSerializerTest {
   private JsonHandler jsonHandler;
   private User user;
 
@@ -17,19 +17,19 @@ class WishSerializerTest {
   }
 
   @BeforeEach
-  void setUp() {
+  public void setUp() {
     user = new User("first", "last", "user5@gmail.com", "123Password!");
     jsonHandler = new JsonHandler(JsonHandlerTest.testFolder);
   }
 
   @AfterEach
-  void tearDown() throws Exception {
+  public void tearDown() throws Exception {
     resetFiles();
     user = null;
   }
 
   @Test
-  void wishSerializerTest() throws Exception {
+  public void wishSerializerTest() throws Exception {
     jsonHandler.addUser(user);
     User userFromFile = jsonHandler.loadUser(user.getEmail(), user.getPassword()).get();
     jsonHandler.makeWishList("Test", userFromFile);
