@@ -1,35 +1,62 @@
 # Core
 
-# Main/Core
+## Folder structure
+
+        core
+        ├── src                                 # Source directory
+        |   ├──main
+        │   |   └──java
+        |   |      └──wishList
+        |   |            ├──core                # core logic
+        |   |            ├──json                # JSON serializers / deserializers
+        |   |            └──utils               # Utility methods
+        |   └──test
+        |       ├──core                         # test core functionality
+        |       ├──json                         # test serializers
+        |       └──utils                        # Test util methods.
+        |
+        ├──pom.xml
+        └──README.md
+
+## Core/Core
+
+[**Core**](./src/main/java/wishList/core): Core functionality to be used throughout application
 
 In the folder **wishList.core** lies the main core logic. With the three classes:
 
 - User-class: Encapsulates user data update state of user. This class has relation to many wishLists
 
-
 - Wish: Is a single wish encapsulation, that can be further expanded to keep more information about a given wish.
-
 
 - WishList: keeps track of multiple wishes aswell as its own name and the possibility to expand and encapsulate more
   data.
 
-# Main/JSON
+> We deliberately opted for contacts to be saved one-way. The contact you add will not get you as a contact unless they also add you. It caused unexpected dependency cycle issues that we did not want to resolve when we had multiple other features we still needed to implemenet. 
 
-In order to be able to save and load objects to JSON files such as `users.wishList.json` we need to make use of the **
-Jackson**
+## Core/JSON
+
+[**JSON**](./src/main/java/wishList/json): Serializer/Deserializers for saving objects to JSON files
+
+In order to be able to save and load objects to JSON files we need to make use of the [**Jackson**](<https://en.wikipedia.org/wiki/Jackson_(API)>) package
 plugin and create our own **Serializers** and **Deserializers**
 
 Where each class has its own **Serializer** and **Deserializer** such as:
 
-- `UserSeralizer / UserDeserializer`
+- `UserSeralizer`
+- `UserDeserializer`
+- etc..
 
-These serializers/deserializers are then being used in the `JsonModule.java` file to tell **Jackson** how to save/load
+These serializers/deserializers are then being used in the `JsonModule.java` which then can be used to overload the standard serializer/deserializer methods **ObjectMapper** class in the **Jackson** package
 these objects.
 
-# Main/Utils
+## Core/Utils
 
-When we have simple problems we want to solve like checking if a path has a separator at the end, it is simpler to create pure functions that does not recreate any side-effects and that behave in a deterministic manner. This is what the class `Utils.java` achieves. its more like an module than a class. And ith static methods we achieve this functional behaviour. Some methods are used to create paths from another given patch, and this in turn makes it able to be run wether you are using a Windows OS or Linux OS.  
+[**Utils**](./src/main/java/wishList/utils): Utility methods that can be used as functional components
+
+The `Utils.java` provides various static functions that can be used to remove code duplication and make code more readable. It supports various `generic` functions such as mapping and checking if elements exists or if its null. These fuctions have made other files much simpler in logic and also made them much more readable.
 
 # Test
 
-Tests have also been splitt into their own packages reflecting how its done in the main folder. The goal is to cover as much code as possible with the tests. 
+[**Core tests**](./src/test/java/wishList): Tests for all sub directories in core
+
+Tests have also been splitt into their own packages reflecting how its done in the main folder. The goal is to cover as much code as possible with the tests.

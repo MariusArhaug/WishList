@@ -8,7 +8,10 @@ In order to run this project or in a new environment do the following:
 
 - `mvn clean install`
 - `mvn compile`
-- `mvn -pl fxui javafx:run` : To run JavaFX.
+
+- `mvn spring-boot:rum`     : To run server (spring boot)
+
+- `mvn -pl fxui javafx:run` : To run JavaFX. (client)
 
 Tests can be done with
 
@@ -49,3 +52,7 @@ Everytime a member of the group creates a merge request, it needs to reviewed an
 After the MR has been verified and accepted, the creator of the MR needs to merge it into the master branch.
 
 Remember to squash commits when merging, since commit messages after doesn't make much sense in the master branch.
+
+## Testing
+
+When implementing a new feature and /or refactoring existing code it is important to update the existing tests and add new additional tests to new features to ensure that the codebase's test coverage either stays the same or increases. 

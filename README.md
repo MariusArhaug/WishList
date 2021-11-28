@@ -9,19 +9,65 @@ Test coverage:
 Pipeline status:
 [![pipeline status](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121/badges/master/pipeline.svg)](https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2121/gr2121/-/commits/master)
 
-## How to contribute and coding routines:
-
-[CONTRIBUTING.md](./CONTRIBUTING.md)
-
-Elaboration of user story, and description og apps purpose and functionality:
-
-[README.md](wishList/core/src/README.md)
-
 # Documentation agile development iterations:
 
-[1. iteration](docs/release1/README.md)
+- [**1. iteration**](docs/release1/README.md)
 
-[2. iteration](docs/release2/README.md)
+- [**2. iteration**](docs/release2/README.md)
+
+- [**3. iteration**](docs/release3/README.md)
+
+## How to contribute and how to run application.
+
+- [**CONTRIBUTING.md**](./CONTRIBUTING.md)
+
+# How to run
+
+## Server
+From the root of the project, enter the `wishList` directory
+
+`cd wishList`
+
+Then we need to clean any previous .class files here and install all dependencies:
+
+ `mvn clean install`
+
+Enter the `rest` sub-directory and update it aswell.
+
+ `mvn clean install`
+
+Return to `wishList`: 
+
+`cd ..`
+
+Start the server:
+
+`mvn spring-boot:run`
+
+Now the spring boot server should run locally on port `8080`
+
+> For more info about the REST api endpoints click [**here**](./wishList/rest/README.md)
+
+## Client
+
+Open a second terminal, do not close the one running the server
+
+Enter the `wishList` directory:
+
+`cd wishList`
+
+Then run the following:
+
+- `mvn clean install`
+- `mvn compile`
+- `mvn -pl fxui javafx:run`
+
+> For more info about the client click [**here**](./wishList/fxui/README.md)
+
+> If you are running in gitpod you will find the app in port `6080`.
+
+> Be aware that when running in gitpod the user interface will not be as good as when run locally
+
 
 # Overview of code structure
 
@@ -38,60 +84,40 @@ Following sub-modules are:
 
 - [**fxui**](wishList/fxui): Here lies javafx-code for GUI as well as controllers for different _views_
 
+- [**rest**](wishList/rest): Here lies the code for the rest server
+
 Our repo supports the following
 
 - Testing (maven-sunfire-plugin)
 - JavaFX running (javafx-maven-plugin)
+- Spring Boot (java restapi framework)
 
 # Core
 
-[**Documentation**](./wishList/core/src)
+The core module consists of all core logic this application uses. It is comprised of three core classes:
 
-[**Core**](./wishList/core/src/main/java/wishList/core): Core functionality to be used throughout application
+- **User**
+- **WishList**
+- **Wish**
 
-[**JSON**](./wishList/core/src/main/java/wishList/json): Serializer/Deserializers for saving objects to JSON files
+These classes have their own ways of interacting with each other, and a set of methods and fields.
 
-[**Utils**](./wishList/core/src/main/java/wishList/utils): Utility methods that can be used as functional components
+In here also lies all forms of json serialization and deserilaztion logic and how such core objects should be written to files and saved to acheive persistance.
 
-## Core test
-
-[**Core tests**](./wishList/core/src/test/java/wishList): Tests for all sub directories in core
+For further detailed documentation about core structure and logic click [**here**](./wishList/core/)
 
 # FXUI
 
-## Dividing of FXML files and the use of multiple controllers
+The FXUI package acts as the client in this application. In here lies all the different scenes the user can interact with and the underlying controllers that handle these user interactions. There is no major logic or computation happeneing in this package aside from it being able to send **HTTP** requests to the server. This is on purpose to make the client as small as possible and not make it depend on underlying logic not direclty used by the user itself. The application is shipped from this module.
 
-In order to avoid having one controller that maintains multiple function calls to different scenes, we opted instead to
-have multiple controllers and views in order to make the code both maintainable if we were to introduce newer
-functionality as well as making the code easier to read and digest. This type of architecture is also used in Spring
-Boot, so we thought it would be usefull to use it elsewhere aswell.
+For further documentation about structure click [**here**](./wishList/fxui/)
 
-## Controllers
+# Server
 
-[**Documentation**](./wishList/fxui/src)
+Our server is a RESTful API created using [**Spring Boot**](https://spring.io/projects/spring-boot). For a server to be called a RESTful API it needs to follow a set of rules. Our server organizes entities and methods on unique _URIs_ often referred to as _endpoints_. Clients can get access to these resources using a **HTTP** request that follows a specific format that consists of which endpoint it is requesting, what type of _HTTP_ request being used an its request body (if nessecerray).
 
-[**Controllers**](./wishList/fxui/src/main/java/wishList/ui): Controllers for every FXML scene
+> REST standing for Representational State Transfer
 
-## FXML
+> URI standing for Uniformed Resource Identifier
 
-[**FXML**](./wishList/fxui/src/main/resources/wishList/ui): Each FXML file is its own unqiue scene
-
-## FXUI Test
-
-[**Fxui tests**](./wishList/fxui/src/test/java/wishList): FXML tests
-
-# REST-API
-
-[**Documentation**](./wishList/rest/)
-
-## Spring Boot
-
-We decided to use [**Spring Boot**](https://spring.io/projects/spring-boot) for our RESTful API seeing as it is the
-industry standard and therefore the most searched frameworks on google, allowing us to get as much help as possible.
-
-## HTTP Client
-
-We decided to use [**HTTP
-Client**](https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/package-summary.html) as a way
-of communicating from our FXUI to our REST API. It requires some boilerplate but it is still by far the cleaneast option
-out of all the various HTTP packages that Java supports
+For further documentation about structure click [**here**](./wishList/rest/)
