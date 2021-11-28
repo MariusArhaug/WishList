@@ -2,14 +2,14 @@
 
 ## Architecture
 
-The application now follows a client server archiecture with the server consisting of a REST API created using **Spring Boot** in Java. As such the client [**fxui**](./../../wishList/fxui/README.md) is now designed to be indepenent of the underlyign logic that takes place in the [**core**](../../wishList/core/README.md) package.
+The application now follows a client server archiecture with the server consisting of a REST API created using **Spring Boot** in Java. As such the client [**fxui**](./../../wishList/fxui/README.md) is now designed to be independent of the underlyign logic that takes place in the [**core**](../../wishList/core/README.md) package.
 
 <br />
 <br />
 
 ### Communication between client and server
 
-However to keep this project simple we did not create exclusive **Domain Transfer Objects** (DTOs) for serializing and deserializing the data/objects passed between the client and the server. Meaning that when a user object is passed from the client to the server or vice versa, we're essentially serializign and deserializing the same object only with updated values to reflect changes to the users persisting data.
+However to keep this project simple we did not create exclusive **Domain Transfer Objects** (DTOs) for serializing and deserializing the data/objects passed between the client and the server. Meaning that when a user object is passed from the client to the server or vice versa, we're essentially serializing and deserializing the same object only with updated values to reflect changes to the users persisting data.
 
 <br />
 
@@ -32,7 +32,7 @@ As of right now **WishListService** is only a thin layer between the **RESTContr
 
 ## Code Quality
 
-To assure good design patterns and bugfree code we still employ CheckStyle and Spotbugs. Combining this with adequate testing (almost at 90% coverage) and good coding rutines, allows us to easily identify nescerray improvements to code before its get merged into **master**
+To assure good design patterns and bugfree code we still employ CheckStyle and Spotbugs. Combining this with adequate testing (almost at 90% coverage) and good coding rutines, allows us to easily identify necessary improvements to code before its get merged into **master**
 
 Using **Continous Integration** strategies such as making sure that new code is both able to compile and does not create code breaking alterations was a good way to make the team confident with merging new code into the **master** branch without it causing major code breaks.
 
