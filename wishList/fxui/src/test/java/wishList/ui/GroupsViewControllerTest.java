@@ -5,6 +5,7 @@ import java.util.Optional;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -23,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class GroupsViewControllerTest extends AbstractTestFxui {
     private GroupsViewController controller;
     private User user;
-    private User testFriend;
     private JsonHandler jsonHandler;
 
     /**
@@ -52,7 +52,6 @@ public class GroupsViewControllerTest extends AbstractTestFxui {
         this.jsonHandler = new JsonHandler(MainViewControllerTest.directory);
 
         this.user = jsonHandler.loadJsonUser("jane@doecom");
-        this.testFriend = jsonHandler.loadJsonUser("james@doecom");
         this.user.addContact("james@doe.com");
 
         this.user.makeWishList("TestList");

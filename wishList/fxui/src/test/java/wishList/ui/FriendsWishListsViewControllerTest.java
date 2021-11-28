@@ -34,7 +34,7 @@ public class FriendsWishListsViewControllerTest extends AbstractTestFxui {
 
     /**
      * Load test fxml file. Get controller from the file
-     * @param stage
+     * @param stage the stage to be shown
      * @throws Exception if file is not found
      */
     @Override
@@ -47,7 +47,8 @@ public class FriendsWishListsViewControllerTest extends AbstractTestFxui {
     }
 
     /**
-     * Set up the attributes needed in the tests
+     * Set up the attributes needed in the tests.
+     *
      * @throws IOException if file is not found
      */
     @BeforeEach
@@ -59,7 +60,7 @@ public class FriendsWishListsViewControllerTest extends AbstractTestFxui {
     }
 
     /**
-     * Check that controller from file is not null
+     * Check that controller from file is not null.
      */
     @Test
     public void testController(){
@@ -68,7 +69,7 @@ public class FriendsWishListsViewControllerTest extends AbstractTestFxui {
 
 
     /**
-     * Test the errors correlated with entering wishlist
+     * Test the errors correlated with entering wishlist.
      */
     @Test
     public void testEnterWishListFault(){
@@ -84,7 +85,7 @@ public class FriendsWishListsViewControllerTest extends AbstractTestFxui {
 
 
     /**
-     * Test that signOut changes to correct scene
+     * Test that signOut changes to correct scene.
      */
     @Test
     public void testSignOut() {
@@ -94,7 +95,7 @@ public class FriendsWishListsViewControllerTest extends AbstractTestFxui {
     }
 
     /**
-     * Test that yourFriends changes to correct scene
+     * Test that yourFriends changes to correct scene.
      */
     @Test
     public void testChangeToFriendsView() {
@@ -104,7 +105,7 @@ public class FriendsWishListsViewControllerTest extends AbstractTestFxui {
     }
 
     /**
-     * Test that yourWishLists changes to correct scene
+     * Test that yourWishLists changes to correct scene.
      */
     @Test
     public void testYourWishLists() {
