@@ -13,7 +13,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class UserDeserializerTest {
+public class UserDeserializerTest {
   private UserDeserializer userDeserializer;
   private User user;
   private DeserializationContext deserializationContext;
@@ -23,7 +23,7 @@ class UserDeserializerTest {
   private JsonFactory factory;
 
   @BeforeEach
-  void setUp() throws IOException {
+  public void setUp() throws IOException {
     user = new User("first", "last", "user@gmail.com", "123Password!");
     json =
         "{\"firstName\":\"first\",\"lastName\":\"last\",\"email\":\"user@gmail.com\",\"password\":\"123Password!\",\"wishLists\":[]}";
@@ -34,7 +34,7 @@ class UserDeserializerTest {
   }
 
   @AfterEach
-  void tearDown() {
+  public void tearDown() {
     user = null;
     json = null;
     mapper = null;
@@ -44,7 +44,7 @@ class UserDeserializerTest {
   }
 
   @Test
-  void userDeserializerTest() throws IOException {
+  public void userDeserializerTest() throws IOException {
     assertEquals(
         (userDeserializer.deserialize(parser, deserializationContext)).toString(), user.toString());
   }
