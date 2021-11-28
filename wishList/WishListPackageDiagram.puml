@@ -1,0 +1,43 @@
+@startuml
+
+title WishList Package Diagram
+
+
+component core {
+	package wishList.core
+	package wishList.json
+}
+
+wishList.core ..> wishList.json
+component jackson {
+}
+
+component fxui {
+	package wishList.ui
+}
+
+component springBoot {
+}
+
+
+package "restserver" {
+    component wishList.restserver
+}
+
+component javafx {
+	component fxml {
+	}
+}
+
+wishList.ui ..> fxml
+wishList.ui ..> wishList.core
+wishList.ui ..> wishList.json
+wishList.ui ..> wishList.restserver
+wishList.core ..> wishList.restserver
+
+restserver ..> springBoot
+wishList.json ..> jackson
+
+
+
+@enduml
