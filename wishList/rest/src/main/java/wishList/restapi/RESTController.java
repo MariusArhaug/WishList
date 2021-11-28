@@ -16,7 +16,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping(RESTController.wishListPath)
 public class RESTController {
-
   static final String wishListPath = "wishList/api/v1";
   private final ObjectMapper objectMapper = new ObjectMapper();
 

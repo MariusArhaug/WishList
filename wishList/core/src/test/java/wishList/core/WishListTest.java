@@ -14,7 +14,7 @@ public class WishListTest {
   @BeforeEach
   public void setUp() {
     john = new User("John", "Smith", "John.Smith@gmail.com", "!Password123");
-    wishList = new WishList("Birthday", john);
+    wishList = new WishList("Birthday", john.getEmail());
   }
 
   @AfterEach
@@ -24,15 +24,8 @@ public class WishListTest {
   }
 
   @Test
-  public void WishList() {
-    assertThrows(IllegalArgumentException.class, () -> new WishList("", john));
-
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> {
-          WishList wishList = new WishList("OneOwner", john);
-          wishList.setOwner(new User("dave", "smith", "Dave.Smith@gmail.com", "!Password123"));
-        });
+  void WishList() {
+    assertThrows(IllegalArgumentException.class, () -> new WishList("", john.getEmail()));
   }
 
   @Test
@@ -48,8 +41,8 @@ public class WishListTest {
   }
 
   @Test
-  public void getOwner() {
-    assertEquals(wishList.getOwner(), john);
+  void getOwner() {
+    assertEquals(wishList.getOwner(), john.getEmail());
   }
 
   @Test

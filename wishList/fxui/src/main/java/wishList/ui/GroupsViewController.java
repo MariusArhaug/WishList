@@ -46,7 +46,6 @@ public class GroupsViewController extends AbstractController {
     listFriend.remove(friend);
     yourFriendsList.setItems(listFriend);
     shareWithGroupFeedback.setText("Moved friend to group!");
-    this.updateFriendsView();
   }
 
   /** Move out of group. */
@@ -64,10 +63,12 @@ public class GroupsViewController extends AbstractController {
     listFriend.add(friend);
     yourFriendsList.setItems(listFriend);
     shareWithGroupFeedback.setText("Removed friend from group!");
-    this.updateFriendsView();
   }
 
-  void updateFriendsView() {
+  /**
+   * Update items in ListView.
+   */
+  public void updateFriendsView() {
     yourFriendsList.setItems(FXCollections.observableList(this.user.getContacts()));
   }
 

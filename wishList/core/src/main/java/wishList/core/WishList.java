@@ -10,7 +10,7 @@ public class WishList implements Iterable<Wish> {
 
   private final List<Wish> wishes = new ArrayList<>();
   private String name;
-  private User owner;
+  private String owner;
 
   /** Empty constructor for json test purposes. */
   public WishList() {}
@@ -19,7 +19,7 @@ public class WishList implements Iterable<Wish> {
     this.setName(name);
   }
 
-  public WishList(String name, User owner) {
+  public WishList(String name, String owner) {
     this.setName(name).setOwner(owner);
   }
 
@@ -46,7 +46,7 @@ public class WishList implements Iterable<Wish> {
     return this;
   }
 
-  public User getOwner() {
+  public String getOwner() {
     return this.owner;
   }
 
@@ -57,9 +57,9 @@ public class WishList implements Iterable<Wish> {
    * @return wishList
    * @throws IllegalArgumentException input is null or wishList already has owner
    */
-  public WishList setOwner(User owner) throws IllegalArgumentException {
+  public WishList setOwner(String owner) throws IllegalArgumentException {
     if (this.owner != null) {
-      throw new IllegalArgumentException("This wishlist already has a owner!");
+      return this;
     }
     this.owner = owner;
     return this;
@@ -145,4 +145,5 @@ public class WishList implements Iterable<Wish> {
   public Iterator<Wish> iterator() {
     return this.wishes.iterator();
   }
+  
 }

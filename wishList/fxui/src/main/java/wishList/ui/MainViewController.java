@@ -72,6 +72,9 @@ public class MainViewController extends AbstractController {
     this.updateWishListView();
   }
 
+  /**
+   * Update items in ListView.
+   */
   private void updateWishListView() {
     List<String> wishListNames = new ArrayList<>();
     for (WishList w : user.getOwnedWishLists()) {

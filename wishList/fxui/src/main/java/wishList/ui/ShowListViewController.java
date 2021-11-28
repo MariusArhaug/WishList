@@ -30,6 +30,9 @@ public class ShowListViewController extends AbstractController {
     }
   }
 
+  /**
+   * Update ListView.
+   */
   private void updateWishesView() {
     WishList wishList = this.user.getWishList(wishListToShare.getName()).get();
     List<String> wishNames = new ArrayList<>();

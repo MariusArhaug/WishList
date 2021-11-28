@@ -25,7 +25,7 @@ public class UserDeserializerTest {
   public void setUp() throws IOException {
     user = new User("first", "last", "user@gmail.com", "123Password!");
     json =
-        "{\"firstName\":\"first\",\"lastName\":\"last\",\"email\":\"user@gmail.com\",\"password\":\"123Password!\",\"wishLists\":[]}";
+            "{\"firstName\":\"first\",\"lastName\":\"last\",\"email\":\"user@gmail.com\",\"password\":\"123Password!\",\"wishLists\":[]}";
     mapper = new ObjectMapper();
     factory = mapper.getFactory();
     parser = factory.createParser(json);
@@ -45,6 +45,6 @@ public class UserDeserializerTest {
   @Test
   public void userDeserializerTest() throws IOException {
     assertEquals(
-        (userDeserializer.deserialize(parser, deserializationContext)).toString(), user.toString());
+            (userDeserializer.deserialize(parser, deserializationContext)).toString(), user.toString());
   }
 }

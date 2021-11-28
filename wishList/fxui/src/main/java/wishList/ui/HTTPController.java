@@ -86,7 +86,7 @@ public class HTTPController {
 
     HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
     return handleResponse(response) != null
-        ? Optional.of(handleResponse(response))
+        ? Optional.ofNullable(handleResponse(response))
         : Optional.empty();
   }
 
@@ -97,7 +97,8 @@ public class HTTPController {
    * @param password password of user
    * @return Optional user
    */
-  public Optional<User> getUser(String email, String password) throws IOException, InterruptedException {
+  public Optional<User> getUser(String email, String password)
+          throws IOException, InterruptedException {
     HttpRequest request = GET_REQUEST("/user/" + email + "/" + password + "/");
 
     HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -135,7 +136,8 @@ public class HTTPController {
    * @throws IOException file not found
    * @throws InterruptedException json error
    */
-  public User addContact(String newContactEmail, User user) throws IOException, InterruptedException {
+  public User addContact(String newContactEmail, User user)
+          throws IOException, InterruptedException {
     Map<String, String> requestBody =
         new HashMap<>() {
           {

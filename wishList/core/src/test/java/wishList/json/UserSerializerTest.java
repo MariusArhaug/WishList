@@ -17,12 +17,12 @@ public class UserSerializerTest {
   private User user;
 
   private static void resetFiles() throws Exception {
-    Utils.resetFile(JsonHandlerTest.testFolder, "user@gmailcom.json");
+    Utils.resetFile(JsonHandlerTest.testFolder, "2user@gmailcom.json");
   }
 
   @BeforeEach
   public void setUp() throws IOException {
-    user = new User("first", "last", "user@gmail.com", "123Password!");
+    user = new User("first", "last", "2user@gmail.com", "123Password!");
     jsonHandler = new JsonHandler(JsonHandlerTest.testFolder);
   }
 
@@ -38,7 +38,7 @@ public class UserSerializerTest {
     User userFromFile = jsonHandler.loadUser(user.getEmail(), user.getPassword()).get();
     assertEquals(userFromFile.getFirstName(), "first");
     assertEquals(userFromFile.getLastName(), "last");
-    assertEquals(userFromFile.getEmail(), "user@gmail.com");
+    assertEquals(userFromFile.getEmail(), "2user@gmail.com");
     assertEquals(userFromFile.getPassword(), "123Password!");
     List<WishList> emptyOwnList = new ArrayList<>();
     assertEquals(userFromFile.getOwnedWishLists(), emptyOwnList);

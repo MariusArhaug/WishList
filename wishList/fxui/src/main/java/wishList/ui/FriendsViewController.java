@@ -31,6 +31,10 @@ public class FriendsViewController extends AbstractController {
   public void addFriend() {
     yourFriendsFeedback.setText("");
     String email = friendEmailField.getText();
+    if (email.length() == 0) {
+      yourFriendsFeedback.setText("You must enter an email!");
+      return;
+    }
     if (email.equals(user.getEmail())) {
       yourFriendsFeedback.setText("You can not befriend yourself!");
       return;
@@ -39,17 +43,13 @@ public class FriendsViewController extends AbstractController {
       yourFriendsFeedback.setText("You are already friends with this user!");
       return;
     }
-    if (email.length() == 0) {
-      yourFriendsFeedback.setText("No user exist with this email");
-      return;
-    }
     User newFriend;
     try {
-      this.user = httpController.addContact(email, user);
-      /*
       if (httpController.getUser(email).isEmpty()) {
-        throw new IllegalArgumentException("No user exist with this email");
-      } */
+        yourFriendsFeedback.setText("No user exist with this email!");
+        return;
+      }
+      this.user = httpController.addContact(email, user);
       newFriend = httpController.getUser(email).get();
     } catch (IllegalArgumentException e) {
       yourFriendsFeedback.setText(e.getMessage());
@@ -83,6 +83,9 @@ public class FriendsViewController extends AbstractController {
     this.updateListView();
   }
 
+  /**
+   * Update items in ListView.
+   */
   private void updateListView() {
     try {
       List<String> fxNames = new ArrayList<>();

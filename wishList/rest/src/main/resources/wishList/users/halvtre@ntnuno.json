@@ -1,9 +1,1 @@
-{
-  "firstName": "Hallvard",
-  "lastName": "Trætteberg",
-  "email": "halvtre@ntnu.no",
-  "password": "12345678",
-  "ownedWishLists": [],
-  "invitedWishLists": [],
-  "contacts": []
-}
+{"firstName":"Hallvard","lastName":"Trætteberg","email":"halvtre@ntnu.no","password":"12345678","ownedWishLists":[{"name":"Software","owner":"halvtre@ntnu.no","wishes":[{"name":"Plantuml"},{"name":"Eclipse"}]}],"invitedWishLists":[{"name":"Datautstyr","owner":"annel@ntnu.no","wishes":[]}],"contacts":["adrsto@ntnu.no"]}

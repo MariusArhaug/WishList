@@ -46,7 +46,7 @@ public class FriendsViewControllerTest extends AbstractTestFxui {
     @BeforeEach
     public void setup() throws IOException {
         this.controller.yourFriendsFeedback.setText("");
-        this.jsonHandler = new JsonHandler(this.controller.resourcesPath);
+        this.jsonHandler = new JsonHandler(MainViewControllerTest.directory);
         this.user = jsonHandler.loadJsonUser("jane@doecom");
         this.controller.updateUser(this.user);
         this.testFriend = jsonHandler.loadJsonUser("james@doecom");
@@ -75,7 +75,13 @@ public class FriendsViewControllerTest extends AbstractTestFxui {
         clickOn("#friendEmailField");
         write("");
         clickOn("#addNewFriendButton");
-        assertEquals(controller.yourFriendsFeedback.getText(), "No user exist with this email");
+        assertEquals(controller.yourFriendsFeedback.getText(), "You must enter an email!");
+
+        clickOn("#friendEmailField");
+        write("123@123.123");
+        clickOn("#addNewFriendButton");
+        assertEquals(controller.yourFriendsFeedback.getText(), "No user exist with this email!");
+        controller.friendEmailField.setText("");
 
         clickOn("#friendEmailField");
         write(testFriend.getEmail());

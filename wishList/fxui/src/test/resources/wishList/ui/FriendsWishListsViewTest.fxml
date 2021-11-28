@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="friendsWishListsView" prefHeight="441.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.FriendsWishListsViewController">
+<AnchorPane fx:id="" prefHeight="441.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wishList.ui.FriendsWishListsViewController">
     <children>
         <Button id="signOut" fx:id="signOut" layoutX="245.0" layoutY="402.0" mnemonicParsing="false" onAction="#signOut" style="-fx-background-color: black;" text="Sign out" textFill="WHITE" />
         <Button id="yourWishLists" fx:id="yourWishLists" layoutX="14.0" layoutY="402.0" mnemonicParsing="false" onAction="#changeToMainView" style="-fx-background-color: black;" text="Your wish lists" textFill="WHITE" />

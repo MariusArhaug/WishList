@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,12 +13,15 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.util.WaitForAsyncUtils;
 import wishList.core.User;
+import wishList.json.JsonHandler;
+import wishList.utils.Utils;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(ApplicationExtension.class)
 public class LoginViewControllerTest extends AbstractTestFxui {
   private LoginViewController controller;
+  private JsonHandler jsonHandler;
   private User user;
 
   /**
@@ -36,8 +40,15 @@ public class LoginViewControllerTest extends AbstractTestFxui {
 
   /** Check if user is null */
   @BeforeEach
-  public void setup() {
+  public void setup() throws Exception {
+    Utils.resetFile(MainViewControllerTest.directory, "jane@doecom.json");
+    this.jsonHandler = new JsonHandler(MainViewControllerTest.directory);
+    jsonHandler.addUser(new User("Jane", "Doe", "jane@doe.com", "qwerty123"));
+  }
+  @AfterEach
+  public void tearDown() {
     this.user = null;
+    jsonHandler = null;
   }
 
   /** Test that attributes' states are correct */
@@ -59,9 +70,9 @@ public class LoginViewControllerTest extends AbstractTestFxui {
     clickOn("#login");
 
     FxAssert.verifyThat(
-        "#errorMessage", LabeledMatchers.hasText("E-mail or password is incorrect"));
+            "#errorMessage", LabeledMatchers.hasText("E-mail or password is incorrect"));
     FxAssert.verifyThat(
-        controller.errorMessage, LabeledMatchers.hasText("E-mail or password is incorrect"));
+            controller.errorMessage, LabeledMatchers.hasText("E-mail or password is incorrect"));
     assertEquals(controller.errorMessage.getText(), "E-mail or password is incorrect");
   }
 

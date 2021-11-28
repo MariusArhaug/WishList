@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import wishList.core.User;
+import wishList.core.WishList;
 import wishList.utils.Utils;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -103,7 +104,7 @@ public class JsonHandlerTest {
     assertTrue(jsonUser.getOwnedWishLists().isEmpty());
     jsonHandler.makeWishList("Test", jsonUser);
     User loadedUser = jsonHandler.loadUser("gmail@gmail.com", "Password123!").get();
-    assertEquals(loadedUser.getOwnedWishLists().toString(), "[Test,FirstName,LastName,gmail@gmail.com,Password123!,[]]");
+    assertEquals(loadedUser.getOwnedWishLists().toString(), "[Test,gmail@gmail.com,[]]");
   }
 
   @Test
@@ -122,7 +123,7 @@ public class JsonHandlerTest {
     User loadedUser = jsonHandler.loadUser("gmail@gmail.com", "Password123!").get();
     jsonHandler.addWish("TestItem", loadedUser.getOwnedWishLists().get(0), jsonUser);
     User loadedUserAgain = jsonHandler.loadUser("gmail@gmail.com", "Password123!").get();
-    assertEquals(loadedUserAgain.getOwnedWishLists().toString(), "[Test,FirstName,LastName,gmail@gmail.com,Password123!,[TestItem]]");
+    assertEquals(loadedUserAgain.getOwnedWishLists().toString(), "[Test,gmail@gmail.com,[TestItem]]");
   }
 
   @Test
@@ -133,7 +134,7 @@ public class JsonHandlerTest {
     jsonHandler.addWish("TestItem", loadedUser.getOwnedWishLists().get(0), jsonUser);
     jsonHandler.removeWish("TestItem", loadedUser.getOwnedWishLists().get(0), jsonUser);
     User loadedUserAgain = jsonHandler.loadUser("gmail@gmail.com", "Password123!").get();
-    assertEquals(loadedUserAgain.getOwnedWishLists().toString(), "[Test,FirstName,LastName,gmail@gmail.com,Password123!,[]]");
+    assertEquals(loadedUserAgain.getOwnedWishLists().toString(), "[Test,gmail@gmail.com,[]]");
   }
   @Test
   public void shareWishListTest() throws Exception {
@@ -145,7 +146,6 @@ public class JsonHandlerTest {
     group.add(jsonUser2);
     jsonHandler.shareWishList(loadedUser, loadedUser.getOwnedWishLists().get(0), group);
     User loadedUser2 = jsonHandler.loadUser("gmail2@gmail.com", "Password123!2").get();
-    System.out.println(loadedUser2.getNthInvitedWishList(0).getOwner());
-    assertEquals(loadedUser2.getInvitedWishLists().toString(), "[Test,null,[]]");
+    assertEquals(loadedUser2.getInvitedWishLists().toString(), "[Test,gmail@gmail.com,[]]");
   }
 }
