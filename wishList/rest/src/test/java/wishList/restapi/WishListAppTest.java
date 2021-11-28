@@ -27,7 +27,11 @@ public class WishListAppTest {
     private MockMvc mockMvc;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-
+    /**
+     * Test that GET method for getiing user from file is working.
+     *
+     * @throws Exception if URI not found
+     */
     @Test
     public void testGetUser() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders
@@ -38,6 +42,11 @@ public class WishListAppTest {
                 .andReturn();
     }
 
+    /**
+     * Test that GET method for all wishlists is working.
+     *
+     * @throws Exception if URI not found
+     */
     @Test
     public void testGetAllWishLists() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders
@@ -48,6 +57,11 @@ public class WishListAppTest {
                 .andReturn();
     }
 
+    /**
+     * Test that GET method for getting all users is working.
+     *
+     * @throws Exception if URI not found
+     */
     @Test
     public void testGetAllUsers() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders
@@ -58,6 +72,11 @@ public class WishListAppTest {
                 .andReturn();
     }
 
+    /**
+     * Test that GET method for getting user with email and password as parameters is working.
+     *
+     * @throws Exception if URI not found
+     */
     @Test
     public void testGetUserWithPassword() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders
@@ -68,6 +87,11 @@ public class WishListAppTest {
                 .andReturn();
     }
 
+    /**
+     * Test that POST method for new user is working.
+     *
+     * @throws Exception if URI not found
+     */
     @Test
     public void testPostUser() throws Exception {
         User user = new User("John", "Smith", "john@smith.no", "12345678");
