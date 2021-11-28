@@ -6,11 +6,19 @@ WishList has currently a saving function when a user either logs in or registers
 
 We use `maven` for our project.
 
-First you need to install and compile:
+The fxui tests will fail unless the server is running.
+
+Start with `mvn clean compile` inside the rest module.
+
+Then run the server:
+
+`mvn spring-boot:run`
+
+Then you need to install and compile in the root directory:
 
 `mvn clean install && mvn compile`
 
-Then to run:
+Then to run in the fxui module:
 
 `mvn javafx:run`
 
